@@ -1,0 +1,12 @@
+\begin{thebibliography}{}
+
+\bibitem[Cover and Hart, 2006]{Cover:2006}
+Cover, T. and Hart, P. (2006).
+\newblock Nearest neighbor pattern classification.
+\newblock {\em IEEE Trans. Inf. Theor.}
+
+\bibitem[Lichman, 2013]{Lichman:2013}
+Lichman, M. (2013).
+\newblock {UCI} machine learning repository.
+
+\end{thebibliography}

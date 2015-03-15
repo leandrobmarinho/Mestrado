@@ -1,0 +1,253 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{graphics,amssymb,amsfonts,amsmath}
+\usepackage{tikz}
+\usepackage{enumerate,hyperref}
+\usepackage{palatino}	% Fonte sem serifa
+\usepackage{ragged2e}	% Paragrafo justificado
+\usepackage{minted}	% Highlight para codigos de programacao
+\usepackage{booktabs} % tabelas
+
+
+\usetheme{Madrid}
+
+\usecolortheme{orchid}
+\usefonttheme[onlymath]{serif}
+
+% Colocando numero de paginas no slide
+%\setbeamertemplate{footline}[frame number]
+
+% Desativando os botoes de navegacao
+\beamertemplatenavigationsymbolsempty
+
+% Tela cheia
+\hypersetup{pdfpagemode=FullScreen}
+
+% Layout da pagina
+\hypersetup{pdfpagelayout=SinglePage}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[]{Máquina de Aprendizagem Mínima Aplicada ao Reconhecimento de Atividades Humanas} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[]{Leandro Bezerra Marinho} % Your name
+\institute[IFCE] % (optional, but mostly needed)
+{
+Defesa do Trabalho de Conclusão de Curso \\
+Instituto Federal de Ciência, Educação e Tecnologia do Ceará (IFCE) \\
+Campus Maracanaú - Telemática \\
+Bacharelado em Ciência da Computação \\
+Orientador: Prof. Amauri Holanda Souza Júnior
+}
+\date{28 de Novembro de 2014} % Date, can be changed to a custom date
+
+%\pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+%\logo{\pgfuseimage{university-logo}}
+
+\begin{document}
+
+%------------------------------------------------
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{}
+\tableofcontents
+\end{frame}
+
+
+%================================
+\section{Objetivos}
+\begin{frame}{Objetivos}
+	
+	\begin{itemize}[<+->]
+    \transdissolve
+    \transduration{2}
+		\item Verificar a aplicação da MLM no reconhecimento de atividades físicas.
+		\item Executar uma comparação de desempenho com o MLP, ELM e RBF.
+		\item Selecionar o conjunto de atributos que contribuam com a tarefa de identificação de atividades.
+		\item Analisar a performance da MLM com a distância Euclidiana e \textit{City Block}.
+	\end{itemize}
+
+\end{frame}
+
+
+%================================
+\section{Motivação}
+\begin{frame}{Motivação}
+
+	\begin{itemize}[<+->]
+    \transdissolve
+    \transduration{2}
+		\item O RAH pode ser usado na segurança, marketing, entretenimento, saúde, entre outros.
+		\item Presença de sensores em dispositivos móveis.
+		\item Mais acessível e menos intrusivo.
+		\item AM permite construir modelos baseados em pouco conhecimento prévio sobre a tarefa de interesse. 
+	\end{itemize}
+	
+\end{frame}
+
+
+%================================
+\section{MLM}
+
+\begin{frame}{MLM}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}\frametitle{Blocks of Highlighted Text}
+	\begin{block}{Block 1}
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
+	\end{block}
+	
+	\begin{block}{Block 2}
+	Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum quis magna at risus dictum tempor eu vitae velit.
+	\end{block}
+	
+	\begin{block}{Block 3}
+	Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
+	\end{block}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Multiple Columns}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+\textbf{Heading}
+\begin{enumerate}
+\item Statement
+\item Explanation
+\item Example
+\end{enumerate}
+
+\column{.5\textwidth} % Right column and width
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
+
+\end{columns}
+\end{frame}
+
+
+%================================
+
+\section{Outros Métodos}
+
+\begin{frame}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Table}
+\begin{table}
+\begin{tabular}{l l l}
+\toprule
+\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+\midrule
+Treatment 1 & 0.0003262 & 0.562 \\
+Treatment 2 & 0.0015681 & 0.910 \\
+Treatment 3 & 0.0009271 & 0.296 \\
+\bottomrule
+\end{tabular}
+\caption{Table caption}
+\end{table}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Theorem}
+\begin{theorem}[Mass--energy equivalence]
+$E = mc^2$
+\end{theorem}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+\frametitle{Verbatim}
+\begin{example}[Theorem Slide Code]
+\begin{verbatim}
+\begin{frame}
+\frametitle{Theorem}
+\begin{theorem}[Mass--energy equivalence]
+$E = mc^2$
+\end{theorem}
+\end{frame}\end{verbatim}
+\end{example}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Figure}
+Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
+%\begin{figure}
+%\includegraphics[width=0.8\linewidth]{test}
+%\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+\frametitle{Citation}
+An example of the \verb|\cite| command to cite within the presentation:\\~
+
+This statement requires citation \cite{p1}.
+\end{frame}
+
+
+%================================
+\section{Metodologia}
+\begin{frame}\frametitle{Metodologia}
+\tableofcontents
+\end{frame}
+\subsection{Base de Dados}
+\begin{frame}\frametitle{Base de Dados}
+fds
+\end{frame}
+
+%================================
+\section{Resultados}
+\begin{frame}
+
+
+
+\end{frame}
+
+%================================
+\section{Conclusão}
+\begin{frame}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}\frametitle{References}
+\footnotesize{
+\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+\bibitem[Smith, 2012]{p1} John Smith (2012)
+\newblock Title of the publication
+\newblock \emph{Journal Name} 12(3), 45 -- 678.
+\end{thebibliography}
+}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
