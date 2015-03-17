@@ -22,7 +22,7 @@ dataset.x = (dataset.x - mediaRep)./(maxRep - minRep);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRepet = 10;
+numRepet = 1;
 
 % Topologia da rede
 config.vizinhos = 1;
