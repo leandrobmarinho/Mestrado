@@ -12,7 +12,7 @@ clear data;
 ptrn = 0.8;
 numRepet = 10;
 
-resultBayes = bayes(dataset, ptrn, numRepet);
+resultBayes = bayes(dataset, ptrn, numRepet, [1 1 1]);
 
 
 %% Superfície de decisão

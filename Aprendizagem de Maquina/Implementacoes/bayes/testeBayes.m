@@ -3,28 +3,28 @@ function [output] = testeBayes(modelo, dados, pesos)
 
 acoes = [];
 
-% pesos = (-1)*pesos; %Para manter o padrao de escolher o menor
-% for i = 1 : length(pesos),
-%     acoes(i,:) = modelo.aprioriClass(i)*pesos(i)*mvnpdf(dados.x, modelo.means(i,:), modelo.covs{i})';
-% end
-
-
+pesos = (-1)*pesos; %Para manter o padrao de escolher o menor
 for i = 1 : length(pesos),
-    
-    acumulator = [];
-    for j = 1 : length(pesos),
-        if (i ~= j)
-            acumulator(j,:) = pesos(j)*modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.means(j,:), modelo.covs{j})';
-        end
-    end
-    acoes(i,:) = sum(acumulator);
+    acoes(i,:) = modelo.aprioriClass(i)*pesos(i)*mvnpdf(dados.x, modelo.means(i,:), modelo.covs{i})';
 end
+
+
+% for i = 1 : length(pesos),
+%     
+%     acumulator = [];
+%     for j = 1 : length(pesos),
+%         if (i ~= j)
+%             acumulator(j,:) = pesos(j)*modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.means(j,:), modelo.covs{j})';
+%         end
+%     end
+%     acoes(i,:) = sum(acumulator);
+% end
 
 [~, indY] = min(acoes);
 
 
 
-%% Transforma 1 em [1 0 0]
+%% Transforma 1 em [1 0 0], 2 em [0 1 0], ...
 labels = unique(indY);
 code = zeros(length(labels), length(labels));
 for j = 1: length(labels),
