@@ -15,7 +15,8 @@ for i = 1 : length(dados.y(1, :)),
     
     
     modelo.aprioriClass(i) = length(indx) / N;
-    covs{i} = cov(dados.x(indx, :));
+%     covs{i} = cov(dados.x(indx, :));
+    covs{i} = cov(dados.x(indx, :)) + 10^-10*eye(size(dados.x,2));
 end
 
 

@@ -32,9 +32,9 @@ elseif ( strcmp(algoritmo, 'bayes') == 1 )
     %% Treinamento do Bayes
     [modelo] = trainBayes(data);
     
-    
+    custo = [0 1 1; 1 0 1; 1 1 0];
     %% Testando o DMC
-    [classeXY] = testeBayes(modelo, testeXY, [1 1 1]);
+    [classeXY] = testeBayes(modelo, testeXY, custo);
 end
 
 [~, idx] = max(classeXY');

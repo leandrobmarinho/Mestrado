@@ -2,23 +2,29 @@ function [output] = testeBayes(modelo, dados, pesos)
 
 
 acoes = [];
-
-pesos = (-1)*pesos; %Para manter o padrao de escolher o menor
-for i = 1 : length(pesos),
-    acoes(i,:) = modelo.aprioriClass(i)*pesos(i)*mvnpdf(dados.x, modelo.means(i,:), modelo.covs{i})';
-end
-
-
+% pesos = (-1)*pesos; %Para manter o padrao de escolher o menor
 % for i = 1 : length(pesos),
-%     
-%     acumulator = [];
-%     for j = 1 : length(pesos),
-%         if (i ~= j)
-%             acumulator(j,:) = pesos(j)*modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.means(j,:), modelo.covs{j})';
-%         end
-%     end
-%     acoes(i,:) = sum(acumulator);
+%     acoes(i,:) = modelo.aprioriClass(i)*pesos(i)*mvnpdf(dados.x, modelo.means(i,:), modelo.covs{i})';
 % end
+
+
+% Probabilidade a priori de X
+acumulator = [];
+for j = 1 : length(modelo.aprioriClass)
+    acumulator(j,:) = modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.means(j,:), modelo.covs{j})';
+end
+aprioriClassX = sum(acumulator);
+
+% Calculo do risco
+for i = 1 : length(pesos),
+    
+    acumulator = [];
+    for j = 1 : length(pesos),
+        acumulator(j,:) = pesos(i, j)*(modelo.aprioriClass(j)*...
+            mvnpdf(dados.x, modelo.means(j,:), modelo.covs{j})'./aprioriClassX);
+    end
+    acoes(i,:) = sum(acumulator);
+end
 
 [~, indY] = min(acoes);
 

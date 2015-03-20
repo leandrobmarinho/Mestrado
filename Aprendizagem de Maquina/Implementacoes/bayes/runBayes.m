@@ -7,12 +7,25 @@ dataset.x = data(:, 1:4);
 dataset.y = data(:, 5:7);
 clear data;
 
+%% Normalizando os dados
+% [lin, ~] = size(dataset.x);
+% 
+% minimo = min(dataset.x);
+% maximo = max(dataset.x);
+% media = mean(dataset.x);
+% minRep = repmat(minimo, lin, 1);
+% maxRep = repmat(maximo, lin, 1);
+% mediaRep = repmat(media, lin, 1);
+% dataset.x = (dataset.x - mediaRep)./(maxRep - minRep);
+% 
+keyboard
 
 %% Configurações gerais
 ptrn = 0.8;
 numRepet = 10;
+custo = [0 1 1; 1 0 1; 1 1 0];
 
-resultBayes = bayes(dataset, ptrn, numRepet, [1 1 1]);
+resultBayes = bayes(dataset, ptrn, numRepet, custo);
 
 
 %% Superfície de decisão
