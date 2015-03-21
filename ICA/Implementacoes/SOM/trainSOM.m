@@ -20,7 +20,15 @@ if (strcmp(conf.dist, 'b') == 1)
 elseif (strcmp(conf.dist, 'l') == 1)
     D = linkdist(pos);
 end
+
+%% Plotando a topologia
+% labels = cellstr( num2str([1:prod(conf.tamanho)]') );
 % plotsom(pos)
+% pos_ = pos';
+% text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
+% 'HorizontalAlignment','right')
+% find (D(10, :) == 1)
+
 
 
 v_i = 1;

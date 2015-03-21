@@ -1,8 +1,8 @@
 function [modelo] = trainBayes(dados)
 
 N = length(dados.x);
-means = [];
-
+meansX = [];
+meansY = [];
 for i = 1 : length(dados.y(1, :)),
     mascara = zeros(1, length(dados.y(i, :)));
     mascara(i) = 1;
@@ -10,7 +10,8 @@ for i = 1 : length(dados.y(1, :)),
     % Seleciona apenas as amostras com a classe pretendida
     indx = find(mascara * dados.y');
     if not(isempty(indx))
-        means = [means; mean(dados.x(indx, :))];
+        meansX = [meansX; mean(dados.x(indx, :))];
+        meansY = [meansY; dados.y(indx(1), :)];
     end
     
     
@@ -20,7 +21,8 @@ for i = 1 : length(dados.y(1, :)),
 end
 
 
-modelo.means = means;
+modelo.meansX = meansX;
+modelo.meansY = meansY;
 modelo.covs = covs;
 
 end

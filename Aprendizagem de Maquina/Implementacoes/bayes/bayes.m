@@ -1,4 +1,4 @@
-function [results] = bayes(dataset, ptrn, numRepet, pesos)
+function [results] = bayes(dataset, ptrn, numRepet, pesos, tipo)
 
 
 [N, ~] = size(dataset.x);
@@ -20,7 +20,7 @@ for i = 1 : numRepet,
     
     
     %% Testando o DMC
-    [Yh] = testeBayes(modelo, testData, pesos);
+    [Yh] = testeBayes(modelo, testData, pesos, tipo);
     
     
     %% Matriz de confusao e acurácia

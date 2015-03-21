@@ -11,7 +11,7 @@ clear data;
 
 %% Configurações gerais
 ptrn = 0.8;
-numRepet = 500;
+numRepet = 10;
 resultKNN = [];
 resultDMC = [];
 

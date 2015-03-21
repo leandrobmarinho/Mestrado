@@ -31,4 +31,4 @@ config.dist = 'b'; % b boxdist; l linkdist
 config.tamanho = [8 8];
 config.epocas = 500;
 
-result= som(dataset, ptrn, numRepet, config);
+result = som(dataset, ptrn, numRepet, config);
