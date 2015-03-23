@@ -1,6 +1,5 @@
 function [output] = testeBayes(modelo, dados, custo, tipo)
 
-keyboard
 if (strcmp(tipo, 'euclidean') == 1)
     dist = pdist2(modelo.meansX, dados.x);
     [~, posicoes] = sort(dist);
@@ -49,6 +48,7 @@ elseif (strcmp(tipo, '') == 1)
     
     [~, indY] = min(acoes);
     
+%     output = modelo.meansY(indY, :);
     
     %% Transforma 1 em [1 0 0], 2 em [0 1 0], ...
     labels = unique(indY);
