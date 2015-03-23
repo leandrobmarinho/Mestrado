@@ -1,4 +1,5 @@
 close all; clear all; clc;
+addpath('..');
 
 %% Carregando os dados
 data = load('../iris.data');
@@ -7,21 +8,11 @@ dataset.y = data(:, 5:7);
 clear data;
 
 %% Normalizando os dados
-[lin, ~] = size(dataset.x);
-
-minimo = min(dataset.x);
-maximo = max(dataset.x);
-media = mean(dataset.x);
-minRep = repmat(minimo, lin, 1);
-maxRep = repmat(maximo, lin, 1);
-mediaRep = repmat(media, lin, 1);
-dataset.x = (dataset.x - mediaRep)./(maxRep - minRep);
-
-
+dataset.x = normalizaDados(dataset.x, 1);
 
 
 %% Configurações gerais
-ptrn = 0.8;
+ptrn = 0.75;
 numRepet = 1;
 
 % Topologia da rede
@@ -31,4 +22,4 @@ config.dist = 'b'; % b boxdist; l linkdist
 config.tamanho = [8 8];
 config.epocas = 500;
 
-result = som(dataset, ptrn, numRepet, config);
+result = som(dataset, ptrn, numRepet, config)
