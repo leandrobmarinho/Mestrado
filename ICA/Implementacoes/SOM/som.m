@@ -1,14 +1,8 @@
-function [ results ] = som( dataset, ptrn, numRepet, config)
-
-[N, ~] = size(dataset.x);
-limit = floor(ptrn*N);
+function [ results ] = som( dados, ptrn, numRepet, config)
 
 for i = 1 : numRepet,
     %% Embaralhando os dados
-    ind = randperm(N);
-    
-    trainData.x = dataset.x(ind(1:limit), :);
-    testData.x = dataset.x(ind(limit+1:end), :);
+    [trainData, testData] = embaralhaDados(dados, ptrn, 2);
     
     
     %% Treinamento da SOM

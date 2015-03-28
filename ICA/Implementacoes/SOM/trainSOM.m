@@ -5,8 +5,9 @@ function [ erro, W ] = trainSOM( dados, conf )
 %% Criando a rede
 % Vetor de pesos
 ind = randperm(N);
-W = dados.x(ind(1:prod(conf.tamanho)), :); %0.0039
-% W = zeros( prod(conf.tamanho), size(dados.x,2)); %0.0075
+% W = zeros( prod(conf.tamanho), size(dados.x,2));
+W = repmat( mean(dados.x), prod(conf.tamanho), 1);
+
 
 % Topologia dos neuronios
 if (strcmp(conf.topologia, 'g') == 1)
@@ -21,21 +22,26 @@ elseif (strcmp(conf.dist, 'l') == 1)
     D = linkdist(pos);
 end
 
-%% Plotando a topologia
-labels = cellstr( num2str([1:prod(conf.tamanho)]') );
-plotsom(pos)
-pos_ = pos';
-text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
-'HorizontalAlignment','right')
-find (D(10, :) == 1)
+
+% %% Plotando a topologia
+% labels = cellstr( num2str([1:prod(conf.tamanho)]') );
+% plotsom(pos)
+% if (size(pos,1) == 1)
+%     pos = [pos; zeros(1,size(pos,2))];
+% end
+% pos_ = pos';
+% text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
+% 'HorizontalAlignment','right')
+% find (D(5, :) == 1)
+% keyboard
 
 
 
+%% Treinando a rede
 v_i = 1;
 v_f = 0.001;
 alfa_i = 0.01;
 alfa_f = 0.001;
-%% Treinando a rede
 for epoca = 1 : conf.epocas,
     
     erro = [];
@@ -61,15 +67,15 @@ for epoca = 1 : conf.epocas,
         
         
         
-        %% Neuronios vencendor (eucl e prod escal) e amostra
-        close all
-        plot(dados.x(:,1), dados.x(:,2), 'xg')
-        hold on
-        plot(W(:,1), W(:,2), 'or')
-        plot(x(1), x(2), 'db')
-        plot(W(win,1), W(win,2), '+m')
-        plot(W(win2,1), W(win2,2), '+k')
-        keyboard
+%         %% Neuronios vencendor (eucl e prod escal) e amostra
+%         close all
+%         plot(dados.x(:,1), dados.x(:,2), 'xg')
+%         hold on
+%         plot(W(:,1), W(:,2), 'or')
+%         plot(x(1), x(2), 'db')
+%         plot(W(win,1), W(win,2), '+m')
+%         plot(W(win2,1), W(win2,2), '+k')
+%         keyboard
         
 
     end
@@ -83,12 +89,12 @@ for epoca = 1 : conf.epocas,
 %     end
 
 
-    %% Neuronios por epoca
-    close all
-    plot(dados.x(:,1), dados.x(:,2), 'xg')
-    hold on
-    plot(W(:,1), W(:,2), 'or')
-    keyboard
+%     %% Neuronios por epoca
+%     close all
+%     plot(dados.x(:,1), dados.x(:,2), 'xg')
+%     hold on
+%     plot(W(:,1), W(:,2), 'or')
+%     keyboard
     
     
     
@@ -101,7 +107,7 @@ for epoca = 1 : conf.epocas,
 end
 
 
-% %% Epocas x Erro Quant
+%% Epocas x Erro Quant
 plot([1:1:length(quant)], quant)
 keyboard
 
@@ -116,10 +122,14 @@ text(W(:,1), W(:,2), labels, 'VerticalAlignment','bottom', ...
 %% vizinhanca dos pesos
 figure
 plotsom(pos)
+if (size(pos,1) == 1)
+    pos = [pos; zeros(1,size(pos,2))];
+end
 pos_ = pos';
 text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
 'HorizontalAlignment','right')
 keyboard
+
 
 erro = sum(quant)/conf.epocas;
 
