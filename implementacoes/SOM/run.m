@@ -17,8 +17,8 @@ numRepet = 1;
 % Topologia da rede
 config.vizinhos = 1;
 config.topologia = 'g'; %g grid; h hexagonal
-config.dist = 'b'; % b boxdist; l linkdist
-config.tamanho = [8];
+config.dist = 'l'; % b boxdist; l linkdist
+config.tamanho = [4 3];
 config.epocas = 500;
 
 result = som(dataset, ptrn, numRepet, config)

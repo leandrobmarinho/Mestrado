@@ -21,20 +21,19 @@ if (strcmp(conf.dist, 'b') == 1)
 elseif (strcmp(conf.dist, 'l') == 1)
     D = linkdist(pos);
 end
-
+keyboard
 
 % %% Plotando a topologia
-% labels = cellstr( num2str([1:prod(conf.tamanho)]') );
-% plotsom(pos)
-% if (size(pos,1) == 1)
-%     pos = [pos; zeros(1,size(pos,2))];
-% end
-% pos_ = pos';
-% text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
-% 'HorizontalAlignment','right')
-% find (D(5, :) == 1)
+labels = cellstr( num2str([1:prod(conf.tamanho)]') );
+plotsom(pos)
+if (size(pos,1) == 1)
+    pos = [pos; zeros(1,size(pos,2))];
+end
+pos_ = pos';
+text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
+'HorizontalAlignment','right')
+find (D(5, :) == 1)
 % keyboard
-
 
 
 %% Treinando a rede
@@ -61,9 +60,14 @@ for epoca = 1 : conf.epocas,
         
         v = v_i*nthroot( (v_i/v_f)^i, conf.epocas*N);
         alfa = alfa_i*nthroot( (alfa_i/alfa_f)^i, conf.epocas*N);
-        h = exp(- ((D(win, indViz)).^2)/v)';
+        
+        h = exp(- ((D(win, indViz)).^2)/v^2)';
         erros = repmat(x, length(indViz),1) - W(indViz, :);
         W(indViz, :) = W(indViz, :) + alfa*repmat(h,1,size(erros,2)).*erros;
+        
+%         h = exp(- ((D(win, :)).^2)/v^2)';
+%         erros = repmat(x, size(W,1), 1) - W;
+%         W = W + alfa*repmat(h,1,size(erros,2)).*erros;
         
         
         
@@ -108,28 +112,13 @@ end
 
 
 %% Epocas x Erro Quant
+figure
 plot([1:1:length(quant)], quant)
-keyboard
 
-%% Dados e neuronios
-figure
-plot(dados.x(:,1), dados.x(:,2), 'xg')
-hold on
-labels = cellstr( num2str([1:prod(conf.tamanho)]') );
-plot(W(:,1), W(:,2), 'or')
-text(W(:,1), W(:,2), labels, 'VerticalAlignment','bottom', ...
-'HorizontalAlignment','right')
-%% vizinhanca dos pesos
-figure
-plotsom(pos)
-if (size(pos,1) == 1)
-    pos = [pos; zeros(1,size(pos,2))];
-end
-pos_ = pos';
-text(pos_(:,1), pos_(:,2), labels, 'VerticalAlignment','bottom', ...
-'HorizontalAlignment','right')
-keyboard
 
+%% Plota os neuronios
+plotNeurons(dados, W, pos, D, conf)
+keyboard
 
 erro = sum(quant)/conf.epocas;
 
