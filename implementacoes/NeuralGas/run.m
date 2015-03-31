@@ -14,23 +14,19 @@ dataset.x = normalizaDados(dataset.x, 1);
 ptrn = 0.75;
 numRepet = 4;
 
-% Topologia da rede
-config.vizinhos = 1;
-config.topologia = 'g'; %g grid; h hexagonal
-config.dist = 'b'; % b boxdist; l linkdist
-config.tamanho = [8 8];
-config.epocas = 300;
+config.numNeur = 40;
+config.epocas = 500;
 
-result = som(dataset, ptrn, numRepet, config)
+result = neuralGas(dataset, ptrn, numRepet, config)
 
 
 %% Plotando o boxplot
 rotulos = [];
 for i = 1:numRepet
-    rotulos = [rotulos; 'SOM Teste'];
+    rotulos = [rotulos; 'Neural-Gas Teste'];
 end
 for i = 1:numRepet
-    rotulos = [rotulos; 'SOM Train'];
+    rotulos = [rotulos; 'Neural-Gas Train'];
 end
 valores = [result.erroTeste result.erroTrain];
 boxplot(valores', rotulos);

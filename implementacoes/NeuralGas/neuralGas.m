@@ -1,4 +1,4 @@
-function [ results ] = som( dados, ptrn, numRepet, config)
+function [ results ] = neuralGas( dados, ptrn, numRepet, config)
 
 for i = 1 : numRepet,
     %% Embaralhando os dados
@@ -6,11 +6,11 @@ for i = 1 : numRepet,
     
     
     %% Treinamento da SOM
-    [erroTrain(i), W] = trainSOM(trainData, config);
+    [erroTrain(i), W] = trainNeuralGas(trainData, config);
     
     
     %% Testando a SOM
-    [erroTeste(i)] = testeSOM(W, testData);
+    [erroTeste(i)] = testeNeuralGas(W, testData);
         
 end
 
