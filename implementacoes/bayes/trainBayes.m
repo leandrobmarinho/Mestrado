@@ -1,6 +1,5 @@
 function [modelo] = trainBayes(dados)
 
-keyboard
 N = length(dados.x);
 meansX = [];
 meansY = [];
