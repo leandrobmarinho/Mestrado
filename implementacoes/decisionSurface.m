@@ -1,9 +1,16 @@
-function [ ] = decisionSurface( range, algoritmo, data, K, atr)
-%% MUDAR FUNCAO PARA RECEBER UM MODELO COMPLETO
-
+function [ ] = decisionSurface( range, conf, data, atr)
+%DECISIONSURFACE Summary of this function goes here
+% range - intervalo do grafico, se vazio será calculado
+% conf.algoritmo
+%   DMC
+%   KNN
+%   bayes
+% 
+% dados - base de dados
+% atributos - atributos para plotar
 
 %% Seleciona os atributos
-data.x = data.x(:,atr);
+data.x = data.x(:, atr);
 
 %% Calcula o range
 if (isempty(range)) 
@@ -22,35 +29,40 @@ image_size = size(x);
 
 testeXY.x = xy;
 
-if (strcmp(algoritmo, 'DMC') == 1)
+if (strcmp(conf.algoritmo, 'DMC') == 1)
     % Treinando o DMC
     [centroides] = trainDMC(data);
     
     % Rotulando a superfícei de decisão
     [classeXY] = testeDMC(centroides, testeXY);
-elseif (strcmp(algoritmo, 'KNN') == 1)
+elseif (strcmp(conf.algoritmo, 'KNN') == 1)
     
     % Rotulando a superfícei de decisão
-    [classeXY] = testeKNN(data, testeXY, K);
+    [classeXY] = testeKNN(data, testeXY, conf.K);
 
-elseif ( strcmp(algoritmo, 'bayes') == 1 )
+else
+    conf.algoritmo
+    
     %% Treinamento do Bayes
     [modelo] = trainBayes(data);
     
-    custo = [0 1 1; 1 0 1; 1 1 0];
-    tipo = '';
     %% Testando o DMC
-    [classeXY] = testeBayes(modelo, testeXY, custo, tipo);
+    [classeXY] = testeBayes(modelo, testeXY, conf);
 end
 
-[~, idx] = max(classeXY');
-idx = idx';
+if (size(classeXY, 1) > 1)
+    [~, idx] = max(classeXY');
+    idx = idx';
+else
+    idx = classeXY';
+end
+
 decisionmap = reshape(idx, image_size);
 
 
 % figure,
 
-numClass = length(classeXY(1,:));
+numClass = length(unique(classeXY));
 cmap2 = hsv(numClass);
 cmap = [1 0.8 0.8; 0.8 1 0.8; 0.7 0.7 1];
 colormap(cmap);
@@ -59,16 +71,14 @@ colormap(cmap);
 plotar = [];
 hold all
 for i = 1 : numClass,
-    cent = zeros(1, numClass);
-    cent(i) = 1;
     
     %Seleciona apenas as amostras com a classe pretendida
-    indxSD = find(cent * classeXY');
+    indxSD = find(classeXY == i);
     if not(isempty(indxSD))
         plot(xy(indxSD,1), xy(indxSD,2), '*', 'Color', cmap(i,:))
     end
     
-    indTrain = find(cent * data.y');
+    indTrain = find(data.y == i);
     if not(isempty(indTrain))
         plotar(i) = plot(data.x(indTrain,1), data.x(indTrain,2), 'o', 'Color', cmap2(i,:));
     end 

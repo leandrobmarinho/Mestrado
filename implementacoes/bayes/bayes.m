@@ -1,18 +1,8 @@
-function [results] = bayes(dataset, ptrn, numRepet, pesos, tipo)
-
-
-[N, ~] = size(dataset.x);
-limit = floor(ptrn*N);
+function [results] = bayes(dados, ptrn, numRepet, conf)
 
 for i = 1 : numRepet,
     %% Embaralhando os dados
-    ind = randperm(N);
-    
-    trainData.x = dataset.x(ind(1:limit), :);
-    trainData.y = dataset.y(ind(1:limit), :);
-   
-    testData.x = dataset.x(ind(limit+1:end), :);
-    testData.y = dataset.y(ind(limit+1:end), :);
+    [trainData, testData] = embaralhaDados(dados, ptrn, 1);
     
     
     %% Treinamento do Bayes
@@ -20,14 +10,10 @@ for i = 1 : numRepet,
     
     
     %% Testando o DMC
-    [Yh] = testeBayes(modelo, testData, pesos, tipo);
+    [Yh] = testeBayes(modelo, testData, conf);
     
-    
-    %% Matriz de confusao e acurácia
-    [~, index] = max(Yh');
-    [~, target] = max(testData.y');
-    
-    confusionMatrices{i} = confusionmat(target, index);
+    %% Matriz de confusao e acurácia    
+    confusionMatrices{i} = confusionmat(testData.y, Yh);
     accuracy(i) = trace(confusionMatrices{i}) / length(testData.y);
     
 end

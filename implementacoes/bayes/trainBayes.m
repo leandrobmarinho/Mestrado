@@ -1,28 +1,36 @@
 function [modelo] = trainBayes(dados)
 
-N = length(dados.x);
+N = size(dados.x, 1);
 meansX = [];
 meansY = [];
-for i = 1 : length(dados.y(1, :)),
-    mascara = zeros(1, length(dados.y(i, :)));
-    mascara(i) = 1;
-    
+
+for l = 1 : length(unique(dados.y)),
+
     % Seleciona apenas as amostras com a classe pretendida
-    indx = find(mascara * dados.y');
+    indx = find(dados.y == l);
     if not(isempty(indx))
         meansX = [meansX; mean(dados.x(indx, :))];
-        meansY = [meansY; dados.y(indx(1), :)];
+        meansY = [meansY; l];
     end
     
     
-    modelo.aprioriClass(i) = length(indx) / N;
-%     covs{i} = cov(dados.x(indx, :));
-    covs{i} = cov(dados.x(indx, :)) + 10^-10*eye(size(dados.x,2));
+    modelo.aprioriClass(l) = length(indx) / N;
+    
+    covs{l} = cov(dados.x(indx, :));
+    if (rcond(covs{l}) < 1e-12)
+        covs{l} = covs{l} + 0.01*eye(size(dados.x,2));
+    end
 end
 
 
 modelo.meansX = meansX;
-modelo.meansY = meansY;
 modelo.covs = covs;
+
+modelo.covAll = cov(dados.x);
+if (rcond(modelo.covAll) < 1e-12)
+    modelo.covAll = modelo.covAll + 0.01*eye(size(dados.x,2))
+else
+    
+end
 
 end

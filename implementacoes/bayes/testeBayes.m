@@ -1,32 +1,71 @@
-function [output] = testeBayes(modelo, dados, custo, tipo)
+function [output] = testeBayes(modelo, dados, conf)
+%TESTEBAYES Summary of this function goes here
+% modelo
+% dados
+% conf.custo - matriz de custo
+% conf.algoritmo
+%   '' - bayes tradicional com risco
+%   sameVar - covariancia igual, diagonal e mesma variancia (variancia média)
+%   euclidean - 
+%   mahalanobis1 - covariancia igual e não diagonal
+%   mahalanobis2 - covariancias distintas e não diagonal
+%   mahalanobis3 - covariancias iguais, diagonalizada de uma não diagonal
+%                 (autovetor e autovalor)
 
-if (strcmp(tipo, 'euclidean') == 1)
+if (strcmp(conf.algoritmo, 'euclidean') == 1)
     dist = pdist2(modelo.meansX, dados.x);
     [~, posicoes] = sort(dist);
     
-    output = modelo.meansY(posicoes(1,:), :);
+    output = posicoes(1,:);
+elseif (strcmp(conf.algoritmo, 'mahalanobis1') == 1)
+    dist = pdist2(modelo.meansX, dados.x, 'mahalanobis', modelo.covAll);
+    [~, posicoes] = sort(dist);
     
-elseif (strcmp(tipo, 'mahalanobis') == 1)
+    output = posicoes(1,:);
+    
+elseif (strcmp(conf.algoritmo, 'mahalanobis2') == 1)
+    
     dist = [];
-    for i = 1 : size(modelo.meansX,1)
-        dist = [dist; pdist2(modelo.meansX(i,:), dados.x, tipo, modelo.covs{i})];
+    for (i = 1 : length(unique(dados.y)))
+        dist = [dist; pdist2(modelo.meansX(i,:), dados.x, 'mahalanobis', modelo.covs{i})];
     end
     
     [~, posicoes] = sort(dist);
     
-    output = modelo.meansY(posicoes(1,:), :);
+    output = posicoes(1,:);
     
-elseif (strcmp(tipo, 'sameVar') == 1)
+elseif (strcmp(conf.algoritmo, 'mahalanobis3') == 1)
     
-elseif (strcmp(tipo, '') == 1)
+    [V E] = eig(modelo.covAll);
+    covariancia = V*inv(E)*V';
     
+    dist = pdist2(modelo.meansX, dados.x, 'mahalanobis', covariancia);
+    [~, posicoes] = sort(dist);
     
+    output = posicoes(1,:);
+elseif (strcmp(conf.algoritmo, 'sameVar') == 1)
+    %     keyboard
+    
+    variancia = mean(diag(modelo.covAll.*eye(size(dados.x,2))));
+    
+%         diagonal = diag(modelo.covAll.*eye(size(dados.x,2)));
+%         variancia = diagonal(1);
+    
+    covariancia = variancia*eye(size(dados.x,2));
+    
+    [~, posicoes] = max( (1/variancia)*modelo.meansX*dados.x' + repmat(modelo.aprioriClass', 1, size(dados.x, 1)) - ...
+        1/2*repmat(sum(modelo.meansX*inv(covariancia)*modelo.meansX')', 1, size(dados.x,1)));
+    
+    %     [~, indY] = max( (1/2*dados.x*inv(modelo.covAll)*modelo.meansX' - ...
+    %     1/2*repmat(sum(modelo.meansX*inv(modelo.covAll)*modelo.meansX'), size(dados.x,1), 1) + ...
+    %    (1/2*modelo.meansX*modelo.covAll*dados.x')' +  repmat(modelo.aprioriClass, size(dados.x,1), 1) )');
+    
+    output = posicoes(1,:);
+    
+elseif (strcmp(conf.algoritmo, '') == 1)
+    
+    %     keyboard
     acoes = [];
-    custo = (-1)*custo; %Para manter o padrao de escolher o menor
-    for i = 1 : length(custo),
-        acoes(i,:) = modelo.aprioriClass(i)*custo(i)*mvnpdf(dados.x, modelo.meansX(i,:), modelo.covs{i})';
-    end
-    
     
     % Probabilidade a priori de X
     acumulator = [];
@@ -36,32 +75,19 @@ elseif (strcmp(tipo, '') == 1)
     aprioriClassX = sum(acumulator);
     
     % Calculo do risco
-    for i = 1 : length(custo),
+    for i = 1 : length(conf.custo),
         
         acumulator = [];
-        for j = 1 : length(custo),
-            acumulator(j,:) = custo(i, j)*(modelo.aprioriClass(j)*...
-                mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})'./aprioriClassX);
+        for j = 1 : length(conf.custo),
+            acumulator(j,:) = (conf.custo(i, j)*(modelo.aprioriClass(j)*...
+                mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})')./aprioriClassX);
+            %                 fdpGauss(dados.x, modelo.meansX(j,:), modelo.covs{j})'./aprioriClassX);
+            
         end
         acoes(i,:) = sum(acumulator);
     end
     
-    [~, indY] = min(acoes);
-    
-%     output = modelo.meansY(indY, :);
-    
-    %% Transforma 1 em [1 0 0], 2 em [0 1 0], ...
-    labels = unique(indY);
-    code = zeros(length(labels), length(labels));
-    for j = 1: length(labels),
-        code(j, j) = 1;
-    end
-    
-    for j = length(labels):-1:1,
-        ind = (indY == labels(j));
-        tam = length(find(ind==1));
-        output(ind, :) = repmat(code(j, :), tam, 1);
-    end
+    [~, output] = min(acoes);
     
 end
 
