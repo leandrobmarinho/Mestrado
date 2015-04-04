@@ -1,27 +1,23 @@
 close all; clear all; clc;
 addpath('..');
+addpath('../SOM');
 
-%% Carregando os dados
-data = load('../iris.data');
-dataset.x = data(:, 1:4);
-dataset.y = data(:, 5:7);
-clear data;
-
-%% Normalizando os dados
-dataset.x = normalizaDados(dataset.x, 1);
+%% Pré-processamento
+dataset = carregaDados('iris.data', 0);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 2;
+numRepet = 1;
 
 % Topologia da rede
 config.vizinhos = 1;
 config.topologia = 'g'; %g grid; h hexagonal
 config.dist = 'b'; % b boxdist; l linkdist
-config.tamanho = [8 8];
-config.epocas = 300;
+config.tamanho = [4 4];
+config.epocas = 50;
+config.K = 3;
 
-result = som(dataset, ptrn, numRepet, config)
+result = som_knn(dataset, ptrn, numRepet, config)
 
 
 %% Plotando o boxplot

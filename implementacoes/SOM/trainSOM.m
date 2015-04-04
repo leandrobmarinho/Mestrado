@@ -41,7 +41,7 @@ v_f = 0.001;
 alfa_i = 0.01;
 alfa_f = 0.001;
 for epoca = 1 : conf.epocas,
-    
+
     erro = [];
     h = [];
     for i = 1 : N,
@@ -100,6 +100,7 @@ for epoca = 1 : conf.epocas,
     dados.x = dados.x(ind, :);
     
     epoca = epoca + 1;
+    
 end
 
 

@@ -11,22 +11,22 @@ numRepet = 10;
 conf.custo = 1 - eye(length(unique(dataset.y)));
 conf.algoritmo = '';
 
-resultCOMP = bayes(dataset, ptrn, numRepet, conf)
-
-conf.algoritmo = 'sameVar';
-resultMVAR = bayes(dataset, ptrn, numRepet, conf)
-
-conf.algoritmo = 'euclidean';
-resultEUCLI = bayes(dataset, ptrn, numRepet, conf)
-
-conf.algoritmo = 'mahalanobis1';
-resultMAHALA1 = bayes(dataset, ptrn, numRepet, conf)
-
-conf.algoritmo = 'mahalanobis2';
-resultMAHALA2 = bayes(dataset, ptrn, numRepet, conf)
-
-conf.algoritmo = 'mahalanobis3';
-resultMAHALA3 = bayes(dataset, ptrn, numRepet, conf)
+% resultCOMP = bayes(dataset, ptrn, numRepet, conf)
+% 
+% conf.algoritmo = 'sameVar';
+% resultMVAR = bayes(dataset, ptrn, numRepet, conf)
+% 
+% conf.algoritmo = 'euclidean';
+% resultEUCLI = bayes(dataset, ptrn, numRepet, conf)
+% 
+% conf.algoritmo = 'mahalanobis1';
+% resultMAHALA1 = bayes(dataset, ptrn, numRepet, conf)
+% 
+% conf.algoritmo = 'mahalanobis2';
+% resultMAHALA2 = bayes(dataset, ptrn, numRepet, conf)
+% 
+% conf.algoritmo = 'mahalanobis3';
+% resultMAHALA3 = bayes(dataset, ptrn, numRepet, conf)
 
 
 
@@ -35,7 +35,7 @@ resultMAHALA3 = bayes(dataset, ptrn, numRepet, conf)
 
 % lin = 2; col = 3;
 % range = [-1 1 -1 1];
-% conf.algoritmo = 'sameVar';
+% conf.algoritmo = 'euclidean';
 % 
 % subplot(lin, col, 1)
 % decisionSurface(range, conf, dataset, [2 1])

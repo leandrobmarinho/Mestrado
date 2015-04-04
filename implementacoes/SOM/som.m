@@ -6,10 +6,12 @@ for i = 1 : numRepet,
     
     
     %% Treinamento da SOM
+    fprintf('Treinando a SOM...\nRodada %d\n', i)
     [erroTrain(i), W] = trainSOM(trainData, config);
     
     
     %% Testando a SOM
+    fprintf('Testando a SOM...\nRodada %d\n\n', i)
     [erroTeste(i)] = testeSOM(W, testData);
         
 end

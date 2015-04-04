@@ -41,7 +41,6 @@ elseif (strcmp(conf.algoritmo, 'KNN') == 1)
     [classeXY] = testeKNN(data, testeXY, conf.K);
 
 else
-    conf.algoritmo
     
     %% Treinamento do Bayes
     [modelo] = trainBayes(data);

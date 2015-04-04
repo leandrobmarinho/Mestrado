@@ -9,7 +9,7 @@ function [output] = testeBayes(modelo, dados, conf)
 %   euclidean - 
 %   mahalanobis1 - covariancia igual e não diagonal
 %   mahalanobis2 - covariancias distintas e não diagonal
-%   mahalanobis3 - covariancias iguais, diagonalizada de uma não diagonal
+%   mahalanobis3 - covariancia igual, diagonalizada de uma não diagonal
 %                 (autovetor e autovalor)
 
 if (strcmp(conf.algoritmo, 'euclidean') == 1)
@@ -24,9 +24,9 @@ elseif (strcmp(conf.algoritmo, 'mahalanobis1') == 1)
     output = posicoes(1,:);
     
 elseif (strcmp(conf.algoritmo, 'mahalanobis2') == 1)
-    
+        
     dist = [];
-    for (i = 1 : length(unique(dados.y)))
+    for (i = 1 : length(modelo.aprioriClass))
         dist = [dist; pdist2(modelo.meansX(i,:), dados.x, 'mahalanobis', modelo.covs{i})];
     end
     
