@@ -1,34 +1,25 @@
-close all; clear all; clc;
-addpath('..');
-addpath('../SOM');
+close all; clear all; clc; addpath('..');addpath('../SOM');
 
 %% Pré-processamento
 dataset = carregaDados('iris.data', 0);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 1;
+numRodadas = 1;
 
 % Topologia da rede
 config.vizinhos = 1;
-config.topologia = 'g'; %g grid; h hexagonal
-config.dist = 'b'; % b boxdist; l linkdist
+config.topologia = 'h'; %g grid; h hexagonal
+config.dist = 'l'; % b boxdist; l linkdist
 config.tamanho = [4 4];
-config.epocas = 50;
-config.K = 2;
+config.epocas = 200;
+config.K = 3;
+config.v_i = 0.1;
+config.v_f = 0.05;
+config.alfa_i = 0.5;
+config.alfa_f = 0.01;
 
-result = som_knn(dataset, ptrn, numRepet, config)
 
+result = som_knn(dataset, ptrn, numRodadas, config)
 
-%% Plotando o boxplot
-% rotulos = [];
-% for i = 1:numRepet
-%     rotulos = [rotulos; 'SOM Teste'];
-% end
-% for i = 1:numRepet
-%     rotulos = [rotulos; 'SOM Train'];
-% end
-% valores = [result.erroTeste result.erroTrain];
-% boxplot(valores', rotulos);
-% 
-% ylabel('Erro de quantização', 'FontSize', 12)
+somAlerta()

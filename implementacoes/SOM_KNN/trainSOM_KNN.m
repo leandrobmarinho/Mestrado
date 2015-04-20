@@ -1,11 +1,12 @@
-function [ modelo ] = trainSOM_KNN( dados, config )
+function [ modelo, erros ] = trainSOM_KNN( dados, config )
 
-[~, W] = trainSOM(dados, config);
+fprintf('Posicionando neurônios.\n')
+[modelo, erros] = trainSOM(dados, config);
 
-dist = pdist2(dados.x, W);
+dist = pdist2(dados.x, modelo.W);
 [~, posicoes] = sort(dist);
 
-for i = 1 : size(W,1)
+for i = 1 : size(modelo.W,1)
     
     y = dados.y(posicoes(1:config.K, i), :);
     
@@ -21,7 +22,8 @@ for i = 1 : size(W,1)
 end
 
 modelo.Wy = Wy';
-modelo.W = W;
+% modelo.W = W;
+modelo.K = config.K;
 
 % pos = gridtop(config.tamanho)
 % labels = cellstr( num2str([modelo.Wy']') );

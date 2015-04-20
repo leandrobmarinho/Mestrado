@@ -33,8 +33,8 @@ dadosTeste = img2Dados(imagem, 'teste');
 %% Convertendo a resposta em imagem
 [linhas colunas ~] = size(imgIn);
 
-Yh(find(Yh == 1)) = 0;
-Yh(find(Yh == 2)) = 255;
+% Yh(find(Yh == 1)) = 0;
+% Yh(find(Yh == 2)) = 255;
 newImg = reshape(Yh,[linhas,colunas]);
 figure
-imshow(newImg)
+image(newImg), colormap('flag')

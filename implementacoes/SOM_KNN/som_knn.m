@@ -4,10 +4,9 @@ for i = 1 : numRepet,
     %% Embaralhando os dados
     [trainData, testData] = embaralhaDados(dados, ptrn, 2);
     
-    
     %% Treinamento da SOM
     fprintf('Treinando a SOM_K-NN...\nRodada %d\n', i)
-    [modelo] = trainSOM_KNN(trainData, config);
+    [modelo, ~] = trainSOM_KNN(trainData, config);
     
     
     %% Testando a SOM
@@ -16,7 +15,8 @@ for i = 1 : numRepet,
     
     %% Matriz de confusao e acurácia    
     confusionMatrices{i} = confusionmat(testData.y, Yh);
-    accuracy(i) = trace(confusionMatrices{i}) / length(testData.y);       
+    accuracy(i) = trace(confusionMatrices{i}) / length(find(Yh ~= 0));
+    
 end
 
 meanAccuracy = mean(accuracy);

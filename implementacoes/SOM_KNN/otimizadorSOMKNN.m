@@ -26,6 +26,7 @@ end
 Ecv = mean(erros);
 [~, indice] = min(Ecv);
 optParam = params{indice};
+save('resultadoSOM-KNN_VC');
 
 end
 

@@ -19,7 +19,8 @@ for i = 1 : conf.rodadas,
     
     %% Matriz de confusao e acurácia    
     confusionMatrices{i} = confusionmat(testData{i}.y, Yh);
-    accuracy(i) = trace(confusionMatrices{i}) / length(find(Yh ~= 0));
+    accuracy(i) = trace(confusionMatrices{i}) / length(find(Yh ~= 0))
+    save('resultadoSOM-KNN_VC');
 end
 
 meanAccuracy = mean(accuracy);

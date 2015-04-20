@@ -1,58 +1,40 @@
-function [ dataset ] = carregaDados( path, tipo_saida)
+function [ dataset ] = carregaDados( path, tipo_saida, pca)
 %CARREGADADOS Summary of this function goes here
-%   Detailed explanation goes here
+%   path - caminho do arquivo
+%   tipo_saida - 
+%       [1] - [0 0 1]
+%       [diferente de 1] - 3
+%   pca - porcentagem dos autovalores para o PCA
 
 %% Carregando os dados
 if (strcmpi('HAR', path) == 1)
-    fprintf('Carregando dados HAR...\n')
+    fprintf('Carregando dados HAR...\n')    
     
+    dataset.x = load('../dados/HAR/train/X_train.txt');
+    dataset.x = [dataset.x; load('../dados/HAR/test/X_test.txt')];
     
-    %%Tenta uma selecao de atributos
-    [col, desc] = textread('../dados/HAR/features.txt', '%d %s');
-    colunas = [];
-    for i = 1 : length(desc)
-        
-        if ( isempty( findstr(desc{i}, 'std()')) && isempty( findstr(desc{i}, 'min()')) ...
-                && isempty( findstr(desc{i}, 'max()')))
-            colunas = [colunas; col(i)];
-        end
-        
-    end
-    
-    
-    %%
-    y = load('../dados/HAR/test/y_test.txt');
-    data = load('../dados/HAR/test/X_test.txt');
-    data = data(:, colunas);
-    
-    prc = 0.3;
-    ys = []; xs = [];
-    for i = 1 : length(unique(y))
-        
-        ind = find(y == i);
-        
-        tamClasse = length(ind);
-        limite = floor(prc*tamClasse);
-        ind = ind(randperm(tamClasse));
-        
-        ys = [ys; y(ind(1:limite), :)];
-        xs = [xs; data(ind(1:limite), :)];
-        
-    end
-    y = ys;
-    dataset.x = xs;
-    
-    
-%     dataset.x = [data; load('../dados/HAR/train/X_train.txt')];
-%     y = [data; load('../dados/HAR/train/y_train.txt')];
+    y = load('../dados/HAR/train/y_train.txt');
+    y = [y; load('../dados/HAR/test/y_test.txt')];
     
 else
     data = load(strcat('../dados/', path));
     dataset.x = data(:, 1:end-1);
     y = data(:, end);
-    
+    clear data;
 end
-clear data;
+
+%% PCA
+if (pca > 0 && pca <= 1)
+    [V E] = eig( cov(dataset.x) );
+    [E order] = sort(diag(E), 'descend');
+    V = V(:,order);
+    
+    sumE = cumsum(E)/sum(E);
+    [~, ultimo] = max(sumE >= pca);
+    V = V(:, 1:ultimo);
+    
+    dataset.x = dataset.x*V;
+end
 
 %% Normalizando os dados
 if (strcmpi('HAR', path) == 0)

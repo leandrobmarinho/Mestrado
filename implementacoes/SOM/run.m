@@ -1,14 +1,7 @@
-close all; clear all; clc;
-addpath('..');
+close all; clear all; clc; addpath('..');
 
-%% Carregando os dados
-data = load('../iris.data');
-dataset.x = data(:, 1:4);
-dataset.y = data(:, 5:7);
-clear data;
-
-%% Normalizando os dados
-dataset.x = normalizaDados(dataset.x, 1);
+%% Pré-processamento
+dataset = carregaDados('iris.data', 0);
 
 %% Configurações gerais
 ptrn = 0.75;
@@ -18,8 +11,13 @@ numRepet = 2;
 config.vizinhos = 1;
 config.topologia = 'g'; %g grid; h hexagonal
 config.dist = 'b'; % b boxdist; l linkdist
-config.tamanho = [8 8];
-config.epocas = 300;
+config.tamanho = [9 3];
+config.epocas = 200;
+
+config.v_i = 1;
+config.v_f = 0.001;
+config.alfa_i = 0.01;
+config.alfa_f = 0.001;
 
 result = som(dataset, ptrn, numRepet, config)
 

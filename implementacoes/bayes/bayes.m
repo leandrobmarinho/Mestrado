@@ -9,7 +9,7 @@ for i = 1 : numRepet,
     [modelo] = trainBayes(trainData);
     
     
-    %% Testando o DMC
+    %% Testando o Bayes
     [Yh] = testeBayes(modelo, testData, conf);
     
     %% Matriz de confusao e acurácia    
@@ -25,10 +25,11 @@ meanAccuracy = mean(accuracy);
 
 
 %%
-results.accuracy = meanAccuracy;
+results.accMean = meanAccuracy*100;
 results.std = std(accuracy);
 results.confusionMatrix = confusionMatrices{posicoes(1)};
 results.confusionMatrices = confusionMatrices;
+results.accuracy = accuracy*100;
 
 
 end

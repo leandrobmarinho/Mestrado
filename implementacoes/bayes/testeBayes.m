@@ -53,14 +53,16 @@ elseif (strcmp(conf.algoritmo, 'sameVar') == 1)
     
     covariancia = variancia*eye(size(dados.x,2));
     
-    [~, posicoes] = max( (1/variancia)*modelo.meansX*dados.x' + repmat(modelo.aprioriClass', 1, size(dados.x, 1)) - ...
-        1/2*repmat(sum(modelo.meansX*inv(covariancia)*modelo.meansX')', 1, size(dados.x,1)));
+%     [~, posicoes] = max( (1/variancia)*modelo.meansX*dados.x' + log(repmat(modelo.aprioriClass', 1, size(dados.x, 1))) - ...
+%         1/2*repmat(sum(modelo.meansX*inv(covariancia)*modelo.meansX')', 1, size(dados.x,1)));
+%         
+%     output = posicoes(1,:);
     
-    %     [~, indY] = max( (1/2*dados.x*inv(modelo.covAll)*modelo.meansX' - ...
-    %     1/2*repmat(sum(modelo.meansX*inv(modelo.covAll)*modelo.meansX'), size(dados.x,1), 1) + ...
-    %    (1/2*modelo.meansX*modelo.covAll*dados.x')' +  repmat(modelo.aprioriClass, size(dados.x,1), 1) )');
-    
-    output = posicoes(1,:);
+    acumulator = [];
+    for i = 1 : size(modelo.meansX,1)
+        acumulator = [acumulator; mvnpdf(dados.x, modelo.meansX(i,:), covariancia)'*modelo.aprioriClass(i)];
+    end
+    [~, output] = max(acumulator);
     
 elseif (strcmp(conf.algoritmo, '') == 1)
     
@@ -74,7 +76,7 @@ elseif (strcmp(conf.algoritmo, '') == 1)
     end
     aprioriClassX = sum(acumulator);
     
-    % Calculo do risco
+    % Calculo do risco    
     for i = 1 : length(conf.custo),
         
         acumulator = [];

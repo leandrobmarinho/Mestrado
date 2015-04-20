@@ -8,6 +8,7 @@ errosTrein = [];
 erros = zeros(nTreinos, 1);
 for i = 1 : nTreinos
     [learnPoints, testData] = embaralhaDados(dados, ptrn, 2);
+    save('resultadoSOM-KNN_VC');
     
     fprintf('Buscando o melhor modelo... Passo %d\n',i);
     
@@ -27,7 +28,7 @@ end
 
 [~, indice] = min(erros);
 modelo = modelo{indice};
-
+save('resultadoSOM-KNN_VC');
 
 %% Plotando os erros de treinamento
 figure

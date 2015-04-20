@@ -4,21 +4,21 @@ N = size(dados.x, 1);
 meansX = [];
 meansY = [];
 
-for l = 1 : length(unique(dados.y)),
+for i = 1 : length(unique(dados.y)),
 
     % Seleciona apenas as amostras com a classe pretendida
-    indx = find(dados.y == l);
+    indx = find(dados.y == i);
     if not(isempty(indx))
         meansX = [meansX; mean(dados.x(indx, :))];
-        meansY = [meansY; l];
+        meansY = [meansY; i];
     end
     
     
-    modelo.aprioriClass(l) = length(indx) / N;
+    modelo.aprioriClass(i) = length(indx) / N;
     
-    covs{l} = cov(dados.x(indx, :));
-    if (rcond(covs{l}) < 1e-12)
-        covs{l} = covs{l} + 0.01*eye(size(dados.x,2));
+    covs{i} = cov(dados.x(indx, :));
+    if (rcond(covs{i}) < 1e-12)
+        covs{i} = covs{i} + 0.01*eye(size(dados.x,2));
     end
 end
 
@@ -29,8 +29,6 @@ modelo.covs = covs;
 modelo.covAll = cov(dados.x);
 if (rcond(modelo.covAll) < 1e-12)
     modelo.covAll = modelo.covAll + 0.01*eye(size(dados.x,2))
-else
-    
 end
 
 end
