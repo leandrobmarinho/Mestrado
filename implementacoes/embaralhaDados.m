@@ -18,13 +18,26 @@ if (tipo == 1)
     
 elseif ( tipo == 2)
     trainData.x = []; trainData.y = []; testData.x = []; testData.y = [];
-    numClass = length(dados.y(1, :));
+
+
+    if (size(dados.y, 2) == 1)
+        matriz = false;
+        numClass = length(unique(dados.y));
+    else
+        matriz = true;
+        numClass = size(dados.y, 2);
+    end
+
     for i = 1 : numClass,
-        classe = zeros(1, numClass);
-        classe(i) = 1;
-        
-        % Seleciona apenas as amostras com a classe pretendida
-        ind = find(classe * dados.y');
+
+        if (matriz == true)
+            classe = zeros(1, numClass);
+            classe(i) = 1;        
+            ind = find(classe * dados.y');
+        else
+            ind = find(dados.y == i);
+        end
+
         lengthClass = length(ind);
         
         limit = floor(ptrn*lengthClass);
@@ -40,11 +53,11 @@ elseif ( tipo == 2)
     end
     
     % Embaralha os dados
-    ind = randperm(length(trainData.x));
+    ind = randperm(size(trainData.x,1));
     trainData.x = trainData.x(ind, :);
     trainData.y = trainData.y(ind, :);
     
-    ind = randperm(length(testData.x));
+    ind = randperm(size(testData.x,1));
     testData.x = testData.x(ind, :);
     testData.y = testData.y(ind, :);
      

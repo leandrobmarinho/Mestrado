@@ -1,4 +1,4 @@
-function [ output ] = testeSOM(W, dados)
+function [ output ] = testeSOM(modelo, dados)
 
 [N, ~] = size(dados.x);
 
@@ -8,9 +8,9 @@ for i = 1 : N,
     x = dados.x(i,:);
     
     % Busca pelo neuronio vencendor
-    [~, win] = min(pdist2(x, W));
+    [~, win] = min(pdist2(x, modelo.W));
     
-    erro = [erro; x - W(win,:) ]; % erro para quantizacao
+    erro = [erro; x - modelo.W(win,:) ]; % erro para quantizacao
     
 end
 

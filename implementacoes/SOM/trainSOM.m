@@ -1,12 +1,44 @@
-function [ erro, W ] = trainSOM( dados, conf )
+function [modelo, erro] = trainSOM( dados, conf )
+% TRAINSOM
+%   dados - Dados para treinamento.
+%   conf.vizinhos - Tamanho da vizinhaça. Padrão 1
+%   conf.topopologia - Tipo da topologia. Padrão 'g'
+%        'g' - grade 
+%        'h' - hexagonal
+%   conf.dist - Tipo de distância da vizinhança. Padrão 'b'
+%        'b' - boxdist
+%        'l' - linkdist
+%   conf.tamanho - Quantidade de neurônios [lin col].
+%   conf.epocas - Número de épocas. Padrão 100.
+%   conf.v_i - valor inicial do cálculo da vizinhança
+%   conf.v_f - valor final do cálculo da vizinhança
+%   conf.alfa_i - valor inicial do cálculo da taxa de aprendizagem
+%   conf.alfa_i - valor final do cálculo da taxa de aprendizagem
 
-[N, ~] = size(dados.x);
+
+%% Validações
+if (isfield(conf, 'vizinhos') == 0)
+    conf.vizinhos = 1;
+end
+if (isfield(conf, 'topologia') == 0)
+    conf.topologia = 'g';
+end
+if (isfield(conf, 'dist') == 0)
+    conf.dist = 'b';
+end
+if (isfield(conf, 'epocas') == 0)
+    conf.epocas = 100;
+end
+
+
 
 %% Criando a rede
+[N, ~] = size(dados.x);
+
 % Vetor de pesos
-ind = randperm(N);
 % W = zeros( prod(conf.tamanho), size(dados.x,2));
 W = repmat( mean(dados.x), prod(conf.tamanho), 1);
+count = zeros(1, prod(conf.tamanho));
 
 
 % Topologia dos neuronios
@@ -36,32 +68,42 @@ end
 
 
 %% Treinando a rede
-v_i = 1;
-v_f = 0.001;
-alfa_i = 0.01;
-alfa_f = 0.001;
 for epoca = 1 : conf.epocas,
 
+    count = zeros(1, prod(conf.tamanho));
     erro = [];
     h = [];
     for i = 1 : N,
         x = dados.x(i,:);
         
         % Busca pelo neuronio vencendor
-        [~, win] = min(pdist2(x, W));
-        [~, win2] = max(x*W');
+        f = (count/i).^2;
+         
+        [~, win] = min(f.*pdist2(x, W));
+        % [~, win2] = max(x*W');
+        count(win) = count(win) + 1;
         
         erro = [erro; x - W(win,:) ]; % erro para quantizacao        
         
-        %% Atualizacao do vetor de pesos
+        %% Atualizacao do vetor de pesos        
         indViz = find(D(win,:) <= conf.vizinhos);
         
-        v = v_i*nthroot( (v_i/v_f)^i, conf.epocas*N);
-        alfa = alfa_i*nthroot( (alfa_i/alfa_f)^i, conf.epocas*N);
+        v = conf.v_i*nthroot( (conf.v_f/conf.v_i)^i, conf.epocas*N);
+        alfa = conf.alfa_i*nthroot( (conf.alfa_f/conf.alfa_i)^i, conf.epocas*N);
+
         
         h = exp(- ((D(win, indViz)).^2)/v^2)';
         erros = repmat(x, length(indViz),1) - W(indViz, :);
+        
+        if (isnan(W(indViz, :) + alfa*repmat(h,1,size(erros,2)).*erros))
+            keyboard
+        end
+        
         W(indViz, :) = W(indViz, :) + alfa*repmat(h,1,size(erros,2)).*erros;
+        
+        if (isnan(W) == 1)
+            keyboard
+        end
         
 %         %% Neuronios vencendor (eucl e prod escal) e amostra
 %         close all
@@ -93,11 +135,11 @@ for epoca = 1 : conf.epocas,
 %     keyboard
     
     
-    
-    
     %% Embaralhando os dados
     ind = randperm(N);
     dados.x = dados.x(ind, :);
+    
+    fprintf('Treinando a SOM. Faltam %d épocas.\n', conf.epocas - epoca)
     
     epoca = epoca + 1;
     
@@ -108,12 +150,26 @@ end
 % figure
 % plot([1:1:length(quant)], quant)
 % 
-% 
-% %% Plota os neuronios
-% plotNeurons(dados, W, pos, D, conf)
+% somAlerta()
 % keyboard
 
-erro = sum(quant)/conf.epocas;
+
+%% Plota os neuronios
+% figure
+% subplot(1, 2, 1)
+% plotNeurons(dados, W, pos, D, conf)
+% 
+% subplot(1, 2, 2)
+% net = selforgmap(conf.tamanho)
+% [net,tr] = train(net,dados.x');
+% plotNeurons(dados, net.IW{1}, pos, D, conf)
+% 
+% keyboard
+
+% erro = sum(quant)/conf.epocas;
+erro = quant;
+modelo.W = W;
+modelo.pos = pos;
 
 end
 

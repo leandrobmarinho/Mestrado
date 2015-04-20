@@ -1,0 +1,37 @@
+function [ dados ] = img2Dados( imgs, tipo )
+%IMG2DADOS Summary of this function goes here
+%   Detailed explanation goes here
+%   imagem - cell
+%   saida [1] - com saida
+
+dados.x = [];
+dados.y = [];
+for i = 1 : size(imgs,2)
+    x = [];
+
+    % Percorre cada pixel
+    [linhas colunas ~] = size(imgs{i});
+    for lin = 1 : linhas
+        for col = 1 : colunas
+            
+            x = [x; [imgs{i}(lin, col, 1) ...
+                imgs{i}(lin, col, 2) imgs{i}(lin, col, 3)]];            
+        end
+    end
+    
+%     x =  unique(x,'rows');
+%     if ( saida == 1 )
+%         dados.y = [dados.y; i*ones(size(x,1),1)];
+%     end
+%     dados.x = [dados.x; x];
+
+    if (strcmp(tipo, 'teste') == 1)
+        
+    end
+end
+
+dados.x =  double(dados.x);
+
+
+end
+

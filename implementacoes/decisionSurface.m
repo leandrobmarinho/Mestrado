@@ -69,6 +69,7 @@ colormap(cmap);
 
 plotar = [];
 hold all
+% for i = numClass : -1 : 1,
 for i = 1 : numClass,
     
     %Seleciona apenas as amostras com a classe pretendida
@@ -77,11 +78,16 @@ for i = 1 : numClass,
         plot(xy(indxSD,1), xy(indxSD,2), '*', 'Color', cmap(i,:))
     end
     
+end
+
+for i = 1 : numClass,
+        
     indTrain = find(data.y == i);
     if not(isempty(indTrain))
         plotar(i) = plot(data.x(indTrain,1), data.x(indTrain,2), 'o', 'Color', cmap2(i,:));
     end 
 end
+
 hold off
 legend(plotar, 'Setosa ', 'Versicolor ', 'Virgínica', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
 
