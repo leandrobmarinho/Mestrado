@@ -1,4 +1,4 @@
-function [output] = testeBayes(modelo, dados, conf)
+function [classes, valores] = testeBayes(modelo, dados, conf)
 %TESTEBAYES Summary of this function goes here
 % modelo
 % dados
@@ -11,18 +11,21 @@ function [output] = testeBayes(modelo, dados, conf)
 %   mahalanobis2 - covariancias distintas e não diagonal
 %   mahalanobis3 - covariancia igual, diagonalizada de uma não diagonal
 %                 (autovetor e autovalor)
+%   bayesRej - bayesiano com rejeição
+% conf.t - limiar para rejeição binária
 
 if (strcmp(conf.algoritmo, 'euclidean') == 1)
     dist = pdist2(modelo.meansX, dados.x);
-    [~, posicoes] = sort(dist);
+    [v, posicoes] = sort(dist);
     
-    output = posicoes(1,:);
+    classes = posicoes(1,:);
+    valores = v(1,:);
 elseif (strcmp(conf.algoritmo, 'mahalanobis1') == 1)
     dist = pdist2(modelo.meansX, dados.x, 'mahalanobis', modelo.covAll);
-    [~, posicoes] = sort(dist);
+    [v, posicoes] = sort(dist);
     
-    output = posicoes(1,:);
-    
+    classes = posicoes(1,:);
+    valores = v(1,:); 
 elseif (strcmp(conf.algoritmo, 'mahalanobis2') == 1)
         
     dist = [];
@@ -30,19 +33,20 @@ elseif (strcmp(conf.algoritmo, 'mahalanobis2') == 1)
         dist = [dist; pdist2(modelo.meansX(i,:), dados.x, 'mahalanobis', modelo.covs{i})];
     end
     
-    [~, posicoes] = sort(dist);
+    [v, posicoes] = sort(dist);
     
-    output = posicoes(1,:);
-    
+    classes = posicoes(1,:);
+    valores = v(1,:);
 elseif (strcmp(conf.algoritmo, 'mahalanobis3') == 1)
     
     [V E] = eig(modelo.covAll);
     covariancia = V*inv(E)*V';
     
     dist = pdist2(modelo.meansX, dados.x, 'mahalanobis', covariancia);
-    [~, posicoes] = sort(dist);
+    [v, posicoes] = sort(dist);
     
-    output = posicoes(1,:);
+    classes = posicoes(1,:);
+    valores = v(1,:);
 elseif (strcmp(conf.algoritmo, 'sameVar') == 1)
     %     keyboard
     
@@ -62,7 +66,7 @@ elseif (strcmp(conf.algoritmo, 'sameVar') == 1)
     for i = 1 : size(modelo.meansX,1)
         acumulator = [acumulator; mvnpdf(dados.x, modelo.meansX(i,:), covariancia)'*modelo.aprioriClass(i)];
     end
-    [~, output] = max(acumulator);
+    [valores, classes] = max(acumulator);
     
 elseif (strcmp(conf.algoritmo, '') == 1)
     
@@ -70,26 +74,53 @@ elseif (strcmp(conf.algoritmo, '') == 1)
     acoes = [];
     
     % Probabilidade a priori de X
-    acumulator = [];
+    aprioriClassX = [];
     for j = 1 : length(modelo.aprioriClass)
-        acumulator(j,:) = modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})';
+        aprioriClassX(j,:) = modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})';
     end
-    aprioriClassX = sum(acumulator);
+    aprioriClassX = sum(aprioriClassX);
+    
     
     % Calculo do risco    
-    for i = 1 : length(conf.custo),
+     for i = 1 : length(conf.custo),
+         
+         acumulator = [];
+         for j = 1 : length(conf.custo),
+             acumulator(j,:) = (conf.custo(i, j)*(modelo.aprioriClass(j)*...
+                 mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})')./aprioriClassX);
+             
+         end
+         acoes(i,:) = sum(acumulator);
+     end    
+     [valores, classes] = min(acoes);
+
+
+%    for i = 1 : size(modelo.meansX,1)
+%        acoes(i, :) = (modelo.aprioriClass(i)*mvnpdf(dados.x, modelo.meansX(i,:), ...
+%            modelo.covs{i})');
+%    end
+%    [valores, classes] = max(acoes);
+
+elseif (strcmp(conf.algoritmo, 'bayesRej') == 1)
         
-        acumulator = [];
-        for j = 1 : length(conf.custo),
-            acumulator(j,:) = (conf.custo(i, j)*(modelo.aprioriClass(j)*...
-                mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})')./aprioriClassX);
-            %                 fdpGauss(dados.x, modelo.meansX(j,:), modelo.covs{j})'./aprioriClassX);
-            
-        end
-        acoes(i,:) = sum(acumulator);
+	if (length(unique(dados.y)) ~= 2)
+        error('Bayes com rejeição só é permitido com problemas binários');
     end
+        
+    % Probabilidade a priori de X
+    aprioriClassX = [];
+    for j = 1 : length(modelo.aprioriClass)
+        aprioriClassX(j,:) = modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})';
+    end
+    aprioriClassX = sum(aprioriClassX);
     
-    [~, output] = min(acoes);
+    for i = 1 : size(modelo.meansX,1)
+        acoes(i, :) = (modelo.aprioriClass(i)*mvnpdf(dados.x, modelo.meansX(i,:), ...
+            modelo.covs{i})')./aprioriClassX;
+    end
+    [valores, classes] = max(acoes);
+    classes(valores <= 0.5 + conf.t) = 0;
+
     
 end
 

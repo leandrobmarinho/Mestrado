@@ -1,26 +1,31 @@
 function [ results ] = som_knnVC_2(dados, params, conf)
 
+save('resultadoSOM-KNN_VC');
 for i = 1 : conf.rodadas,    
     %% Embaralhando os dados
     [trainData{i}, testData{i}] = embaralhaDados(dados, conf.ptrn, 2);
-    save('resultadoSOM-KNN_VC');
-    
+    save('resultadoSOM-KNN_VC', '-append');
+
     %% Validação cruzada
     fprintf('Buscando a melhor topologia...\n')
+    tic
     [optParams{i}, Evc{i}] = otimizadorSOMKNN(trainData{i}, params, conf.folds);
     
     %% Treinamento da SOM
     fprintf('Treinando a SOM_K-NN...\nRodada %d\n', i)
     [modelo{i}] = trainVC(trainData{i}, optParams{i}, conf.treinos, conf.ptrn);
+    tempoTrein(i) = toc
     
     %% Testando a SOM
     fprintf('Testando a SOM...\nRodada %d\n\n', i)
+    tic
     [Yh] = testeSOM_KNN(modelo{i}, testData{i});
     
     %% Matriz de confusao e acurácia    
     confusionMatrices{i} = confusionmat(testData{i}.y, Yh);
     accuracy(i) = trace(confusionMatrices{i}) / length(find(Yh ~= 0))
-    save('resultadoSOM-KNN_VC');
+    tempoTeste = toc
+    save('resultadoSOM-KNN_VC', '-append');
 end
 
 meanAccuracy = mean(accuracy);
@@ -41,7 +46,10 @@ results.ErroVC = Evc;
 results.modelos = modelo;
 results.trainData = trainData;
 results.testData = testData;
+results.tempoTrein = tempoTrein;
+results.tempoTeste = tempoTeste;
 
+save('resultadoSOM-KNN_VC', '-append');
 
 end
 

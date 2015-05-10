@@ -11,6 +11,11 @@ else
 %     output =  mode(modelo.Wy(posicoes(1:modelo.K,:)))';
     
     for i = 1 : size(dados.x, 1)
+        %Se tentar pegar mais neuronios que existe
+        if (modelo.K > size(modelo.W, 1))
+            modelo.K = size(modelo.W, 1); 
+        end
+        
         y = modelo.Wy(posicoes(1:modelo.K, i));
         
         U = unique(y);

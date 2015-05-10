@@ -7,14 +7,14 @@ dataset = carregaDados('iris.data', 0);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 10;
+numRepet = 20;
 
 
 %%
 conf.custo = [0 20 20;20 0 20; 1 1 0];
 % conf.custo = [0 1 50;1 0 50; 1 1 0];
 conf.algoritmo = '';
-resultCOMP2 = bayes2(dataset, ptrn, numRepet, conf);
+resultCOMP2 = bayesCusto(dataset, ptrn, numRepet, conf);
 resultCOMP2.confusionMatrix1
 resultCOMP2.confusionMatrix2
 % resultCOMP2.accMean2 >= resultCOMP2.accMean1

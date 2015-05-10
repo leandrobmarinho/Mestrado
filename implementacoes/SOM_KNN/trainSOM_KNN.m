@@ -1,7 +1,10 @@
 function [ modelo, erros ] = trainSOM_KNN( dados, config )
-
 fprintf('Posicionando neurônios.\n')
 [modelo, erros] = trainSOM(dados, config);
+
+% net = selforgmap(conf.tamanho)
+% [net,tr] = train(net,dados.x');
+% modelo.W = net.IW{1}
 
 dist = pdist2(dados.x, modelo.W);
 [~, posicoes] = sort(dist);
@@ -22,7 +25,6 @@ for i = 1 : size(modelo.W,1)
 end
 
 modelo.Wy = Wy';
-% modelo.W = W;
 modelo.K = config.K;
 
 % pos = gridtop(config.tamanho)

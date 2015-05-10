@@ -2,12 +2,12 @@ close all; clear all; clc
 addpath('..');
 
 %% Pré-processamento
-dataset = carregaDados('iris.data', 0);
+dataset = carregaDados('column_2C.data', 0);
 
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 10;
+numRepet = 20;
 
 conf.custo = 1 - eye(length(unique(dataset.y)));
 conf.algoritmo = '';

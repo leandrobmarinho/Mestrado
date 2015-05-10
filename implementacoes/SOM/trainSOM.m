@@ -90,6 +90,7 @@ for epoca = 1 : conf.epocas,
         
         v = conf.v_i*nthroot( (conf.v_f/conf.v_i)^i, conf.epocas*N);
         alfa = conf.alfa_i*nthroot( (conf.alfa_f/conf.alfa_i)^i, conf.epocas*N);
+%         alfa = conf.alfa_i*i + conf.alfa_f;
 
         
         h = exp(- ((D(win, indViz)).^2)/v^2)';
@@ -119,13 +120,15 @@ for epoca = 1 : conf.epocas,
     end
     
     quant(epoca) = sum(sum(erro.^2))/N;
-    
-    
-%     if (quant(epoca) <= 0.007)
-%         quant
-%         break;
-%     end
+        
+    if (epoca > 40)        
+        frame = quant(end-30:end);
 
+        if (mean(abs(diff(frame))) <= 6 && mean(frame) <= 9)
+            fprintf('Estabilizou na epoca %d\n', epoca);
+            break;
+        end
+    end
 
 %     %% Neuronios em uma epoca
 %     close all

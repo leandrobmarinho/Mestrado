@@ -1,36 +1,22 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dataset = carregaDados('iris.data', 0);
+conf.pca = 0.98; conf.selecaoAtr = 0.1;
+dataset = carregaDados('har', 0, conf);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 2;
+numRodadas = 1;
 
 % Topologia da rede
-config.vizinhos = 1;
-config.topologia = 'g'; %g grid; h hexagonal
-config.dist = 'b'; % b boxdist; l linkdist
-config.tamanho = [9 3];
-config.epocas = 200;
-
-config.v_i = 1;
-config.v_f = 0.001;
+config.vizinhos = 3;
+config.topologia = 'h'; %g grid; h hexagonal
+config.dist = 'l'; % b boxdist; l linkdist
+config.tamanho = [20 20];
+config.epocas = 50;
+config.v_i = 0.09;
+config.v_f = 0.085;
 config.alfa_i = 0.01;
-config.alfa_f = 0.001;
+config.alfa_f = 0.01;
 
-result = som(dataset, ptrn, numRepet, config)
-
-
-%% Plotando o boxplot
-rotulos = [];
-for i = 1:numRepet
-    rotulos = [rotulos; 'SOM Teste'];
-end
-for i = 1:numRepet
-    rotulos = [rotulos; 'SOM Train'];
-end
-valores = [result.erroTeste result.erroTrain];
-boxplot(valores', rotulos);
-
-ylabel('Erro de quantização', 'FontSize', 12)
+result = som(dataset, ptrn, numRodadas, config)

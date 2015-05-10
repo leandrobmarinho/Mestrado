@@ -1,0 +1,54 @@
+==================================================================
+Self-Organized Map (SOM)
+SOM-KNN
+==================================================================
+
+Este projeto é composto pelos algoritmos SOM e SOM-KNN.
+
+---------------------------------------------------------------------------------------------------------
+SOM:
+- 'run*.m': Scripts que executam a rede SOM. O 'run.m' mostra um exemplo com a base de dados Human Activity Recognition e o 'runIris.m' com a Iris.
+
+- 'runBuscaTopol.m': Script utilizado para encontrar a melhor topologia.
+
+- 'runResultados.m': Mostra os resultados encontrados com o script 'runBuscaTopol.m'. A pasta SOM já possui um arquivo chamado 'topologiaSOM.mat' para executar.
+
+- 'buscaTopologiaSOM': Função utilizada para encontrar a melhor topologia da SOM. Ela é chamada em 'runBuscaTopol.m'.
+
+- 'som.m': Esta função será responsável por organizar os valores de cada rodada. Os métodos de treinamento e teste da SOM são chamados nela. Ela usada com apenas uma topologia.
+
+- 'trainSOM.m': Recebe os dados e uma struct com as configurações da rede. A descrição desta função pode ser vista utilizando o comando 'help trainSOM'.
+
+- 'testeSOM.m': Calcula o erro de quantização com os dados de teste.
+
+- 'plotNeurons': Esta função foi usada como debug na etapa de treinamento. Ela plota os neurônios para dois atributos.
+	
+
+---------------------------------------------------------------------------------------------------------
+SOM-KNN:
+- 'run.m': Script para rodar a SOM-KNN. Possui um exemplo com a base de dados Human Activity Recognition.
+
+- 'runBuscaSOM_KNN.m': Este script carrega os resultados da busca de topologia da SOM, 'topologiaSOM.mat', e chama a função que testará difernetes valores de 'K' na SOM-KNN.
+
+- 'runResultados.m': Executa os resultados gerados pela o script 'runBuscaSOM_KNN.m'. Dentro do bloco 'Plotando os neuronios com as classes' é possível ver 2 variáveis 'tam' e 'k' que permitem escolher o tamanho e o número de vizinhos da grade de neurônios. Lembrando que são escolhidos o melhor modelo (maior taxa de acerto) dos n treinamentos.
+
+- 'run.m': Script que executa o SOM-KNN com uma topologia.
+
+- 'som_knn.m': Semelhante a 'som.m' na SOM.
+
+- 'buscaSOMKNN.m': Função responsável por computar diferentes valores de 'k' dos valores calculados da SOM utilizando a SOM-KNN.
+
+- 'trainSOM_KNN.m': Função para treinar a SOM-KNN. Chama a SOM para posicionar os neuronios.
+
+- 'train2SOM_KNN.m': Semelhante a trainSOM_KNN, porém já recebe os neurônios posicionados. É utilizada na função 'buscaSOMKNN.m'.
+
+- 'testeSOM_KNN.m': Calcula a taxa de acerto da SOM-KNN.
+
+==================================================================
+Algumas funções são utilizadas pelos dois algoritmos:
+
+- 'carregaDados(nome_base, tipo_saida, conf)': Esta função é responsável por carregar os dados. O primeiro parâmetro é o nome da base de dados, o segundo é o formato da saída e o último é configurações extras como seleção de atributos e PCA. Se tipo_saida é igual a 1, os valores da saída serão no formato [1 0 0] para classe 1, [0 1 0] para classe 2 e assim por diante. Caso contrário, a saída será numérica (1, 2, 3, ...). Use o comando 'help carregaDados' para ver os campos da struct conf. Este parâmetro é opcional.
+
+- 'normalizaDados(dados, opcao )': Esta função é utilizada pela carregaDados() para normalizar os dados. O parâmetro dados recebe uma matriz com os valores de entrada e a opção indicará o tipo normalização. Atualmente, esse método só possui uma maneira de normalizar (opção = 1 ). Esta função retornará a matriz com os dados normalizados.
+
+- 'embaralhaDados( dados, ptrn, tipo )': Embaralha os dados e separa em dois subconjuntos (treinamento e teste), onde cada um é uma estrutura (trein.x e trein.y). O parâmetro 'ptrn' indica a porcentagem usada para treinamento e o 'tipo' informa se o número de classes será equilibrando (tipo = 2) ou não (tipo = 1).

@@ -9,24 +9,23 @@ for i = 1 : nFolds,
     [learnPoints, testData] = embaralhaDados(dados, 0.8, 2);
 
     for j = 1: length(params),
-        tic
-        fprintf('Validação Cruzada SOM-KNN. Fold: %d - Param: %d\n',i, j);
-                
+        tic                
         [modelo, ~] = trainSOM_KNN(learnPoints, params{j});
         [Yh] = testeSOM_KNN(modelo, testData);
         
         % Calculando erro
         erros(i, j) = 1 - (trace(confusionmat(testData.y, Yh)) / length(testData.y));
-        
-        save('resultadoSOM-KNN_VC');
+        fprintf('Validação Cruzada SOM-KNN. Fold: %d - Param: %d. Acc: %f\n',i, j, 1-erros(i, j));
+
+        save('resultadoSOM-KNN_VC','-append');
         toc
     end
 end
 
-Ecv = mean(erros);
+Ecv = mean(erros, 1);
 [~, indice] = min(Ecv);
 optParam = params{indice};
-save('resultadoSOM-KNN_VC');
+save('resultadoSOM-KNN_VC','-append');
 
 end
 

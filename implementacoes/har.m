@@ -1,8 +1,9 @@
 close all; clear all; clc;
 
 x = load('dados/HAR/train/X_train.txt');
+x = [x; load('dados/HAR/test/X_test.txt')];
 y = load('dados/HAR/train/Y_train.txt');
-
+y = [y; load('dados/HAR/test/Y_test.txt')];
 
 classes = unique(y);
 
@@ -32,32 +33,32 @@ varClass = [varClass var(resultados(:, [7:12])')'];
 % [~, pos] = sort(varClass, 'descend');
 
 %% Variancias por classe
-plot([1:1:561], resultados(:, 7), '-og' )
-hold on
-plot([1:1:561], resultados(:, 8), '-ob' )
-hold on
-plot([1:1:561], resultados(:, 9), '-oc' )
-hold on
-plot([1:1:561], resultados(:, 10), '-or' )
-hold on
-plot([1:1:561], resultados(:, 11), '-ok' )
-hold on
-plot([1:1:561], resultados(:, 11), '-om' )
-hold on
-plot([1:1:561], resultados(:, 12), '--oy' )
+% plot([1:1:561], resultados(:, 7), '-og' )
+% hold on
+% plot([1:1:561], resultados(:, 8), '-ob' )
+% hold on
+% plot([1:1:561], resultados(:, 9), '-oc' )
+% hold on
+% plot([1:1:561], resultados(:, 10), '-or' )
+% hold on
+% plot([1:1:561], resultados(:, 11), '-ok' )
+% hold on
+% plot([1:1:561], resultados(:, 11), '-om' )
+% hold on
+plot([1:1:561], resultados(:, 12), '--ob' )
 
 figure
 %% Medias por classe
-plot([1:1:561], resultados(:, 1), '-og' )
-hold on
-plot([1:1:561], resultados(:, 2), '-ob' )
-hold on
-plot([1:1:561], resultados(:, 3), '-oc' )
-hold on
-plot([1:1:561], resultados(:, 4), '-or' )
-hold on
-plot([1:1:561], resultados(:, 5), '-ok' )
-hold on
-plot([1:1:561], resultados(:, 6), '-om' )
-hold on
-plot([1:1:561], resultados(:, 14), '--oy' )
+% plot([1:1:561], resultados(:, 1), '-og' )
+% hold on
+% plot([1:1:561], resultados(:, 2), '-ob' )
+% hold on
+% plot([1:1:561], resultados(:, 3), '-oc' )
+% hold on
+% plot([1:1:561], resultados(:, 4), '-or' )
+% hold on
+% plot([1:1:561], resultados(:, 5), '-ok' )
+% hold on
+% plot([1:1:561], resultados(:, 6), '-om' )
+% hold on
+% plot([1:1:561], resultados(:, 14), '--oy' )

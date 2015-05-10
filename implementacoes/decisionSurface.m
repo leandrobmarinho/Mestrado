@@ -5,6 +5,7 @@ function [ ] = decisionSurface( range, conf, data, atr)
 %   DMC
 %   KNN
 %   bayes
+%   janelaParzen
 % 
 % dados - base de dados
 % atributos - atributos para plotar
@@ -39,6 +40,11 @@ elseif (strcmp(conf.algoritmo, 'KNN') == 1)
     
     % Rotulando a superfícei de decisão
     [classeXY] = testeKNN(data, testeXY, conf.K);
+    
+elseif (strcmp(conf.algoritmo, 'janelaParzen') == 1)
+    
+    [modelo] = trainPzWin(data);
+    [classeXY] = testePzWin(modelo, testeXY, conf.h);
 
 else
     
@@ -89,7 +95,8 @@ for i = 1 : numClass,
 end
 
 hold off
-legend(plotar, 'Setosa ', 'Versicolor ', 'Virgínica', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
+% legend(plotar, 'Setosa ', 'Versicolor ', 'Virgínica', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
+% legend(plotar, 'Hernia', 'Spondylolisthesis', 'Normal', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
 
 
 end
