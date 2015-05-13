@@ -1,58 +1,42 @@
-close all; clear all; clc
+close all; clear all; clc; addpath('..');
 
-%% Carregando os dados
-data = load('../iris.data');
-dataset.x = data(:, 1:4);
-dataset.y = data(:, 5:7);
-clear data;
-
+%% Pré-processamento
+% dados = carregaDados('iris.data', 0);
+bd = load('../dados/iris.data');
+dados.x = bd(:, 1:4);
+dados.y = bd(:, 5);
 
 %% Configurações gerais
 ptrn = 0.8;
+numRepet = 10;
 
 
-%% Separa em treinamento e teste
-
-% Separa as classes
-trainData.x = []; trainData.y = []; testData.x = []; testData.y = [];
-numClass = length(dataset.y(1, :));
-for i = 1 : numClass,
-    classe = zeros(1, numClass);
-    classe(i) = 1;
+%%
+for i = 1 : numRepet,
+    %% Embaralhando os dados
+    [trainData, testData] = embaralhaDados(dados, ptrn, 2);    
     
-    % Seleciona apenas as amostras com a classe pretendida
-    ind = find(classe * dataset.y');
-    lengthClass = length(ind);
+    %% Testando o Bayes
+    [Yh] = arvoreDecisao(testData.x);
+
+    %% Matriz de confusao e acurácia
+    confusionMatricesTeste{i} = confusionmat(testData.y, Yh);
+    accuracy(i) = trace(confusionMatricesTeste{i}) / length(testData.y);
     
-    limit = floor(ptrn*lengthClass);
-    if not(isempty(ind))
-        
-        ind = ind(randperm(lengthClass));
-        trainData.x = [trainData.x; dataset.x(ind(1:limit), :)];
-        trainData.y = [trainData.y; dataset.y(ind(1:limit), :)];
-        
-        testData.x = [testData.x; dataset.x(ind(limit+1:end), :)];
-        testData.y = [testData.y; dataset.y(ind(limit+1:end), :)];
-    end
 end
 
-
-% Embaralha os dados
-ind = randperm(length(trainData.x));
-trainData.x = trainData.x(ind, :);
-trainData.y = trainData.y(ind, :);
-
-ind = randperm(length(testData.x));
-testData.x = testData.x(ind, :);
-testData.y = testData.y(ind, :);
+meanAccuracy = mean(accuracy);
 
 
+%% Procurando a matriz de confusão mais próxima da acurácia média
+[~, posicoes] = sort( abs ( meanAccuracy - accuracy ) );
 
-%% Validando o classificador
-[output] = arvoreDecisao(testData.x);
 
-[~, index] = max(output');
-[~, target] = max(testData.y');
+%%
+results.accMean = meanAccuracy*100
+results.std = std(accuracy);
+results.confusionMatrix = confusionMatricesTeste{posicoes(1)};
+results.confusionMatrices = confusionMatricesTeste;
+results.accuracy = accuracy*100;
 
-confusionMatrices = confusionmat(target, index);
-accuracy = trace(confusionMatrices) / length(testData.y)
+results.confusionMatrix
