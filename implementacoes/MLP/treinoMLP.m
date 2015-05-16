@@ -9,6 +9,7 @@ X = [ones(N, 1) X]; % adding the bias term
 W = rand(conf.L, d+1); % weights between in-hidden layers
 M = rand(C, conf.L+1); % weights between hidden-out layers
 
+keyboard
 for iteration = 1: conf.maxIterations,
     fprintf('Treinando MLP. Época %d\n', iteration);
     

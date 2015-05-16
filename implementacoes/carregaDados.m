@@ -6,6 +6,7 @@ function [ dataset ] = carregaDados( path, tipo_saida, conf, varargin)
 %       [diferente de 1] - 3
 %   conf.pca - porcentagem dos autovalores para o PCA.
 %   conf.selecaoAtr - taxa de selecao atributos pela variancia
+%   conf.normaliza - (true) normaliza os dados
 
 if nargin < 2 || nargin > 3
     error('Número de argumentos inválidos');
@@ -40,7 +41,9 @@ if (exist('conf', 'var') == 1 && isfield(conf, 'selecaoAtr') == 1)
 end
 
 %% Normalizando os dados
-if (strcmpi('HAR', path) == 0)
+if ((strcmpi('HAR', path) == 0) && (exist('conf', 'var') == 0) || ...
+        exist('conf', 'var') == 1 && isfield(conf, 'normaliza') == 1 ...
+        && conf.normaliza == true)
     dataset.x = normalizaDados(dataset.x, 1);
 end
 
