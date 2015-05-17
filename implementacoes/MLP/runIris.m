@@ -5,12 +5,12 @@ dataset = carregaDados('iris.data', 1);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 10;
+numRepet = 5;
 
 % Topologia da rede
-config.L = 10; %numero de neuronios na camada oculta
-config.maxIterations = 100;
-config.lRate = 0.1;
+config.L = 9; %numero de neuronios na camada oculta
+config.maxIterations = 300;
+config.lRate = 0.05 ;
 
 result = mlp(dataset, ptrn, numRepet, config)
 

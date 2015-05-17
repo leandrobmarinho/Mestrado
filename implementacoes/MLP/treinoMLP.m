@@ -9,7 +9,12 @@ X = [ones(N, 1) X]; % adding the bias term
 W = rand(conf.L, d+1); % weights between in-hidden layers
 M = rand(C, conf.L+1); % weights between hidden-out layers
 
-keyboard
+% if ( ~isfield(conf, 'lRate') )
+%     lRate = 0.5;
+% end
+% lRate = lRate(1).*(1 - (1:N)/(N+1));
+
+
 for iteration = 1: conf.maxIterations,
     fprintf('Treinando MLP. Época %d\n', iteration);
     
@@ -25,7 +30,7 @@ for iteration = 1: conf.maxIterations,
         o = h*M'; % o stands for output
         o = tanh(o);       
     
- %       auxMSE(i) = sum((y - yh).^2);
+        auxMSE(i) = sum((y - o).^2);
         
  %       [~, indTarget] = max(y);
  %       [~, indEstimated] = max(yh);
@@ -50,7 +55,8 @@ for iteration = 1: conf.maxIterations,
         end
         W = W - conf.lRate*lGrad1'*x;
     end
-%    MSE(iteration) = mean(auxMSE);
+    
+    MSE(iteration) = mean(auxMSE);
 %    Accuracy(iteration) = mean(auxSuccessRate);
     ind = randperm(N);
     X = X(ind, :);
@@ -59,3 +65,4 @@ end
 
 model.W = W;
 model.M = M;
+model.MSE = MSE;

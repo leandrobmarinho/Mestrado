@@ -1,9 +1,10 @@
 function [ dataset ] = carregaDados( path, tipo_saida, conf, varargin)
 %CARREGADADOS Summary of this function goes here
 %   path - caminho do arquivo
-%   tipo_saida - 
+%   tipo_saida -
+%       [2] - [-1 -1 1]
 %       [1] - [0 0 1]
-%       [diferente de 1] - 3
+%       [outro numero] - O direto da base. Geralmente um número.
 %   conf.pca - porcentagem dos autovalores para o PCA.
 %   conf.selecaoAtr - taxa de selecao atributos pela variancia
 %   conf.normaliza - (true) normaliza os dados
@@ -14,14 +15,14 @@ end
 
 %% Carregando os dados
 if (strcmpi('HAR', path) == 1)
-    fprintf('Carregando dados HAR...\n')    
+    fprintf('Carregando dados HAR...\n')
     
     dataset.x = load('../dados/HAR/train/X_train.txt');
     dataset.x = [dataset.x; load('../dados/HAR/test/X_test.txt')];
     
     y = load('../dados/HAR/train/y_train.txt');
     y = [y; load('../dados/HAR/test/y_test.txt')];
-
+    
 else
     data = load(strcat('../dados/', path));
     dataset.x = data(:, 1:end-1);
@@ -63,21 +64,37 @@ if (exist('conf', 'var') == 1 && isfield(conf, 'pca') == 1)
     fprintf('Num atributos depois do PCA %d\n', size(dataset.x, 2));
 end
 
-if (tipo_saida == 1)
-    %% pre-processing / 1-of-S output encoding scheme
-    labels = unique(y);
-    code = zeros(length(labels), length(labels));
-    for j = 1: length(labels),
-        code(j, j) = 1;
-    end
-    
-    for j = length(labels):-1:1,
-        ind = (y == labels(j));
-        tam = length(find(ind==1));
-        dataset.y(ind, :) = repmat(code(j, :), tam, 1);
-    end
-else
-    dataset.y = y;
+switch tipo_saida
+    case 1
+        %% pre-processing / 1-of-S output encoding scheme
+        labels = unique(y);
+        code = zeros(length(labels), length(labels));
+        for j = 1: length(labels),
+            code(j, j) = 1;
+        end
+        
+        for j = length(labels):-1:1,
+            ind = (y == labels(j));
+            tam = length(find(ind==1));
+            dataset.y(ind, :) = repmat(code(j, :), tam, 1);
+        end
+        
+    case 2
+        %% pre-processing / 1-of-S output encoding scheme
+        labels = unique(y);
+        code = -1*ones(length(labels), length(labels));
+        for j = 1: length(labels),
+            code(j, j) = 1;
+        end
+        
+        for j = length(labels):-1:1,
+            ind = (y == labels(j));
+            tam = length(find(ind==1));
+            dataset.y(ind, :) = repmat(code(j, :), tam, 1);
+        end
+        
+    otherwise
+        dataset.y = y;
 end
 
 end

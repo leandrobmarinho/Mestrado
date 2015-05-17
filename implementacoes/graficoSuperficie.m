@@ -41,6 +41,10 @@ elseif (strcmp(conf.algoritmo, 'janelaParzen') == 1)
     [modelo] = trainPzWin(data);
     [classeXY, valorXY] = testePzWin(modelo, testeXY, conf.h);
     
+elseif (strcmp(conf.algoritmo, 'mixGaus') == 1)
+    
+    [modelo] = trainGausMix(data, conf);
+    [classeXY, valorXY] = testeGausMix(modelo, testeXY);
 else
     %% Treinamento do Bayes
     [modelo] = trainBayes(data);

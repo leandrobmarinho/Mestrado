@@ -32,7 +32,7 @@ for epoca = 1 : conf.epocas
     
     if ( epoca > 1 && (logLikelihood <= conf.threshold || ...
             oldLogLike == logLikelihood ) )
-        fprintf('Convergiu na época %d. %f\n', epoca, logLikelihood);
+        fprintf('MisturaGauss convergiu na época %d. %f\n', epoca, logLikelihood);
         break;
     end
     oldLogLike = logLikelihood;

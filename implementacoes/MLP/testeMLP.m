@@ -17,8 +17,12 @@ O = tanh(O);
 
     
 if (size(Y,2) > 2)
+    
     %Multi-Classes
     [~, output] = max(O');
+    
+%     [~, pos] = sort(pdist2(O, [1 -1 -1; -1 1 -1; -1 -1 1])');
+%     sum(pos(1,:) == output)/size(data.x, 1)
 else
     %2 Classes
     output = sign(O);

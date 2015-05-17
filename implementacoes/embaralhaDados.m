@@ -28,6 +28,7 @@ elseif ( tipo == 2)
         numClass = size(dados.y, 2);
     end
 
+    labelClasse = unique(dados.y);
     for i = 1 : numClass,
 
         if (matriz == true)
@@ -35,7 +36,7 @@ elseif ( tipo == 2)
             classe(i) = 1;        
             ind = find(classe * dados.y');
         else
-            ind = find(dados.y == i);
+            ind = find(dados.y == labelClasse(i));
         end
 
         lengthClass = length(ind);
