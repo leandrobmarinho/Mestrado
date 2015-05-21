@@ -45,6 +45,7 @@ elseif (strcmp(conf.algoritmo, 'mixGaus') == 1)
     
     [modelo] = trainGausMix(data, conf);
     [classeXY, valorXY] = testeGausMix(modelo, testeXY);
+    
 else
     %% Treinamento do Bayes
     [modelo] = trainBayes(data);
@@ -52,6 +53,16 @@ else
     %% Testando o DMC
     [classeXY, valorXY] = testeBayes(modelo, testeXY, conf);
 end
+
+if (sum(find(0==classeXY)) ~= 0)
+    classeXY = classeXY + 1;
+end
+
+% sum(classeXY == 1)
+% sum(classeXY == 2)
+% if (length(unique(classeXY)) == 3) 
+%     sum(classeXY == 3)
+% end
 
 cores = hsv(length(unique(classeXY)));
 surf(x, y,  reshape(valorXY, [length(x) length(y)] ), ...

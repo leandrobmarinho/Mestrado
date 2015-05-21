@@ -5,7 +5,7 @@ dados = carregaDados('iris2D.data', 0);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRodadas = 10;
+numRodadas = 30;
 
 conf.epocas = 200;
 conf.threshold = 10;

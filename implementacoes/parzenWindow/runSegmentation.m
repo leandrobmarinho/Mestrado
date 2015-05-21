@@ -14,11 +14,11 @@ for i = 1 : numClasse
     imgSelec{i} = imgIn(rect(2):rect(2)+rect(4), rect(1):rect(1)+rect(3), :);
 end
 % figure
-% subplot(1,2,1)
+% subplot(1,numClasse,1)
 % imshow( imgSelec{1} )
-% subplot(1,2,2)
+% subplot(1,numClasse,2)
 % imshow( imgSelec{2} )
-% subplot(1,3,3)
+% subplot(1,numClasse,3)
 % imshow( imgSelec{3} )
 
 %% Criando os dados a partir das imagens
@@ -33,11 +33,12 @@ dadosTeste = img2Dados(imagem, 'teste');
 fprintf('Treinando...\n')
 tic
 [modelo] = trainPzWin(dadosTrein);
+tempoTrein = toc
+tic
 fprintf('Testando...\n')
 [Yh] = testePzWin(modelo, dadosTeste, 1);
-toc
 Yh = Yh(dadosTeste.ic);
-
+tempoTeste = toc
 
 
 %% Convertendo a resposta em imagem
@@ -46,7 +47,7 @@ Yh = Yh(dadosTeste.ic);
 % newImg = reshape(Yh,[colunas, linhas])';
 newImg = reshape(Yh,[linhas, colunas]);
 figure
-image(newImg), colormap('flag')
+image(newImg), colormap('lines')
 axis off;
 
 somAlerta();

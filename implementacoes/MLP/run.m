@@ -14,7 +14,7 @@ numRodadas = 1;
 % floor((size(dataset.x, 2) + 6) /2)
 % *50 30 *60 80 100
 config.L = 100; %numero de neuronios na camada oculta
-config.maxIterations = 500;
+config.maxIterations = 300;
 config.lRate = 0.001; %[0.1 *0.05 *0.01 0.03 0.001 0.005] 0.001
 
 mlp(dataset, ptrn, numRodadas, config)

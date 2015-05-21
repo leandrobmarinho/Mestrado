@@ -20,7 +20,7 @@ end
  
 %% Gerando os dados para superfície de decisão
 
-inc = 0.02;
+inc = 0.01;
 % gera a grade de coordenadas
 [x, y] = meshgrid(range(1):inc:range(2), range(3):inc:range(4));
  
@@ -69,13 +69,27 @@ end
 
 decisionmap = reshape(idx, image_size);
 
+if (sum(find(0==classeXY)) ~= 0)
+    classeXY = classeXY + 1;
+end
+fprintf('%d\n', sum(classeXY == 1) )
+fprintf('%d\n', sum(classeXY == 2) )
+if (length(unique(classeXY)) == 3) 
+    fprintf('%d\n', sum(classeXY == 3) )
+end
 
 % figure,
 
+% keyboard
+
 numClass = length(unique(classeXY));
-cmap2 = hsv(numClass);
 cmap = [1 0.8 0.8; 0.8 1 0.8; 0.7 0.7 1];
-colormap(cmap);
+
+cmap = spring(numClass);
+cmap = rgb2hsv(cmap);
+
+% n = brighten(cmap, .5);
+% colormap(n);
 
 
 plotar = [];
@@ -91,11 +105,14 @@ for i = 1 : numClass,
     
 end
 
+cmap = prism(numClass*numClass);
+% colormap(cmap);
+
 for i = 1 : numClass,
         
     indTrain = find(data.y == i);
     if not(isempty(indTrain))
-        plotar(i) = plot(data.x(indTrain,1), data.x(indTrain,2), 'o', 'Color', cmap2(i,:));
+        plotar(i) = plot(data.x(indTrain,1), data.x(indTrain,2), 'o', 'Color', cmap(i*(numClass-1),:));
     end 
 end
 

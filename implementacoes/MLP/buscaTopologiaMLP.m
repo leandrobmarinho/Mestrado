@@ -2,7 +2,7 @@ function [ resultado ] = buscaTopologiaMLP( dados, params, conf )
 %BUSCATOPOLOGIASOM Summary of this function goes here
 %   Detailed explanation goes here
 
-save('topologiaMLP');
+save(conf.fileName);
 acc = zeros(conf.treinos, length(params));
 for i = 1 : conf.treinos,
     %% Embaralhando os dados
@@ -22,7 +22,7 @@ for i = 1 : conf.treinos,
                 
         fprintf('ACC: %f\n',  acc(i, j));
         
-        save('topologiaMLP','-append');
+        save(conf.fileName,'-append');
         
     end
 end
@@ -35,7 +35,7 @@ end
 resultado.mediaTeste = mean(acc, 1);
 resultado.tempoTreino = tempoTrein;
 
-save('topologiaMLP','-append');
+save(conf.fileName,'-append');
 
 end
 

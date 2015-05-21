@@ -28,5 +28,6 @@ for i = 1 : size(param,2)
     params{i} = rede;
 end
 
+conf.fileName = 'topologiaMLP';
 buscaTopologiaMLP(dados, params, conf)
-save('topologiaMLP','-append');
+save(conf.fileName,'-append');

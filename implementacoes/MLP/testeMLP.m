@@ -21,7 +21,12 @@ if (size(Y,2) > 2)
     %Multi-Classes
     [~, output] = max(O');
     
-%     [~, pos] = sort(pdist2(O, [1 -1 -1; -1 1 -1; -1 -1 1])');
+%     tam = size(Y,2);
+%     code = zeros(tam, tam);
+%     for j = 1: tam,
+%         code(j, j) = 1;
+%     end
+%     [~, pos] = sort(pdist2(O, code)');
 %     sum(pos(1,:) == output)/size(data.x, 1)
 else
     %2 Classes

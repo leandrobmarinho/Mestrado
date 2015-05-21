@@ -82,28 +82,26 @@ elseif (strcmp(conf.algoritmo, '') == 1)
     
     
     % Calculo do risco    
-     for i = 1 : length(conf.custo),
-         
-         acumulator = [];
-         for j = 1 : length(conf.custo),
-             acumulator(j,:) = (conf.custo(i, j)*(modelo.aprioriClass(j)*...
-                 mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})')./aprioriClassX);
-             
-         end
-         acoes(i,:) = sum(acumulator);
-     end    
-     [valores, classes] = min(acoes);
+%      for i = 1 : length(conf.custo),
+%          
+%          acumulator = [];
+%          for j = 1 : length(conf.custo),
+%              acumulator(j,:) = (conf.custo(i, j)*(modelo.aprioriClass(j)*...
+%                  mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})')./aprioriClassX);
+%          end
+%          acoes(i,:) = sum(acumulator);
+%      end    
+%      [valores, classes] = min(acoes);
 
 
-%    for i = 1 : size(modelo.meansX,1)
-%        acoes(i, :) = (modelo.aprioriClass(i)*mvnpdf(dados.x, modelo.meansX(i,:), ...
-%            modelo.covs{i})');
-%    end
-%    [valores, classes] = max(acoes);
+   for i = 1 : size(modelo.meansX,1)
+       acoes(i, :) = (mvnpdf(dados.x, modelo.meansX(i,:), modelo.covs{i})');
+   end
+   [valores, classes] = max(acoes);
 
 elseif (strcmp(conf.algoritmo, 'bayesRej') == 1)
         
-	if (length(unique(dados.y)) ~= 2)
+	if (length(modelo.aprioriClass) ~= 2)
         error('Bayes com rejeição só é permitido com problemas binários');
     end
         

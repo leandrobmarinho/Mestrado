@@ -10,8 +10,8 @@ end
 aprioriClassX = sum(aprioriClassX, 1);
 
 for i = 1 : numClass
-    aposteriori(i, :) = (model.aprioriClass(i)*gausMixPDF(model.params{i}, data.x));
-%     ./aprioriClassX
+%     aposteriori(i, :) = (model.aprioriClass(i)*gausMixPDF(model.params{i}, data.x))./aprioriClassX;
+    aposteriori(i, :) = gausMixPDF(model.params{i}, data.x);
 end
 [valores, classes] = max(aposteriori);
 

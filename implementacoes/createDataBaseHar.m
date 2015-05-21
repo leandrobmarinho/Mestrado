@@ -16,7 +16,7 @@ dados.y = [dados.y; load('dados/HAR/test/y_test.txt')];
 % dados.x = (dados.x - mediaRep)./(maxRep - minRep);
 
 dados2 = dados;
-tipo = 1
+tipo = 2
 
 for i = 1 : 6
     dados2.y(dados.y == i) = i-1;
@@ -27,9 +27,9 @@ if tipo == 0
 
     ans = [dados2.x dados2.y];
     csvwrite('har.txt', ans)
-elseif tipo ==1 
-    %% PCA 
+elseif tipo == 1
     
+    %% PCA     
     [V E] = eig( cov(dados2.x) );
     [E order] = sort(diag(E), 'descend');
     V = V(:,order);
@@ -42,6 +42,26 @@ elseif tipo ==1
     
     ans = [dados2.x dados2.y];
     csvwrite('harPCA.txt', ans)
+elseif tipo == 2 
+    
+    ind = var(dados2.x) >= 0.1;
+    dados2.x = dados2.x(:, ind);
+    fprintf('Num atributos depois da SelecaoAtri %d\n', size(dados2.x, 2));
+
+    %% Selecao e PCA
+    [V E] = eig( cov(dados2.x) );
+    [E order] = sort(diag(E), 'descend');
+    V = V(:,order);
+    
+    sumE = cumsum(E)/sum(E);
+    [~, ultimo] = max(sumE >= 0.98);
+    V = V(:, 1:ultimo);
+    
+    dados2.x = dados2.x*V;
+    fprintf('Num atributos depois do PCA %d\n', size(dados2.x, 2));
+    
+    ans = [dados2.x dados2.y];
+    csvwrite('har_sel_PCA.txt', ans)
 end
 
 %% Base com PCA

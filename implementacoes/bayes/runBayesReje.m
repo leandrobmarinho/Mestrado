@@ -1,6 +1,7 @@
 close all; clear all; clc; addpath('..');
 
-dados = carregaDados('column_2C.data', 0);
+name = 'column_2C';
+dados = carregaDados(strcat(name, '.data'), 0);
 
 
 %% Configurações gerais
@@ -8,15 +9,15 @@ ptrn = 0.8;
 conf.algoritmo = 'bayesRej';
 
 %% Buscando o melhor limiar
-for i = 1 : 10
+for i = 1 : 30
     
     [dadosTrein, dadosTeste] = embaralhaDados(dados, ptrn, 2);
     [dadosTrein, dadosValid] = embaralhaDados(dadosTrein, ptrn, 2);
     
     [modelo] = trainBayes(dadosTrein);
     
-    limiares = [];
-    for wr = 0.04 : 0.04 : 0.5
+    valores = [];
+    for wr = 0.04 : 0.04 : 0.5 %0.04 : 0.04 : 0.5
         
         tabela = [];
         for t = 0.05 : 0.05 : 0.5
@@ -39,14 +40,16 @@ for i = 1 : 10
         erro = 1 - (sum(dadosTeste.y == Yh') / length(find(Yh ~= 0)));
         rejeicao = length(find(Yh == 0)) / length(dadosTeste.y);
         
-        limiares = [limiares; wr conf.t (1-erro) rejeicao (erro + wr*rejeicao)];
+        valores = [valores; wr conf.t (1-erro) rejeicao (erro + wr*rejeicao)];
     end
-    valores(:,:, i) = limiares;
+    valoresRod(:,:, i) = valores;
 end
 
 %% Gráfico curva de rejeição
-valores = mean(valores(:,:,:), 3);
+valoresRod = mean(valoresRod(:,:,:), 3);
 figure
-plot(valores(:,4), valores(:,3), '-o')
+plot(valoresRod(:,4), valoresRod(:,3), '-o')
+title('Coluna 2c', 'FontSize', 18);
+% save(name);
 
 % resultCOMP = bayes(dataset, ptrn, numRepet, conf);
