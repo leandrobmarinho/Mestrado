@@ -54,8 +54,12 @@ else
     [classeXY, valorXY] = testeBayes(modelo, testeXY, conf);
 end
 
+numClass = length(unique(classeXY));
 if (sum(find(0==classeXY)) ~= 0)
+%     classeXY = classeXY + 1;
     classeXY = classeXY + 1;
+    aux = unique(classeXY);
+    numClass = aux(length(aux));
 end
 
 % sum(classeXY == 1)
@@ -64,7 +68,7 @@ end
 %     sum(classeXY == 3)
 % end
 
-cores = hsv(length(unique(classeXY)));
+cores = hsv(numClass);
 surf(x, y,  reshape(valorXY, [length(x) length(y)] ), ...
     reshape(cores(classeXY, :), [length(x) length(y) 3]));
 

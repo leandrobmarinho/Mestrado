@@ -116,6 +116,7 @@ elseif (strcmp(conf.algoritmo, 'bayesRej') == 1)
         acoes(i, :) = (modelo.aprioriClass(i)*mvnpdf(dados.x, modelo.meansX(i,:), ...
             modelo.covs{i})')./aprioriClassX;
     end
+
     [valores, classes] = max(acoes);
     classes(valores <= 0.5 + conf.t) = 0;
 
