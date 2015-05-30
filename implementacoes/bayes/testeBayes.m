@@ -119,7 +119,6 @@ elseif (strcmp(conf.algoritmo, 'bayesRej') == 1)
 
     [valores, classes] = max(acoes);
     classes(valores <= 0.5 + conf.t) = 0;
-
     
 end
 

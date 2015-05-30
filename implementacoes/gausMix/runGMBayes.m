@@ -6,7 +6,7 @@ close all; clear all; clc; addpath('..'); addpath('../KMeans'); addpath('../baye
 dados = carregaDados('iris2D.data', 0);
 
 ptrn = 0.75;
-numRodadas = 50;
+numRodadas = 30;
 
 confGM.epocas = 200;
 confGM.threshold = 10;
@@ -166,7 +166,7 @@ xlabel('Classificador', 'FontSize', 14)
 % xlabel('L. Pétala', 'FontSize', 14);
 
 
-
+% 
 % lin = 2; col = 3;
 % range = [-1 1 -1 1];
 % 

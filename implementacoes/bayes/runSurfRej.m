@@ -1,7 +1,7 @@
 close all; clear all; clc; addpath('..');
 
 dados = carregaDados('column_2C.data', 0);
-% coluna .15
+% coluna .15 .45
 % diabetes .35
 % breast_cancer .25
 % haberman .25

@@ -41,7 +41,7 @@ end
 
 model.prototypes = prototype;
 dataset.x = data;
-dataset.y = y;
+dataset.y = y';
 model.data = dataset;
 
 % % Plot

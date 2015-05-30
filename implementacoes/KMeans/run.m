@@ -12,7 +12,7 @@ classe = 1;
 
 %% K-means
 X = dados.x(dados.y == classe, :);
-r = trainKMeans(X, conf)
+r = trainKMeans(dados.x, conf)
 
 
 %% Plotanto resultados
@@ -20,11 +20,11 @@ atrX = 3; atrY = 2;
 
 cmap = lines(conf.k);
 figure
-for i=1: conf.k
-    plot(r.data.x(r.data.y==i, atrX), r.data.x(r.data.y==i, atrY), 'o', 'Color', cmap(i,:))
-    hold on
-end
-plot(r.prototypes(:,atrX), r.prototypes(:,atrY), '*k')
+% for i=1: conf.k
+%     plot(r.data.x(r.data.y==i, atrX), r.data.x(r.data.y==i, atrY), 'o', 'Color', cmap(i,:))
+%     hold on
+% end
+% plot(r.prototypes(:,atrX), r.prototypes(:,atrY), '*k')
 
 cmap = lines(length(unique(dados.y)));
 figure

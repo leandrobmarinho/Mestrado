@@ -4,7 +4,7 @@ close all; clear all; clc; addpath('..'); addpath('../KMeans'); addpath('../baye
 
 %% Pré-processamento
 dados = carregaDados('haberman.data', 0);
-% coluna .15
+% coluna .15 .45
 % diabetes .35
 % breast_cancer .25
 % haberman .25
@@ -153,35 +153,35 @@ xlabel('Classificador', 'FontSize', 14)
 
 
 
-lin = 2; col = 3;
-range = [-1 1 -1 1];
-
-subplot(lin, col, 1)
-decisionSurface(range, confRej, dados, [1 2])
-ylabel('2', 'FontSize', 14);
-xlabel('1', 'FontSize', 14);
-
-subplot(lin, col, 2)
-decisionSurface(range, confRej, dados, [1 3])
-ylabel('3', 'FontSize', 14);
-xlabel('1', 'FontSize', 14);
-
-subplot(lin, col, 3)
-decisionSurface(range, confRej, dados, [2 3])
-ylabel('3', 'FontSize', 14);
-xlabel('2', 'FontSize', 14);
-
-subplot(lin, col, 4)
-decisionSurface(range, confBayes, dados, [1 2])
-ylabel('2', 'FontSize', 14);
-xlabel('1', 'FontSize', 14);
-
-subplot(lin, col, 5)
-decisionSurface(range, confBayes, dados, [1 3])
-ylabel('3', 'FontSize', 14);
-xlabel('1', 'FontSize', 14);
-
-subplot(lin, col, 6)
-decisionSurface(range, confBayes, dados, [2 3])
-ylabel('3', 'FontSize', 14);
-xlabel('2', 'FontSize', 14);
+% lin = 2; col = 3;
+% range = [-1 1 -1 1];
+% 
+% subplot(lin, col, 1)
+% decisionSurface(range, confRej, dados, [1 2])
+% ylabel('2', 'FontSize', 14);
+% xlabel('1', 'FontSize', 14);
+% 
+% subplot(lin, col, 2)
+% decisionSurface(range, confRej, dados, [1 3])
+% ylabel('3', 'FontSize', 14);
+% xlabel('1', 'FontSize', 14);
+% 
+% subplot(lin, col, 3)
+% decisionSurface(range, confRej, dados, [2 3])
+% ylabel('3', 'FontSize', 14);
+% xlabel('2', 'FontSize', 14);
+% 
+% subplot(lin, col, 4)
+% decisionSurface(range, confBayes, dados, [1 2])
+% ylabel('2', 'FontSize', 14);
+% xlabel('1', 'FontSize', 14);
+% 
+% subplot(lin, col, 5)
+% decisionSurface(range, confBayes, dados, [1 3])
+% ylabel('3', 'FontSize', 14);
+% xlabel('1', 'FontSize', 14);
+% 
+% subplot(lin, col, 6)
+% decisionSurface(range, confBayes, dados, [2 3])
+% ylabel('3', 'FontSize', 14);
+% xlabel('2', 'FontSize', 14);

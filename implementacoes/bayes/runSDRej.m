@@ -9,7 +9,7 @@ dataset = carregaDados('column_2C.data', 0);
 lin = 1; col = 2;
 range = [-1 1 -1 1];
 conf.algoritmo = 'bayesRej';
-conf.t = 0.15;
+conf.t = 0.45;
 
 subplot(lin, col, 1)
 decisionSurface(range, conf, dataset, [2 1])

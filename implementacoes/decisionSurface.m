@@ -135,7 +135,7 @@ end
 hold off
 % legend(plotar, 'Setosa ', 'Versicolor ', 'Virgínica', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
 % legend(plotar, 'Hernia', 'Spondylolisthesis', 'Normal', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
-legend(plotar, 'Classe 1', 'Classe 2', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
+legend(plotar, 'Outras', 'Versicolor', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
 
 % if rej
 %     if (numClass == 3)

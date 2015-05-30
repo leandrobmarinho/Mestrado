@@ -1,6 +1,6 @@
 close all; clear all; clc; addpath('..');
 
-name = 'haberman';
+name = 'column_2C';
 dados = carregaDados(strcat(name, '.data'), 0);
 
 
@@ -12,7 +12,7 @@ conf.algoritmo = 'bayesRej';
 for i = 1 : 30
     
     [dadosTrein, dadosTeste] = embaralhaDados(dados, ptrn, 2);
-    [dadosTrein, dadosValid] = embaralhaDados(dadosTrein, ptrn, 2);
+%     [dadosTrein, dadosValid] = embaralhaDados(dadosTrein, ptrn, 2);
     
     [modelo] = trainBayes(dadosTrein);
     
@@ -23,10 +23,14 @@ for i = 1 : 30
         for t = 0.05 : 0.05 : 0.50
             
             conf.t = t;
-            [Yh] = testeBayes(modelo, dadosValid, conf);
+            [Yh] = testeBayes(modelo, dadosTeste, conf);
             
-            erro = 1 - (sum(dadosValid.y == Yh') / length(find(Yh ~= 0)));
-            rejeicao = length(find(Yh == 0)) / length(dadosValid.y);
+            if (length(find(Yh ~= 0)) == 0)
+                erro = 0;
+            else
+                erro = 1 - (sum(dadosTeste.y == Yh') / length(find(Yh ~= 0)));
+            end
+            rejeicao = length(find(Yh == 0)) / length(dadosTeste.y);
             
             chow = erro + wr*rejeicao;
             tabela = [tabela; t chow];
@@ -34,14 +38,24 @@ for i = 1 : 30
         end
         [~, pos] = min(tabela(:,2));
         
+%         mean( tabela(find(tabela(:,2) == tabela(pos,2)), 1) )
+%         keyboard
+        
         % Validando com o melhor limiar
         conf.t = tabela(pos,1);
+%         conf.t = mean( tabela(find(tabela(:,2) == tabela(pos,2)), 1) );
         [Yh] = testeBayes(modelo, dadosTeste, conf);
-        erro = 1 - (sum(dadosTeste.y == Yh') / length(find(Yh ~= 0)));
+        
+        if (length(find(Yh ~= 0)) == 0)
+            erro = 0;
+        else
+            erro = 1 - (sum(dadosTeste.y == Yh') / length(find(Yh ~= 0)));
+        end
         rejeicao = length(find(Yh == 0)) / length(dadosTeste.y);
         
         valores = [valores; wr conf.t (1-erro) rejeicao (erro + wr*rejeicao)];
     end
+    keyboard
     valoresRod(:,:, i) = valores;
 end
 
