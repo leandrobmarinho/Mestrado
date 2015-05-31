@@ -70,6 +70,7 @@ r = char(r1,r2);
 edgeFIS = parsrule(edgeFIS,r);
 showrule(edgeFIS)
 
+fuzzy(edgeFIS)
 
 %%
 Ieval = zeros(size(I));% Preallocate the output matrix

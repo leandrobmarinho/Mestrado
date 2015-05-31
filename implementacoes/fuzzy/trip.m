@@ -13,10 +13,10 @@ renda familiar média e do emprego total.
 
 % Carrega os dados
 tripdata
+datin = datin(:,[1 4]);
 
-% Clusteriza
-[C,S] = subclust([datin datout],0.5);
 
-load('tripCluster.mat');
+load('trip.mat');
+fuzzy(trip);
 
-mean((evalfis(datin', trafficFS) - datout).^2)
+mean((evalfis(datin', trip) - datout).^2)
