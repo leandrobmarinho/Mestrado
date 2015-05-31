@@ -6,7 +6,6 @@ tripdata
 % Clusteriza
 [C,S] = subclust([datin datout],0.5);
 
+load('traffic.mat');
 
-myfis=genfis2(datin,datout,0.5);
-
-mean(abs(evalfis(datin', myfis) - datout))
+mean((evalfis(datin', trafficFS) - datout).^2)
