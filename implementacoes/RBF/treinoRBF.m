@@ -6,25 +6,32 @@ d = size(dados.x, 2);
 l = size(dados.x, 1);
 
 % Inicializando a matriz entre camada de entrada e oculta
-ID = randperm(l);
+% ID = randperm(l);
+% if conf.nOcultos > l
+%     conf.nOcultos = l;
+% end
+% W = dados.x(ID(1:conf.nOcultos), :);
 
-if conf.nOcultos > l
-    conf.nOcultos = l;
-end
+if ( isfield(conf, 'W') == 0 )
+    fprintf('Posicionando neurônios.\n')
+
+    [modeloSOM, ~] = trainSOM(dados, conf);
+    conf.W = modeloSOM.W;
     
-W = dados.x(ID(1:conf.nOcultos), :);
+%     net = selforgmap(conf.tamanho);
+%     [net, tr] = train(net, dados.x');
+%     conf.W = net.IW{1};
+end
 
-
-Z = pdist2(dados.x, W);
+Z = pdist2(dados.x, conf.W);
 Z = exp(-conf.gamma*(Z.^2));
 
 Z = [ones(size(Z, 1), 1) Z];
 
-m = Z\dados.y;
-
-modelo.W = W;
-modelo.m = m;
-modelo.nOcultos = conf.nOcultos;
+modelo.m = Z\dados.y;
+modelo.W = conf.W;
 modelo.gamma = conf.gamma;
+
+% modelo.nOcultos = conf.nOcultos;
 
 end

@@ -27,7 +27,7 @@ if (isfield(conf, 'dist') == 0)
     conf.dist = 'b';
 end
 if (isfield(conf, 'epocas') == 0)
-    conf.epocas = 100;
+    conf.epocas = 200;
 end
 
 

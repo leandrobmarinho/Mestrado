@@ -1,6 +1,8 @@
 close all; clear all; clc; addpath('..');
 
 %% Carregando dados
+conf.pca = 0.98;
+conf.selecaoAtr = 0.1;
 dados = carregaDados('har', 0, 0.98);
 
 

@@ -13,7 +13,7 @@ conf.treinos = 5;
 %% Criando as combinações de parâmetros
 %numero de neuronios na camada oculta
 param = 10 : 50 : 1000;
-param = combvec([1 0.1 0.01 0.001], param);
+param = combvec([0.1 0.01 0.001], param);
 
 
 % Topologia geral da rede 

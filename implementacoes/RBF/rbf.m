@@ -26,7 +26,6 @@ for i = 1 : numRepet,
     %% Matriz de confusao e acurácia
     confusionMatricesTeste{i} = confusionmat(target, Yh);
     accuracyTeste(i) = trace(confusionMatricesTeste{i}) / length(target);
-    
 end
 
 meanAccuracy = mean(accuracyTeste);

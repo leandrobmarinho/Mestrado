@@ -55,7 +55,6 @@ for i = 1 : 30
         
         valores = [valores; wr conf.t (1-erro) rejeicao (erro + wr*rejeicao)];
     end
-    keyboard
     valoresRod(:,:, i) = valores;
 end
 
