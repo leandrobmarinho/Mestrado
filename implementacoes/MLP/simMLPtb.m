@@ -6,28 +6,29 @@ function [ result ] = simMLPtb( dados, ptrn, numRodadas, conf )
 Ntest = size(dados.y, 1) - floor(size(dados.y, 1)*(ptrn)); %num dados teste
 for i = 1 : numRodadas
     %% Embaralhando os dados
-    [dadosTrein, dadosTeste] = embaralhaDados(dados, ptrn, 2);
+    [dadosTrein{i}, dadosTeste{i}] = embaralhaDados(dados, ptrn, 2);
 
         
     %% Treinamento
+    rede{i} = patternnet(conf.neurOcul);
     tic
-    [modelo{i}] = treinoMLP(dadosTrein, conf);
-    tempoTrein(i) = toc;
-    
+    rede{i} = train(rede{i}, dadosTrein{i}.x', dadosTrein{i}.y');
+    tempoTrein(i) = toc;   
+        
     
     %% Avaliando o conjunto de treinamento
-    [Yh] = testeMLP(modelo{i}, dadosTrein); 
-    [~, target] = max(dadosTrein.y');
-    confMatTreino(:,:,i) = confusionmat(target, Yh);
-    accTrein(i) = trace(confMatTreino(:,:,i)) / length(dadosTrein.y);
+    y = rede{i}(dadosTrein{i}.x');
+    classes = vec2ind(y);    
+    confMatTreino(:,:,i) = confusionmat(vec2ind(dadosTrein{i}.y'), classes);
+    accTrein(i) = trace(confMatTreino(:,:,i)) / length(dadosTrein{i}.y);
     
     
     %% Teste
     tic
-    [Yh] = testeMLP(modelo{i}, dadosTeste);
+    y = rede{i}(dadosTeste{i}.x');
     tempoTeste(i) = mean(toc);
-    [~, target] = max(dadosTeste.y');
-    confMatTeste(:,:,i) = confusionmat(target, Yh);
+    classes = vec2ind(y);    
+    confMatTeste(:,:,i) = confusionmat(vec2ind(dadosTeste{i}.y'), classes);
     
     
     %% Metricas
@@ -63,7 +64,10 @@ result.tempoTrein = tempoTrein;
 result.tempoTesteMedio = mean(tempoTeste);
 result.tempoTreinMedio = mean(tempoTrein);
 
-result.modelos = modelo;
+result.modelos = rede;
+
+result.dadosTrein = dadosTrein;
+result.dadosTeste = dadosTeste;
 
 end
 
