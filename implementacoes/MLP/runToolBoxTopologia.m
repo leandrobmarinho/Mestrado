@@ -2,7 +2,7 @@ clear all; close all; clc; addpath('..');
 
 %% Carregando dados
 conf.pca = 0.98;
-conf.selecaoAtr = 0.1;
+% conf.selecaoAtr = 0.1;
 dados = carregaDados('har', 1, conf);
 
 

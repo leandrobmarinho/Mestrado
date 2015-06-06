@@ -16,7 +16,8 @@ dados.y = [dados.y; load('dados/HAR/test/y_test.txt')];
 % dados.x = (dados.x - mediaRep)./(maxRep - minRep);
 
 dados2 = dados;
-tipo = 2
+tipo = 1;
+precisao = 55;
 
 for i = 1 : 6
     dados2.y(dados.y == i) = i-1;
@@ -25,8 +26,9 @@ end
 if tipo == 0
     %% Base completa
 
-    ans = [dados2.x dados2.y];
-    csvwrite('har.txt', ans)
+%     ans = [dados2.x dados2.y];
+%     csvwrite('har.txt', ans)
+    dlmwrite('har.txt', [dados2.x dados2.y], 'delimiter', ',', 'precision', precisao);
 elseif tipo == 1
     
     %% PCA     
@@ -40,8 +42,8 @@ elseif tipo == 1
     
     dados2.x = dados2.x*V;
     
-    ans = [dados2.x dados2.y];
-    csvwrite('harPCA.txt', ans)
+%     csvwrite('harPCA.txt', [dados2.x dados2.y])
+    dlmwrite('harPCA.txt', [dados2.x dados2.y], 'delimiter', ',', 'precision', precisao);
 elseif tipo == 2 
     
     ind = var(dados2.x) >= 0.1;
@@ -60,8 +62,8 @@ elseif tipo == 2
     dados2.x = dados2.x*V;
     fprintf('Num atributos depois do PCA %d\n', size(dados2.x, 2));
     
-    ans = [dados2.x dados2.y];
-    csvwrite('har_sel_PCA.txt', ans)
+%     csvwrite('har_sel_PCA.txt', ans)
+    dlmwrite('har_sel_PCA.txt', [dados2.x dados2.y], 'delimiter', ',', 'precision', precisao);
 end
 
 %% Base com PCA
