@@ -27,6 +27,7 @@ for dist = {'mahalanobis', 'cityblock', ''}
     end    
 end
 
+clear config
 config.method = 'lsqnonlin'; % lsqnonlin knn ''
 for dist = {'mahalanobis', 'cityblock', ''}
 
