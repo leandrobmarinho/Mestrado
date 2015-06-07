@@ -72,13 +72,13 @@ if (isempty(trX) == 0),
         case ('mahalanobis')
             model.covX = cov(trX);
             if (rcond(model.covX) < 1e-12)
-                model.covX = model.covX + 0.01*eye(size(model.covX));
+                model.covX = model.covX + 0.01*eye(size(model.covX))
             end
             Dx = pdist2(trX, refX, 'mahalanobis', model.covX);
             
             model.covY = cov(trY);
-            if (rcond(covY) < 1e-12)
-                model.covY = model.covY + 0.01*eye(size(model.covY));
+            if (rcond(model.covY) < 1e-12)
+                model.covY = model.covY + 0.01*eye(size(model.covY))
             end
             Dy = pdist2(trY, refY, 'mahalanobis', model.covY);
 
