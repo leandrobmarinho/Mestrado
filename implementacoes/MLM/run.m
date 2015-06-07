@@ -44,3 +44,21 @@ for dist = {'mahalanobis', 'cityblock', ''}
     end
     
 end
+
+clear config
+config.method = 'lsqnonlin'; % lsqnonlin knn ''
+for dist = {'mahalanobis', 'cityblock', ''}
+
+    for k = [0.1 0.5 1]
+        config.k = k;
+        config.distance = dist{1}; % mahalanobis cityblock ''
+        r = simMLM(dataset, ptrn, numRodadas, config);
+        
+        save(sprintf('mlm_%s_%s_D-%s_%.0f', config.method, 'lsqnonlin', ...
+            config.distance, config.k*100))
+        
+        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f\n', config.method, 'lsqnonlin', ...
+            config.distance, config.k*100))
+    end
+    
+end
