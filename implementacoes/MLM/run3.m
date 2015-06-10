@@ -1,8 +1,7 @@
 close all; clear all; clc; addpath('..');
 
 % Pré-processamento
-conf.pca = 0.98; conf.selecaoAtr = 0.1;
-dataset = carregaDados('har', 1, conf);
+dataset = carregaDados('har', 1);
 
 
 %% Configurações gerais
@@ -19,10 +18,10 @@ for dist = {'mahalanobis', 'cityblock', ''}
         config.distance = dist{1}; % mahalanobis cityblock ''
         r = simMLM(dataset, ptrn, numRodadas, config);
         
-        save(sprintf('mlm_%s_%d_D-%s_%.0f_sel', config.method, config.NN,...
+        save(sprintf('mlm_%s_%d_D-%s_%.0f_all', config.method, config.NN,...
             config.distance, config.k*100))
         
-        fprintf(sprintf('mlm_%s_%d_D-%s_%.0f_sel\n', config.method, config.NN,...
+        fprintf(sprintf('mlm_%s_%d_D-%s_%.0f_all\n', config.method, config.NN,...
             config.distance, config.k*100))
     end    
 end
@@ -36,10 +35,10 @@ for dist = {'mahalanobis', 'cityblock', ''}
         config.distance = dist{1}; % mahalanobis cityblock ''
         r = simMLM(dataset, ptrn, numRodadas, config);
         
-        save(sprintf('mlm_%s_%s_D-%s_%.0f_sel', config.method, 'fsolve', ...
+        save(sprintf('mlm_%s_%s_D-%s_%.0f_all', config.method, 'fsolve', ...
             config.distance, config.k*100))
         
-        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f_sel\n', config.method, 'fsolve', ...
+        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f_all\n', config.method, 'fsolve', ...
             config.distance, config.k*100))
     end
     
@@ -54,10 +53,10 @@ for dist = {'mahalanobis', 'cityblock', ''}
         config.distance = dist{1}; % mahalanobis cityblock ''
         r = simMLM(dataset, ptrn, numRodadas, config);
         
-        save(sprintf('mlm_%s_%s_D-%s_%.0f_sel', config.method, 'lsqnonlin', ...
+        save(sprintf('mlm_%s_%s_D-%s_%.0f_all', config.method, 'lsqnonlin', ...
             config.distance, config.k*100))
         
-        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f_sel\n', config.method, 'lsqnonlin', ...
+        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f_all\n', config.method, 'lsqnonlin', ...
             config.distance, config.k*100))
     end
     
