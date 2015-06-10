@@ -21,8 +21,8 @@ for c = 1 : size(matriz,2)
         
 end
 
-metricasGeral = sum(metricas.*repmat(sum(matriz,2), 1, size(matriz,2)))...
-    ./repmat(sum(sum(matriz,2)), 1, size(matriz,2));
+metricasGeral = sum(metricas.*repmat(sum(matriz,2), 1, size(metricas,2)))...
+    ./repmat(sum(sum(matriz,2)), 1, size(metricas,2));
 
 end
 

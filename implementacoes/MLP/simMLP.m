@@ -39,7 +39,7 @@ end
 result.matConfTesteMedia = mean(confMatTeste, 3);
 result.matConfPorcMedia = mean(matConfPorc,3);
 result.metricasMedia = mean(metricas, 3);
-result.metricasGeralMedia = mean(metricasGeral);
+result.metricasGeralMedia = mean(metricasGeral,1);
 
 result.matConfTeste = confMatTeste;
 result.matConfPorc = matConfPorc;

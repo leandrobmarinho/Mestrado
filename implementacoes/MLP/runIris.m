@@ -1,16 +1,17 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dataset = carregaDados('iris.data', 1);
+dados = carregaDados('iris.data', 1);
 
 %% Configurações gerais
 ptrn = 0.75;
-numRepet = 5;
+numRodadas = 10;
 
 % Topologia da rede
-config.L = 9; %numero de neuronios na camada oculta
+config.L = 10; %numero de neuronios na camada oculta
 config.maxIterations = 300;
-config.lRate = 0.05 ;
+config.lRate = 0.05;
 
-result = mlp(dataset, ptrn, numRepet, config)
+result = mlp(dados, ptrn, numRodadas, config)
+% r = simMLP( dados, ptrn, numRodadas, config )
 

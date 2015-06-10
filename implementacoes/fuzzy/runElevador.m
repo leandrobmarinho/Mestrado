@@ -7,7 +7,7 @@ o elevador deve percorrer desde a posição atual até o andar onde a nova
 chamada ocorreu. No modelo 'elevador4', positivo indica que o elevador está
 no sentindo da solicitação.
 
-III) Tempo de espera: é o tempo desde de a chamada realizada no pavimento até
+III) Tempo de espera: é o tempo desde a chamada realizada no pavimento até
 a chegada da cabine. Esta medida depende diretamente dos parâmetros de 
 configuração do sistema de elevadores tais como, velocidade do elevador, 
 relação de aceleração, altura dos andares, tempo de abrir e fechar as 

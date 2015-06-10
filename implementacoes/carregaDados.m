@@ -2,6 +2,7 @@ function [ dataset ] = carregaDados( path, tipo_saida, conf, varargin)
 %CARREGADADOS Summary of this function goes here
 %   path - caminho do arquivo
 %   tipo_saida -
+%       [3] - [-0.98 -0.98 0.98]
 %       [2] - [-1 -1 1]
 %       [1] - [0 0 1]
 %       [outro numero] - O direto da base. Geralmente um número.
@@ -85,6 +86,19 @@ switch tipo_saida
         code = -1*ones(length(labels), length(labels));
         for j = 1: length(labels),
             code(j, j) = 1;
+        end
+        
+        for j = length(labels):-1:1,
+            ind = (y == labels(j));
+            tam = length(find(ind==1));
+            dataset.y(ind, :) = repmat(code(j, :), tam, 1);
+        end
+        
+    case 3
+        labels = unique(y);
+        code = -0.98*ones(length(labels), length(labels));
+        for j = 1: length(labels),
+            code(j, j) = 0.98;
         end
         
         for j = length(labels):-1:1,
