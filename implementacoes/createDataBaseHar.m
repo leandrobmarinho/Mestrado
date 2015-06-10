@@ -16,7 +16,7 @@ dados.y = [dados.y; load('dados/HAR/test/y_test.txt')];
 % dados.x = (dados.x - mediaRep)./(maxRep - minRep);
 
 dados2 = dados;
-tipo = 1;
+tipo = 2;
 precisao = 55;
 
 for i = 1 : 6
