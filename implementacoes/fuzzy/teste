@@ -1,5 +1,5 @@
-tempoBaixo & distN-
-tempoBaixo & distP-
+tempoBaixo & distNeg-
+tempoBaixo & distPos-
 tempoAlto & distN-
 tempoAlto & distP-
 tempoMedio & dist-
@@ -9,10 +9,10 @@ tempo- & cargaBaixo50
 
 cargaAcima50 & distPosPeq
 
-cargaAcima50 & sub
-cargaAcima50 & desc
-cargaAbaixo50 & sub
-cargaAbaixo50 & desc
+cargaAcima50 (baixa) & sub
+cargaAcima50 (baixa) & desc
+cargaAbaixo50 (alta) & sub
+cargaAbaixo50 (alta) & desc
 
 todos fixo & tempoEspera-Pequeno
 todos fixo & tempoEspera-Grande

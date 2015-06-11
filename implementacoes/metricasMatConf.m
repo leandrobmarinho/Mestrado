@@ -9,6 +9,7 @@ for c = 1 : size(matriz,2)
     TN = trace(matriz())- TP;
     FP = sum(matriz(:,c)) - TP;
     FN = sum(matriz(c,:)) - TP;
+%     FN = sum(sum(matriz)) - TN - TP - FP;
     
     metricas(c,1) = ( TN ) / ( TN + FP ); %spe
     metricas(c,2) = ( TP ) / ( TP + FN ); %sens
