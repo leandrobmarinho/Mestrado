@@ -26,31 +26,11 @@ numRodadas = 5;
 %     end    
 % end
 
-clear config
-config.method = ''; % lsqnonlin knn ''
-for dist = {'cityblock', ''}
-
-    for k = [0.1 0.5 1]
-        config.k = k;
-        config.distance = dist{1}; % mahalanobis cityblock ''
-        r = sim2MLM(dataset, ptrn, numRodadas, config);
-        
-        save(sprintf('mlm_%s_%s_D-%s_%.0f_all', config.method, 'fsolve', ...
-            config.distance, config.k*100))
-        
-        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f_all\n', config.method, 'fsolve', ...
-            config.distance, config.k*100))
-    end
-    
-end
-
-
-% %% APAGAR
 % clear config
 % config.method = ''; % lsqnonlin knn ''
-% for dist = {'mahalanobis'}
+% for dist = {'cityblock', ''}
 % 
-%     for k = [0.5 1]
+%     for k = [0.1 0.5 1]
 %         config.k = k;
 %         config.distance = dist{1}; % mahalanobis cityblock ''
 %         r = sim2MLM(dataset, ptrn, numRodadas, config);
@@ -63,6 +43,26 @@ end
 %     end
 %     
 % end
+
+
+% %% APAGAR
+clear config
+config.method = ''; % lsqnonlin knn ''
+for dist = {'mahalanobis'}
+
+    for k = [0.5 1]
+        config.k = k;
+        config.distance = dist{1}; % mahalanobis cityblock ''
+        r = sim2MLM(dataset, ptrn, numRodadas, config);
+        
+        save(sprintf('mlm_%s_%s_D-%s_%.0f_all', config.method, 'fsolve', ...
+            config.distance, config.k*100))
+        
+        fprintf(sprintf('mlm_%s_%s_D-%s_%.0f_all\n', config.method, 'fsolve', ...
+            config.distance, config.k*100))
+    end
+    
+end
 %%
 
 % clear config
