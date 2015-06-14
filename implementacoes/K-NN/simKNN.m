@@ -34,7 +34,7 @@ for i = 1 : numRodadas
     %% Metricas
     matConfPorc(:,:,i) = (confMatTeste(:,:,i)./Ntest).*100;
     matConfPorc2(:,:,i) = (confMatTeste(:,:,i)./...
-        repmat(sum(confMatTeste(:,:,i))', 1, size(confMatTeste(:,:,i),1))).*100;
+        repmat(sum(confMatTeste(:,:,i),2), 1, size(confMatTeste(:,:,i),1))).*100;
     [metricas(:,:,i), metricasGeral(i,:)] = metricasMatConf(confMatTeste(:,:,i));    
 end
 
