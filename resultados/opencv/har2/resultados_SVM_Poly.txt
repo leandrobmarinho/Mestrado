@@ -1,0 +1,498 @@
+Metodo - SVM 
+Base - har.txt
+kernell - Poly
+Parametros fixos
+
+------------------------------------------------------------
+-------------------------Iteracao 1------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	1.517653
+Teste 1 amostra	-	0.000621
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	344	0	1	0	0	0	
+1	0	308	1	0	0	0	
+2	0	0	282	0	0	0	
+3	0	1	0	325	30	0	
+4	0	0	0	43	339	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.67	0.00	0.05	0.00	0.00	0.00	
+1	0.00	14.93	0.05	0.00	0.00	0.00	
+2	0.00	0.00	13.67	0.00	0.00	0.00	
+3	0.00	0.05	0.00	15.75	1.45	0.00	
+4	0.00	0.00	0.00	2.08	16.43	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	0.99	1.00	1.00
+3	0.97	0.91	0.88	0.96	0.90
+4	0.98	0.89	0.92	0.96	0.90
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	0.99
+sens	-	0.96
+ppv	-	0.96
+acc	-	0.99
+fscore	-	0.96
+
+Metodo - SVM 
+Base - har.txt
+kernell - Poly
+Parametros fixos
+
+------------------------------------------------------------
+-------------------------Iteracao 2------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	1.579064
+Teste 1 amostra	-	0.001272
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	344	1	0	0	0	0	
+1	0	309	0	0	0	0	
+2	0	0	282	0	0	0	
+3	0	0	0	336	20	0	
+4	0	0	0	21	361	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.67	0.05	0.00	0.00	0.00	0.00	
+1	0.00	14.98	0.00	0.00	0.00	0.00	
+2	0.00	0.00	13.67	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.29	0.97	0.00	
+4	0.00	0.00	0.00	1.02	17.50	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.94	0.94	0.98	0.94
+4	0.99	0.95	0.95	0.98	0.95
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - SVM 
+Base - har.txt
+kernell - Poly
+Parametros fixos
+
+------------------------------------------------------------
+-------------------------Iteracao 3------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	1.468556
+Teste 1 amostra	-	0.000852
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	308	1	0	0	0	
+2	1	0	281	0	0	0	
+3	0	0	0	326	30	0	
+4	0	0	0	13	369	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.93	0.05	0.00	0.00	0.00	
+2	0.05	0.00	13.62	0.00	0.00	0.00	
+3	0.00	0.00	0.00	15.80	1.45	0.00	
+4	0.00	0.00	0.00	0.63	17.89	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.92	0.96	0.98	0.94
+4	0.98	0.97	0.92	0.98	0.94
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - SVM 
+Base - har.txt
+kernell - Poly
+Parametros fixos
+
+------------------------------------------------------------
+-------------------------Iteracao 4------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	1.433803
+Teste 1 amostra	-	0.000706
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	309	0	0	0	0	
+2	0	0	282	0	0	0	
+3	0	0	0	322	34	0	
+4	0	0	0	38	344	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.98	0.00	0.00	0.00	0.00	
+2	0.00	0.00	13.67	0.00	0.00	0.00	
+3	0.00	0.00	0.00	15.61	1.65	0.00	
+4	0.00	0.00	0.00	1.84	16.67	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.98	0.90	0.89	0.97	0.90
+4	0.98	0.90	0.91	0.97	0.91
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	0.99
+sens	-	0.97
+ppv	-	0.97
+acc	-	0.99
+fscore	-	0.97
+
+Metodo - SVM 
+Base - har.txt
+kernell - Poly
+Parametros fixos
+
+------------------------------------------------------------
+-------------------------Iteracao 5------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	1.431498
+Teste 1 amostra	-	0.000772
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	309	0	0	0	0	
+2	1	0	281	0	0	0	
+3	0	0	0	337	19	0	
+4	0	0	0	40	342	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.98	0.00	0.00	0.00	0.00	
+2	0.05	0.00	13.62	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.34	0.92	0.00	
+4	0.00	0.00	0.00	1.94	16.58	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.98	0.95	0.89	0.97	0.92
+4	0.99	0.90	0.95	0.97	0.92
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	0.99
+sens	-	0.97
+ppv	-	0.97
+acc	-	0.99
+fscore	-	0.97
+
+
+%------------------------------------------------------------
+%------------------------RESUMO GERAL------------------------
+%------------------------------------------------------------
+
+Matriz de confusao Media
+
+	0	1	2	3	4	5	
+0	344.60	0.20	0.20	0.00	0.00	0.00	
+1	0.00	308.60	0.40	0.00	0.00	0.00	
+2	0.40	0.00	281.60	0.00	0.00	0.00	
+3	0.00	0.20	0.00	329.20	26.60	0.00	
+4	0.00	0.00	0.00	31.00	351.00	0.00	
+5	0.00	0.00	0.00	0.00	0.00	389.00	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	94.74	0.05	0.05	0.00	0.00	0.00	
+1	0.00	84.84	0.11	0.00	0.00	0.00	
+2	0.11	0.00	77.42	0.00	0.00	0.00	
+3	0.00	0.05	0.00	90.50	7.31	0.00	
+4	0.00	0.00	0.00	8.52	96.50	0.00	
+5	0.00	0.00	0.00	0.00	0.00	106.94	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+class	spe		sens		fscore		accpc
+0	99.98/0.03	99.88/0.14	99.88/0.06	99.96/0.02	
+1	99.98/0.03	99.87/0.16	99.87/0.12	99.96/0.04	
+2	99.97/0.04	99.86/0.17	99.82/0.16	99.95/0.04	
+3	98.18/0.69	92.47/1.72	91.95/1.87	97.20/0.67	
+4	98.42/0.36	91.88/3.09	92.40/1.87	97.21/0.66	
+5	100.00/0.00	100.00/0.00	100.00/0.00	100.00/0.00	
+Geral	99.43/0.13	97.14/0.67	97.14/0.67	99.05/0.22	
+
+
+
+
+Tempo de treino medio: 1.486115/0.055968
+
+Tempo de teste de 1 amostra medio: 0.00084468/0.00022673
+
+
+
+%------------------------------------------------------------
+%-----------------------TABELAS LATEX------------------------
+%------------------------------------------------------------
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Accuracy (Acc), sensitivity (Se), specificity (Sp) and Harmonicmeans (HM) by class for database of ... obtained by ... method}
+	\label{tab::M3C3}
+	\begin{tabular}{cccccc}
+\hline
+CLASS & Sp($\%$) & Se($\%$) & HM ($\%$) & Acc($\%$)\\ \hline 
+0	&	99.98$\pm$0.03	&	99.88$\pm$0.14	&	99.88$\pm$0.06	&	99.96$\pm$0.02	\\
+1	&	99.98$\pm$0.03	&	99.87$\pm$0.16	&	99.87$\pm$0.12	&	99.96$\pm$0.04	\\
+2	&	99.97$\pm$0.04	&	99.86$\pm$0.17	&	99.82$\pm$0.16	&	99.95$\pm$0.04	\\
+3	&	98.18$\pm$0.69	&	92.47$\pm$1.72	&	91.95$\pm$1.87	&	97.20$\pm$0.67	\\
+4	&	98.42$\pm$0.36	&	91.88$\pm$3.09	&	92.40$\pm$1.87	&	97.21$\pm$0.66	\\
+5	&	100.00$\pm$0.00	&	100.00$\pm$0.00	&	100.00$\pm$0.00	&	100.00$\pm$0.00	\\
+Geral	&	99.43$\pm$0.13	&	97.14$\pm$0.67	&	97.14$\pm$0.67	&	99.05$\pm$0.22	\\
+\hline 
+	 \end{tabular} 
+ \end{table} 
+%------------------------------------------------------------
+%----------MATRIZ DE CONFUSAO LATEX MEDIA NUMERICA-----------
+%------------------------------------------------------------
+
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Numerical average confusion matrix for database of ... obtained by ... method.}
+	\label{tabMCNumericoM3C3}	
+{\normalsize
+\begin{tabular}{ccccccc}
+\hline
+CLASS	&	1	&	2	&	3	&	4	&	5	&	6	\\ \hline 
+0	&	344.6	&	0.2	&	0.2	&	0.0	&	0.0	&	0.0	\\
+1	&	0.0	&	308.6	&	0.4	&	0.0	&	0.0	&	0.0	\\
+2	&	0.4	&	0.0	&	281.6	&	0.0	&	0.0	&	0.0	\\
+3	&	0.0	&	0.2	&	0.0	&	329.2	&	26.6	&	0.0	\\
+4	&	0.0	&	0.0	&	0.0	&	31.0	&	351.0	&	0.0	\\
+5	&	0.0	&	0.0	&	0.0	&	0.0	&	0.0	&	389.0	\\
+\hline 
+	 \end{tabular}} 
+ \end{table} 
+
+
+%------------------------------------------------------------
+%---------MATRIZ DE CONFUSAO LATEX MEDIA PERCENTUAL----------
+%------------------------------------------------------------
+
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Average percentage confusion matrix for database of ... obtained by ... method.}
+	\label{tabMCPercentualM3C3}	
+{\normalsize
+\begin{tabular}{ccccccc}
+\hline
+CLASS	&	1	&	2	&	3	&	4	&	5	&	6	\\ \hline 
+0	&	94.7	&	0.1	&	0.1	&	0.0	&	0.0	&	0.0	\\
+1	&	0.0	&	84.8	&	0.1	&	0.0	&	0.0	&	0.0	\\
+2	&	0.1	&	0.0	&	77.4	&	0.0	&	0.0	&	0.0	\\
+3	&	0.0	&	0.1	&	0.0	&	90.5	&	7.3	&	0.0	\\
+4	&	0.0	&	0.0	&	0.0	&	8.5	&	96.5	&	0.0	\\
+5	&	0.0	&	0.0	&	0.0	&	0.0	&	0.0	&	106.9	\\
+\hline 
+	 \end{tabular}} 
+ \end{table} 
+
