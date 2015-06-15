@@ -1,0 +1,853 @@
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 1------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	135.331558
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	308	0	0	0	1	
+2	0	0	282	0	0	0	
+3	0	0	0	332	24	0	
+4	0	0	0	20	362	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.93	0.00	0.00	0.00	0.05	
+2	0.00	0.00	13.67	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.09	1.16	0.00	
+4	0.00	0.00	0.00	0.97	17.55	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.93	0.94	0.98	0.94
+4	0.99	0.95	0.94	0.98	0.94
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 2------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	112.782082
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	344	1	0	12	4	0	
+1	1	308	0	9	1	0	
+2	1	0	281	0	0	0	
+3	0	0	0	340	12	0	
+4	0	0	0	0	361	0	
+5	0	0	0	0	0	388	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.67	0.05	0.00	0.58	0.19	0.00	
+1	0.05	14.93	0.00	0.44	0.05	0.00	
+2	0.05	0.00	13.62	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.48	0.58	0.00	
+4	0.00	0.00	0.00	0.00	17.50	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.81	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	0.95	0.99	0.99	0.97
+1	1.00	0.97	1.00	0.99	0.98
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.97	0.94	0.98	0.95
+4	0.99	1.00	0.96	0.99	0.98
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 3------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	158.778702
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	309	0	0	0	0	
+2	0	0	282	0	0	0	
+3	0	0	0	343	13	0	
+4	0	0	0	15	367	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.98	0.00	0.00	0.00	0.00	
+2	0.00	0.00	13.67	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.63	0.63	0.00	
+4	0.00	0.00	0.00	0.73	17.79	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.96	0.96	0.99	0.96
+4	0.99	0.96	0.97	0.99	0.96
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.99
+ppv	-	0.99
+acc	-	1.00
+fscore	-	0.99
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 4------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	170.513275
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	308	1	0	0	0	
+2	1	0	281	0	0	0	
+3	0	0	0	333	23	0	
+4	0	0	0	11	371	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.93	0.05	0.00	0.00	0.00	
+2	0.05	0.00	13.62	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.14	1.11	0.00	
+4	0.00	0.00	0.00	0.53	17.98	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.94	0.97	0.98	0.95
+4	0.99	0.97	0.94	0.98	0.96
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 5------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	128.264954
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	346	0	0	0	0	0	
+1	1	306	1	0	13	0	
+2	0	0	282	6	5	0	
+3	0	0	0	346	0	0	
+4	0	0	0	0	368	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.77	0.00	0.00	0.00	0.00	0.00	
+1	0.05	14.83	0.05	0.00	0.63	0.00	
+2	0.00	0.00	13.67	0.29	0.24	0.00	
+3	0.00	0.00	0.00	16.77	0.00	0.00	
+4	0.00	0.00	0.00	0.00	17.84	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	0.95	1.00	0.99	0.98
+2	1.00	0.96	1.00	0.99	0.98
+3	1.00	1.00	0.98	1.00	0.99
+4	0.99	1.00	0.95	0.99	0.98
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.99
+ppv	-	0.99
+acc	-	1.00
+fscore	-	0.99
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 6------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	164.199722
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	308	1	0	0	0	
+2	0	0	282	0	0	0	
+3	0	0	0	330	26	0	
+4	0	0	0	21	361	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.93	0.05	0.00	0.00	0.00	
+2	0.00	0.00	13.67	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.00	1.26	0.00	
+4	0.00	0.00	0.00	1.02	17.50	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.93	0.94	0.98	0.93
+4	0.98	0.95	0.93	0.98	0.94
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 7------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	166.963593
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	1	0	0	0	
+1	1	307	0	0	0	0	
+2	0	0	282	0	9	0	
+3	0	0	0	354	2	0	
+4	0	0	0	1	372	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.05	0.00	0.00	0.00	
+1	0.05	14.88	0.00	0.00	0.00	0.00	
+2	0.00	0.00	13.67	0.00	0.44	0.00	
+3	0.00	0.00	0.00	17.16	0.10	0.00	
+4	0.00	0.00	0.00	0.05	18.03	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	0.97	1.00	1.00	0.98
+3	1.00	0.99	1.00	1.00	1.00
+4	0.99	1.00	0.97	0.99	0.98
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.99
+ppv	-	0.99
+acc	-	1.00
+fscore	-	0.99
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 8------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	164.646637
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	309	0	0	0	0	
+2	0	1	281	0	0	0	
+3	0	0	0	339	16	1	
+4	0	0	0	16	366	0	
+5	0	0	0	0	1	388	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.98	0.00	0.00	0.00	0.00	
+2	0.00	0.05	13.62	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.43	0.78	0.05	
+4	0.00	0.00	0.00	0.78	17.74	0.00	
+5	0.00	0.00	0.00	0.00	0.05	18.81	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.95	0.95	0.98	0.95
+4	0.99	0.96	0.96	0.98	0.96
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 9------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	171.058502
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	0	308	0	0	0	1	
+2	0	2	280	0	0	0	
+3	0	0	1	339	16	0	
+4	0	0	0	22	360	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.00	14.93	0.00	0.00	0.00	0.05	
+2	0.00	0.10	13.57	0.00	0.00	0.00	
+3	0.00	0.00	0.05	16.43	0.78	0.00	
+4	0.00	0.00	0.00	1.07	17.45	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	1.00	1.00	1.00
+1	1.00	1.00	0.99	1.00	1.00
+2	1.00	0.99	1.00	1.00	0.99
+3	0.99	0.95	0.94	0.98	0.95
+4	0.99	0.94	0.96	0.98	0.95
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+Metodo - MLP 
+Base - harPCA.txt
+Configuracao 1- 118/62/6
+
+------------------------------------------------------------
+-------------------------Iteracao 10------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	178.287384
+Teste 1 amostra	-	0.000000
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	345	0	0	0	0	0	
+1	2	307	0	0	0	0	
+2	1	0	281	0	0	0	
+3	0	0	0	342	14	0	
+4	0	0	0	18	364	0	
+5	0	0	0	0	0	389	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	16.72	0.00	0.00	0.00	0.00	0.00	
+1	0.10	14.88	0.00	0.00	0.00	0.00	
+2	0.05	0.00	13.62	0.00	0.00	0.00	
+3	0.00	0.00	0.00	16.58	0.68	0.00	
+4	0.00	0.00	0.00	0.87	17.64	0.00	
+5	0.00	0.00	0.00	0.00	0.00	18.86	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	1.00	1.00	0.99	1.00	1.00
+1	1.00	0.99	1.00	1.00	1.00
+2	1.00	1.00	1.00	1.00	1.00
+3	0.99	0.96	0.95	0.98	0.96
+4	0.99	0.95	0.96	0.98	0.96
+5	1.00	1.00	1.00	1.00	1.00
+
+
+Medidas do classificador geral
+
+
+spe	-	1.00
+sens	-	0.98
+ppv	-	0.98
+acc	-	0.99
+fscore	-	0.98
+
+
+%------------------------------------------------------------
+%------------------------RESUMO GERAL------------------------
+%------------------------------------------------------------
+
+Matriz de confusao Media
+
+	0	1	2	3	4	5	
+0	345.00	0.10	0.10	1.20	0.40	0.00	
+1	0.50	307.80	0.30	0.90	1.40	0.20	
+2	0.30	0.30	281.40	0.60	1.40	0.00	
+3	0.00	0.00	0.10	339.80	14.60	0.10	
+4	0.00	0.00	0.00	12.40	365.20	0.00	
+5	0.00	0.00	0.00	0.00	0.10	388.80	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	94.61	0.03	0.03	0.33	0.11	0.00	
+1	0.14	84.41	0.08	0.25	0.38	0.05	
+2	0.08	0.08	77.17	0.16	0.38	0.00	
+3	0.00	0.00	0.03	93.18	4.00	0.03	
+4	0.00	0.00	0.00	3.40	100.15	0.00	
+5	0.00	0.00	0.00	0.00	0.03	106.62	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+class	spe		sens		fscore		accpc
+0	99.95/0.06	99.50/1.41	99.63/0.79	99.87/0.27	
+1	99.98/0.04	98.96/1.55	99.41/0.80	99.82/0.24	
+2	99.97/0.03	99.10/1.29	99.46/0.71	99.85/0.20	
+3	99.12/0.39	95.84/2.32	95.79/1.95	98.55/0.67	
+4	98.94/0.28	96.75/2.21	96.03/1.42	98.53/0.53	
+5	99.98/0.03	99.97/0.08	99.95/0.09	99.98/0.03	
+Geral	99.66/0.09	98.30/0.47	98.30/0.47	99.43/0.16	
+
+
+
+
+Tempo de treino medio: 155.082626/20.639362
+
+Tempo de teste de 1 amostra medio: 0.00000000/0.00000000
+
+
+
+%------------------------------------------------------------
+%-----------------------TABELAS LATEX------------------------
+%------------------------------------------------------------
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Accuracy (Acc), sensitivity (Se), specificity (Sp) and Harmonicmeans (HM) by class for database of ... obtained by ... method}
+	\label{tab::M4C1}
+	\begin{tabular}{cccccc}
+\hline
+CLASS & Sp($\%$) & Se($\%$) & HM ($\%$) & Acc($\%$)\\ \hline 
+0	&	99.95$\pm$0.06	&	99.50$\pm$1.41	&	99.63$\pm$0.79	&	99.87$\pm$0.27	\\
+1	&	99.98$\pm$0.04	&	98.96$\pm$1.55	&	99.41$\pm$0.80	&	99.82$\pm$0.24	\\
+2	&	99.97$\pm$0.03	&	99.10$\pm$1.29	&	99.46$\pm$0.71	&	99.85$\pm$0.20	\\
+3	&	99.12$\pm$0.39	&	95.84$\pm$2.32	&	95.79$\pm$1.95	&	98.55$\pm$0.67	\\
+4	&	98.94$\pm$0.28	&	96.75$\pm$2.21	&	96.03$\pm$1.42	&	98.53$\pm$0.53	\\
+5	&	99.98$\pm$0.03	&	99.97$\pm$0.08	&	99.95$\pm$0.09	&	99.98$\pm$0.03	\\
+Geral	&	99.66$\pm$0.09	&	98.30$\pm$0.47	&	98.30$\pm$0.47	&	99.43$\pm$0.16	\\
+\hline 
+	 \end{tabular} 
+ \end{table} 
+%------------------------------------------------------------
+%----------MATRIZ DE CONFUSAO LATEX MEDIA NUMERICA-----------
+%------------------------------------------------------------
+
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Numerical average confusion matrix for database of ... obtained by ... method.}
+	\label{tabMCNumericoM4C1}	
+{\normalsize
+\begin{tabular}{ccccccc}
+\hline
+CLASS	&	1	&	2	&	3	&	4	&	5	&	6	\\ \hline 
+0	&	345.0	&	0.1	&	0.1	&	1.2	&	0.4	&	0.0	\\
+1	&	0.5	&	307.8	&	0.3	&	0.9	&	1.4	&	0.2	\\
+2	&	0.3	&	0.3	&	281.4	&	0.6	&	1.4	&	0.0	\\
+3	&	0.0	&	0.0	&	0.1	&	339.8	&	14.6	&	0.1	\\
+4	&	0.0	&	0.0	&	0.0	&	12.4	&	365.2	&	0.0	\\
+5	&	0.0	&	0.0	&	0.0	&	0.0	&	0.1	&	388.8	\\
+\hline 
+	 \end{tabular}} 
+ \end{table} 
+
+
+%------------------------------------------------------------
+%---------MATRIZ DE CONFUSAO LATEX MEDIA PERCENTUAL----------
+%------------------------------------------------------------
+
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Average percentage confusion matrix for database of ... obtained by ... method.}
+	\label{tabMCPercentualM4C1}	
+{\normalsize
+\begin{tabular}{ccccccc}
+\hline
+CLASS	&	1	&	2	&	3	&	4	&	5	&	6	\\ \hline 
+0	&	94.6	&	0.0	&	0.0	&	0.3	&	0.1	&	0.0	\\
+1	&	0.1	&	84.4	&	0.1	&	0.2	&	0.4	&	0.1	\\
+2	&	0.1	&	0.1	&	77.2	&	0.2	&	0.4	&	0.0	\\
+3	&	0.0	&	0.0	&	0.0	&	93.2	&	4.0	&	0.0	\\
+4	&	0.0	&	0.0	&	0.0	&	3.4	&	100.1	&	0.0	\\
+5	&	0.0	&	0.0	&	0.0	&	0.0	&	0.0	&	106.6	\\
+\hline 
+	 \end{tabular}} 
+ \end{table} 
+

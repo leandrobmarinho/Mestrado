@@ -15,7 +15,7 @@ for i = 1 : numel(files)
 %         min(r.metricasGeral(:,6))*100, r.metricasGeralMedia(6)*100, r.stdAcc, ...,
 %         r.tempoTreinMedio, mean(r.tempoTeste/2060)*1000000, files(i).name);
 %     
-    fprintf('& %0.2f\t& %0.2f\t& %0.2f\t& %0.4f\t& %0.6f s\t& %0.2f $\\us$ \\\\\t %s\n', max(r.metricasGeral(:,6))*100, ...
-        min(r.metricasGeral(:,6))*100, r.metricasGeralMedia(6)*100, r.stdAcc, ...,
+    fprintf('& %0.2f\t& %0.2f\t& %0.2f\t& %0.2f\t& %0.6f s\t& %0.2f $\\us$ \\\\\t %s\n', max(r.metricasGeral(:,6))*100, ...
+        min(r.metricasGeral(:,6))*100, r.metricasGeralMedia(6)*100, r.stdAcc*100, ...,
         r.tempoTreinMedio, mean(r.tempoTeste/2060)*1000000, files(i).name);
 end
