@@ -1,0 +1,853 @@
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 1------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	184.710739
+Teste 1 amostra	-	0.024194
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	93	61	79	60	212	66	
+1	79	51	64	33	236	37	
+2	58	77	41	43	182	70	
+3	50	30	63	78	339	48	
+4	31	32	51	86	397	57	
+5	47	36	79	32	403	39	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.70	1.77	2.30	1.74	6.16	1.92	
+1	2.30	1.48	1.86	0.96	6.86	1.08	
+2	1.69	2.24	1.19	1.25	5.29	2.03	
+3	1.45	0.87	1.83	2.27	9.85	1.40	
+4	0.90	0.93	1.48	2.50	11.54	1.66	
+5	1.37	1.05	2.30	0.93	11.72	1.13	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.91	0.16	0.26	0.78	0.20
+1	0.92	0.10	0.18	0.80	0.13
+2	0.89	0.09	0.11	0.78	0.10
+3	0.91	0.13	0.23	0.77	0.17
+4	0.51	0.61	0.22	0.53	0.33
+5	0.90	0.06	0.12	0.75	0.08
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.20
+ppv	-	0.20
+acc	-	0.73
+fscore	-	0.20
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 2------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	182.272217
+Teste 1 amostra	-	0.025227
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	85	64	90	226	49	72	
+1	67	51	66	228	44	43	
+2	57	76	49	204	32	60	
+3	52	28	62	282	127	55	
+4	43	33	50	299	137	56	
+5	46	27	52	444	50	34	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.47	1.86	2.62	6.57	1.42	2.09	
+1	1.95	1.48	1.92	6.63	1.28	1.25	
+2	1.66	2.21	1.42	5.93	0.93	1.74	
+3	1.51	0.81	1.80	8.20	3.69	1.60	
+4	1.25	0.96	1.45	8.69	3.98	1.63	
+5	1.34	0.78	1.51	12.91	1.45	0.99	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.91	0.15	0.24	0.78	0.18
+1	0.92	0.10	0.18	0.80	0.13
+2	0.89	0.10	0.13	0.78	0.12
+3	0.51	0.47	0.17	0.50	0.25
+4	0.89	0.22	0.31	0.77	0.26
+5	0.90	0.05	0.11	0.74	0.07
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.19
+ppv	-	0.19
+acc	-	0.73
+fscore	-	0.19
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 3------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	184.412384
+Teste 1 amostra	-	0.020168
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	84	61	68	47	33	228	
+1	61	43	60	44	54	269	
+2	74	91	66	43	33	172	
+3	18	9	33	47	53	455	
+4	21	9	25	34	46	490	
+5	68	36	82	47	67	369	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.44	1.77	1.98	1.37	0.96	6.63	
+1	1.77	1.25	1.74	1.28	1.57	7.82	
+2	2.15	2.65	1.92	1.25	0.96	5.00	
+3	0.52	0.26	0.96	1.37	1.54	13.23	
+4	0.61	0.26	0.73	0.99	1.34	14.24	
+5	1.98	1.05	2.38	1.37	1.95	10.73	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.92	0.16	0.26	0.80	0.20
+1	0.93	0.08	0.17	0.80	0.11
+2	0.91	0.14	0.20	0.80	0.16
+3	0.92	0.08	0.18	0.77	0.11
+4	0.91	0.07	0.16	0.76	0.10
+5	0.42	0.55	0.19	0.44	0.28
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.19
+ppv	-	0.19
+acc	-	0.73
+fscore	-	0.19
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 4------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	181.054031
+Teste 1 amostra	-	0.025386
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	86	76	76	69	196	65	
+1	85	51	68	38	218	47	
+2	79	64	43	34	171	78	
+3	39	24	62	86	358	48	
+4	22	28	56	82	376	65	
+5	69	32	71	54	373	51	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.50	2.21	2.21	2.01	5.70	1.89	
+1	2.47	1.48	1.98	1.10	6.34	1.37	
+2	2.30	1.86	1.25	0.99	4.97	2.27	
+3	1.13	0.70	1.80	2.50	10.41	1.40	
+4	0.64	0.81	1.63	2.38	10.93	1.89	
+5	2.01	0.93	2.06	1.57	10.84	1.48	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.90	0.15	0.23	0.77	0.18
+1	0.92	0.10	0.19	0.80	0.13
+2	0.89	0.09	0.11	0.78	0.10
+3	0.90	0.14	0.24	0.77	0.18
+4	0.53	0.60	0.22	0.54	0.32
+5	0.89	0.08	0.14	0.74	0.10
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.20
+ppv	-	0.20
+acc	-	0.73
+fscore	-	0.20
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 5------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	180.463715
+Teste 1 amostra	-	0.022171
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	86	260	76	59	43	68	
+1	70	236	67	41	49	38	
+2	57	218	53	41	26	56	
+3	24	349	42	49	75	29	
+4	27	357	41	92	84	47	
+5	69	367	86	49	61	48	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.50	7.56	2.21	1.72	1.25	1.98	
+1	2.03	6.86	1.95	1.19	1.42	1.10	
+2	1.66	6.34	1.54	1.19	0.76	1.63	
+3	0.70	10.15	1.22	1.42	2.18	0.84	
+4	0.78	10.38	1.19	2.67	2.44	1.37	
+5	2.01	10.67	2.50	1.42	1.77	1.40	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.91	0.15	0.26	0.78	0.19
+1	0.47	0.47	0.13	0.47	0.21
+2	0.90	0.12	0.15	0.79	0.13
+3	0.90	0.09	0.15	0.77	0.11
+4	0.91	0.13	0.25	0.76	0.17
+5	0.91	0.07	0.17	0.75	0.10
+
+
+Medidas do classificador geral
+
+
+spe	-	0.83
+sens	-	0.16
+ppv	-	0.16
+acc	-	0.72
+fscore	-	0.16
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 6------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	181.989532
+Teste 1 amostra	-	0.019446
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	73	52	337	44	35	63	
+1	71	40	287	34	52	48	
+2	59	56	258	39	30	48	
+3	21	17	395	45	60	34	
+4	15	15	408	51	97	49	
+5	55	38	361	42	62	49	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.12	1.51	9.80	1.28	1.02	1.83	
+1	2.06	1.16	8.34	0.99	1.51	1.40	
+2	1.72	1.63	7.50	1.13	0.87	1.40	
+3	0.61	0.49	11.48	1.31	1.74	0.99	
+4	0.44	0.44	11.86	1.48	2.82	1.42	
+5	1.60	1.10	10.49	1.22	1.80	1.42	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.92	0.12	0.25	0.78	0.16
+1	0.94	0.08	0.18	0.81	0.11
+2	0.39	0.53	0.13	0.41	0.20
+3	0.93	0.08	0.18	0.79	0.11
+4	0.91	0.15	0.29	0.77	0.20
+5	0.91	0.08	0.17	0.77	0.11
+
+
+Medidas do classificador geral
+
+
+spe	-	0.83
+sens	-	0.16
+ppv	-	0.16
+acc	-	0.72
+fscore	-	0.16
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 7------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	181.278534
+Teste 1 amostra	-	0.023268
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	80	60	81	43	236	66	
+1	73	68	65	34	244	45	
+2	58	66	37	48	179	66	
+3	31	24	35	71	353	46	
+4	34	33	54	98	392	70	
+5	61	29	55	35	428	42	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.33	1.74	2.35	1.25	6.86	1.92	
+1	2.12	1.98	1.89	0.99	7.09	1.31	
+2	1.69	1.92	1.08	1.40	5.20	1.92	
+3	0.90	0.70	1.02	2.06	10.26	1.34	
+4	0.99	0.96	1.57	2.85	11.40	2.03	
+5	1.77	0.84	1.60	1.02	12.44	1.22	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.91	0.14	0.24	0.78	0.18
+1	0.93	0.13	0.24	0.80	0.17
+2	0.90	0.08	0.11	0.79	0.09
+3	0.91	0.13	0.22	0.78	0.16
+4	0.48	0.58	0.21	0.50	0.31
+5	0.89	0.06	0.13	0.74	0.09
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.20
+ppv	-	0.20
+acc	-	0.73
+fscore	-	0.20
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 8------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	183.334869
+Teste 1 amostra	-	0.018202
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	56	64	61	281	47	59	
+1	70	51	51	259	44	37	
+2	61	54	54	237	33	44	
+3	35	18	29	428	52	39	
+4	15	14	27	493	48	30	
+5	62	34	57	414	42	40	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	1.63	1.86	1.77	8.17	1.37	1.72	
+1	2.03	1.48	1.48	7.53	1.28	1.08	
+2	1.77	1.57	1.57	6.89	0.96	1.28	
+3	1.02	0.52	0.84	12.44	1.51	1.13	
+4	0.44	0.41	0.78	14.33	1.40	0.87	
+5	1.80	0.99	1.66	12.03	1.22	1.16	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.92	0.10	0.19	0.78	0.13
+1	0.94	0.10	0.22	0.81	0.14
+2	0.92	0.11	0.19	0.81	0.14
+3	0.41	0.71	0.20	0.46	0.32
+4	0.92	0.08	0.18	0.77	0.11
+5	0.93	0.06	0.16	0.76	0.09
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.20
+ppv	-	0.20
+acc	-	0.73
+fscore	-	0.20
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 9------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	180.466202
+Teste 1 amostra	-	0.019450
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	69	59	74	36	37	300	
+1	70	44	83	39	48	242	
+2	68	60	54	40	33	209	
+3	23	16	37	51	47	403	
+4	10	12	22	39	61	502	
+5	70	29	70	52	73	358	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.01	1.72	2.15	1.05	1.08	8.72	
+1	2.03	1.28	2.41	1.13	1.40	7.03	
+2	1.98	1.74	1.57	1.16	0.96	6.08	
+3	0.67	0.47	1.08	1.48	1.37	11.72	
+4	0.29	0.35	0.64	1.13	1.77	14.59	
+5	2.03	0.84	2.03	1.51	2.12	10.41	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.92	0.12	0.22	0.78	0.16
+1	0.94	0.08	0.20	0.81	0.12
+2	0.90	0.12	0.16	0.80	0.13
+3	0.93	0.09	0.20	0.79	0.12
+4	0.91	0.09	0.20	0.76	0.13
+5	0.41	0.55	0.18	0.43	0.27
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.19
+ppv	-	0.19
+acc	-	0.73
+fscore	-	0.19
+
+Metodo - OPF 
+Base - harPCA.txt
+Distancia - Chi-Square
+
+------------------------------------------------------------
+-------------------------Iteracao 10------------------------
+------------------------------------------------------------
+
+Tempos
+
+Train	-	181.195023
+Teste 1 amostra	-	0.018423
+
+
+Matriz de confusao
+
+	0	1	2	3	4	5	
+0	70	57	63	56	30	322	
+1	45	43	53	27	40	329	
+2	46	43	36	42	32	254	
+3	24	22	41	56	47	392	
+4	24	23	39	57	75	428	
+5	67	32	62	43	42	378	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	2.03	1.66	1.83	1.63	0.87	9.36	
+1	1.31	1.25	1.54	0.78	1.16	9.56	
+2	1.34	1.25	1.05	1.22	0.93	7.38	
+3	0.70	0.64	1.19	1.63	1.37	11.40	
+4	0.70	0.67	1.13	1.66	2.18	12.44	
+5	1.95	0.93	1.80	1.25	1.22	10.99	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+
+	spe	sens	ppv	accpc	fscore 
+0	0.93	0.12	0.25	0.79	0.16
+1	0.94	0.08	0.20	0.80	0.11
+2	0.91	0.08	0.12	0.80	0.10
+3	0.92	0.10	0.20	0.78	0.13
+4	0.93	0.12	0.28	0.78	0.16
+5	0.39	0.61	0.18	0.43	0.28
+
+
+Medidas do classificador geral
+
+
+spe	-	0.84
+sens	-	0.19
+ppv	-	0.19
+acc	-	0.73
+fscore	-	0.19
+
+
+%------------------------------------------------------------
+%------------------------RESUMO GERAL------------------------
+%------------------------------------------------------------
+
+Matriz de confusao Media
+
+	0	1	2	3	4	5	
+0	78.20	81.40	100.50	92.10	91.80	130.90	
+1	69.10	67.80	86.40	77.70	102.90	113.50	
+2	61.70	80.50	69.10	77.10	75.10	105.70	
+3	31.70	53.70	79.90	119.30	151.10	154.90	
+4	24.20	55.60	77.30	133.10	171.30	179.40	
+5	61.40	66.00	97.50	121.20	160.10	140.80	
+
+
+
+Matriz de confusao percentual
+
+	0	1	2	3	4	5	
+0	13.20	13.74	16.96	15.54	15.49	22.09	
+1	11.66	11.44	14.58	13.11	17.36	19.15	
+2	10.41	13.58	11.66	13.01	12.67	17.84	
+3	5.35	9.06	13.48	20.13	25.50	26.14	
+4	4.08	9.38	13.04	22.46	28.91	30.27	
+5	10.36	11.14	16.45	20.45	27.02	23.76	
+
+
+
+Results of Metrics Technics for Distance 
+
+
+
+Legenda
+
+spe	-	specificity
+sens	-	sensitivity
+ppv	-	ppv
+accpc	-	accpc
+fscore	-	fscore
+
+Medidas do por classe geral
+
+
+class	spe		sens		fscore		accpc
+0	91.34/0.79	13.64/2.01	17.33/2.05	78.35/0.72	
+1	88.49/13.77	13.24/11.39	13.51/2.90	77.13/9.98	
+2	85.10/15.28	14.52/12.83	12.77/3.32	75.53/11.46	
+3	82.37/18.53	19.98/20.32	16.40/6.49	71.73/11.95	
+4	79.18/18.78	26.45/21.92	20.95/8.51	69.46/11.32	
+5	75.49/23.02	21.76/23.05	14.60/8.49	65.39/14.39	
+Geral	83.76/0.28	18.79/1.41	18.79/1.41	72.93/0.47	
+
+
+
+
+Tempo de treino medio: 182.117722/1.471777
+
+Tempo de teste de 1 amostra medio: 0.02159361/0.00265098
+
+
+
+%------------------------------------------------------------
+%-----------------------TABELAS LATEX------------------------
+%------------------------------------------------------------
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Accuracy (Acc), sensitivity (Se), specificity (Sp) and Harmonicmeans (HM) by class for database of ... obtained by ... method}
+	\label{tab::M1C2}
+	\begin{tabular}{cccccc}
+\hline
+CLASS & Sp($\%$) & Se($\%$) & HM ($\%$) & Acc($\%$)\\ \hline 
+0	&	91.34$\pm$0.79	&	13.64$\pm$2.01	&	17.33$\pm$2.05	&	78.35$\pm$0.72	\\
+1	&	88.49$\pm$13.77	&	13.24$\pm$11.39	&	13.51$\pm$2.90	&	77.13$\pm$9.98	\\
+2	&	85.10$\pm$15.28	&	14.52$\pm$12.83	&	12.77$\pm$3.32	&	75.53$\pm$11.46	\\
+3	&	82.37$\pm$18.53	&	19.98$\pm$20.32	&	16.40$\pm$6.49	&	71.73$\pm$11.95	\\
+4	&	79.18$\pm$18.78	&	26.45$\pm$21.92	&	20.95$\pm$8.51	&	69.46$\pm$11.32	\\
+5	&	75.49$\pm$23.02	&	21.76$\pm$23.05	&	14.60$\pm$8.49	&	65.39$\pm$14.39	\\
+Geral	&	83.76$\pm$0.28	&	18.79$\pm$1.41	&	18.79$\pm$1.41	&	72.93$\pm$0.47	\\
+\hline 
+	 \end{tabular} 
+ \end{table} 
+%------------------------------------------------------------
+%----------MATRIZ DE CONFUSAO LATEX MEDIA NUMERICA-----------
+%------------------------------------------------------------
+
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Numerical average confusion matrix for database of ... obtained by ... method.}
+	\label{tabMCNumericoM1C2}	
+{\normalsize
+\begin{tabular}{ccccccc}
+\hline
+CLASS	&	1	&	2	&	3	&	4	&	5	&	6	\\ \hline 
+0	&	78.2	&	81.4	&	100.5	&	92.1	&	91.8	&	130.9	\\
+1	&	69.1	&	67.8	&	86.4	&	77.7	&	102.9	&	113.5	\\
+2	&	61.7	&	80.5	&	69.1	&	77.1	&	75.1	&	105.7	\\
+3	&	31.7	&	53.7	&	79.9	&	119.3	&	151.1	&	154.9	\\
+4	&	24.2	&	55.6	&	77.3	&	133.1	&	171.3	&	179.4	\\
+5	&	61.4	&	66.0	&	97.5	&	121.2	&	160.1	&	140.8	\\
+\hline 
+	 \end{tabular}} 
+ \end{table} 
+
+
+%------------------------------------------------------------
+%---------MATRIZ DE CONFUSAO LATEX MEDIA PERCENTUAL----------
+%------------------------------------------------------------
+
+
+
+\begin{table}[!hbt] 
+	 \centering 
+		 \caption{\it Average percentage confusion matrix for database of ... obtained by ... method.}
+	\label{tabMCPercentualM1C2}	
+{\normalsize
+\begin{tabular}{ccccccc}
+\hline
+CLASS	&	1	&	2	&	3	&	4	&	5	&	6	\\ \hline 
+0	&	13.2	&	13.7	&	17.0	&	15.5	&	15.5	&	22.1	\\
+1	&	11.7	&	11.4	&	14.6	&	13.1	&	17.4	&	19.2	\\
+2	&	10.4	&	13.6	&	11.7	&	13.0	&	12.7	&	17.8	\\
+3	&	5.3	&	9.1	&	13.5	&	20.1	&	25.5	&	26.1	\\
+4	&	4.1	&	9.4	&	13.0	&	22.5	&	28.9	&	30.3	\\
+5	&	10.4	&	11.1	&	16.5	&	20.5	&	27.0	&	23.8	\\
+\hline 
+	 \end{tabular}} 
+ \end{table} 
+
