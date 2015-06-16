@@ -67,7 +67,6 @@ end
 
 %% Points used for the distance-based regression
 if (isempty(trX) == 0),
-    
     switch (conf.distance)
         case ('mahalanobis')
             model.covX = cov(trX);

@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-folder = 'resultAll/';
+folder = 'resultSelec/';
 files = dir(sprintf('%s*.mat', folder));
 
 for i = 1 : numel(files)
