@@ -1,7 +1,8 @@
 close all; clear all; clc; addpath('..');
 
 % Pré-processamento
-dataset = carregaDados('har', 1);
+conf.pca = 0.98; conf.selecaoAtr = 0.07; %0.015 0.1 0.45 0.07 0.03
+dataset = carregaDados('har', 1, conf);
 
 
 %% Configurações gerais
@@ -12,7 +13,7 @@ numRodadas = 5;
 config.method = 'knn'; % lsqnonlin knn ''
 for dist = {'cityblock', ''}
 
-      for k = [0.1]
+      for k = [1]
         config.k = k;
         config.NN = 9;
         config.distance = dist{1}; % mahalanobis cityblock ''
