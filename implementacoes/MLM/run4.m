@@ -11,7 +11,26 @@ numRodadas = 5;
 
 %% MLM
 config.method = 'knn'; % lsqnonlin knn ''
-for dist = {'cityblock', '', 'mahalanobis'}
+for dist = {'cityblock'}
+    
+    for k = [1]
+        
+        for n = [3 5 7]
+            config.k = k;
+            config.NN = n;
+            config.distance = dist{1}; % mahalanobis cityblock ''
+            r = sim2MLM(dataset, ptrn, numRodadas, config);
+            
+            save(sprintf('mlm_%s_%d_D-%s_%.0f_pca', config.method, config.NN,...
+                config.distance, config.k*100))
+            
+            fprintf(sprintf('mlm_%s_%d_D-%s_%.0f_pca\n', config.method, config.NN,...
+                config.distance, config.k*100))
+        end
+    end
+end
+
+for dist = { '', 'mahalanobis'}
     
     for k = [0.1 0.5 1]
         
