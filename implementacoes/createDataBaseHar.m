@@ -46,7 +46,7 @@ elseif tipo == 1
     dlmwrite('harPCA.txt', [dados2.x dados2.y], 'delimiter', ',', 'precision', precisao);
 elseif tipo == 2 
     
-    ind = var(dados2.x) >= 0.1;
+    ind = var(dados2.x) >= 0.03;
     dados2.x = dados2.x(:, ind);
     fprintf('Num atributos depois da SelecaoAtri %d\n', size(dados2.x, 2));
 

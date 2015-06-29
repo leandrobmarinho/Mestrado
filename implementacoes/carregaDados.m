@@ -2,6 +2,7 @@ function [ dataset ] = carregaDados( path, tipo_saida, conf, varargin)
 %CARREGADADOS Summary of this function goes here
 %   path - caminho do arquivo
 %   tipo_saida -
+%       [4] - 1; -1; 1 (apenas classificação binária)
 %       [3] - [-0.98 -0.98 0.98]
 %       [2] - [-1 -1 1]
 %       [1] - [0 0 1]
@@ -107,6 +108,15 @@ switch tipo_saida
             dataset.y(ind, :) = repmat(code(j, :), tam, 1);
         end
         
+    case 4
+        labels = unique(y);
+        if (length(labels) ~= 2)
+            error('Apenas classificação binária!');
+        end
+        dataset.y(y == labels(1)) = -1;
+        dataset.y(y == labels(2)) = 1;
+        dataset.y = dataset.y';
+
     otherwise
         dataset.y = y;
 end
