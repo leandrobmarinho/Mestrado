@@ -60,8 +60,6 @@ for i = 1 : numRodadas,
     %% Testando o SVM
     fprintf('Testando o SVM...\nRodada %d\n\n', i)
     Yh = svmclassify(modelo{i}, dadosTeste.x);
-
-%     [Yh] = testeSOM_KNN(modelo, dadosTeste);
     
     % Matriz de confusao e acurácia    
     matrizesConf{i} = confusionmat(dadosTeste.y, Yh);

@@ -23,7 +23,6 @@ for i = 1 : realizations
     %make decision function
     output_labels = my.classify(test_features);
     hit_rate(i,1) = length((output_labels - test_labels) == 0)/size(test_features,1);
-    hit_rate(i,1);
     sv_rate(i,1) = length(my.alphas);
 end
 
