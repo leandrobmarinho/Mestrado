@@ -35,6 +35,7 @@ for i = 1: nFolds,
     end
 end
 
+keyboard
 Ecv = mean(erros,1);
 [~, indice] = min(Ecv);
 optParam = param(:, indice);
