@@ -6,6 +6,7 @@ classdef MyLSSVM < handle
       gamma % trade-off between hit and error costs
       bias % bias of LSSVM classifier
       alphas % Lagrange multipliers of LSSVM classifier
+      sigma % Sigma of RBF kernel
    end
    
    methods
@@ -15,6 +16,9 @@ classdef MyLSSVM < handle
          obj.gamma = params.gamma;
          obj.bias = [];
          obj.alphas = [];
+         if (isfield(params, 'sigma'))
+             obj.sigma = params.sigma;
+         end
       end
       
       function train(obj)
@@ -37,8 +41,20 @@ classdef MyLSSVM < handle
       
       function [class, real] = classify(obj,test_features)
         %make decision function
-        real = sum(test_features*obj.train_features'.*repmat(obj.alphas'.*obj.train_labels',size(test_features,1),1),2) + obj.bias;
-        class = sign(sum(test_features*obj.train_features'.*repmat(obj.alphas'.*obj.train_labels',size(test_features,1),1),2) + obj.bias);
+        
+        if (isempty(obj.sigma) == 0) % kernel rbf
+            K = pdist2(test_features, obj.train_features);
+            K = exp(-(K.^2)/obj.sigma^2);
+            
+            real = sum(K.*repmat(obj.alphas'.*obj.train_labels',size(test_features,1),1),2) + obj.bias;
+            class = sign(sum(K.*repmat(obj.alphas'.*obj.train_labels',size(test_features,1),1),2) + obj.bias);            
+        else
+            
+            % sem kernel
+            real = sum(test_features*obj.train_features'.*repmat(obj.alphas'.*obj.train_labels',size(test_features,1),1),2) + obj.bias;
+            class = sign(sum(test_features*obj.train_features'.*repmat(obj.alphas'.*obj.train_labels',size(test_features,1),1),2) + obj.bias);
+            
+        end
       end
       
    end % methods

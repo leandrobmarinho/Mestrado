@@ -5,32 +5,39 @@ dados = carregaDados('column_2C.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRodadas = 10;
-numFolds = 10;
-
+numRodadas = 3;
+numFolds = 3;
+metodo = 'SMO';
+fkernel = 'rbf';
 
 %% Criando as combinações de parâmetros para a validação cruzada
 
 paraC = ceil(0.1 * ptrn * size(dados.y, 1)) - 20 : 2 :ceil(0.1 * ptrn * size(dados.y, 1)) + 50;
-paraC = 2.^(-5:2:7);
+paraC = 2.^(-5:2:9);
+paraC = 1:20;
+% paraC = 0.001:0.01:0.1;
+
 i = 1;
-% 2 : 2 : 30
-for sigma = 2.^(-15:2:5)
+if (strcmp('rbf', fkernel) == 1)
+    for sigma = 1:20%2.^(-15:2:5)
+        
+        for c = paraC
+            params{1,i} = c;
+            params{2,i} = fkernel;
+            params{3,i} = sigma;
+            params{4,i} = metodo;
+            i = i + 1;
+        end
+    end
+else
     
     for c = paraC
         params{1,i} = c;
-        params{2,i} = 'rbf';
-        params{3,i} = sigma;
+        params{2,i} = fkernel;
+        params{3,i} = metodo;
         i = i + 1;
     end
 end
-
-for c = paraC
-    params{1,i} = c;
-    params{2,i} = 'linear';
-    i = i + 1;
-end
-
 
 %% Avaliando o método
 for i = 1 : numRodadas,
@@ -50,18 +57,24 @@ for i = 1 : numRodadas,
     fkernel = optParams{i}{2,1};
     if (strcmp('rbf', fkernel) == 1)
         sigma = optParams{i}{3,1};
-        
+        tic
         modelo{i} = svmtrain(dadosTrein.x, dadosTrein.y,'kernel_function',...
             fkernel,'rbf_sigma',sigma,'boxconstraint',paraC,...
-            'method','QP','kernelcachelimit',15000);
+            'method',metodo,'kernelcachelimit',15000);
+        tempoTreino(i) = toc;
     else
+        tic
         modelo{i} = svmtrain(dadosTrein.x, dadosTrein.y,'kernel_function',...
-            fkernel,'boxconstraint',paraC,'method','QP','kernelcachelimit',15000);
+            fkernel,'boxconstraint',paraC,'method',metodo,'kernelcachelimit',15000);
+        tempoTreino(i) = toc;
     end
+    numSV(i) = size(modelo{i}.SupportVectors,1);
         
     %% Testando o SVM
     fprintf('Testando o SVM...\nRodada %d\n\n', i)
+    tic
     Yh = svmclassify(modelo{i}, dadosTeste.x);
+    tempoTeste(i) = toc/size(Yh,1);
     
     % Matriz de confusao e acurácia    
     matrizesConf{i} = confusionmat(dadosTeste.y, Yh);
@@ -76,4 +89,8 @@ mediaAcc = mean(acuracia);
 
 desvPadr = std(acuracia);
 matrizConfMedia = matrizesConf{posicoes(1)};
-clear Yh dados dadosTeste dadosTrein i c paraC posicoes sigma fkernel
+clear Yh dados dadosTeste dadosTrein i c paraC posicoes sigma
+
+
+%% Boxplot
+eval(sprintf('acuracia_%s_%s = acuracia;', metodo, fkernel))

@@ -7,7 +7,6 @@ else
     CVO = cvpartition(N, 'kfold', nFolds);
 end
 
-erros = zeros(nFolds, length(params));
 for i = 1: nFolds,
     dadosTreinX = dados.x(training(CVO, i), :);
     dadosTreinY = dados.y(training(CVO, i), :);
@@ -16,8 +15,7 @@ for i = 1: nFolds,
     for j = 1: length(params),
         fprintf('LSSVM %d - %d\n',i, j);
                 
-        param.gamma = params(j);
-        my = MyLSSVM(dadosTreinX, dadosTreinY, param);
+        my = MyLSSVM(dadosTreinX, dadosTreinY, params{j});
         my.train();
         
         output_labels = my.classify(dadosTesteX);
@@ -29,5 +27,5 @@ end
 
 Ecv = mean(erros,1);
 [~, indice] = min(Ecv);
-optParam.gamma = params(indice);
+optParam = params{indice};
 end
