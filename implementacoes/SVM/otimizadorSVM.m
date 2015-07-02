@@ -19,15 +19,18 @@ for i = 1: nFolds,
         paraC = param{1,j};
         fkernel = param{2,j};
         metodo = param{end,j};
+        options.MaxIter = 1000000;
+
         if (strcmp('rbf', fkernel) == 1)
             sigma = param{3,j};
             
             modelo = svmtrain(dadosTreinX, dadosTreinY,'kernel_function',...
                 fkernel,'rbf_sigma',sigma,'boxconstraint',paraC,...
-                'method',metodo,'kernelcachelimit',15000);
+                'method',metodo,'kernelcachelimit',15000, 'Options', options);
         else
             modelo = svmtrain(dadosTreinX, dadosTreinY,'kernel_function',...
-                fkernel,'boxconstraint',paraC,'method',metodo,'kernelcachelimit',15000);
+                fkernel,'boxconstraint',paraC,'method',metodo,...
+                'kernelcachelimit',15000, 'Options', options);
         end
         
         Yh = svmclassify(modelo, dadosTesteX);

@@ -1,25 +1,26 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('column_2C.data', 4);
+dados = carregaDados('breast_cancer.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRodadas = 3;
-numFolds = 3;
-metodo = 'SMO';
+numRodadas = 30;
+numFolds = 5;
+metodo = 'QP';
 fkernel = 'rbf';
+options.MaxIter = 9000000;
+
 
 %% Criando as combinações de parâmetros para a validação cruzada
 
-paraC = ceil(0.1 * ptrn * size(dados.y, 1)) - 20 : 2 :ceil(0.1 * ptrn * size(dados.y, 1)) + 50;
-paraC = 2.^(-5:2:9);
-paraC = 1:20;
+% paraC = ceil(0.1 * ptrn * size(dados.y, 1)) - 20 : 2 :ceil(0.1 * ptrn * size(dados.y, 1)) + 50;
+paraC = 2.^(-5:2:13);
 % paraC = 0.001:0.01:0.1;
 
 i = 1;
 if (strcmp('rbf', fkernel) == 1)
-    for sigma = 1:20%2.^(-15:2:5)
+    for sigma = 2.^(-15:2:5)
         
         for c = paraC
             params{1,i} = c;
@@ -60,12 +61,13 @@ for i = 1 : numRodadas,
         tic
         modelo{i} = svmtrain(dadosTrein.x, dadosTrein.y,'kernel_function',...
             fkernel,'rbf_sigma',sigma,'boxconstraint',paraC,...
-            'method',metodo,'kernelcachelimit',15000);
+            'method',metodo,'kernelcachelimit',15000,'Options', options);
         tempoTreino(i) = toc;
     else
         tic
         modelo{i} = svmtrain(dadosTrein.x, dadosTrein.y,'kernel_function',...
-            fkernel,'boxconstraint',paraC,'method',metodo,'kernelcachelimit',15000);
+            fkernel,'boxconstraint',paraC,'method',metodo,...
+            'kernelcachelimit',15000,'Options', options);
         tempoTreino(i) = toc;
     end
     numSV(i) = size(modelo{i}.SupportVectors,1);
@@ -91,6 +93,5 @@ desvPadr = std(acuracia);
 matrizConfMedia = matrizesConf{posicoes(1)};
 clear Yh dados dadosTeste dadosTrein i c paraC posicoes sigma
 
-
 %% Boxplot
-eval(sprintf('acuracia_%s_%s = acuracia;', metodo, fkernel))
+% eval(sprintf('acuracia_%s_%s = acuracia;', metodo, fkernel))
