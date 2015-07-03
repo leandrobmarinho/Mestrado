@@ -1,26 +1,14 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('haberman.data', 4);
+dados = carregaDados('breast_cancer.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-<<<<<<< Updated upstream
-numRodadas = 30;
-numFolds = 5;
-<<<<<<< HEAD
-metodo = 'LS';
-fkernel = 'rbf';
-=======
-metodo = 'SMO';
-fkernel = 'linear';
->>>>>>> origin/master
-=======
 numRodadas = 3;
 numFolds = 10;
 metodo = 'SMO';
 fkernel = 'rbf';
->>>>>>> Stashed changes
 options.MaxIter = 9000000;
 
 
