@@ -6,9 +6,9 @@ dados = carregaDados('diabetes.data', 4);
 %% Configurações gerais
 ptrn = 0.8;
 numRodadas = 30;
-numFolds = 5;
-metodo = 'QP';
-fkernel = 'rbf';
+numFolds = 10;
+metodo = 'LS';
+fkernel = 'linear';
 options.MaxIter = 9000000;
 
 

@@ -1,13 +1,13 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('breast_cancer.data', 4);
+dados = carregaDados('haberman.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
 numRodadas = 30;
 numFolds = 5;
-metodo = 'QP';
+metodo = 'LS';
 fkernel = 'rbf';
 options.MaxIter = 900000000;
 

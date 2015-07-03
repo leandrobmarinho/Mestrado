@@ -7,7 +7,7 @@ dados = carregaDados('breast_cancer.data', 4);
 ptrn = 0.8;
 numRodadas = 30;
 numFolds = 5;
-metodo = 'QP';
+metodo = 'LS';
 fkernel = 'rbf';
 options.MaxIter = 9000000;
 

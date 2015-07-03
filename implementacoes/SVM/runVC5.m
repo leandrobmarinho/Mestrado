@@ -1,13 +1,13 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('diabetes.data', 4);
+dados = carregaDados('haberman.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
 numRodadas = 30;
-numFolds = 5;
-metodo = 'SMO';
+numFolds = 10;
+metodo = 'LS';
 fkernel = 'rbf';
 options.MaxIter = 9000000;
 
