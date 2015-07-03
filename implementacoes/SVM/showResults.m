@@ -1,6 +1,6 @@
 clear all; close all; clc; addpath('../');
 
-folder = 'teste/';
+folder = 'resultados/iris/';
 files = dir(sprintf('%s*.mat', folder));
 
 for i = 1 : numel(files)

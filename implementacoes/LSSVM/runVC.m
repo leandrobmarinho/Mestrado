@@ -5,7 +5,7 @@ dados = carregaDados('haberman.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRodadas = 30;
+numRodadas = 1;
 numFolds = 10;
 
 
@@ -15,9 +15,10 @@ numFolds = 10;
 gamma = [0.001:0.01:0.1 1:60];
 gamma = 2.^(-5:2:13);
 % gamma = 1:32;
+% gamma = 1:10;
 
 % sigma = 0.001:0.01:1;
-sigma = 2.^(-15:2:5);
+sigma = 2.^(-5:2:13);%2.^(-15:2:5);
 % sigma = 1:10;
 
 i = 1;
@@ -77,8 +78,8 @@ desvPadr = std(acuracia);
 matrizConfMedia = matrizesConf{posicoes(1)};
 clear Yh dados dadosTeste dadosTrein i posicoes
 
-% [X, Y] = meshgrid(sigma, gamma);
-% mesh(X, Y, reshape(Ecv{1}, length(gamma), length(sigma)))
+[X, Y] = meshgrid(sigma, gamma);
+mesh(X, Y, reshape(1-Ecv{1}, length(gamma), length(sigma)))
 
 %%
 % for i = 1 : 88

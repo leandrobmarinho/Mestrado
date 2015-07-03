@@ -5,6 +5,7 @@ dados = carregaDados('haberman.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
+<<<<<<< Updated upstream
 numRodadas = 30;
 numFolds = 5;
 <<<<<<< HEAD
@@ -14,6 +15,12 @@ fkernel = 'rbf';
 metodo = 'SMO';
 fkernel = 'linear';
 >>>>>>> origin/master
+=======
+numRodadas = 3;
+numFolds = 10;
+metodo = 'SMO';
+fkernel = 'rbf';
+>>>>>>> Stashed changes
 options.MaxIter = 9000000;
 
 
@@ -25,7 +32,7 @@ paraC = 2.^(-5:2:7);
 
 i = 1;
 if (strcmp('rbf', fkernel) == 1)
-    for sigma = 2.^(-15:2:5)
+    for sigma = 2.^(-15:2:5) %2.^(-5:2:7)
         
         for c = paraC
             params{1,i} = c;
