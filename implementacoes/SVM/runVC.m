@@ -5,8 +5,8 @@ dados = carregaDados('breast_cancer.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRodadas = 3;
-numFolds = 10;
+numRodadas = 30;
+numFolds = 5;
 metodo = 'SMO';
 fkernel = 'rbf';
 options.MaxIter = 9000000;
