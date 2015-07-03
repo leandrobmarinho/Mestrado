@@ -1,11 +1,11 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('breast_cancer.data', 4);
+dados = carregaDados('haberman.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRodadas = 2;
+numRodadas = 30;
 numFolds = 10;
 
 
