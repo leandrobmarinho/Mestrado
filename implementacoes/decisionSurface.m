@@ -51,6 +51,21 @@ elseif (strcmp(conf.algoritmo, 'mixGaus') == 1)
     [modelo] = trainGausMix(data, conf);
     [classeXY] = testeGausMix(modelo, testeXY);
 
+elseif (strcmp(conf.algoritmo, 'SVM') == 1)
+    
+    if (strcmp('rbf', conf.fkernel) == 1)
+        
+        modelo = svmtrain(data.x, data.y,'kernel_function',...
+            conf.fkernel,'rbf_sigma', conf.sigma,'boxconstraint',conf.paraC,...
+            'method',conf.metodo,'kernelcachelimit',15000);
+    else
+        modelo = svmtrain(data.x, data.y,'kernel_function',...
+            conf.fkernel,'boxconstraint',conf.paraC,...
+            'method',conf.metodo,'kernelcachelimit',15000);
+    end
+    [classeXY] = svmclassify(modelo, testeXY.x);
+
+    
 else
     
     %% Treinamento do Bayes
@@ -135,7 +150,7 @@ end
 hold off
 % legend(plotar, 'Setosa ', 'Versicolor ', 'Virgínica', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
 % legend(plotar, 'Hernia', 'Spondylolisthesis', 'Normal', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
-legend(plotar, 'Outras', 'Versicolor', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
+legend(plotar, '-1', '+1', 'Location',[0.35,0.01,0.35,0.05],'Orientation','Horizontal');
 
 % if rej
 %     if (numClass == 3)
