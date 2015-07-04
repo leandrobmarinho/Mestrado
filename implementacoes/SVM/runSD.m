@@ -2,20 +2,27 @@ close all; clear all; clc
 addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('column_2C.data', 0);
+dados = carregaDados('iris2D.data', 0);
 
 %% Superfície de decisão
 % Configurações
 lin = 1; col = 2;
-range = [-1 1 -1 1];
+range = [-.8 .8 -.8 .8];
 
 conf.algoritmo = 'SVM';
-conf.metodo = 'SMO';
-conf.fkernel = 'rbf';
-conf.sigma = 4;
-conf.paraC = 4;
+conf.metodo = 'QP';
+conf.fkernel = 'linear';
+conf.sigma = 0.1250;
+conf.paraC = 0.5;
+atributos = [3 4];
 
 subplot(lin, col, 1)
-decisionSurface(range, conf, dados, [2 1])
-% ylabel('C. Sépala', 'FontSize', 14);
-% xlabel('L. Sépala', 'FontSize', 14);
+decisionSurface(range, conf, dados, atributos)
+xlabel(sprintf('Atributo %d', atributos(1)), 'FontSize', 16)
+ylabel(sprintf('Atributo %d', atributos(2)), 'FontSize', 16)
+
+conf.fkernel = 'rbf';
+subplot(lin, col, 2)
+decisionSurface(range, conf, dados, atributos)
+xlabel(sprintf('Atributo %d', atributos(1)), 'FontSize', 16)
+ylabel(sprintf('Atributo %d', atributos(2)), 'FontSize', 16)

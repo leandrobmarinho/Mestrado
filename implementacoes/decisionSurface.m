@@ -20,7 +20,7 @@ end
  
 %% Gerando os dados para superfície de decisão
 
-inc = 0.01;
+inc = 0.008;
 % gera a grade de coordenadas
 [x, y] = meshgrid(range(1):inc:range(2), range(3):inc:range(4));
  
@@ -136,7 +136,7 @@ end
 
 % cmap = prism(numClass*numClass);
 % cmap = [0 0 1; 0 1 0];
-cmap = [0 0 0.1; 1 .5 .5]; 
+cmap = [0 0 0.1; 1 0 0]; 
 % colormap(cmap);
 
 for i = 1 : numClass,
