@@ -22,7 +22,7 @@ for i = 1:numRodadas
     rotulos = [rotulos; 'LSSVM/MI/RBF'];
 end
 % valores = [resultCOMP.accuracy resultMVAR.accuracy resultEUCLI.accuracy resultMAHALA1.accuracy resultMAHALA2.accuracy resultMAHALA3.accuracy];
-boxplot(valores', rotulos);
+boxplot(valor', rotulos);
 
 ylabel('Acurácia', 'FontSize', 18)
 xlabel('Classificador', 'FontSize', 18)

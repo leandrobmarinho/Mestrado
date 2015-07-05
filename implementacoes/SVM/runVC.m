@@ -7,7 +7,7 @@ dados = carregaDados('column_2C.data', 4);
 ptrn = 0.8;
 numRodadas = 30;
 numFolds = 5;
-metodo = 'QP';
+metodo = 'LS';
 fkernel = 'linear';
 options.MaxIter = 9000000;
 
