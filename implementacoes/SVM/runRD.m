@@ -1,16 +1,21 @@
+%{
+Plot os gráficos de região de decisão com vetores de suport.
+%}
+
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('iris2D.data', 4);
-
+dados = carregaDados('coluna2c.data', 4);
 
 
 %% Configurações gerais
-metodo = 'QP';
+metodo = 'SMO';
 fkernel = 'rbf';
-atributos = [3 4];
-paraC = 0.1250;
-sigma = 0.5;
+atributos = [1 8];
+
+
+paraC = 32; %
+sigma = 32;
 
 %% Superfície de decisão
 dados.x = dados.x(:, atributos);

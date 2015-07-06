@@ -77,15 +77,3 @@ mediaAcc = mean(acuracia);
 desvPadr = std(acuracia);
 matrizConfMedia = matrizesConf{posicoes(1)};
 clear Yh dados dadosTeste dadosTrein i posicoes
-
-[X, Y] = meshgrid(sigma, gamma);
-mesh(X, Y, reshape(1-Ecv{1}, length(gamma), length(sigma)))
-
-%%
-% for i = 1 : 88
-% aux(1, i) = params{1,i};
-% aux(2, i) = params{3,i};
-% end
-% tri = delaunay(aux(1,:), aux(2,:));
-% trimesh(tri,aux(1,:), aux(2,:), Ecv{1}(1:88));
-% colormap('winter')
