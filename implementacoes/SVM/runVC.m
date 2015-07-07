@@ -1,21 +1,21 @@
 close all; clear all; clc; addpath('..');
 
 %% Pré-processamento
-dados = carregaDados('column_2C.data', 4);
+dados = carregaDados('iris2D.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
-numRodadas = 30;
+numRodadas = 10;
 numFolds = 5;
 metodo = 'LS';
-fkernel = 'linear';
+fkernel = 'rbf';
 options.MaxIter = 9000000;
 
 
 %% Criando as combinações de parâmetros para a validação cruzada
 
 % paraC = ceil(0.1 * ptrn * size(dados.y, 1)) - 20 : 2 :ceil(0.1 * ptrn * size(dados.y, 1)) + 50;
-paraC = 2.^(-5:2:13);
+paraC = 2.^(-5:2:9);
 % paraC = 0.001:0.01:0.1;
 
 i = 1;
