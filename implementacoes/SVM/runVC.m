@@ -5,9 +5,15 @@ dados = carregaDados('iris2D.data', 4);
 
 %% Configurações gerais
 ptrn = 0.8;
+<<<<<<< HEAD
 numRodadas = 10;
 numFolds = 5;
 metodo = 'LS';
+=======
+numRodadas = 2;
+numFolds = 5;
+metodo = 'QP';
+>>>>>>> origin/master
 fkernel = 'rbf';
 options.MaxIter = 9000000;
 
@@ -15,12 +21,16 @@ options.MaxIter = 9000000;
 %% Criando as combinações de parâmetros para a validação cruzada
 
 % paraC = ceil(0.1 * ptrn * size(dados.y, 1)) - 20 : 2 :ceil(0.1 * ptrn * size(dados.y, 1)) + 50;
+<<<<<<< HEAD
 paraC = 2.^(-5:2:9);
 % paraC = 0.001:0.01:0.1;
+=======
+paraC = 2.^(-5:13);
+>>>>>>> origin/master
 
 i = 1;
 if (strcmp('rbf', fkernel) == 1)
-    for sigma = 2.^(-15:2:5) %2.^(-5:2:7)
+    for sigma = 2.^(-15:5)
         
         for c = paraC
             params{1,i} = c;
@@ -91,4 +101,4 @@ mediaAcc = mean(acuracia);
 
 desvPadr = std(acuracia);
 matrizConfMedia = matrizesConf{posicoes(1)};
-clear Yh dados dadosTeste dadosTrein i c paraC posicoes sigma
+clear Yh dados dadosTeste dadosTrein i c posicoes
