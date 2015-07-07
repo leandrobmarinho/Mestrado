@@ -33,3 +33,4 @@ for limiar = limiares
     acuracia(i) = trace(confMat)/size(dadosTeste.y,1);
     i = i + 1;
 end
+save('limiares');
