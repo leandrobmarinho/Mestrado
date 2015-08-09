@@ -1,4 +1,4 @@
-function [output] = testePerceptron(modelo, dados)
+function [classes, output] = testePerceptron(modelo, dados)
 
 %keyboard
 lin = size(dados.x, 1);
@@ -6,7 +6,7 @@ X = [ones(lin, 1) dados.x];
 Y = dados.y;
 
 
-Yh = X*modelo.W';
+output = X*modelo.W';
 
 % if (size(Y,2) > 2)
 %     %Multi-Classes
@@ -22,11 +22,11 @@ Yh = X*modelo.W';
 if (size(Y,2) > 2)
     %Multi-Classes
     
-    [~, output] = max(Yh');
+    [output, classes] = max(output');
 else
     
     %2 Classes
-    output = sign(Yh);
+    classes = sign(output);
 end
 
 end
