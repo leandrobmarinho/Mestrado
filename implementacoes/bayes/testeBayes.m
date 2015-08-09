@@ -73,13 +73,17 @@ elseif (strcmp(conf.algoritmo, '') == 1)
     %     keyboard
     acoes = [];
     
-    % Probabilidade a priori de X
-    aprioriClassX = [];
-    for j = 1 : length(modelo.aprioriClass)
-        aprioriClassX(j,:) = modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})';
+    try
+        % Probabilidade a priori de X
+        aprioriClassX = [];
+        for j = 1 : length(modelo.aprioriClass)
+            aprioriClassX(j,:) = modelo.aprioriClass(j)*mvnpdf(dados.x, modelo.meansX(j,:), modelo.covs{j})';
+        end
+        aprioriClassX = sum(aprioriClassX);
+        
+    catch me
+        keyboard
     end
-    aprioriClassX = sum(aprioriClassX);
-    
     
     % Calculo do risco    
 %      for i = 1 : length(conf.custo),

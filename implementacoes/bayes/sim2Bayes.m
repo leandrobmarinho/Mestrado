@@ -1,26 +1,25 @@
-function [ result ] = simBayes( data, ptrn, num, conf )
+function [ result ] = sim2Bayes( dados, ptrn, numRodadas, conf )
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-Ntest = size(data.y, 1) - floor(size(data.y, 1)*(ptrn)); %num dados teste
-for i = 1 : num
+Ntest = size(dados.y, 1) - floor(size(dados.y, 1)*(ptrn)); %num dados teste
+for i = 1 : numRodadas
     %% Embaralhando os dados
-    [treinData, testData] = embaralhaDados(data, ptrn, 2);
+    [dadosTrein, dadosTeste] = embaralhaDados(dados, ptrn, 2);
 
         
     %% Treinamento
     fprintf('Treinando o Bayes.\n');
     tic
-    [model] = trainBayes(treinData);
-    tempoTrein(i) = toc;
+    [modelo] = trainBayes(dadosTrein);
+    tempoTrein(i) = toc;            
     
-            
     %% Teste
-    fprintf('Step %d. Testando o Bayes.\n', i);
+    fprintf('Testando o Bayes.\n');
     tic
-    [Y] = testeBayes(model, testData, conf);
+    [Y] = testeBayes(modelo, dadosTeste, conf);
     tempoTeste(i) = toc/Ntest;
-    confMatTeste(:,:,i) = confusionmat(testData.y', Y');
+    confMatTeste(:,:,i) = confusionmat(dadosTeste.y', Y');
     
     
     %% Metricas
@@ -29,15 +28,17 @@ for i = 1 : num
 end
 
 % Resultado geral
-% result.matConfTesteMedia = mean(confMatTeste, 3);
-% result.matConfPorcMedia = mean(matConfPorc,3);
-% result.metricasMedia = mean(metricas, 3);
+result.matConfTesteMedia = mean(confMatTeste, 3);
+result.matConfPorcMedia = mean(matConfPorc,3);
+result.metricasMedia = mean(metricas, 3);
 result.metricasGeralMedia = mean(metricasGeral);
 
 result.matConfTeste = confMatTeste;
 result.matConfPorc = matConfPorc;
 result.metricas = metricas;
 result.metricasGeral = metricasGeral;
+
+result.matrizesConfTeste = confMatTeste;
 
 % Procura a matriz de confusão mais próxima da acc média
 acc = metricasGeral(:,end);
@@ -49,8 +50,8 @@ result.stdAcc = std(acc);
 
 result.tempoTeste = tempoTeste;
 result.tempoTrein = tempoTrein;
-% result.tempoTesteMedio = mean(tempoTeste);
-% result.tempoTreinMedio = mean(tempoTrein);
+result.tempoTesteMedio = mean(tempoTeste);
+result.tempoTreinMedio = mean(tempoTrein);
 
 end
 
