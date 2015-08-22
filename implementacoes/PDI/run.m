@@ -6,8 +6,8 @@ close all; clear; clc; addpath('../img/');
 % img = imread('tire.tif');
 img = imread('seeds.png');
 I2=im2double(img);
-imshow(img), figure
-imhist(img), figure
+% imshow(img), figure
+% imhist(img), figure
 
 %%Negative
 % nI = 255 - I;
@@ -52,3 +52,25 @@ imhist(img), figure
 % imhist(J)
 
 % imshow(histeq2(img))
+
+
+mask1 = (1/9)*[1 1 1; 1 1 1; 1 1 1];
+
+tic
+H = conv2_2(double(img),mask1);
+toc
+
+tic
+H2 = conv2(double(img), mask1);
+toc
+
+tic
+H3 = imfilter(img, mask1);
+toc
+
+subplot(2, 2, 1)
+imshow(uint8(H))
+subplot(2, 2, 2)
+imshow(uint8(H2))
+subplot(2, 2, 3)
+imshow(uint8(H3))
