@@ -54,10 +54,10 @@ I2=im2double(img);
 % imshow(histeq2(img))
 
 
+%% Mean Filter
 mask1 = (1/9)*[1 1 1; 1 1 1; 1 1 1];
-
 tic
-H = conv2_2(double(img),mask1);
+H = imfilter2(img,mask1);
 toc
 
 tic
@@ -69,8 +69,11 @@ H3 = imfilter(img, mask1);
 toc
 
 subplot(2, 2, 1)
-imshow(uint8(H))
+imshow(H)
 subplot(2, 2, 2)
 imshow(uint8(H2))
 subplot(2, 2, 3)
-imshow(uint8(H3))
+imshow(H3)
+
+
+%% Median Filter
