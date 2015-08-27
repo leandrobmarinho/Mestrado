@@ -13,6 +13,7 @@ else
     Le = 255;
     isUint8 = true;
 end
+
 if ( exist('threshold', 'var') == 1)
     
     sizeT = length(threshold);
@@ -20,7 +21,6 @@ if ( exist('threshold', 'var') == 1)
         
         imgOut = Le*(imgIn > threshold);
     else
-%         keyboard
         
         thresholds = [Ls sort(threshold) Le];
         
@@ -45,9 +45,9 @@ else
     
     for i = 1 : 200
         
-        m1 = mean(imgIn(imgIn > threshold));       
+        m1 = mean(imgIn(imgIn > threshold));
         m2 = mean(imgIn(imgIn <= threshold));
-                
+        
         thresholds(i) = (m1 + m2)/2;
         
         if (mean(abs(diff(thresholds))) <= 0.5)
