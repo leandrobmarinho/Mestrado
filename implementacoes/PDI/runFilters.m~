@@ -117,22 +117,19 @@ I2=im2double(img);
 
 
 %% Thresholding
-imgRGB = imread('fingerprint.jpg');
-% img = rgb2hsv(imgRGB); img = img(:,:,1);
+imgRGB = imread('floresta.jpg');
+img = rgb2hsv(imgRGB); img = img(:,:,1);
 % img = rgb2gray(imgRGB);
-% img = imgRGB;
 
-[imgT, t] = thresholding(img, 125);
-%[84 124] ice - melhor rgb
+
+% imgT = thresholding(img, [49 140]);
+%[84 124] ice
 %[49 140] alemanha
-%[0.4 0.59] floresta - melhor hsv
-%125 fingerprint
 
 imshow(imgRGB),figure
 imshow(img),figure
 imhist(img)
-figure; imshow(imgT)
-
+%figure; imshow(imgT)
 
 %% Gaussian Filter
 %http://stackoverflow.com/questions/8204645/implementing-gaussian-blur-how-to-calculate-convolution-matrix-kernel

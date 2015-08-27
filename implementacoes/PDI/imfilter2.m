@@ -2,6 +2,10 @@ function [ imgOut ] = imfilter2( imgIn, kernel)
 %MEDIANFILT Summary of this function goes here
 %   Detailed explanation goes here
 
+isUint8 = false;
+if(isa(imgIn,'uint8'))
+    isUint8 = true;
+end
 imgIn = double(imgIn);
 
 [rI,cI] = size(imgIn);
@@ -21,7 +25,7 @@ for i = 1:cI
    end
 end
 
-if(isa(imgOut,'uint8'))
+if(isUint8)
     imgOut = uint8(imgOut);
 end
 

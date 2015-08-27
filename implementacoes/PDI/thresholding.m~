@@ -44,17 +44,16 @@ else
     threshold = mean(imgIn(:));
     
     for i = 1 : 200
+        imgOut = Le*(imgIn > threshold);
+        m1 = imgIn > threshold;
+        m1 = mean(m1);        
+        m2 = imgIn <= threshold;
+        m1 = mean(m2);
         
-        m1 = mean(imgIn(imgIn > threshold));       
-        m2 = mean(imgIn(imgIn <= threshold));
-                
+        
         thresholds(i) = (m1 + m2)/2;
-        
-        if (mean(abs(diff(thresholds))) <= 0.5)
-            break;
-        end
     end
-    imgOut = Le*(imgIn > threshold);
+    
 end
 
 if(isUint8)
