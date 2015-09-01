@@ -4,7 +4,7 @@ close all; clear all; clc; addpath('..');
 %% Pré-processamento
 conf.pca = 0.98;
 conf.selecaoAtr = 0.1;
-dataset = carregaDados('har', 1, conf);
+dataset = carregaDados('iris2D.data', 4);
 
 
 %% Configurações gerais

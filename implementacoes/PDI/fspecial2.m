@@ -1,7 +1,7 @@
 function [ kernel ] = fspecial2( kernelName, kernelSize, sigma, varargin )
 %FSPECIAL2 Summary of this function goes here
 %   name 
-%       mean
+%       average
 %       gaussian
 %       laplacian1 [0 1 0; 1 -4 1; 0 1 0]
 %       laplacian2 [1 1 1; 1 -8 1; 1 1 1]
@@ -26,7 +26,7 @@ end
 %% Median Kernel
 
 switch kernelName
-    case 'mean'
+    case 'average'
         kernel = ones(rK, cK);
         kernel = (1/sum(sum(kernel)))*kernel;
         

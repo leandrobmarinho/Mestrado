@@ -10,7 +10,7 @@ I2=im2double(img);
 %% Mean Filter
 % % img = [2 2 2 3; 2 1 3 3; 2 2 1 2; 1 3 2 2]; img = uint8(img);
 %
-% mask = fspecial2('mean', 3);
+% mask = fspecial2('average', 3);
 % tic
 % H = imfilter2(img,mask);
 % toc

@@ -4,6 +4,7 @@ function [ results ] = perceptron( dados, ptrn, numRepet, config )
 
 for i = 1 : numRepet,
     %% Embaralhando os dados
+    keyboard
     [trainData, testData] = embaralhaDados(dados, ptrn, 2);
     
     %% Treinamento o Perceptron

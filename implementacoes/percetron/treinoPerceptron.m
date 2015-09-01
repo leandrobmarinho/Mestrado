@@ -27,6 +27,9 @@ while (erro == true) && (epoca < conf.epocas)
         end
     end
     epoca = epoca + 1;
+    
+    ind = randperm(lin);
+    X_train = X_train(ind,:);
 end
 
 modelo.W = W;
