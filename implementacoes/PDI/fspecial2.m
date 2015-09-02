@@ -49,6 +49,12 @@ switch kernelName
         
     case 'sobel'
         kernel = [1 2 1; 0 0 0; -1 -2 -1];
+        
+    case 'sobelD1'
+        kernel = [0 1 2; -1 0 1; -2 -1 0];
+        
+    case 'sobelD2'
+        kernel = [-2 -1 0; -1 0 1; 0 1 2];
 end
 
 end
