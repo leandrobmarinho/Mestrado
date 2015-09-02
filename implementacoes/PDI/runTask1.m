@@ -1,16 +1,6 @@
 
 close all; clear; clc; addpath('../img/');
 
-% coins
-% hubble
-% bandeiras
-% letras
-% quadrinhos
-% lenna
-% girafa
-% moedas
-% - 'replicate' or 0
-
 
 %% ------------------------ LOW PASS FILTERS ------------------------
 %% Average Filter
