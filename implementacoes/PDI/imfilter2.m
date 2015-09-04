@@ -11,7 +11,7 @@ imgIn = double(imgIn);
 [rI,cI] = size(imgIn);
 [rK,cK] = size(kernel);
 
-
+% keyboard
 c = [zeros(floor(cK/2), cI); imgIn; zeros(floor(cK/2), cI)];
 c = [zeros(rI+rK-1, floor(rK/2)) c zeros(rI+rK-1, floor(rK/2))];
 

@@ -144,7 +144,7 @@ close all; clear; clc; addpath('../img/');
 
 %% Filtro Gaussiano
 % Several sigma and kernel size
-img = imread('cameraman.tif');
+% img = imread('cameraman.tif');
 
 % imshow(img), figure;
 % i = 1;
@@ -229,36 +229,45 @@ img = imread('cameraman.tif');
 %% ------------------------ HIGH PASS FILTERS ------------------------
 %% Laplaciano
 % Difference between two kernels to image enhancement
-% img = imread('license-plate3.png');
+% img = imread('house3.png'); 
+% img = rgb2gray(img);
+% 
 % img = double(img);
-%
+% 
 % m = fspecial2('laplacian1');
 % imgF = imfilter2(img, m);
 % imgFN = imgNormalize(imgF);
 % imgL = img - imgF;
-%
+% 
 % m = fspecial2('laplacian2');
 % imgF2 = imfilter2(img, m);
 % imgFN2 = imgNormalize(imgF2);
 % imgL2 = img - imgF2;
-%
-% subplot(2,2,1), imshow(uint8(img))
-% subplot(2,2,2), imshow(uint8(imgF2))
-% subplot(2,2,3), imshow(uint8(imgL))
-% subplot(2,2,4), imshow(uint8(imgL2))
+% 
+% % subplot(2,2,1), imshow(uint8(img))
+% % subplot(2,2,2), imshow(uint8(imgF2))
+% % subplot(2,2,3), imshow(uint8(imgL))
+% % subplot(2,2,4), imshow(uint8(imgL2))
+% 
+% imshow(uint8(imgF2)); print('laplacian_filter','-depsc')
+% imshow(uint8(imgL)); print('laplacian1','-depsc')
+% imshow(uint8(imgL2)); print('laplacian2','-depsc')
+
 
 
 % Laplacian Filter several times in the same image
 % img = imread('lenna-blurred.png');
 % img = double(img);
-%
+% 
 % imshow(uint8(img))
 % m = fspecial2('laplacian2');
 % for i = 1 : 3
 %     imgF = imfilter2(img, m);
 %     img = img - imgF;
-%
-%     figure, imshow(uint8(img));
+% 
+% %     figure, imshow(uint8(img));
+%     imshow(uint8(img));
+%     print(sprintf('laplacian_times_%d', i),'-depsc')
 % end
 
 
@@ -268,23 +277,31 @@ img = imread('cameraman.tif');
 % img = imread('house.jpg');
 % img = rgb2gray(img);
 % img = double(img);
-%
+% 
 % m = fspecial2('prewitt');
 % bx = imfilter2(img, m);
 % m = m';
 % by = imfilter2(img, m);
-% b = sqrt(bx.^2 + by.^2);
-%
+% % b = sqrt(bx.^2 + by.^2);
+% b = abs(bx) + abs(by);
+
 % subplot(2,2,1), imshow(uint8(img))
 % subplot(2,2,2), imshow(uint8(bx))
 % subplot(2,2,3), imshow(uint8(by))
 % subplot(2,2,4), imshow(uint8(b))
 
+% imshow(uint8(img)); imwrite(uint8(img), 'house.png')
+% imshow(uint8(bx)); print('prewitt_x','-depsc')
+% imshow(uint8(by)); print('prewitt_y','-depsc')
+% imshow(uint8(b)); print('prewitt_all','-depsc')
+
+
+
 % Two way to compute the magnitude
 % img = imread('house.jpg');
 % img = rgb2gray(img);
 % img = double(img);
-%
+% 
 % m = fspecial2('prewitt');
 % bx = imfilter2(img, m);
 % m = m';
@@ -295,24 +312,35 @@ img = imread('cameraman.tif');
 % tic
 % b2 = abs(bx) + abs(by);
 % t2 = toc;
-%
+
 % subplot(1,2,1), imshow(uint8(b1))
 % subplot(1,2,2), imshow(uint8(b2))
+% figure, imhist2(uint8(b1));
+% figure, imhist2(uint8(b2));
+
+% imshow(uint8(b1)); print('prewitt_comp1','-depsc')
+% imshow(uint8(b2)); print('prewitt_comp2','-depsc')
+% imhist2(uint8(b1)); colormap('lines'); print('prewitt_comp_hist1','-depsc')
+% imhist2(uint8(b2)); colormap('lines'); print('prewitt_comp_hist2','-depsc')
+
 
 
 % Prewitt several times in the same image
 % img = imread('house2.jpg');
 % img = rgb2gray(img);
 % img = double(img);
-%
+% 
+% imwrite(uint8(img), 'house2.png')
 % for i = 1 : 5
-%     m = fspecial2('prewitt');
-%     bx = imfilter2(img, m);
+%     m = fspecial('prewitt');
+%     bx = imfilter(img, m);
 %     m = m';
-%     by = imfilter2(img, m);
+%     by = imfilter(img, m);
 %     img = abs(bx) + abs(by);
-%
+% 
 %     figure, imshow(uint8(img))
+% %     imshow(uint8(img))
+% %     print(sprintf('prewitt_times_%d', i),'-depsc')
 % end
 
 
@@ -321,31 +349,39 @@ img = imread('cameraman.tif');
 % img = imread('house.jpg');
 % img = rgb2gray(img);
 % img = double(img);
-%
+% 
 % m = fspecial2('sobel');
 % bx = imfilter2(img, m);
 % m = m';
 % by = imfilter2(img, m);
 % b = sqrt(bx.^2 + by.^2);
-%
-% subplot(2,2,1), imshow(uint8(img))
-% subplot(2,2,2), imshow(uint8(bx))
-% subplot(2,2,3), imshow(uint8(by))
-% subplot(2,2,4), imshow(uint8(b))
+% % 
+% % subplot(2,2,1), imshow(uint8(img))
+% % subplot(2,2,2), imshow(uint8(bx))
+% % subplot(2,2,3), imshow(uint8(by))
+% % subplot(2,2,4), imshow(uint8(b))
+% 
+% imshow(uint8(img)); imwrite(uint8(img), 'house.png')
+% imshow(uint8(bx)); print('sobel_x','-depsc')
+% imshow(uint8(by)); print('sobel_y','-depsc')
+% imshow(uint8(b)); print('sobel_all','-depsc')
 
 
 % Borders in 45º
 % img = imread('house.jpg');
 % img = rgb2gray(img);
 % img = double(img);
-%
+% 
 % m = fspecial2('sobelD1');
 % d1 = imfilter2(img, m);
 % m = fspecial2('sobelD2');
 % d2 = imfilter2(img, m);
-%
+
 % subplot(1,2,1), imshow(uint8(d1))
 % subplot(1,2,2), imshow(uint8(d2))
+% imshow(uint8(d1)); print('sobel_d1','-depsc')
+% imshow(uint8(d2)); print('sobel_d2','-depsc')
+
 
 
 % Filtro da Média antes de detectar borda
@@ -354,20 +390,25 @@ img = imread('cameraman.tif');
 % mask = fspecial2('average', 5);
 % img = imfilter2(img, mask);
 % img = double(img);
-%
+% 
 % m = fspecial2('sobel');
 % bx = imfilter2(img, m);
 % m = m';
 % by = imfilter2(img, m);
 % b = sqrt(bx.^2 + by.^2);
-%
-% subplot(2,2,1), imshow(uint8(img))
-% subplot(2,2,2), imshow(uint8(bx))
-% subplot(2,2,3), imshow(uint8(by))
-% subplot(2,2,4), imshow(uint8(b))
+% 
+% % subplot(2,2,1), imshow(uint8(img))
+% % subplot(2,2,2), imshow(uint8(bx))
+% % subplot(2,2,3), imshow(uint8(by))
+% % subplot(2,2,4), imshow(uint8(b))
+% 
+% imshow(uint8(img)); print('sobel_average_house','-depsc')
+% imshow(uint8(bx)); print('sobel_average_bx','-depsc')
+% imshow(uint8(by)); print('sobel_average_by','-depsc')
+% imshow(uint8(b)); print('sobel_average_b','-depsc')
 
 
-% Sobel with thresholding
+% Sobel with thresholding and average
 % img = imread('house.jpg');
 % img = rgb2gray(img);
 % mask = fspecial2('average', 5);
@@ -375,7 +416,7 @@ img = imread('cameraman.tif');
 % imgF = double(imgF);
 % img = double(img);
 % t = 120;
-%
+% 
 % m = fspecial2('sobel');
 % bx = imfilter2(img, m);
 % m = m';
@@ -383,7 +424,7 @@ img = imread('cameraman.tif');
 % b = abs(bx) + abs(by);
 % b = uint8(b);
 % b1 = thresholding(b, t);
-%
+% 
 % m = fspecial2('sobel');
 % bx = imfilter2(imgF, m);
 % m = m';
@@ -391,47 +432,61 @@ img = imread('cameraman.tif');
 % b = abs(bx) + abs(by);
 % b = uint8(b);
 % b2 = thresholding(b, t);
-%
-% subplot(1,2,1), imshow(uint8(b1))
-% subplot(1,2,2), imshow(uint8(b2))
+% 
+% % subplot(1,2,1), imshow(uint8(b1))
+% % subplot(1,2,2), imshow(uint8(b2))
+% imshow(uint8(b1)); print('sobel_limiarizacao1','-depsc')
+% imshow(uint8(b2)); print('sobel_limiarizacao2','-depsc')
 
 
 
 % Laplacian X Prewitt X Sobel
 % img = imread('circuit.tif');
 % img = double(img);
-%
+% 
 % m = fspecial2('laplacian2');
 % imgF = imfilter2(img, m);
 % l = img - imgF;
-%
+% 
 % m = fspecial2('prewitt');
 % bx = imfilter2(img, m);
 % m = m';
 % by = imfilter2(img, m);
 % p = abs(bx) + abs(by);
-%
+% 
 % m = fspecial2('sobel');
 % bx = imfilter2(img, m);
 % m = m';
 % by = imfilter2(img, m);
 % s = abs(bx) + abs(by);
-%
-% subplot(2, 2, 1), imshow(uint8(imgF))
-% subplot(2, 2, 2), imshow(uint8(p))
-% subplot(2, 2, 3), imshow(uint8(s))
-% subplot(2, 2, 4), imshow(uint8(img))
+% 
+% % subplot(2, 2, 1), imshow(uint8(imgF))
+% % subplot(2, 2, 2), imshow(uint8(p))
+% % subplot(2, 2, 3), imshow(uint8(s))
+% % subplot(2, 2, 4), imshow(uint8(img))
+% 
+% imshow(uint8(imgF)); print('comp_laplacian','-depsc')
+% imshow(uint8(p)); print('comp_prewitt','-depsc')
+% imshow(uint8(s)); print('comp_sobel','-depsc')
+% imwrite(uint8(img), 'comp_original_circuito.png')
 
 
 
 %% Border pixels
 % I = imread('texto_quadrinho3.jpg');
+% I = rgb2gray(I);
 % imshow(I)
 % mask = fspecial2('average', 9);
 % J = imfilter2(I, mask);
 % figure, imshow(J)
-% K = imfilter2(I, mask, 'replicate');
+% K = imfilter(I, mask, 'replicate');
 % figure, imshow(K)
+% 
+% imwrite(uint8(I), 'texto_quadrinho.png')
+% imshow(J); print('average_0','-depsc')
+% imshow(K); print('average_replicate','-depsc')
+
+
 
 
 %% ------------------------ HISTOGRAM ------------------------

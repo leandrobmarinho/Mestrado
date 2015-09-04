@@ -22,10 +22,10 @@ figure(2);bar(X)                   % histogram
 % options.semantic = 0;              % classic LBP
 % options.samples  = 8;              % number of neighbor samples
 % options.mappingtype = 'ri';        % rotation-invariant LBP
-% I = imread('../img/casa.jpg');     % input image
-% J = I(:,:,2);
-% figure(1);imshow(J,[])             % image to be analyzed
-% [X,Xn] = lbp(J,[],options);    % LBP features
+% % I = imread('../img/casa.jpg');     % input image
+% % J = I(:,:,2);
+% figure(1);imshow(imageGray,[])             % image to be analyzed
+% [X,Xn] = lbp(imageGray,[],options);    % LBP features
 % bar(X)                             % histogram
 
 %%
