@@ -7,13 +7,18 @@ if (~isa(img, 'uint8'))
 end
 
 range = 0:255;
+y = zeros(1, length(range));
 for i = range
 
-    histogram(i+1) = sum(sum(img == i));
+    y(i+1) = sum(sum(img == i));
 end
 
+if (nargout == 0)
+    bar(range,y, 0.4);
+    axis([0 length(y)-1 0 max(y)]);
+    set(gca,'XTick', 0:50:length(y)-1);   
+else
+    histogram = y;
+end
 
-bar(range,histogram, 0.4);
-axis([0 length(histogram)-1 0 max(histogram)]);
-set(gca,'XTick', 0:50:length(histogram)-1);
 

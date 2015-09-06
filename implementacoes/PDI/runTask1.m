@@ -71,6 +71,23 @@ close all; clear; clc; addpath('../img/');
 % imhist2(imgF2), colormap('lines')
 % print('average_weighted_hist','-depsc')
 
+% Average with thresholding (count words)
+% img = imread('texto_quadrinho3.jpg');
+% img = rgb2gray(img);
+% 
+% mask = fspecial2('average', 9);
+% imgF = imfilter(img,mask, 'replicate');
+% imgT = thresholding(imgF, 200);
+% 
+% [labelComp totalComp] = bwlabel(imgT);
+% figure, imshow(img)
+% figure, imshow(imgF)
+% figure, imshow(imgT)
+% 
+% % imwrite(img, 'texto_quadrinho3.png')
+% % imwrite(imgF, 'text_average.png')
+% % imwrite(imgT, 'text_average_thresholding.png')
+
 
 %% Median Filter
 % Median and Average Filter (noise salt and pepper)
@@ -493,13 +510,24 @@ close all; clear; clc; addpath('../img/');
 %% Histogram Equalization
 % img = imread('tire.tif');
 % imgEq = histeq2(img);
-% figure,imshow([img imgEq])
-% figure,histeq2(imgEq);
-
+% % figure,imshow([img imgEq]);
+% % figure,imhist2(img);
+% % figure,imhist2(imgEq);
+% imshow(img); print('tire','-depsc')
+% imshow(imgEq); print('tire_eq','-depsc'); colormap('lines')
+% imhist2(img); print('tire_hist','-depsc'); colormap('lines')
+% imhist2(imgEq); print('tire_hist_eq','-depsc')
+% 
+% 
 % img = imread('pout.tif');
 % imgEq = histeq2(img);
-% figure,imshow([img imgEq])
-% figure,histeq2(imgEq);
+% % figure,imshow([img imgEq])
+% % figure,imhist2(img);
+% % figure,imhist2(imgEq);
+% imshow(img); print('pout','-depsc')
+% imshow(imgEq); print('pout_eq','-depsc'); colormap('lines')
+% imhist2(img); print('pout_hist','-depsc'); colormap('lines')
+% imhist2(imgEq); print('pout_hist_eq','-depsc')
 
 
 
@@ -507,54 +535,105 @@ close all; clear; clc; addpath('../img/');
 %% Limiarização
 % Single Threshold
 % img = imread('fingerprint.jpg');
-%
-% imshow(img),figure
-% imhist2(img), figure
+% 
+% % imshow(img),figure
+% % imhist2(img), figure
+% imhist2(img), colormap('lines')
+% print('fingerprint_hist','-depsc')
+% 
 % j = 1;
-% for t = [60 80 140 175 180 190]
-%
+% for t = [50 60 140 175 180 190]
+% 
 %     imgT = thresholding(img, t);
-%     subplot(2,3,j), imshow(imgT)
+% %     subplot(2,3,j), imshow(imgT)
+%     imshow(imgT)
+%     print(sprintf('limiarizacao_digital_%d', t),'-depsc')
+%     
 %     j = j +1;
 % end
+% [imgTA, t] = thresholding(img);
+% 
+% imwrite(img, 'fingerprint.png')
+
+
+%% Average before Thresholding to remove noise
+% img = imread('threshold_noise.png');
+% img = rgb2gray(img);
+% imhist2(img); print('limiarizacao_noise_hist','-depsc')
+% figure, imshow(img)
+% 
+% mask = fspecial2('average', 5);
+% imgF = imfilter(img,mask,'replicate');
+% figure, imhist2(imgF); print('limiarizacao_noise_average_hist','-depsc')
+% figure, imshow(imgF); 
+% 
+% [imgT1, t1] = thresholding(img);
+% [imgT2, t2] = thresholding(imgF);
+% 
+% figure, imshow(imgT1); print('limiarizacao_noise','-depsc')
+% figure, imshow(imgT2); print('limiarizacao_average_noise','-depsc')
+% 
+% imwrite(imgF, 'threshold_noise_average.png');
+
 
 
 %% Multi-threshold
+% img = imread('rocha2.jpg');
+% img = rgb2gray(img);
+% figure, imshow(img)
+% figure, imhist2(img)
+% imgT = thresholding(img, [84 189]);
+% figure, imshow(imgT)
+% 
+% imwrite(img, 'rocha.png')
+% set(gca,'FontSize',20)
+% imhist2(img); colormap('lines'); print('rocha_hist','-depsc')
+% imshow(imgT); colormap('lines'); print('rocha_limiarizada','-depsc')
+
+
 % img = imread('ice.jpg');
 % img = rgb2gray(img);
-%
-% imgT = thresholding(img, [84 124]);
-%
+% 
+% imgT = thresholding(img, [87 122]);
+% 
 % imshow(img),figure
 % imhist2(img), figure
 % imshow(imgT)
+
+
+
+% img = imread('reggae.jpg');
+% img = rgb2gray(img);
+% 
+% imgT = thresholding(img, [68 113 174]);
+% 
+% imhist(img)
+% figure, imshow(img)
+% figure, imshow(imgT)
+
+
+
 
 
 % imgRGB = imread('floresta.jpg');
 % imgHSV = rgb2hsv(imgRGB);
 % imgHSV = imgHSV(:,:,1);
 % imgGray = rgb2gray(imgRGB);
-%
+% 
 % imgT1 = thresholding(imgHSV, [0.4 0.59]);
 % imgT2 = thresholding(imgGray, [54 133]);
-%
+% 
 % imshow(imgHSV),figure
 % imhist(imgHSV), figure
 % imshow(imgGray),figure
 % imhist2(imgGray),figure
 % imshow(imgT1), figure
 % imshow(imgT2)
-
-
-% Average with thresholding
-% img = imread('texto_quadrinho3.jpg');
-% img = rgb2gray(img);
-%
-% mask = fspecial2('average', 9);
-% imgF = imfilter2(img,mask, 'replicate');
-% imgT = thresholding(imgF, 200);
-%
-% [labelComp totalComp] = bwlabel(imgT);
-% imshow(img), figure, imshow(imgT)
-
+% 
+% set(gca,'FontSize',20)
+% imwrite(imgGray, 'floresta_gray.png')
+% imhist2(imgGray); colormap('lines'); print('floresta_gray_hist','-depsc')
+% imwrite(imgHSV, 'floresta_hsv.png')
+% imhist(imgHSV); colormap('lines'); print('floresta_hsv_hist','-depsc')
+% imshow(imgT1); colormap('lines'); print('floresta_segmentada','-depsc')
 
