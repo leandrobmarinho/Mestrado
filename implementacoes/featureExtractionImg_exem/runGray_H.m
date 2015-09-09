@@ -1,6 +1,6 @@
 clear all; close all; clc;
 addpath('../percetron/'); addpath('../MLM/'); addpath('../MLP/');
-addpath('../multisvm/'); addpath('../bayes/');
+addpath('../multisvm/'); addpath('../bayes/'); addpath('../');
 
 %% Load data and Pre-processing
 load('../dados/haralick_hu_lbp_mide - Gray_H.mat');
