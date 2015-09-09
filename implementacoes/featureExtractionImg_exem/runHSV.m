@@ -5,7 +5,7 @@ addpath('../multisvm/'); addpath('../bayes/');
 %% Load data and Pre-processing
 load('../dados/haralick_hu_lbp_mide - HSV.mat');
 dataMide.x = mide(:,1:end-1);
-dataMide.y = mide(:,1:end);
+dataMide.y = mide(:, end);
 % 
 % dataLBP.x = lbp(:,1:end-1);
 % dataLBP.y = lbp(:,end);
