@@ -47,7 +47,7 @@ I2=im2double(img);
 %% Laplacian
 % m = fspecial2('laplacian2');
 % f1 = imfilter2(img, m);
-% r = img-f1;
+% r = img+f1;
 %
 % subplot(1,3,1);
 % imshow(img);

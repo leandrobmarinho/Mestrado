@@ -7,4 +7,4 @@ imgGray = rgb2gray(imgRGB);
 
 img = single(imgGray);
 lbp = vl_lbp(img, min(size(img))); 
-lbp = reshape(lbp,numel(lbp),1)';
+lbp = reshape(lbp, numel(lbp),1)';

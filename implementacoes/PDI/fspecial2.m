@@ -39,10 +39,10 @@ switch kernelName
         kernel = hg ./ sum(hg(:));
         
     case 'laplacian1'
-        kernel = [0 1 0; 1 -4 1; 0 1 0];
+        kernel = [0 -1 0; -1 4 -1; 0 -1 0];
         
     case 'laplacian2'
-        kernel = [1 1 1; 1 -8 1; 1 1 1];
+        kernel = [-1 -1 -1; -1 8 -1; -1 -1 -1];
         
     case 'prewitt'
         kernel = [-1 -1 -1; 0 0 0; 1 1 1];

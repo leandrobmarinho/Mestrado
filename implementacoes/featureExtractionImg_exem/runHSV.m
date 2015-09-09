@@ -3,19 +3,23 @@ addpath('../percetron/'); addpath('../MLM/'); addpath('../MLP/');
 addpath('../multisvm/'); addpath('../bayes/');
 
 %% Load data and Pre-processing
-load('../dados/haralick_hu_lbp - HSV.mat');
-dataLBP.x = lbp(:,1:end-1);
-dataLBP.y = lbp(:,end);
-
-dataHu.x = hu(:,1:end-1);
-dataHu.y = hu(:,end);
-
-dataHaralick.x = haralick(:,1:end-1);
-dataHaralick.y = haralick(:,end);
+load('../dados/haralick_hu_lbp_mide - HSV.mat');
+dataMide.x = mide(:,1:end-1);
+dataMide.y = mide(:,1:end);
+% 
+% dataLBP.x = lbp(:,1:end-1);
+% dataLBP.y = lbp(:,end);
+% 
+% dataHu.x = hu(:,1:end-1);
+% dataHu.y = hu(:,end);
+% 
+% dataHaralick.x = haralick(:,1:end-1);
+% dataHaralick.y = haralick(:,end);
 
 
 % clear all
 % dataLBP = carregaDados('iris.data', 0);
+
 
 
 %% General Configurations
@@ -24,25 +28,134 @@ numRep = 10;
 
 
 
-
-% %% Bayes
-% config.custo = 1 - eye(length(unique(dataLBP.y)));
+%% =============== Bayes ===============
+% config.custo = 1 - eye(length(unique(dataMide.y)));
 % config.algoritmo = '';
 % 
 % result = simBayes(dataHaralick, ptrn, numRep, config);
-% save(sprintf('1 - bayes_haralick'), 'result')
-% fprintf(sprintf('1 - bayes_haralick\n'))
+% save(sprintf('bayes_haralick - HSV'), 'result')
+% fprintf(sprintf('bayes_haralick\n'))
 % 
 % result = simBayes(dataHu, ptrn, numRep, config);
-% save(sprintf('2 - bayes_hu'), 'result')
-% fprintf(sprintf('2 - bayes_hu\n'))
+% save(sprintf('bayes_hu - HSV'), 'result')
+% fprintf(sprintf('bayes_hu\n'))
 % 
 % result = simBayes(dataLBP, ptrn, numRep, config);
-% save(sprintf('3 - bayes_lbp'), 'result')
-% fprintf(sprintf('3 - bayes_lbp\n'))
+% save(sprintf('bayes_lbp - HSV'), 'result')
+% fprintf(sprintf('bayes_lbp\n'))
+% 
+% result = simBayes(dataMide, ptrn, numRep, config);
+% save(sprintf('bayes_mide - HSV'), 'result')
+% fprintf(sprintf('bayes_mide\n'))
+
+
+
+%% =============== SVM ===============
+% clear config
+% 
+% config.metodo = 'SMO';
+% config.fkernel = 'linear';
+% config.options.MaxIter = 9000000;
+% 
+% paraC = 2.^(-5:2:9);
+% 
+% i = 1;
+% for c = paraC
+%     config.paraC = c;
+%     
+%     params{i} = config;
+%     i = i + 1;
+% end
+% 
+% optParam = searchParamSVM(dataHaralick, params, numRep, ptrn );
+% result = simMultiSVM( dataHaralick, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - Haralick - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - Haralick', config.fkernel)
+% 
+% optParam = searchParamSVM(dataHu, params, numRep, ptrn );
+% result = simMultiSVM( dataHu, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - Hu - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - Hu', config.fkernel)
+% 
+% optParam = searchParamSVM(dataLBP, params, numRep, ptrn );
+% result = simMultiSVM( dataLBP, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - LBP - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - LBP', config.fkernel)
+% 
+% optParam = searchParamSVM(dataMide, params, numRep, ptrn );
+% result = simMultiSVM( dataMide, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - Mide - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - Mide', config.fkernel)
 % 
 % 
-% %% LSSVM
+% clear params
+% config.fkernel = 'rbf';
+% i = 1;
+% for sigma = 2.^(-10:5)
+%     
+%     for c = paraC
+%         config.paraC = c;
+%         config.sigma = sigma;
+%         
+%         params{i} = config;
+%         i = i + 1;
+%     end
+% end
+% optParam = searchParamSVM(dataHaralick, params, numRep, ptrn );
+% result = simMultiSVM( dataHaralick, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - Haralick - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - Haralick', config.fkernel)
+% 
+% optParam = searchParamSVM(dataHu, params, numRep, ptrn );
+% result = simMultiSVM( dataHu, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - Hu - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - Hu', config.fkernel)
+% 
+% optParam = searchParamSVM(dataLBP, params, numRep, ptrn );
+% result = simMultiSVM( dataLBP, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - LBP - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - LBP', config.fkernel)
+% 
+% optParam = searchParamSVM(dataMide, params, numRep, ptrn );
+% result = simMultiSVM( dataMide, ptrn, numRep, optParam );
+% save(sprintf('SVM - %s - Mide - HSV', config.fkernel), 'result', 'config')
+% fprintf('SVM - %s - Mide', config.fkernel)
+
+
+
+
+%% =============== MLP ===============
+% clear config
+% clear params
+% 
+% params = [50 100:10:200 250 300];
+% 
+% optParam = searchTopologyMLP(dataHaralick, params, numRep, ptrn );
+% result = simMLP(dataHaralick, ptrn, numRep, optParam );
+% save('MLP - Haralick - HSV',  'result', 'optParam')
+% fprintf('MLP - Haralick')
+% 
+% optParam = searchTopologyMLP(dataHu, params, numRep, ptrn );
+% result = simMLP(dataHu, ptrn, numRep, optParam );
+% save('MLP - Hu - HSV',  'result', 'optParam')
+% fprintf('MLP - Hu')
+% 
+% optParam = searchTopologyMLP(dataLBP, params, numRep, ptrn );
+% result = simMLP(dataLBP, ptrn, numRep, optParam );
+% save('MLP - LBP - HSV',  'result', 'optParam')
+% fprintf('MLP - LBP')
+% 
+% optParam = searchTopologyMLP(dataMide, params, numRep, ptrn );
+% result = simMLP(dataMide, ptrn, numRep, optParam );
+% save('MLP - Mide - HSV',  'result', 'optParam')
+% fprintf('MLP - Mide')
+
+
+
+%% =============== LSSVM ===============
+% clear config
+% clear params
+% % =============== LSSVM - Linear ===============
 % config.metodo = 'LS';
 % config.fkernel = 'linear';
 % config.options.MaxIter = 9000000;
@@ -59,20 +172,26 @@ numRep = 10;
 % 
 % optParam = searchParamSVM(dataHaralick, params, numRep, ptrn );
 % result = simMultiSVM( dataHaralick, ptrn, numRep, optParam );
-% save(sprintf('4 - LSSVM - %s - Haralick', config.fkernel), 'result', 'config')
-% fprintf('4 - LSSVM - %s - Haralick', config.fkernel)
+% save(sprintf('LSSVM - %s - Haralick - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - Haralick', config.fkernel)
 % 
 % optParam = searchParamSVM(dataHu, params, numRep, ptrn );
 % result = simMultiSVM( dataHu, ptrn, numRep, optParam );
-% save(sprintf('5 - LSSVM - %s - Hu', config.fkernel), 'result', 'config')
-% fprintf('5 - LSSVM - %s - Hu', config.fkernel)
+% save(sprintf('LSSVM - %s - Hu - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - Hu', config.fkernel)
 % 
 % optParam = searchParamSVM(dataLBP, params, numRep, ptrn );
 % result = simMultiSVM( dataLBP, ptrn, numRep, optParam );
-% save(sprintf('6 - LSSVM - %s - LBP', config.fkernel), 'result', 'config')
-% fprintf('6 - LSSVM - %s - LBP', config.fkernel)
+% save(sprintf('LSSVM - %s - LBP - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - LBP', config.fkernel)
 % 
-% %LSSVM - RBF
+% optParam = searchParamSVM(dataMide, params, numRep, ptrn );
+% result = simMultiSVM( dataMide, ptrn, numRep, optParam );
+% save(sprintf('LSSVM - %s - Mide - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - Mide', config.fkernel)
+% 
+% 
+% % =============== LSSVM - RBF ===============
 % clear params
 % config.fkernel = 'rbf';
 % i = 1;
@@ -88,29 +207,38 @@ numRep = 10;
 % end
 % optParam = searchParamSVM(dataHaralick, params, numRep, ptrn );
 % result = simMultiSVM( dataHaralick, ptrn, numRep, optParam );
-% save(sprintf('7 - LSSVM - %s - Haralick', config.fkernel), 'result', 'config')
-% fprintf('7 - LSSVM - %s - Haralick', config.fkernel)
+% save(sprintf('LSSVM - %s - Haralick - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - Haralick', config.fkernel)
 % 
 % optParam = searchParamSVM(dataHu, params, numRep, ptrn );
 % result = simMultiSVM( dataHu, ptrn, numRep, optParam );
-% save(sprintf('8 - LSSVM - %s - Hu', config.fkernel), 'result', 'config')
-% fprintf('8 - LSSVM - %s - Hu', config.fkernel)
+% save(sprintf('LSSVM - %s - Hu - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - Hu', config.fkernel)
 % 
 % optParam = searchParamSVM(dataLBP, params, numRep, ptrn );
 % result = simMultiSVM( dataLBP, ptrn, numRep, optParam );
-% save(sprintf('9 - LSSVM - %s - LBP', config.fkernel), 'result', 'config')
-% fprintf('9 - LSSVM - %s - LBP', config.fkernel)
+% save(sprintf('LSSVM - %s - LBP - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - LBP', config.fkernel)
 % 
-% 
-% 
-% 
-% % %% MLM-NN
+% optParam = searchParamSVM(dataMide, params, numRep, ptrn );
+% result = simMultiSVM(dataMide, ptrn, numRep, optParam );
+% save(sprintf('LSSVM - %s - Mide - HSV', config.fkernel), 'result', 'config')
+% fprintf('LSSVM - %s - Mide', config.fkernel)
+
+
+
+%% =============== Perceptron ===============
+% TODO
+
+
+
+%% =============== MLM ===============
 % clear config
-% i = 10;
 % 
 % dataHaralick.y = full(ind2vec(dataHaralick.y'))';
 % dataHu.y = full(ind2vec(dataHu.y'))';
 % dataLBP.y = full(ind2vec(dataLBP.y'))';
+% dataMide.y = full(ind2vec(dataMide.y'))';
 % 
 % config.method = ''; % lsqnonlin knn ''
 % config.k = 1;
@@ -120,29 +248,34 @@ numRep = 10;
 %     config.distance = dist{1}; % mahalanobis cityblock ''
 % 
 %     result = simMLM(dataHaralick, ptrn, numRep, config);
-%     save(sprintf('%d - mlm_D-%s_%.0f', i, config.distance, config.k*100),...
+%     save(sprintf('haralick mlm_D-%s_%.0f - HSV', config.distance, config.k*100),...
 %         'result', 'config')
-%     fprintf(sprintf('%d - mlm_D-%s_%.0f', i, config.distance, config.k*100))
+%     fprintf(sprintf('haralick mlm_D-%s_%.0f', config.distance, config.k*100))
 % 
 % 
 %     result = simMLM(dataHu, ptrn, numRep, config);
-%     save(sprintf('%d - mlm_D-%s_%.0f', i+1, config.distance, config.k*100),...
+%     save(sprintf('hu mlm_D-%s_%.0f - HSV', config.distance, config.k*100),...
 %         'result', 'config')
-%     fprintf(sprintf('%d - mlm_D-%s_%.0f', i+1, config.distance, config.k*100))
+%     fprintf(sprintf('hu mlm_D-%s_%.0f', config.distance, config.k*100))
 % 
 % 
 % 
 %     result = simMLM(dataLBP, ptrn, numRep, config);
-%     save(sprintf('%d - mlm_D-%s_%.0f', i+2, config.distance, config.k*100),...
+%     save(sprintf('lbp mlm_D-%s_%.0f - HSV', config.distance, config.k*100),...
 %         'result', 'config')
-%     fprintf(sprintf('%d - mlm_D-%s_%.0f', i+2, config.distance, config.k*100))
+%     fprintf(sprintf('lbp mlm_D-%s_%.0f', config.distance, config.k*100))
 % 
 % 
-%     i = i + 3;
+%     result = simMLM(dataMide, ptrn, numRep, config);
+%     save(sprintf('mide mlm_D-%s_%.0f - HSV', config.distance, config.k*100),...
+%         'result', 'config')
+%     fprintf(sprintf('mide mlm_D-%s_%.0f', config.distance, config.k*100))
+% 
 % end
-% 
-% 
-% %% MLM-NN
+
+
+
+%% =============== MLM-NN ===============
 % clear config
 % 
 % config.method = 'knn'; % lsqnonlin knn ''
@@ -154,110 +287,32 @@ numRep = 10;
 %     config.distance = dist{1}; % mahalanobis cityblock ''
 % 
 %     result = simMLM(dataHaralick, ptrn, numRep, config);
-%     save(sprintf('%d - mlm_%s_%d_D-%s_%.0f', i, config.method, config.NN,...
+%     save(sprintf('haralick - mlm_%s_%d_D-%s_%.0f - HSV', config.method, config.NN,...
 %         config.distance, config.k*100), 'result', 'config')
-%     fprintf(sprintf('%d - mlm_%s_%d_D-%s_%.0f\n', i, config.method, config.NN,...
+%     fprintf(sprintf('haralick - mlm_%s_%d_D-%s_%.0f\n', config.method, config.NN,...
 %         config.distance, config.k*100))
 % 
 % 
 %     result = simMLM(dataHu, ptrn, numRep, config);
-%     save(sprintf('%d - mlm_%s_%d_D-%s_%.0f', i+1, config.method, config.NN,...
+%     save(sprintf('hu - mlm_%s_%d_D-%s_%.0f - HSV', config.method, config.NN,...
 %         config.distance, config.k*100), 'result', 'config')
-%     fprintf(sprintf('%d - mlm_%s_%d_D-%s_%.0f\n', i, config.method, config.NN,...
+%     fprintf(sprintf('hu - mlm_%s_%d_D-%s_%.0f\n', config.method, config.NN,...
 %         config.distance, config.k*100))
 % 
 % 
 %     result = simMLM(dataLBP, ptrn, numRep, config);
-%     save(sprintf('%d - mlm_%s_%d_D-%s_%.0f', i+2, config.method, config.NN,...
+%     save(sprintf('lbp - mlm_%s_%d_D-%s_%.0f - HSV', config.method, config.NN,...
 %         config.distance, config.k*100), 'result', 'config')
-%     fprintf(sprintf('%d - mlm_%s_%d_D-%s_%.0f\n', i, config.method, config.NN,...
+%     fprintf(sprintf('lbp - mlm_%s_%d_D-%s_%.0f\n', config.method, config.NN,...
 %         config.distance, config.k*100))
 % 
-%     i = i + 3;
+% 
+%     result = simMLM(dataMide, ptrn, numRep, config);
+%     save(sprintf('mide - mlm_%s_%d_D-%s_%.0f - HSV', config.method, config.NN,...
+%         config.distance, config.k*100), 'result', 'config')
+%     fprintf(sprintf('mide - mlm_%s_%d_D-%s_%.0f\n', config.method, config.NN,...
+%         config.distance, config.k*100))
+% 
 % end
-% 
-% 
-% %% MLP
-% clear config
-% params = [50 100:10:200 250 300];
-% 
-% optParam = searchTopologyMLP(dataHaralick, params, numRep, ptrn );
-% result = simMLP(dataHaralick, ptrn, numRep, optParam );
-% save('28 - MLP - Haralick',  'result', 'optParam')
-% fprintf('28 - MLP - Haralick')
-% 
-% optParam = searchTopologyMLP(dataHu, params, numRep, ptrn );
-% result = simMLP(dataHu, ptrn, numRep, optParam );
-% save('29 - MLP - Hu',  'result', 'optParam')
-% fprintf('29 - MLP - Hu')
-% 
-% optParam = searchTopologyMLP(dataLBP, params, numRep, ptrn );
-% result = simMLP(dataLBP, ptrn, numRep, optParam );
-% save('30 - MLP - LBP',  'result', 'optParam')
-% fprintf('30 - MLP - LBP')
-% 
-% 
-% %% SVM
-% clear config
-% dataHaralick.y = vec2ind(dataHaralick.y')';
-% dataHu.y = vec2ind(dataHu.y')';
-% dataLBP.y = vec2ind(dataLBP.y')';
 
 
-config.metodo = 'SMO';
-config.fkernel = 'linear';
-config.options.MaxIter = 9000000;
-
-paraC = 2.^(-5:2:9);
-paraC = [2 4];
-
-i = 1;
-for c = paraC
-    config.paraC = c;
-    
-    params{i} = config;
-    i = i + 1;
-end
-
-optParam = searchParamSVM(dataHaralick, params, numRep, ptrn );
-result = simMultiSVM( dataHaralick, ptrn, numRep, optParam );
-save(sprintf('31 - SVM - %s - Haralick', config.fkernel), 'result', 'config')
-fprintf('31 - SVM - %s - Haralick', config.fkernel)
-
-optParam = searchParamSVM(dataHu, params, numRep, ptrn );
-result = simMultiSVM( dataHu, ptrn, numRep, optParam );
-save(sprintf('32 - SVM - %s - Hu', config.fkernel), 'result', 'config')
-fprintf('32 - SVM - %s - Hu', config.fkernel)
-
-optParam = searchParamSVM(dataLBP, params, numRep, ptrn );
-result = simMultiSVM( dataLBP, ptrn, numRep, optParam );
-save(sprintf('33 - LSSVM - %s - LBP', config.fkernel), 'result', 'config')
-fprintf('33 - SVM - %s - LBP', config.fkernel)
-
-clear params
-config.fkernel = 'rbf';
-i = 1;
-for sigma = 2.^(-10:5)
-    
-    for c = paraC
-        config.paraC = c;
-        config.sigma = sigma;
-        
-        params{i} = config;
-        i = i + 1;
-    end
-end
-optParam = searchParamSVM(dataHaralick, params, numRep, ptrn );
-result = simMultiSVM( dataHaralick, ptrn, numRep, optParam );
-save(sprintf('34 - SVM - %s - Haralick', config.fkernel), 'result', 'config')
-fprintf('34 - SVM - %s - Haralick', config.fkernel)
-
-optParam = searchParamSVM(dataHu, params, numRep, ptrn );
-result = simMultiSVM( dataHu, ptrn, numRep, optParam );
-save(sprintf('35 - SVM - %s - Hu', config.fkernel), 'result', 'config')
-fprintf('35 - SVM - %s - Hu', config.fkernel)
-
-optParam = searchParamSVM(dataLBP, params, numRep, ptrn );
-result = simMultiSVM( dataLBP, ptrn, numRep, optParam );
-save(sprintf('36 - SVM - %s - LBP', config.fkernel), 'result', 'config')
-fprintf('36 - SVM - %s - LBP', config.fkernel)

@@ -1,6 +1,6 @@
 clear all; close all; clc;
 addpath('../LBP/'); addpath('../haralick/'); addpath('../hu_moments/');
-
+addpath('../../../../Dropbox/Mestrado/Feature Extraction Image/mide_v1/')
 
 folder = '/Users/leandrobm/Documents/robohomegopro/';
 files = dir(sprintf('%s*.JPG', folder));
@@ -19,44 +19,56 @@ optionsLBP.mappingtype = 'u2';        % uniform LBP
 % Hu Moments
 
 i = 1;
-dataLBP = []; dataHu = []; dataHaralick = [];
-for i = 1:40:600
+dataLBP = []; dataHu = []; dataHaralick = []; dataMide = [];
+for i = 1:600
     %% Load the image
-    imageRGB = imread(sprintf('%s%s', folder, files(i).name));
-    
-    imageHSV = rgb2hsv(imageRGB);
-    imageHSV = imageHSV(:,:,1);
-    
+    imageRGB = imread(sprintf('%s%s', folder, files(i).name));    
+%     imageHSV = rgb2hsv(imageRGB);
+%     imageHSV = imageHSV(:,:,1);    
     imageGray = rgb2gray(imageRGB);
+    
+    numClass = str2double(files(i).name(2:3));
+    img = imageGray;
+    
+    %% Mide
+    tic
+    I2 = edge(img, 'sobel');
+    
+    [M,~] = mide(img, I2);    
+    stats = mideprops(M, 'all');
+    timeMide(i) = toc;
+    X = struct2array(stats);
+    
+    dataMide = [dataMide; [X numClass] ];
     
     
     %% Haralick Texture
     fprintf('Haralick Texture - %s\n', files(i).name);
     
     tic
-    GLCM2 = graycomatrix(imageGray); %graycomatrix(I,'Offset',[2 0;0 2]); 
+    GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
     stats = GLCM_Features1(GLCM2,0);
     timeHaralick(i) = toc;
     X = struct2array(stats);
 
-    dataHaralick = [dataHaralick; [X str2num(files(i).name(2:3))] ];
+    dataHaralick = [dataHaralick; [X numClass] ];
 
     
     %% Local Binary Pattern
     fprintf('Local Binary Pattern - %s\n', files(i).name);
     tic
-    [X, ~] = lbp(imageGray,[],optionsLBP);
+    [X, ~] = lbp(img,[],optionsLBP);
     timeLBP(i) = toc;
-    dataLBP = [dataLBP; [X str2num(files(i).name(2:3))] ];
+    dataLBP = [dataLBP; [X numClass] ];
     
     %% Hu Moments
     fprintf('Hu Moments - %s\n\n', files(i).name);
     tic
-    X = invmoments(imageGray);
+    X = invmoments(img);
     timeHu(i) = toc;
 %     [X,~] = hugeo(imageRGB);
     
-    dataHu = [dataHu; [X str2num(files(i).name(2:3))] ];
+    dataHu = [dataHu; [X numClass] ];
     
-%     save('haralickHSV')
+    save('result_simulado')
 end

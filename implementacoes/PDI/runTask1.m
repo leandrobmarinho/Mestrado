@@ -244,7 +244,7 @@ close all; clear; clc; addpath('../img/');
 
 
 %% ------------------------ HIGH PASS FILTERS ------------------------
-%% Laplaciano
+%% Laplacian
 % Difference between two kernels to image enhancement
 % img = imread('house3.png'); 
 % img = rgb2gray(img);
@@ -254,12 +254,12 @@ close all; clear; clc; addpath('../img/');
 % m = fspecial2('laplacian1');
 % imgF = imfilter2(img, m);
 % imgFN = imgNormalize(imgF);
-% imgL = img - imgF;
+% imgL = img + imgF;
 % 
 % m = fspecial2('laplacian2');
 % imgF2 = imfilter2(img, m);
 % imgFN2 = imgNormalize(imgF2);
-% imgL2 = img - imgF2;
+% imgL2 = img + imgF2;
 % 
 % % subplot(2,2,1), imshow(uint8(img))
 % % subplot(2,2,2), imshow(uint8(imgF2))
@@ -463,7 +463,7 @@ close all; clear; clc; addpath('../img/');
 % 
 % m = fspecial2('laplacian2');
 % imgF = imfilter2(img, m);
-% l = img - imgF;
+% l = img + imgF;
 % 
 % m = fspecial2('prewitt');
 % bx = imfilter2(img, m);
