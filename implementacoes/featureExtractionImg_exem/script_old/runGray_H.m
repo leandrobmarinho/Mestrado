@@ -49,7 +49,6 @@ save(sprintf('bayes_mide - Gray_H'), 'result')
 fprintf(sprintf('bayes_mide\n'))
 
 
-
 %% =============== SVM ===============
 clear config
 

@@ -1,95 +1,79 @@
 clear all; close all; clc;
-addpath('../percetron/'); addpath('../MLM/'); addpath('../SVM/');
-addpath('../multisvm/');
+addpath('../percetron/'); addpath('../MLM/'); addpath('../MLP/');
+addpath('../multisvm/'); addpath('../bayes/'); addpath('../');
 
-%% Load data and Pre-processing
-load('../dados/feature_extraction_imgs.mat');
-data.x = lbp(:,1:end-1);
-y = lbp(:,end);
-
-labels = unique(y);
-code = zeros(length(labels), length(labels));
-for j = 1: length(labels),
-    code(j, j) = 1;
-end
-
-for j = length(labels):-1:1,
-    ind = (y == labels(j));
-    tam = length(find(ind==1));
-    data.y(ind, :) = repmat(code(j, :), tam, 1);
-end
-clear y;
-
-% clear all
-% data = carregaDados('iris.data', 0);
-
-
-%% General Configurations
-ptrn = 0.8;
-numRep = 2;
-numFolds = 2;
-
-%% Perceptron
-conf.epocas = 100;
-i = 1;
-for alfa = [0.1 0.01]
-    conf.alfa = alfa;
-    
-    params{i} = conf;
-    i = i + 1;
-end
-
-resPerceptron = perceptronSim(data, ptrn, numRep, params, numFolds);
+%% General configurations
+conf.mlMethods = {'bayes', 'svm', 'mlp'};
+% {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 
 
 
-%% MLM
-% config.method = 'knn'; % lsqnonlin knn ''
-% for dist = {'mahalanobis', 'cityblock', ''}
-%     
-%     for k = [0.1 0.5 1]
-%         config.k = k;
-%         config.NN = 9;
-%         config.distance = dist{1}; % mahalanobis cityblock ''
-%         resMLM = simMLM(data, ptrn, numRep, config);
-%         
-%         save(sprintf('mlm_%s_%d_D-%s_%.0f', config.method, config.NN,...
-%             config.distance, config.k*100), 'resMLM', 'config')
-%         
-%         fprintf(sprintf('mlm_%s_%d_D-%s_%.0f\n', config.method, config.NN,...
-%             config.distance, config.k*100))
-%     end    
-% end
+%% ======= Gray - All_MideAverage - Real =======
+strModel = 'gray_%s_gopro_real';
+load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
 
-%% SVM
-% data.y = vec2ind(data.y')';
-% conf.metodo = 'LS';
-% conf.fkernel = 'rbf';
-% conf.options.MaxIter = 9000000;
-% 
-% paraC = 2.^(-5:2:9);
-% 
-% i = 1;
-% if (strcmp('rbf', conf.fkernel) == 1)
-%     for sigma = 2.^(-10:5)
-%         
-%         for c = paraC
-%             conf.paraC = c;
-%             conf.sigma = sigma;
-%             
-%             params{i} = conf;
-%             i = i + 1;
-%         end
-%     end
-% else
-%     
-%     for c = paraC
-%         conf.paraC = c;
-% 
-%         params{i} = conf;
-%         i = i + 1;
-%     end
-% end
-% resultSVM = simMultiSVM( data, numRep, ptrn, params, numFolds )
- 
- 
+conf.descr = sprintf(strModel, 'mideAverage');
+evalueteData(mide, conf)
+
+conf.descr = sprintf(strModel, 'lbp');
+evalueteData(lbp, conf)
+
+conf.descr = sprintf(strModel, 'hu');
+evalueteData(hu, conf)
+
+conf.descr = sprintf(strModel, 'haralick');
+evalueteData(haralick, conf)
+
+
+
+%% ======= Gray - All_MideSobel - Real =======
+strModel = 'gray_%s_gopro_real';
+load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
+
+conf.descr = sprintf(strModel, 'mideSobel');
+evalueteData(mide, conf)
+
+conf.descr = sprintf(strModel, 'lbp');
+evalueteData(lbp, conf)
+
+conf.descr = sprintf(strModel, 'hu');
+evalueteData(hu, conf)
+
+conf.descr = sprintf(strModel, 'haralick');
+evalueteData(haralick, conf)
+
+
+
+%% ======= Gray - All_MideAverage - Sim =======
+strModel = 'gray_%s_gopro_sim';
+load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
+
+conf.descr = sprintf(strModel, 'mideAverage');
+evalueteData(mide, conf)
+
+conf.descr = sprintf(strModel, 'lbp');
+evalueteData(lbp, conf)
+
+conf.descr = sprintf(strModel, 'hu');
+evalueteData(hu, conf)
+
+conf.descr = sprintf(strModel, 'haralick');
+evalueteData(haralick, conf)
+
+
+
+%% ======= Gray - All_MideSobel - Sim =======
+strModel = 'gray_%s_gopro_sim';
+load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
+
+conf.descr = sprintf(strModel, 'mideSobel');
+evalueteData(mide, conf)
+
+conf.descr = sprintf(strModel, 'lbp');
+evalueteData(lbp, conf)
+
+conf.descr = sprintf(strModel, 'hu');
+evalueteData(hu, conf)
+
+conf.descr = sprintf(strModel, 'haralick');
+evalueteData(haralick, conf)
