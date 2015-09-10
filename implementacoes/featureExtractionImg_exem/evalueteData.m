@@ -61,7 +61,7 @@ if(find(ismember(params.mlMethods,'svm')))
         i = i + 1;
     end
 
-    optParam = searchparamsSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchparamSVM(data, paramsSVM, numRep, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'svm', config.fkernel);    
@@ -85,7 +85,7 @@ if(find(ismember(params.mlMethods,'svm')))
         end
     end
     
-    optParam = searchparamsSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchparamSVM(data, paramsSVM, numRep, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
             
     strModel = sprintf('%s_%s-%s', descr, 'svm', config.fkernel);    
@@ -134,7 +134,7 @@ if(find(ismember(params.mlMethods,'lssvm')))
         i = i + 1;
     end
     
-    optParam = searchparamsSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchparamSVM(data, paramsSVM, numRep, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
@@ -159,7 +159,7 @@ if(find(ismember(params.mlMethods,'lssvm')))
         end
     end
     
-    optParam = searchparamsSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchparamSVM(data, paramsSVM, numRep, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
