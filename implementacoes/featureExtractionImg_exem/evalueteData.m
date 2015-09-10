@@ -8,7 +8,6 @@ function [ ] = evalueteData( dataset, params )
 %           descr - string with model of names to save
 %           mlMethods = methods to evaluate {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'}
 
-keyboard
 data.x = dataset(:,1:end-1);
 data.y = dataset(:,end);
 
