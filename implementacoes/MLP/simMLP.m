@@ -1,34 +1,31 @@
-function [ result ] = simMLP( dados, ptrn, numRodadas, conf )
-%SIMKNN Summary of this function goes here
+function [ result ] = simMLP( data, ptrn, num, param )
+%SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
-%   
 
-Ntest = size(dados.y, 1) - floor(size(dados.y, 1)*(ptrn)); %num dados teste
-for i = 1 : numRodadas
+Ntest = size(data.y, 1) - floor(size(data.y, 1)*(ptrn)); %num dados teste
+for i = 1 : num
     %% Embaralhando os dados
-    [dadosTrein, dadosTeste] = embaralhaDados(dados, ptrn, 2);
+    [treinData, testData] = embaralhaDados(data, ptrn, 2);
 
         
     %% Treinamento
+    fprintf('Treinando a MLP.\n');
+    net = patternnet(param);
+    net.trainParam.showWindow = 0;
+    
     tic
-    [modelo{i}] = treinoMLP(dadosTrein, conf);
+    net = train(net, treinData.x', treinData.y');
     tempoTrein(i) = toc;
     
-    
-    %% Avaliando o conjunto de treinamento
-    [Yh] = testeMLP(modelo{i}, dadosTrein); 
-    [~, target] = max(dadosTrein.y');
-    confMatTreino(:,:,i) = confusionmat(target, Yh);
-    accTrein(i) = trace(confMatTreino(:,:,i)) / length(dadosTrein.y);
-    
-    
+            
     %% Teste
+    fprintf('Step %d. Testando a MLP.\n', i);    
     tic
-    [Yh] = testeMLP(modelo{i}, dadosTeste);
-    tempoTeste(i) = mean(toc);
-    [~, target] = max(dadosTeste.y');
-    confMatTeste(:,:,i) = confusionmat(target, Yh);
-    
+    Y = net(testData.x');
+    tempoTeste(i) = toc/Ntest;
+    classes = vec2ind(Y);    
+    confMatTeste(:,:,i) = confusionmat(vec2ind(testData.y'), classes);
+        
     
     %% Metricas
     matConfPorc(:,:,i) = (confMatTeste(:,:,i)./Ntest).*100;
@@ -36,18 +33,15 @@ for i = 1 : numRodadas
 end
 
 % Resultado geral
-result.matConfTesteMedia = mean(confMatTeste, 3);
-result.matConfPorcMedia = mean(matConfPorc,3);
-result.metricasMedia = mean(metricas, 3);
-result.metricasGeralMedia = mean(metricasGeral,1);
+% result.matConfTesteMedia = mean(confMatTeste, 3);
+% result.matConfPorcMedia = mean(matConfPorc,3);
+% result.metricasMedia = mean(metricas, 3);
+result.metricasGeralMedia = mean(metricasGeral);
 
 result.matConfTeste = confMatTeste;
 result.matConfPorc = matConfPorc;
 result.metricas = metricas;
 result.metricasGeral = metricasGeral;
-
-result.matrizesConfTeste = confMatTeste;
-result.matrizesConfTrain = confMatTreino;
 
 % Procura a matriz de confusão mais próxima da acc média
 acc = metricasGeral(:,end);
@@ -56,14 +50,11 @@ mediaAcc = mean(acc);
 
 result.matConfTesteMedia2 = confMatTeste(:,:,pos(1));
 result.stdAcc = std(acc);
-result.accTrein = accTrein;
 
 result.tempoTeste = tempoTeste;
 result.tempoTrein = tempoTrein;
-result.tempoTesteMedio = mean(tempoTeste);
-result.tempoTreinMedio = mean(tempoTrein);
-
-result.modelos = modelo;
+% result.tempoTesteMedio = mean(tempoTeste);
+% result.tempoTreinMedio = mean(tempoTrein);
 
 end
 

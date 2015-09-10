@@ -97,7 +97,7 @@ for i = 1 : length(nameFolds)
         dataHu = [dataHu; [X numClass] ];
         
         save('gray_all_gopro_sim')
-        fprint('%d - %d\n', i, j)
+        fprintf('%d - %d\n', i, j)
         k = k + 1;
     end
 end
