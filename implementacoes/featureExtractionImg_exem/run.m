@@ -8,30 +8,15 @@ conf.mlMethods = {'bayes', 'svm', 'mlp'};
 
 
 
-%% ======= Gray - All_MideAverage - Real =======
+%% ======= Gray - Real =======
 strModel = 'gray_%s_gopro_real';
-load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
+load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 
 conf.descr = sprintf(strModel, 'mideAverage');
-evalueteData(mide, conf)
-
-conf.descr = sprintf(strModel, 'lbp');
-evalueteData(lbp, conf)
-
-conf.descr = sprintf(strModel, 'hu');
-evalueteData(hu, conf)
-
-conf.descr = sprintf(strModel, 'haralick');
-evalueteData(haralick, conf)
-
-
-
-%% ======= Gray - All_MideSobel - Real =======
-strModel = 'gray_%s_gopro_real';
-load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
+evalueteData(mideAverage, conf)
 
 conf.descr = sprintf(strModel, 'mideSobel');
-evalueteData(mide, conf)
+evalueteData(mideSobel, conf)
 
 conf.descr = sprintf(strModel, 'lbp');
 evalueteData(lbp, conf)
@@ -44,30 +29,16 @@ evalueteData(haralick, conf)
 
 
 
-%% ======= Gray - All_MideAverage - Sim =======
+
+%% ======= Gray - Sim =======
 strModel = 'gray_%s_gopro_sim';
-load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
+load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 
 conf.descr = sprintf(strModel, 'mideAverage');
-evalueteData(mide, conf)
-
-conf.descr = sprintf(strModel, 'lbp');
-evalueteData(lbp, conf)
-
-conf.descr = sprintf(strModel, 'hu');
-evalueteData(hu, conf)
-
-conf.descr = sprintf(strModel, 'haralick');
-evalueteData(haralick, conf)
-
-
-
-%% ======= Gray - All_MideSobel - Sim =======
-strModel = 'gray_%s_gopro_sim';
-load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
+evalueteData(mideAverage, conf)
 
 conf.descr = sprintf(strModel, 'mideSobel');
-evalueteData(mide, conf)
+evalueteData(mideSobel, conf)
 
 conf.descr = sprintf(strModel, 'lbp');
 evalueteData(lbp, conf)

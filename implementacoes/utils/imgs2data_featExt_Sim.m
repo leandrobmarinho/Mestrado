@@ -26,7 +26,9 @@ nameFolds(ismember(nameFolds,{'.','..', 'Capturar frames', 'Cortar imagens'})) =
 
 
 %%
-dataLBP = []; dataHu = []; dataHaralick = []; dataMide = [];
+k = 1;
+dataLBP = []; dataHu = []; dataHaralick = []; dataMideSobel = [];
+dataMideAver = [];
 for i = 1 : length(nameFolds)
     pathFiles = dir(sprintf('%s%s/*.png', pathFolder, char(nameFolds(i))));
     
@@ -41,16 +43,29 @@ for i = 1 : length(nameFolds)
         
         img = imageGray;
         
-        %% Mide
+        %% Mide - Sobel
         tic
         I2 = edge(img, 'sobel');
         
         [M,~] = mide(img, I2);
         stats = mideprops(M, 'all');
-        timeMide(i) = toc;
+        timeMideSobel(k) = toc;
         X = struct2array(stats);
         
-        dataMide = [dataMide; [X numClass] ];
+        dataMideSobel = [dataMideSobel; [X numClass] ];
+        
+        
+        %% Mide - Average
+        tic
+        m = fspecial('average', 15);
+        I2 = imfilter(img, m);
+        
+        [M,~] = mide(img, I2);
+        stats = mideprops(M, 'all');
+        timeMideAver(k) = toc;
+        X = struct2array(stats);
+        
+        dataMideAver = [dataMideAver; [X numClass] ];
         
         
         %% Haralick Texture
@@ -59,7 +74,7 @@ for i = 1 : length(nameFolds)
         tic
         GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]);
         stats = GLCM_Features1(GLCM2,0);
-        timeHaralick(i) = toc;
+        timeHaralick(k) = toc;
         X = struct2array(stats);
         
         dataHaralick = [dataHaralick; [X numClass] ];
@@ -69,19 +84,19 @@ for i = 1 : length(nameFolds)
         fprintf('Local Binary Pattern - %s\n', pathFiles(j).name);
         tic
         [X, ~] = lbp(img,[],optionsLBP);
-        timeLBP(i) = toc;
+        timeLBP(k) = toc;
         dataLBP = [dataLBP; [X numClass] ];
         
         %% Hu Moments
         fprintf('Hu Moments - %s\n\n', pathFiles(j).name);
         tic
         X = invmoments(img);
-        timeHu(i) = toc;
+        timeHu(k) = toc;
         %     [X,~] = hugeo(imageRGB);
         
         dataHu = [dataHu; [X numClass] ];
         
         save('result_simulado_mideH')
-        
+        fprint('%d - %d\n', i, j)
     end
 end
