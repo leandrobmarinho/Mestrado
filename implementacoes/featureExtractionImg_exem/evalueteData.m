@@ -179,7 +179,9 @@ end
 clear config
 if(find(ismember(params.mlMethods,'mlm')))
 
-    data.y = full(ind2vec(data.y'))';
+    if ( size(data.y, 2) == 1)
+        data.y = full(ind2vec(data.y'))';
+    end
     
     config.method = ''; % lsqnonlin knn ''
     config.k = 1;
@@ -203,7 +205,9 @@ end
 clear config
 if(find(ismember(params.mlMethods,'mlmNN')))
 
-    data.y = full(ind2vec(data.y'))';
+    if ( size(data.y, 2) == 1)
+        data.y = full(ind2vec(data.y'))';
+    end
     
     config.method = 'knn'; % lsqnonlin knn ''
     config.k = 1;
