@@ -19,7 +19,8 @@ optionsLBP.mappingtype = 'u2';        % uniform LBP
 % Hu Moments
 
 i = 1;
-dataLBP = []; dataHu = []; dataHaralick = []; dataMide = [];
+dataLBP = []; dataHu = []; dataHaralick = []; dataMideSobel = [];
+dataMideAverage = [];
 for i = 1:600
     %% Load the image
     imageRGB = imread(sprintf('%s%s', folder, files(i).name));    
@@ -30,45 +31,63 @@ for i = 1:600
     numClass = str2double(files(i).name(2:3));
     img = imageGray;
     
-    %% Mide
-    tic
-    I2 = edge(img, 'sobel');
+%     %% Mide Sobel
+%     fprintf('Mide Sobel - %s\n', files(i).name);
+%     tic
+%     I2 = edge(img, 'sobel');
+%     
+%     [M,~] = mide(img, I2);    
+%     stats = mideprops(M, 'all');
+%     timeMideSobel(i) = toc;
+%     X = struct2array(stats);
+%     
+%     dataMideSobel = [dataMideSobel; [X numClass] ];
     
-    [M,~] = mide(img, I2);    
+    
+    %% Mide Average
+    fprintf('Mide Average - %s\n', files(i).name);
+
+    tic
+    m = fspecial('average', 15);
+    I2 = imfilter(img, m);
+    
+    [M,~] = mide(img, I2);
     stats = mideprops(M, 'all');
-    timeMide(i) = toc;
+    timeMideAver(i) = toc;
     X = struct2array(stats);
     
-    dataMide = [dataMide; [X numClass] ];
+    dataMideAverage = [dataMideAverage; [X numClass] ];
     
     
-    %% Haralick Texture
-    fprintf('Haralick Texture - %s\n', files(i).name);
+%     %% Haralick Texture
+%     fprintf('Haralick Texture - %s\n', files(i).name);
+%     
+%     tic
+%     GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
+%     stats = GLCM_Features1(GLCM2,0);
+%     timeHaralick(i) = toc;
+%     X = struct2array(stats);
+% 
+%     dataHaralick = [dataHaralick; [X numClass] ];
+% 
+%     
+%     %% Local Binary Pattern
+%     fprintf('Local Binary Pattern - %s\n', files(i).name);
+%     tic
+%     [X, ~] = lbp(img,[],optionsLBP);
+%     timeLBP(i) = toc;
+%     dataLBP = [dataLBP; [X numClass] ];
+%     
+%     %% Hu Moments
+%     fprintf('Hu Moments - %s\n\n', files(i).name);
+%     tic
+%     X = invmoments(img);
+%     timeHu(i) = toc;
+% %     [X,~] = hugeo(imageRGB);
+%     
+%     dataHu = [dataHu; [X numClass] ];
     
-    tic
-    GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
-    stats = GLCM_Features1(GLCM2,0);
-    timeHaralick(i) = toc;
-    X = struct2array(stats);
-
-    dataHaralick = [dataHaralick; [X numClass] ];
-
     
-    %% Local Binary Pattern
-    fprintf('Local Binary Pattern - %s\n', files(i).name);
-    tic
-    [X, ~] = lbp(img,[],optionsLBP);
-    timeLBP(i) = toc;
-    dataLBP = [dataLBP; [X numClass] ];
-    
-    %% Hu Moments
-    fprintf('Hu Moments - %s\n\n', files(i).name);
-    tic
-    X = invmoments(img);
-    timeHu(i) = toc;
-%     [X,~] = hugeo(imageRGB);
-    
-    dataHu = [dataHu; [X numClass] ];
-    
-    save('result_simulado')
+%     save('gray_all_gopro_real')
+    save('mideAverageGray')
 end

@@ -44,6 +44,8 @@ for i = 1 : length(nameFolds)
         img = imageGray;
         
         %% Mide - Sobel
+        fprintf('Mide Sobel - %s\n', pathFiles(j).name);
+
         tic
         I2 = edge(img, 'sobel');
         
@@ -56,6 +58,8 @@ for i = 1 : length(nameFolds)
         
         
         %% Mide - Average
+        fprintf('Mide Average - %s\n', pathFiles(j).name);
+
         tic
         m = fspecial('average', 15);
         I2 = imfilter(img, m);
@@ -66,6 +70,7 @@ for i = 1 : length(nameFolds)
         X = struct2array(stats);
         
         dataMideAver = [dataMideAver; [X numClass] ];
+        
         
         
         %% Haralick Texture
@@ -80,12 +85,15 @@ for i = 1 : length(nameFolds)
         dataHaralick = [dataHaralick; [X numClass] ];
         
         
+        
         %% Local Binary Pattern
         fprintf('Local Binary Pattern - %s\n', pathFiles(j).name);
         tic
         [X, ~] = lbp(img,[],optionsLBP);
         timeLBP(k) = toc;
         dataLBP = [dataLBP; [X numClass] ];
+        
+        
         
         %% Hu Moments
         fprintf('Hu Moments - %s\n\n', pathFiles(j).name);
@@ -97,7 +105,6 @@ for i = 1 : length(nameFolds)
         dataHu = [dataHu; [X numClass] ];
         
         save('gray_all_gopro_sim')
-        fprintf('%d - %d\n', i, j)
         k = k + 1;
     end
 end
