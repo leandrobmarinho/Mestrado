@@ -29,7 +29,7 @@ conf.mlMethods = {'mlp'};
 
 %% ======= Gray - All_MideSobel - Real =======
 strModel = 'gray_%s_gopro_real';
-load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
+load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 
 conf.descr = sprintf(strModel, 'mideSobel');
 evalueteData(mide, conf)
