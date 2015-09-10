@@ -4,6 +4,7 @@ addpath('../multisvm/'); addpath('../bayes/'); addpath('../');
 
 %% General configurations
 conf.mlMethods = {'bayes', 'svm', 'mlp'};
+conf.mlMethods = {'mlp'};
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 
 
