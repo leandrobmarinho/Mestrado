@@ -101,7 +101,7 @@ clear config
 clear paramsSVM
 if(find(ismember(params.mlMethods,'mlp')))
     
-    paramsSVM = [50 100:10:200 250 300];
+    paramsSVM = [50 100:10:200 250];%250 300
     
     optParam = searchTopologyMLP(data, paramsSVM, numRep, ptrn );
     result = simMLP(data, ptrn, numRep, optParam );

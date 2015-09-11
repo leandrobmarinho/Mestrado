@@ -43,8 +43,8 @@ evalueteData(mideSobel, conf)
 conf.descr = sprintf(strModel, 'lbp');
 evalueteData(lbp, conf)
 
-% conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
-% 
-% conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+conf.descr = sprintf(strModel, 'hu');
+evalueteData(hu, conf)
+
+conf.descr = sprintf(strModel, 'haralick');
+evalueteData(haralick, conf)
