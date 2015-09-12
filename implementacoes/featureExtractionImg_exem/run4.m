@@ -43,8 +43,8 @@ load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 % conf.descr = sprintf(strModel, 'lbp');
 % evaluateData(lbp, conf)
 
-conf.descr = sprintf(strModel, 'hu');
-evaluateData(hu, conf)
+% conf.descr = sprintf(strModel, 'hu');
+% evaluateData(hu, conf)
 
 conf.descr = sprintf(strModel, 'haralick');
 evaluateData(haralick, conf)
