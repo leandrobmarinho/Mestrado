@@ -2,7 +2,7 @@ function [trainData, testData] = shuffleImgs( data, k )
 %SHUFFLEIMGS Shuffle descriptions and labels images
 % data - description and labels of images
 % k - number of image model by classes
-ptrn = .4;
+ptrn = .1;
 
 trainData.imgs = []; trainData.labels = [];
 testData.imgs = []; testData.labels = [];

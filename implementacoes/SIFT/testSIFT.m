@@ -11,7 +11,7 @@ numTrain = length(trainData.labels);
 
 Y = zeros(1,numTest);
 numIndex = zeros(1, numTrain);
-timeTest = zeros(1, numTest);
+timeTest = zeros(1, numTest);keyboard
 for i = 1 : numTest
     tic
     img = imread(sprintf('%s%s', path, testData.imgs{i}));
