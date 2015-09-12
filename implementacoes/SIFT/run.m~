@@ -4,9 +4,14 @@ folder = '/Users/leandrobm/Documents/robohomegopro/';
 files = dir(sprintf('%s*.JPG', folder));
 
 keyboard
+%% Choose the model of each class
+for i = 1 : 15
+    
+end
+
 labels = 1:size(files,1);
 for i = 1:600
-    %% Load the image
+    
 
     imageRGB = imread(sprintf('%s%s', folder, files(i).name)); 
     

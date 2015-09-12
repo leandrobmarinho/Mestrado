@@ -100,10 +100,16 @@ end
 clear config
 clear paramsSVM
 if(find(ismember(params.mlMethods,'mlp')))
+    if ( size(data.y, 2) == 1)
+        data.y = full(ind2vec(data.y'))';
+    end
+
+    %paramsMLP = [50 100:10:200 250 300];
+    %paramsMLP = 2.^(1:9);
+%     paramsMLP = [10:10:300];
+    paramsMLP = [10:10:150 200:20:340];
     
-    paramsSVM = [50 100:10:200 250];%250 300
-    
-    optParam = searchTopologyMLP(data, paramsSVM, numRep, ptrn );
+    optParam = searchTopologyMLP(data, paramsMLP, numRep, ptrn );
     result = simMLP(data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s', descr, 'mlp');    
@@ -118,6 +124,9 @@ end
 clear config
 clear paramsSVM
 if(find(ismember(params.mlMethods,'lssvm')))
+    if ( size(data.y,2) > 1)
+       data.y = vec2ind(data.y);
+    end
     
     % =================== LSSVM - Linear ===================
     config.metodo = 'LS';

@@ -28,5 +28,6 @@ Ecv = mean(acc,1);
 [~, indice] = max(Ecv);
 neuCO = params(indice);
 
+keyboard
 end
 
