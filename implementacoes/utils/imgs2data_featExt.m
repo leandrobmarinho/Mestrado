@@ -93,3 +93,4 @@ for i = 1:600
 %     save('gray_all_gopro_real')
     save('mideAverageGray')
 end
+

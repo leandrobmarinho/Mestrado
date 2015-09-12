@@ -1,33 +1,59 @@
 clear all; close all; clc;
 
-folder = '/Users/leandrobm/Documents/robohomegopro/';
-files = dir(sprintf('%s*.JPG', folder));
+%% General configurations
+numRep = 2;
+nnThreshold = 0.8;
+nameImgs = 'real_gopro';
+k = 1;
+path = '/Users/leandrobm/Documents/robohomegopro/';
+% path = '../../../../Dropbox/2015_InTech_Mapa_Topologico/Simulation V-REP/Imagens/';
 
-keyboard
-%% Choose the model of each class
-for i = 1 : 15
+%% Load the images
+load(sprintf('../dados/desc_%s', nameImgs));
+data.imgsName = imgs;
+data.labels = labels;
+
+% Initializes variables
+numClass = length(unique(labels));
+matConfPorc = zeros(numClass,numClass,numRep);
+metrics = zeros(numClass, numClass, numRep);
+generalMetrics = zeros(numRep, 6);
+confMatTest = zeros(numClass, numClass, numRep);
+timeTest = zeros(1, numRep);
+%% Steps
+for i = 1 : numRep
+    %% Shuffle the imagens
+    [treinData, testData] = shuffleImgs(data, k);
     
+    %% Test
+    fprintf('SIFT - step %d.\n', i);
+    tic
+    [Y, t] = testSIFT(treinData, testData, k, path, nnThreshold);
+    timeTest(i) = mean(t);
+    confMatTest(:,:,i) = confusionmat(testData.y', Y');
+    
+    
+    %% Metrics
+    matConfPorc(:,:,i) = (confMatTest(:,:,i)./length(testData.labels)).*100;
+    [metrics(:,:,i), generalMetrics(i,:)] = metricasMatConf(confMatTest(:,:,i));    
 end
 
-labels = 1:size(files,1);
-for i = 1:600
-    
+% Resultado geral
+result.metricasGeralMedia = mean(generalMetrics);
 
-    imageRGB = imread(sprintf('%s%s', folder, files(i).name)); 
-    
-end
+result.matConfTeste = confMatTest;
+result.matConfPorc = matConfPorc;
+result.metricas = metrics;
+result.metricasGeral = generalMetrics;
 
-I = imread('../../../../Documents/robohomegopro/P01_01.JPG') ;
-tic
-I = single(rgb2gray(I));
-tempoConv = toc;
+% Procura a matriz de confusão mais próxima da acc média
+acc = generalMetrics(:,end);
+mediaAcc = mean(acc);
+[~, pos] = sort( abs ( mediaAcc - acc) );
 
-[frames, descrs] = vl_sift(I);
+result.matConfTesteMedia2 = confMatTest(:,:,pos(1));
+result.stdAcc = std(acc);
 
-tic
+result.tempoTeste = timeTest;
 
-[nn, dist2] = findNeighbours(descrs1, descrs2, 2);
-ratio2 = dist2(1,:) ./ dist2(2,:) ;
-ok = ratio2 <= nnThreshold^2 ;
-matches_raw = [find(ok) ; nn(1,ok)] ;
-time_raw = toc ;
+save(sprintf('sift_gray_%s', nameImgs));
