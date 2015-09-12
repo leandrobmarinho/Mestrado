@@ -14,16 +14,16 @@ conf.mlMethods = {'mlp'};
 % load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
 % 
 % conf.descr = sprintf(strModel, 'mideAverage');
-% evalueteData(mide, conf)
+% evaluateData(mide, conf)
 % 
 % conf.descr = sprintf(strModel, 'lbp');
-% evalueteData(lbp, conf)
+% evaluateData(lbp, conf)
 % 
 % conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
+% evaluateData(hu, conf)
 % 
 % conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+% evaluateData(haralick, conf)
 
 
 
@@ -32,16 +32,16 @@ strModel = 'gray_%s_gopro_real';
 load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 
 conf.descr = sprintf(strModel, 'mideSobel');
-evalueteData(mide, conf)
+evaluateData(mide, conf)
 
 % conf.descr = sprintf(strModel, 'lbp');
-% evalueteData(lbp, conf)
+% evaluateData(lbp, conf)
 % 
 % conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
+% evaluateData(hu, conf)
 % 
 % conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+% evaluateData(haralick, conf)
 
 
 
@@ -50,16 +50,16 @@ evalueteData(mide, conf)
 % load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
 % 
 % conf.descr = sprintf(strModel, 'mideAverage');
-% evalueteData(mide, conf)
+% evaluateData(mide, conf)
 % 
 % conf.descr = sprintf(strModel, 'lbp');
-% evalueteData(lbp, conf)
+% evaluateData(lbp, conf)
 % 
 % conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
+% evaluateData(hu, conf)
 % 
 % conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+% evaluateData(haralick, conf)
 
 
 
@@ -68,13 +68,13 @@ evalueteData(mide, conf)
 % load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
 % 
 % conf.descr = sprintf(strModel, 'mideSobel');
-% evalueteData(mide, conf)
+% evaluateData(mide, conf)
 % 
 % conf.descr = sprintf(strModel, 'lbp');
-% evalueteData(lbp, conf)
+% evaluateData(lbp, conf)
 % 
 % conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
+% evaluateData(hu, conf)
 % 
 % conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+% evaluateData(haralick, conf)

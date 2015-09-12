@@ -13,19 +13,19 @@ conf.mlMethods = {'lssvm'};
 % load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 % 
 % conf.descr = sprintf(strModel, 'mideAverage');
-% evalueteData(mideAverage, conf)
+% evaluateData(mideAverage, conf)
 % 
 % conf.descr = sprintf(strModel, 'mideSobel');
-% evalueteData(mideSobel, conf)
+% evaluateData(mideSobel, conf)
 % 
 % conf.descr = sprintf(strModel, 'lbp');
-% evalueteData(lbp, conf)
+% evaluateData(lbp, conf)
 % 
 % conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
+% evaluateData(hu, conf)
 % 
 % conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+% evaluateData(haralick, conf)
 
 
 
@@ -35,16 +35,16 @@ strModel = 'gray_%s_gopro_sim';
 load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 
 % conf.descr = sprintf(strModel, 'mideAverage');
-% evalueteData(mideAverage, conf)
+% evaluateData(mideAverage, conf)
 
 conf.descr = sprintf(strModel, 'mideSobel');
-evalueteData(mideSobel, conf)
+evaluateData(mideSobel, conf)
 
 conf.descr = sprintf(strModel, 'lbp');
-evalueteData(lbp, conf)
+evaluateData(lbp, conf)
 
 % conf.descr = sprintf(strModel, 'hu');
-% evalueteData(hu, conf)
+% evaluateData(hu, conf)
 % 
 % conf.descr = sprintf(strModel, 'haralick');
-% evalueteData(haralick, conf)
+% evaluateData(haralick, conf)

@@ -102,6 +102,13 @@ if(conf.lambda ~= 0 )
 else
     model.B =  Dx\Dy;
 end
+
+if (rcond(model.B) < 1e-12)
+    model.B =  model.B + 0.01*eye(size(model.B,2));
+end
+if (isnan(model.B))
+    model.B =  0.01*eye(size(model.B,2));
+end
 model.refX = refX;
 model.refY = refY;
 model.bias = conf.bias;

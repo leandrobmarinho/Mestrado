@@ -1,4 +1,4 @@
-function [ ] = evalueteData( dataset, params )
+function [ ] = evaluateData( dataset, params )
 %EVALUETEDATA Evalute the dataset using the Machine Learning methods
 %   data - matrix with data [X Y], Y is a line vector with numbers of the 
 %           classes
@@ -8,9 +8,9 @@ function [ ] = evalueteData( dataset, params )
 %           descr - string with model of names to save
 %           mlMethods = methods to evaluate {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'}
 
-data.x = dataset(:,1:end-1);
+% data.x = dataset(:,1:end-1);
 data.y = dataset(:,end);
-
+data.x = normalizaDados(dataset(:,1:end-1), 1);
 
 %% Verification
 if (isfield(params, 'ptrain') == 0)    

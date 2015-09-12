@@ -1,5 +1,17 @@
 clear all; close all; clc;
 
+folder = '/Users/leandrobm/Documents/robohomegopro/';
+files = dir(sprintf('%s*.JPG', folder));
+
+keyboard
+ids = 1:size(files,1);
+for i = 1:600
+    %% Load the image
+
+    imageRGB = imread(sprintf('%s%s', folder, files(i).name)); 
+    
+end
+
 I = imread('../../../../Documents/robohomegopro/P01_01.JPG') ;
 tic
 I = single(rgb2gray(I));
