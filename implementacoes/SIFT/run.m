@@ -35,7 +35,9 @@ for i = 1 : numRep
     
     %% Metrics
     matConfPorc(:,:,i) = (confMatTest(:,:,i)./length(testData.labels)).*100;
-    [metrics(:,:,i), generalMetrics(i,:)] = metricasMatConf(confMatTest(:,:,i));    
+    [metrics(:,:,i), generalMetrics(i,:)] = metricasMatConf(confMatTest(:,:,i));
+    
+    save(sprintf('sift_gray_%s', nameImgs));
 end
 
 % Resultado geral
