@@ -24,45 +24,46 @@ options_lsq = optimoptions('lsqnonlin','Algorithm','levenberg-marquardt', 'Jacob
 Yh = zeros(size(data.x, 1), size(model.refY, 2));
 yh0 = mean(model.refY); % initial estimate for y
 
-
-switch (conf.method)
-    case ('lsqnonlin')
-        for i = 1: size(data.x, 1),
-            Yh(i, :) = lsqnonlin(@(x)(fun(x, model.refY, DYh(i, :))), yh0, [], [], options_lsq);
-        end
-    case ('knn')
-        [~, Ind] = sort(DYh, 2);
-%         for i = 1: size(data.x, 1),
-%             Yh(i,:) = mode(model.refY(Ind(i, 1:conf.NN), :));
-%         end
+try
+    switch (conf.method)
         
-
-        labels = vec2ind(model.refY')';
-        n = size(data.x, 1);
-        Yh = mode(reshape(labels(Ind(:, 1:conf.NN)', :), conf.NN, n))';        
-
-        Yh = full(ind2vec(Yh'))';
-
-%         labels = unique(y);
-%         code = zeros(length(labels), length(labels));
-%         for j = 1: length(labels),
-%             code(j, j) = 1;
-%         end
-% 
-%         for j = length(labels):-1:1,
-%             ind = (y == labels(j));
-%             tam = length(find(ind==1));
-%             Yh(ind, :) = repmat(code(j, :), tam, 1);
-%         end
         
-    otherwise
-        try
+        case ('lsqnonlin')
+            for i = 1: size(data.x, 1),
+                Yh(i, :) = lsqnonlin(@(x)(fun(x, model.refY, DYh(i, :))), yh0, [], [], options_lsq);
+            end
+        case ('knn')
+            [~, Ind] = sort(DYh, 2);
+            %         for i = 1: size(data.x, 1),
+            %             Yh(i,:) = mode(model.refY(Ind(i, 1:conf.NN), :));
+            %         end
+            
+            
+            labels = vec2ind(model.refY')';
+            n = size(data.x, 1);
+            Yh = mode(reshape(labels(Ind(:, 1:conf.NN)', :), conf.NN, n))';
+            
+            Yh = full(ind2vec(Yh'))';
+            
+            %         labels = unique(y);
+            %         code = zeros(length(labels), length(labels));
+            %         for j = 1: length(labels),
+            %             code(j, j) = 1;
+            %         end
+            %
+            %         for j = length(labels):-1:1,
+            %             ind = (y == labels(j));
+            %             tam = length(find(ind==1));
+            %             Yh(ind, :) = repmat(code(j, :), tam, 1);
+            %         end
+            
+        otherwise
             for i = 1: size(data.x, 1),
                 Yh(i, :) = fsolve(@(x)(sum((model.refY - repmat(x, length(model.refY), 1)).^2, 2) - DYh(i,:)'.^2), yh0, options_fsolve);
             end
-        catch
-             warning('It was not possible classify!!!');
-        end
+    end
+catch
+    warning('It was not possible classify!!!');
 end
 
 error = [];
