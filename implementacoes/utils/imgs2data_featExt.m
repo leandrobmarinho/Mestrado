@@ -23,10 +23,12 @@ dataLBP = []; dataHu = []; dataHaralick = []; dataMideSobel = [];
 dataMideAverage = [];
 for i = 1:600
     %% Load the image
+    tic
     imageRGB = imread(sprintf('%s%s', folder, files(i).name));    
 %     imageHSV = rgb2hsv(imageRGB);
 %     imageHSV = imageHSV(:,:,1);    
     imageGray = rgb2gray(imageRGB);
+    tempoConv = toc;
     
     numClass = str2double(files(i).name(2:3));
     img = imageGray;
@@ -38,7 +40,7 @@ for i = 1:600
 %     
 %     [M,~] = mide(img, I2);    
 %     stats = mideprops(M, 'all');
-%     timeMideSobel(i) = toc;
+%     timeMideSobel(i) = toc + tempoConv;
 %     X = struct2array(stats);
 %     
 %     dataMideSobel = [dataMideSobel; [X numClass] ];
@@ -53,7 +55,7 @@ for i = 1:600
     
     [M,~] = mide(img, I2);
     stats = mideprops(M, 'all');
-    timeMideAver(i) = toc;
+    timeMideAver(i) = toc + tempoConv;
     X = struct2array(stats);
     
     dataMideAverage = [dataMideAverage; [X numClass] ];
@@ -65,7 +67,7 @@ for i = 1:600
 %     tic
 %     GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
 %     stats = GLCM_Features1(GLCM2,0);
-%     timeHaralick(i) = toc;
+%     timeHaralick(i) = toc + tempoConv;
 %     X = struct2array(stats);
 % 
 %     dataHaralick = [dataHaralick; [X numClass] ];
@@ -75,14 +77,14 @@ for i = 1:600
 %     fprintf('Local Binary Pattern - %s\n', files(i).name);
 %     tic
 %     [X, ~] = lbp(img,[],optionsLBP);
-%     timeLBP(i) = toc;
+%     timeLBP(i) = toc + tempoConv;
 %     dataLBP = [dataLBP; [X numClass] ];
 %     
 %     %% Hu Moments
 %     fprintf('Hu Moments - %s\n\n', files(i).name);
 %     tic
 %     X = invmoments(img);
-%     timeHu(i) = toc;
+%     timeHu(i) = toc + tempoConv;
 % %     [X,~] = hugeo(imageRGB);
 %     
 %     dataHu = [dataHu; [X numClass] ];

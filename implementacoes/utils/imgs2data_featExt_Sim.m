@@ -33,10 +33,12 @@ for i = 1 : length(nameFolds)
     pathFiles = dir(sprintf('%s%s/*.png', pathFolder, char(nameFolds(i))));
     
     for j = 1 : length(pathFiles)
+        tic
         imageRGB = imread(sprintf('%s%s/%s', pathFolder, nameFolds{i}, pathFiles(j).name));
         %         imageHSV = rgb2hsv(imageRGB);
         %         imageHSV = imageHSV(:,:,1);
         imageGray = rgb2gray(imageRGB);
+        tempoConv = toc;
         
         numClass = strsplit(nameFolds{i}, 'C');
         numClass = str2double(numClass{2});
@@ -51,7 +53,7 @@ for i = 1 : length(nameFolds)
         
         [M,~] = mide(img, I2);
         stats = mideprops(M, 'all');
-        timeMideSobel(k) = toc;
+        timeMideSobel(k) = toc + tempoConv;
         X = struct2array(stats);
         
         dataMideSobel = [dataMideSobel; [X numClass] ];
@@ -66,7 +68,7 @@ for i = 1 : length(nameFolds)
         
         [M,~] = mide(img, I2);
         stats = mideprops(M, 'all');
-        timeMideAver(k) = toc;
+        timeMideAver(k) = toc + tempoConv;
         X = struct2array(stats);
         
         dataMideAver = [dataMideAver; [X numClass] ];
@@ -79,7 +81,7 @@ for i = 1 : length(nameFolds)
         tic
         GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]);
         stats = GLCM_Features1(GLCM2,0);
-        timeHaralick(k) = toc;
+        timeHaralick(k) = toc + tempoConv;
         X = struct2array(stats);
         
         dataHaralick = [dataHaralick; [X numClass] ];
@@ -90,7 +92,7 @@ for i = 1 : length(nameFolds)
         fprintf('Local Binary Pattern - %s\n', pathFiles(j).name);
         tic
         [X, ~] = lbp(img,[],optionsLBP);
-        timeLBP(k) = toc;
+        timeLBP(k) = toc + tempoConv;
         dataLBP = [dataLBP; [X numClass] ];
         
         
@@ -99,7 +101,7 @@ for i = 1 : length(nameFolds)
         fprintf('Hu Moments - %s\n\n', pathFiles(j).name);
         tic
         X = invmoments(img);
-        timeHu(k) = toc;
+        timeHu(k) = toc + tempoConv;
         %     [X,~] = hugeo(imageRGB);
         
         dataHu = [dataHu; [X numClass] ];

@@ -36,10 +36,24 @@ switch (conf.method)
 %             Yh(i,:) = mode(model.refY(Ind(i, 1:conf.NN), :));
 %         end
         
+
         labels = vec2ind(model.refY')';
         n = size(data.x, 1);
-        Yh = mode(reshape(labels(Ind(:, 1:conf.NN)', :), conf.NN, n))';
+        Yh = mode(reshape(labels(Ind(:, 1:conf.NN)', :), conf.NN, n))';        
+
         Yh = full(ind2vec(Yh'))';
+
+%         labels = unique(y);
+%         code = zeros(length(labels), length(labels));
+%         for j = 1: length(labels),
+%             code(j, j) = 1;
+%         end
+% 
+%         for j = length(labels):-1:1,
+%             ind = (y == labels(j));
+%             tam = length(find(ind==1));
+%             Yh(ind, :) = repmat(code(j, :), tam, 1);
+%         end
         
     otherwise
         for i = 1: size(data.x, 1),
@@ -47,9 +61,8 @@ switch (conf.method)
         end
 end
 
-
 error = [];
-if(isempty(data.y) == 0)
+if(isempty(data.y) == 0 & size(data.y,2) == size(Yh,2))
     error = data.y - Yh;
 end
 

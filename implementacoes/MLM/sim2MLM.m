@@ -16,10 +16,10 @@ for i = 1 : numRodadas
     
     
     %% Avaliando o conjunto de treinamento
-%     fprintf('Validando o conjunto de treinamento.\n');
-%     [Y, ~] = test_MLM(modelo, dadosTrein, conf);
-%     confMatTreino(:,:,i) = confusionmat(vec2ind(dadosTrein.y'), vec2ind(Y'));
-%     accTrein(i) = trace(confMatTreino(:,:,i)) / length(dadosTrein.y);
+    fprintf('Validando o conjunto de treinamento.\n');
+    [Y, ~] = test_MLM(modelo, dadosTrein, conf);
+    confMatTreino(:,:,i) = confusionmat(vec2ind(dadosTrein.y'), vec2ind(Y'));
+    accTrein(i) = trace(confMatTreino(:,:,i)) / length(dadosTrein.y);
     
     
     %% Teste
@@ -47,6 +47,7 @@ result.metricas = metricas;
 result.metricasGeral = metricasGeral;
 
 result.matrizesConfTeste = confMatTeste;
+result.matrizesConfTrain = confMatTreino;
 
 % Procura a matriz de confusão mais próxima da acc média
 acc = metricasGeral(:,end);
@@ -55,6 +56,7 @@ mediaAcc = mean(acc);
 
 result.matConfTesteMedia2 = confMatTeste(:,:,pos(1));
 result.stdAcc = std(acc);
+result.accTrein = accTrein;
 
 result.tempoTeste = tempoTeste;
 result.tempoTrein = tempoTrein;
