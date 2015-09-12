@@ -57,12 +57,10 @@ switch (conf.method)
         
     otherwise
         try
-            for i = 1: size(data.x, 1),
-                Yh(i, :) = fsolve(@(x)(sum((model.refY - repmat(x, length(model.refY), 1)).^2, 2) - DYh(i,:)'.^2), yh0, options_fsolve);
-            end
-        catch
-             warning('It was not possible classify!!!');
+        for i = 1: size(data.x, 1),
+            Yh(i, :) = fsolve(@(x)(sum((model.refY - repmat(x, length(model.refY), 1)).^2, 2) - DYh(i,:)'.^2), yh0, options_fsolve);
         end
+        a
 end
 
 error = [];
