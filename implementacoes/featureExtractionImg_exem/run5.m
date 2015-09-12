@@ -12,20 +12,20 @@ conf.mlMethods = {'mlp'};
 strModel = 'gray_%s_gopro_real';
 load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 
-conf.descr = sprintf(strModel, 'mideAverage');
-evaluateData(mideAverage, conf)
-
-conf.descr = sprintf(strModel, 'mideSobel');
-evaluateData(mideSobel, conf)
-
-% conf.descr = sprintf(strModel, 'lbp');
-% evaluateData(lbp, conf)
+% conf.descr = sprintf(strModel, 'mideAverage');
+% evaluateData(mideAverage, conf)
 % 
-% conf.descr = sprintf(strModel, 'hu');
-% evaluateData(hu, conf)
-% % 
-% conf.descr = sprintf(strModel, 'haralick');
-% evaluateData(haralick, conf)
+% conf.descr = sprintf(strModel, 'mideSobel');
+% evaluateData(mideSobel, conf)
+
+conf.descr = sprintf(strModel, 'lbp');
+evaluateData(lbp, conf)
+
+conf.descr = sprintf(strModel, 'hu');
+evaluateData(hu, conf)
+
+conf.descr = sprintf(strModel, 'haralick');
+evaluateData(haralick, conf)
 
 
 

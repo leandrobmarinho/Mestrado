@@ -107,7 +107,8 @@ if(find(ismember(params.mlMethods,'mlp')))
     %paramsMLP = [50 100:10:200 250 300];
     %paramsMLP = 2.^(1:9);
 %     paramsMLP = [10:10:300];
-    paramsMLP = [10:10:150 200:20:340];
+%     paramsMLP = [10:10:150 200:20:340];
+    paramsMLP = [10:10:150 200:20:240];
     
     optParam = searchTopologyMLP(data, paramsMLP, numRep, ptrn );
     result = simMLP(data, ptrn, numRep, optParam );
