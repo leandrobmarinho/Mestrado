@@ -57,6 +57,6 @@ result.stdAcc = std(acc);
 
 result.tempoTeste = timeTest;
 
-save(sprintf('sift_gray_%s', nameImgs));
+save(sprintf('surf_gray_%s', nameImgs));
 
 path(p);
