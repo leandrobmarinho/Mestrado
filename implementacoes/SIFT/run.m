@@ -10,27 +10,31 @@ path = '/Users/leandrobm/Documents/robohomegopro/';
 
 %% Load the images
 load(sprintf('../dados/desc_%s', nameImgs));
-data.imgsName = imgs;
+data.imgs = imgs;
 data.labels = labels;
 
 % Initializes variables
 numClass = length(unique(labels));
 matConfPorc = zeros(numClass,numClass,numRep);
-metrics = zeros(numClass, numClass, numRep);
+metrics = zeros(numClass, 6, numRep);
 generalMetrics = zeros(numRep, 6);
 confMatTest = zeros(numClass, numClass, numRep);
 timeTest = zeros(1, numRep);
+timeTrain = zeros(1, numRep);
 %% Steps
 for i = 1 : numRep
     %% Shuffle the imagens
     [treinData, testData] = shuffleImgs(data, k);
     
+    %% Train
+    [model, timeTrain(i)] = trainSIFT(treinData, path);
+    
     %% Test
     fprintf('SIFT - step %d.\n', i);
     tic
-    [Y, t] = testSIFT(treinData, testData, k, path, nnThreshold);
+    [Y, t] = testSIFT(model, testData, k, path, nnThreshold);
     timeTest(i) = mean(t);
-    confMatTest(:,:,i) = confusionmat(testData.y', Y');
+    confMatTest(:,:,i) = confusionmat(testData.labels', Y');
     
     
     %% Metrics
@@ -56,6 +60,7 @@ mediaAcc = mean(acc);
 result.matConfTesteMedia2 = confMatTest(:,:,pos(1));
 result.stdAcc = std(acc);
 
-result.tempoTeste = timeTest;
+result.timeTest = timeTest;
+result.timeTrain = timeTrain;
 
 save(sprintf('sift_gray_%s', nameImgs));
