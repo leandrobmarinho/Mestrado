@@ -1,14 +1,14 @@
 clear all; close all; clc;
 
 %% General configurations
-numRep = 2;
+numRep = 10;
 nnThreshold = 0.8;
 nameImgs = 'sim_gopro';
 k = 1;
 
 
 %% Load the images
-load(sprintf('../dados/desc_%s', nameImgs));
+load(sprintf('../dados/desc_sift_%s', nameImgs));
 data.imgs = imgsDescr;
 data.labels = labels;
 averageTimExte = mean(timeExt);

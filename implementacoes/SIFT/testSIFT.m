@@ -3,7 +3,6 @@ function [Y, timeTest] = testSIFT( model, testData, k, nnThreshold )
 % model - data train
 % testData - test train
 % k - number of image model by classes
-% path - path to read the image
 % nnThreshold - threshold
 
 numTest = length(testData.labels);
