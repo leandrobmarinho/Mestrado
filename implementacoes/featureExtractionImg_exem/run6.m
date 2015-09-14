@@ -3,7 +3,7 @@ addpath('../percetron/'); addpath('../MLM/'); addpath('../MLP/');
 addpath('../multisvm/'); addpath('../bayes/'); addpath('../');
 
 %% General configurations
-conf.mlMethods = {'mlp'};
+conf.mlMethods = {'mlm', 'mlmNN'};
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 
 
