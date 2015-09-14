@@ -13,10 +13,10 @@ for i = 1 : length(labelClasse)
     ind = ind(randperm(numClasses));
     
     trainData.labels = [trainData.labels data.labels(ind(1:k))];
-    trainData.imgs = [trainData.imgs data.imgsName(ind(1:k))];
+    trainData.imgs = [trainData.imgs data.imgs(ind(1:k))];
     
     testData.labels = [testData.labels data.labels(ind(k+1:end))];
-    testData.imgs = [testData.imgs data.imgsName(ind(k+1:end))];
+    testData.imgs = [testData.imgs data.imgs(ind(k+1:end))];
     
 end
 

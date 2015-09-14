@@ -1,5 +1,5 @@
 clear all; close all; clc;
-type = 2;
+type = 1;
 
 switch(type)
     case 1

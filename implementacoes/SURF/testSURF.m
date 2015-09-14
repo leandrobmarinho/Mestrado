@@ -1,33 +1,21 @@
-function [Y, timeTest] = testSURF( trainData, testData, k, path )
+function [Y, timeTest] = testSURF( trainData, testData, k )
 %TESTSIFT Test of SIFT
 % trainData - data train
 % testData - test train
 % k - number of image model by classes
-% path - path to read the image
-% nnThreshold - threshold
 
 numTest = length(testData.labels);
-numTrain = length(trainData.labels);
+numModels = length(trainData.labels);
 
 Y = zeros(1,numTest);
-numIndex = zeros(1, numTrain);
+numIndex = zeros(1, numModels);
 timeTest = zeros(1, numTest);
 for i = 1 : numTest
     tic
-    img = imread(sprintf('%s%s', path, testData.imgs{i}));
-    img = rgb2gray(img);
+    fTest = testData.imgs{i};
     
-%     [~, descrsTest] = vl_sift(img);
-    points = detectSURFFeatures(img);
-    [fTest, ~] = extractFeatures(img, points);
-    
-    for j = 1 : numTrain
-        imgTrain = imread(sprintf('%s%s', path, trainData.imgs{j}));
-        imgTrain = rgb2gray(imgTrain);
-        
-%         [~, descrsTrain] = vl_sift(imgTrain);
-        points = detectSURFFeatures(imgTrain);
-        [fTrain, ~] = extractFeatures(imgTrain, points);
+    for j = 1 : numModels
+        fTrain = trainData.imgs{j};
 
         indexPairs = matchFeatures(fTest, fTrain);
         

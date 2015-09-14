@@ -1,27 +1,23 @@
-function [ ] = createDescrImgs( path, type )
-%LOADIMGS Summary of this function goes here
-%   path - path of the imgs
-%   type
-%       1: real gopro
-%       2: sim gopro
-%       3: real gopro
-%       4: sim gopro
+clear all; close all; clc;
+type = 1;
 
 switch(type)
     case 1
-        name = 'desc_real_gopro';
+        name = 'desc_sift_real_gopro';
         real = true;
+        path = '/Users/leandrobm/Documents/robohomegopro/';
         
     case 2
-        name = 'desc_sim_gopro';
+        name = 'desc_sift_sim_gopro';
         real = false;
-        
+        path = '../../../../Dropbox/2015_InTech_Mapa_Topologico/Simulation V-REP/Imagens/';
+                
     case 3
-        name = 'desc_real_omni';
+        name = 'desc_sift_real_omni';
         real = true;
         
     case 4
-        name = 'desc_sim_omni';
+        name = 'desc_sift_sim_omni';
         real = false;
 end
 
@@ -69,16 +65,16 @@ else
             
             [~, descr] = vl_sift(img);
             timeExt(k) = toc;
-            imgsDescr{k} = single(descr);            
+            imgsDescr{k} = single(descr);
             labels(k) = numClass;
             
             fprintf('Sim - %d\n', k);
-            k = k + 1;            
+            k = k + 1;
         end
     end
     
 end
 
-save(name, 'imgsDescr', 'labels', 'timeExt')
-end
+save(name, 'imgsDescr', 'labels', 'timeExt', '-v7.3')
+
 
