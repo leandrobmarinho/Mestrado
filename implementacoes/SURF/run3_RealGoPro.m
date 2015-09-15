@@ -4,7 +4,7 @@ p = path; path(p, '../'); path(p, '../utils/');
 %% General configurations
 numRep = 10;
 nameImgs = 'real_gopro';
-pathData = sprintf('../dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
+pathData = sprintf('/Users/leandrobm/Documents/dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
 k = 1;
 
 
@@ -30,7 +30,7 @@ for i = 1 : numRep
     [model] = trainSURF(trainData, pathData);
     
     %% Test
-    fprintf('SIFT - step %d.\n', i);
+    fprintf('SURF - step %d.\n', i);
     tic
     [Y, t] = testSURF_ind(model, testData, k, pathData);
     timeTest(i) = mean(t);
