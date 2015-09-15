@@ -2,7 +2,7 @@ clear all; close all; clc;
 p = path; path(p, '../'); path(p, '../utils/');
 
 %% General configurations
-numRep = 10;
+numRep = 4;
 nameImgs = 'real_gopro';
 pathData = sprintf('/Users/leandrobm/Documents/dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
 k = 1;
