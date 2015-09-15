@@ -29,11 +29,9 @@ for i = 1 : numTest
     end    
     fprintf('%d\n', i);
 
-    tic
     [~, lbs] = sort(numIndex, 'descend');
     Y(i) = lbs(1:k);
-    timeSort = toc;
-    timeTest(i) = sum(timeTemp) + timeSort;
+    timeTest(i) = toc;
 end
 
 end
