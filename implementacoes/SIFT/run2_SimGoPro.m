@@ -1,4 +1,6 @@
 clear all; close all; clc;
+p = path; path(p, '../'); path(p, '../utils/');
+
 
 %% General configurations
 numRep = 10;
@@ -62,3 +64,5 @@ result.timeTest = timeTest;
 result.timeTrain = timeTrain;
 
 save(sprintf('sift_gray_%s', nameImgs));
+
+path(p)

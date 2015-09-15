@@ -1,15 +1,16 @@
 clear all; close all; clc;
-p = path; path(p, '../');
+p = path; path(p, '../'); path(p, '../utils/');
 
 %% General configurations
 numRep = 2;
 nnThreshold = 0.8;
 nameImgs = 'real_gopro';
+pathData = '../dados/SIFT_real_gopro/desc_sift_real_gopro_';
 k = 1;
 
 
 %% Load the images
-load(sprintf('../dados/descInd_sift_%s', nameImgs));
+load(sprintf('../dados/descInd_%s', nameImgs));
 data.imgs = imgsInd;
 data.labels = labels;
 
@@ -24,15 +25,15 @@ timeTest = zeros(1, numRep);
 %% Steps
 for i = 1 : numRep
     %% Shuffle the imagens
-    [trainData, testData] = shuffleImgs(data, k);      
+    [trainData, testData] = shuffleImgs(data, k, false);      
     
     %% Train
-    [model] = trainSIFT(trainData);
+    [model] = trainSIFT(trainData, pathData);
     
     %% Test
     fprintf('SIFT - step %d.\n', i);
     tic
-    [Y, t] = testSIFT_ind(model, testData, k, nnThreshold);
+    [Y, t] = testSIFT_ind(model, testData, k, nnThreshold, pathData);
     timeTest(i) = mean(t);
     confMatTest(:,:,i) = confusionmat(testData.labels', Y');
     

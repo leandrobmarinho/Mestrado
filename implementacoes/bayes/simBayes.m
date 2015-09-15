@@ -2,11 +2,10 @@ function [ result ] = simBayes( data, ptrn, num, conf )
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-Ntest = size(data.y, 1) - floor(size(data.y, 1)*(ptrn)); %num dados teste
 for i = 1 : num
     %% Embaralhando os dados
     [treinData, testData] = embaralhaDados(data, ptrn, 2);
-
+    Ntest = size(testData.y, 1);
         
     %% Treinamento
     fprintf('Treinando o Bayes.\n');

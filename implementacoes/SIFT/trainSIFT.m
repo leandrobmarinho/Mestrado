@@ -1,9 +1,8 @@
-function [model] = trainSIFT( trainData )
+function [model] = trainSIFT( trainData, pathData)
 %TRAINSIFT Train of SIFT. 
 % trainData - data train
 % k - number of image model by classes
-% path - path to read the image
-% nnThreshold - threshold
+% pathDescrp - path to load data
 
 numTrain = length(trainData.labels);
 
@@ -19,9 +18,19 @@ numTrain = length(trainData.labels);
 % end
 % model.labels = trainData.labels;
 
+inds = 0;
 for i = 1 : numTrain
     
-    model.imgs{i} = loadDescs(trainData.imgs(i));
+%     model.imgs{i} = loadDescs(trainData.imgs(i));
+
+    % Load only if there is not batch in memory
+    indImg = trainData.imgs(i);
+    if ( sum(inds == indImg) )
+        model.imgs{i} = batchDesc{inds == indImg};
+    else
+        [batchDesc, inds] = loadDescs(trainData.imgs(i), pathData);
+        model.imgs{i} = batchDesc{inds == indImg};
+    end
 end
 model.labels = trainData.labels;
 
