@@ -1,66 +1,59 @@
-function [trainData, testData] = embaralhaDados( dados, ptrn, tipo )
+function [trainData, testData] = embaralhaDados( data, ptrn, type )
 %EMBARALHADADOS Summary of this function goes here
 % dados - dados para embaralhar
 % ptrn - porcentagem para treinamento e teste
 % tipo [1] - numero de classe desbalanceado
 % tipo [2] - numero de classe balanceado
 
-[N, ~] = size(dados.x);
+[N, ~] = size(data.x);
 
-if (tipo == 1)
+if (type == 1)
     limit = floor(ptrn*N);
-    ind = randperm(N);
+    inds = randperm(N);
     
-    trainData.x = dados.x(ind(1:limit), :);
-    trainData.y = dados.y(ind(1:limit), :);
-    testData.x = dados.x(ind(limit+1:end), :);
-    testData.y = dados.y(ind(limit+1:end), :);
+    trainData.x = data.x(inds(1:limit), :);
+    trainData.y = data.y(inds(1:limit), :);
+    testData.x = data.x(inds(limit+1:end), :);
+    testData.y = data.y(inds(limit+1:end), :);
     
-elseif ( tipo == 2)
+elseif ( type == 2)
     trainData.x = []; trainData.y = []; testData.x = []; testData.y = [];
 
-
-    if (size(dados.y, 2) == 1)
-        matriz = false;
-        numClass = length(unique(dados.y));
+    
+    if (size(data.y, 2) == 1)
+        labels = data.y;
     else
-        matriz = true;
-        numClass = size(dados.y, 2);
+        % 1_of_k representation
+        labels = vec2ind(data.y')';
     end
+    classes = unique(labels);
+    
+    numLabels = length(classes);
+    for i = 1 : numLabels
+        inds = find(labels == classes(i));
 
-    labelClasse = unique(dados.y);
-    for i = 1 : numClass,
-
-        if (matriz == true)
-            classe = zeros(1, numClass);
-            classe(i) = 1;        
-            ind = find(classe * dados.y');
-        else
-            ind = find(dados.y == labelClasse(i));
-        end
-
-        lengthClass = length(ind);
+        numInds = length(inds);
         
-        limit = floor(ptrn*lengthClass);
-        if not(isempty(ind))
+        limit = floor(ptrn*numInds);
+        if not(isempty(inds))
             
-            ind = ind(randperm(lengthClass));
-            trainData.x = [trainData.x; dados.x(ind(1:limit), :)];
-            trainData.y = [trainData.y; dados.y(ind(1:limit), :)];
+            inds = inds(randperm(numInds));
+            trainData.x = [trainData.x; data.x(inds(1:limit), :)];
+            trainData.y = [trainData.y; data.y(inds(1:limit), :)];
             
-            testData.x = [testData.x; dados.x(ind(limit+1:end), :)];
-            testData.y = [testData.y; dados.y(ind(limit+1:end), :)];
+            testData.x = [testData.x; data.x(inds(limit+1:end), :)];
+            testData.y = [testData.y; data.y(inds(limit+1:end), :)];
         end
     end
     
     % Embaralha os dados
-    ind = randperm(size(trainData.x,1));
-    trainData.x = trainData.x(ind, :);
-    trainData.y = trainData.y(ind, :);
+    inds = randperm(size(trainData.x,1));
+    trainData.x = trainData.x(inds, :);
+    trainData.y = trainData.y(inds, :);
     
-    ind = randperm(size(testData.x,1));
-    testData.x = testData.x(ind, :);
-    testData.y = testData.y(ind, :);
+    inds = randperm(size(testData.x,1));
+    testData.x = testData.x(inds, :);
+    testData.y = testData.y(inds, :);
      
 end
 
