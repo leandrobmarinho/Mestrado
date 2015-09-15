@@ -1,9 +1,13 @@
-function [trainData, testData] = shuffleImgs( data, k )
-%SHUFFLEIMGS Shuffle descriptions and labels images
+function [trainData, testData] = shuffleImgs_( data, k, shuffleTest, varargin)
+%SHUFFLEIMGS Divide and Shuffle descriptions and labels images
 % data - description and labels of images
 % k - number of image model by classes
+% shuffleTest - shuffle the test images. Default: true
 
 % ptrn = .1;
+if (not(exist('shuffleTest', 'var')))
+    shuffleTest = true;
+end
 
 trainData.imgs = []; trainData.labels = [];
 testData.imgs = []; testData.labels = [];
@@ -23,10 +27,12 @@ for i = 1 : length(labelClasse)
     
 end
 
-ind = randperm(length(testData.labels));
-
-testData.labels = testData.labels(ind);
-testData.imgs = testData.imgs(ind);
+if (shuffleTest)
+    ind = randperm(length(testData.labels));
+    
+    testData.labels = testData.labels(ind);
+    testData.imgs = testData.imgs(ind);
+end
 
 end
 

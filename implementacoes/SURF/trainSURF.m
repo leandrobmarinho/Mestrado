@@ -1,8 +1,6 @@
-function [model] = trainSIFT( trainData, pathData)
-%TRAINSIFT Train of SIFT. 
+function [model] = trainSURF( trainData, pathData )
+%TRAINSURF Train of SURF. 
 % trainData - data train
-% k - number of image model by classes
-% pathDescrp - path to load data
 
 numTrain = length(trainData.labels);
 

@@ -71,7 +71,10 @@ if (isempty(trX) == 0),
         case ('mahalanobis')
             model.covX = cov(trX);
             if (rcond(model.covX) < 1e-12)
-                model.covX = model.covX + 0.01*eye(size(model.covX))
+                model.covX = model.covX + 0.01*eye(size(model.covX));
+            end
+            if (isnan(model.covX))
+                model.covX = model.covX + 0.01*eye(size(model.covX));
             end
             Dx = pdist2(trX, refX, 'mahalanobis', model.covX);
             
@@ -104,10 +107,10 @@ else
 end
 
 if (rcond(model.B) < 1e-12)
-    model.B =  model.B + 0.01*eye(size(model.B,2));
+    model.B = inv(Dx'*Dx + 0.001.*eye(n))*Dx'*Dy;
 end
 if (isnan(model.B))
-    model.B =  0.01*eye(size(model.B,2));
+    model.B = inv(Dx'*Dx + 0.001.*eye(n))*Dx'*Dy;
 end
 model.refX = refX;
 model.refY = refY;

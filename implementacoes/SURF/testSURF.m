@@ -1,5 +1,5 @@
 function [Y, timeTest] = testSURF( trainData, testData, k )
-%TESTSIFT Test of SIFT
+%TESTSURF Test of SURF
 % trainData - data train
 % testData - test train
 % k - number of image model by classes

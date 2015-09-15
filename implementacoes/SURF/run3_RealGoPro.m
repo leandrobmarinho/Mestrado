@@ -2,15 +2,14 @@ clear all; close all; clc;
 p = path; path(p, '../'); path(p, '../utils/');
 
 %% General configurations
-numRep = 2;
-nnThreshold = 0.8;
+numRep = 10;
 nameImgs = 'real_gopro';
-pathData = '../dados/SIFT_real_gopro/desc_real_gopro_';
+pathData = sprintf('../dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
 k = 1;
 
 
 %% Load the images
-load(sprintf('../dados/descInd_sift_%s', nameImgs));
+load(sprintf('../dados/descInd_%s', nameImgs));
 data.imgs = imgsInd;
 data.labels = labels;
 
@@ -28,12 +27,12 @@ for i = 1 : numRep
     [trainData, testData] = shuffleImgs(data, k, false);      
     
     %% Train
-    [model] = trainSIFT(trainData, pathData);
+    [model] = trainSURF(trainData, pathData);
     
     %% Test
     fprintf('SIFT - step %d.\n', i);
     tic
-    [Y, t] = testSIFT_ind(model, testData, k, nnThreshold, pathData);
+    [Y, t] = testSURF_ind(model, testData, k, pathData);
     timeTest(i) = mean(t);
     confMatTest(:,:,i) = confusionmat(testData.labels', Y');
     
@@ -42,7 +41,7 @@ for i = 1 : numRep
     matConfPorc(:,:,i) = (confMatTest(:,:,i)./length(testData.labels)).*100;
     [metrics(:,:,i), generalMetrics(i,:)] = metricasMatConf(confMatTest(:,:,i));
     
-    save(sprintf('sift_gray_%s', nameImgs));
+    save(sprintf('surf_gray_%s', nameImgs));
 end
 
 % Resultado geral
@@ -63,6 +62,6 @@ result.stdAcc = std(acc);
 
 result.timeTest = timeTest;
 
-save(sprintf('sift_gray_%s', nameImgs));
+save(sprintf('surf_gray_%s', nameImgs));
 
 path(p);
