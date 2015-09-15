@@ -3,7 +3,7 @@ addpath('../percetron/'); addpath('../MLM/'); addpath('../MLP/');
 addpath('../multisvm/'); addpath('../bayes/'); addpath('../');
 
 %% General configurations
-conf.mlMethods = {'mlm', 'mlmNN'};
+conf.mlMethods = {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'};
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 
 
@@ -11,6 +11,7 @@ conf.mlMethods = {'mlm', 'mlmNN'};
 %% ======= Gray - Real =======
 % strModel = 'gray_%s_gopro_real';
 % load(sprintf(sprintf('../dados/%s', strModel), 'all'));
+% mideAverage = mideAverage(:, [2 3 6 8 9 10 12]);
 % 
 % conf.descr = sprintf(strModel, 'mideAverage');
 % evaluateData(mideAverage, conf)
@@ -28,12 +29,12 @@ conf.mlMethods = {'mlm', 'mlmNN'};
 % evaluateData(haralick, conf)
 
 
-conf.numRep = 4;
-
 %% ======= Gray - Sim =======
 strModel = 'gray_%s_gopro_sim';
 load(sprintf(sprintf('../dados/%s', strModel), 'all'));
-mideAverage = mideAverage(:, [1 2 3 6 8 9 10 12]);
+mideAverage = mideAverage(:, [2 3 6 8 9 10 12]);
+mideSobel = mideSobel(:, [2 3 6 8 9 10 12]);
+
 
 conf.descr = sprintf(strModel, 'mideAverage');
 evaluateData(mideAverage, conf)

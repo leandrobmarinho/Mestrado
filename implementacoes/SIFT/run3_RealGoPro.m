@@ -5,12 +5,12 @@ p = path; path(p, '../'); path(p, '../utils/');
 numRep = 2;
 nnThreshold = 0.8;
 nameImgs = 'real_gopro';
-pathData = '../dados/SIFT_real_gopro/desc_real_gopro_';
+pathData = '../dados/SIFT_real_gopro/desc_sift_real_gopro_';
 k = 1;
 
 
 %% Load the images
-load(sprintf('../dados/descInd_sift_%s', nameImgs));
+load(sprintf('../dados/descInd_%s', nameImgs));
 data.imgs = imgsInd;
 data.labels = labels;
 
