@@ -13,9 +13,11 @@ strModel = 'gray_%s_gopro_real';
 load(sprintf(sprintf('../dados/%s', strModel), 'all'));
 mideAverage = mideAverage(:, [2 3 6 8 9 10 12]);
 
+conf.mlMethods = {'lssvm', 'mlm', 'mlmNN'};
 conf.descr = sprintf(strModel, 'mideAverage');
 evaluateData(mideAverage, conf)
 
+conf.mlMethods = {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'};
 conf.descr = sprintf(strModel, 'mideSobel');
 evaluateData(mideSobel, conf)
 
