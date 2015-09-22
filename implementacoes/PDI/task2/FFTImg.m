@@ -51,13 +51,13 @@ classdef FFTImg < handle
                         obj.H(u,v) = exp(-((D(u,v)^2)/(2*(D0^2))));
                         
                     elseif strcmp(typeMasc, 'lowbutt')
-                        obj.H (u, v) =  1 / (1 + (D(u,v)/D0)^(2*params{1}));
+                        obj.H (u, v) =  1 / (1 + (D(u,v)/D0)^(2*params));
                         
                     elseif strcmp(typeMasc, 'highgauss')
                         obj.H (u, v) = 1 - exp(-((D(u,v)^2)/(2*(D0^2))));
                         
                     elseif strcmp(typeMasc, 'highbutt')
-                        obj.H (u, v) = 1 / (1 + (D0/D(u,v))^(2*params{1}));
+                        obj.H (u, v) = 1 / (1 + (D0/D(u,v))^(2*params));
                     end
                 end
             end
