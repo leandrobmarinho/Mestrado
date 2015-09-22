@@ -1,13 +1,31 @@
-close all; clear; clc; addpath('../img/');
-
+close all; clear; clc;
+p = path;
+path(p, '../../img');
 % http://www.cs.uregina.ca/Links/class-info/425/Lab3/
 
 
 % img = imread('tire.tif');
-img = imread('seeds.png');
+img = imread('cameraman.tif');
 I2=im2double(img);
 % imshow(img), figure
 % imhist(img), figure
+
+
+%% Gamma Transformation
+% c = 1;
+% gamma = 2.25;
+% imgGamma = c*I2.^gamma;
+% figure, imshow(img)
+% figure, imshow(imgGamma)
+% figure, imhist(imgGamma)
+
+
+%% Linear Transformation
+% a = 1;
+% b = 50;
+% imgT = a*img + b;
+% figure, imshow([img imgT])
+
 
 %%Negative
 % nI = 255 - I;
@@ -24,16 +42,10 @@ I2=im2double(img);
 % imhist(imgLog), figure
 
 
-%% Gamma Transformation
-% c = 1;
-% gamma = .4;
-% % imgGamma = c*I2.^gamma;
-% imgGamma = imadjust(img,[],[],gamma);
-% imshow(imgGamma), figure
-% imhist(imgGamma), figure
-
-
 %% Contrast stretching
 % imgCont = imadjust(img,[.4 .55],[.12 .87]);
-% imshow( imgCont ), figure
-% imhist( imgCont), figure
+% figure, imshow( imgCont )
+% figure, imhist( imgCont) 
+
+
+path(p);
