@@ -11,6 +11,7 @@ h = imgHSV(:,:,1);
 s = imgHSV(:,:,2);
 
 imgBW = logical(thresholding(h, .6)) & logical(thresholding(s, .7));
+% imgBW = logical(im2bw(h, 0.6) & im2bw(h, .7));
 
 figure, imhist(h)
 figure, imhist(s)
