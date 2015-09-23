@@ -38,7 +38,7 @@ for i=1:length(props)
 end
 
 imwrite(h, 'imgsOut/hand_H.png')
-imwrite(h, 'imgsOut/hand_S.png')
+imwrite(s, 'imgsOut/hand_S.png')
 imwrite(L, 'imgsOut/handBW.png')
 
 path(p)
