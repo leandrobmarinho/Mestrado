@@ -1,5 +1,5 @@
 close all; clear; clc;
-img = imread('figures2.gif');
+img = imread('imgs/objetos.gif');
 
 %% Computa os componentes conectados na imagem
 compConec = bwconncomp(img);
@@ -20,3 +20,5 @@ for i = 1 : numComp
     
     plot(xCentroide, yCentroide, 'b*', 'LineWidth', 3);
 end
+
+print('imgsOut/obj_conectado','-depsc')
