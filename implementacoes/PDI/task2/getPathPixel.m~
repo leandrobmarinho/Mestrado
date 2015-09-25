@@ -1,0 +1,34 @@
+function [ ] = getPathPixel(pixelIni, imgIn, i )
+%{
+East         M
+Southeast    M + 1
+South        1
+Southwest   -M + 1
+West        -M
+Northwest   -M - 1
+North       -1
+Northeast    M - 1
+%}
+
+keyboard
+M = size(imgIn, 1);
+neighbor_offsets = [-1, M - 1, M, M + 1, 1, -M + 1, -M, -M - 1]';
+
+inds = pixelIni;
+while not(isempty(inds))
+    pixel = inds(1);
+    inds = inds(2:end);
+    
+    neighbors = bsxfun(@plus, pixel, neighbor_offsets);
+    isNeighbors = neighbors(imgIn(neighbors) == 1)';
+    
+    inds = [inds isNeighbors];
+    
+    imgInAux(pixel) = i;
+    i = i + 1;
+    
+end
+
+end
+
+

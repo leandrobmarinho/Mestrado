@@ -2,7 +2,8 @@ close all; clear; clc;
 img = imread('imgs/objetos.gif');
 
 %% Computa os componentes conectados na imagem
-compConec = bwconncomp(img);
+compConec = bwConComp(img);
+
 numComp = compConec.NumObjects;
 
 figure, imshow(img);
