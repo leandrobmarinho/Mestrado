@@ -1,74 +1,50 @@
-clear all; close all; clc;
+clear all; close all; clc; p = path;
 addpath('../percetron/'); addpath('../MLM/'); addpath('../MLP/');
 addpath('../multisvm/'); addpath('../bayes/'); addpath('../');
 
 %% General configurations
-conf.mlMethods = {'bayes', 'svm', 'mlp'};
-conf.mlMethods = {'mlp'};
+conf.mlMethods = {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'};
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 
 
 
-%% ======= Gray - All_MideAverage - Real =======
-% strModel = 'gray_%s_gopro_real';
-% load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
-% 
-% conf.descr = sprintf(strModel, 'mideAverage');
-% evaluateData(mide, conf)
-% 
-% conf.descr = sprintf(strModel, 'lbp');
-% evaluateData(lbp, conf)
-% 
-% conf.descr = sprintf(strModel, 'hu');
-% evaluateData(hu, conf)
-% 
-% conf.descr = sprintf(strModel, 'haralick');
-% evaluateData(haralick, conf)
-
-
-
-%% ======= Gray - All_MideSobel - Real =======
+%% ======= Gray - Real =======
 strModel = 'gray_%s_gopro_real';
 load(sprintf(sprintf('../dados/%s', strModel), 'all'));
-
-conf.descr = sprintf(strModel, 'mideSobel');
-evaluateData(mide, conf)
-
-% conf.descr = sprintf(strModel, 'lbp');
-% evaluateData(lbp, conf)
+% mideAverage = mideAverage(:, [2 3 6 8 9 10 12]);
 % 
-% conf.descr = sprintf(strModel, 'hu');
-% evaluateData(hu, conf)
-% 
-% conf.descr = sprintf(strModel, 'haralick');
-% evaluateData(haralick, conf)
-
-
-
-%% ======= Gray - All_MideAverage - Sim =======
-% strModel = 'gray_%s_gopro_sim';
-% load(sprintf(sprintf('../dados/%s', strModel), 'all-mideAverage'));
-% 
+% conf.mlMethods = {'lssvm', 'mlm', 'mlmNN'};
 % conf.descr = sprintf(strModel, 'mideAverage');
-% evaluateData(mide, conf)
+% evaluateData(mideAverage, conf)
 % 
+% conf.mlMethods = {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'};
+% conf.descr = sprintf(strModel, 'mideSobel');
+% evaluateData(mideSobel, conf)
+% 
+% conf.mlMethods = {'mlp'};
 % conf.descr = sprintf(strModel, 'lbp');
 % evaluateData(lbp, conf)
 % 
 % conf.descr = sprintf(strModel, 'hu');
 % evaluateData(hu, conf)
 % 
-% conf.descr = sprintf(strModel, 'haralick');
-% evaluateData(haralick, conf)
+conf.mlMethods = {'lssvm', 'mlm', 'mlmNN'};
+conf.descr = sprintf(strModel, 'haralick');
+evaluateData(haralick, conf)
 
 
+%% ======= Gray - Sim =======
+strModel = 'gray_%s_gopro_sim';
+load(sprintf(sprintf('../dados/%s', strModel), 'all'));
+mideAverage = mideAverage(:, [2 3 6 8 9 10 12]);
+mideSobel = mideSobel(:, [2 3 6 8 9 10 12]);
 
-%% ======= Gray - All_MideSobel - Sim =======
-% strModel = 'gray_%s_gopro_sim';
-% load(sprintf(sprintf('../dados/%s', strModel), 'all-mideSobel'));
+
+conf.descr = sprintf(strModel, 'mideAverage');
+evaluateData2(mideAverage, conf)
 % 
 % conf.descr = sprintf(strModel, 'mideSobel');
-% evaluateData(mide, conf)
+% evaluateData(mideSobel, conf)
 % 
 % conf.descr = sprintf(strModel, 'lbp');
 % evaluateData(lbp, conf)

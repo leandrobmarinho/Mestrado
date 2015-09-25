@@ -1,4 +1,4 @@
-function [ ] = evaluateData( dataset, params )
+function [ ] = evaluateData2( dataset, params )
 %EVALUETEDATA Evalute the dataset using the Machine Learning methods
 %   data - matrix with data [X Y], Y is a line vector with numbers of the 
 %           classes
@@ -8,9 +8,12 @@ function [ ] = evaluateData( dataset, params )
 %           descr - string with model of names to save
 %           mlMethods = methods to evaluate {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'}
 
-data.x = dataset(:,1:end-1);
-data.y = dataset(:,end);
-data.x = normalizaDados(data.x, 1);
+
+if (isfield(params, 'normaliza') == 0)
+    normaliza = true;
+else
+    normaliza = params.normaliza;
+end
 
 %% Verification
 if (isfield(params, 'ptrain') == 0)    
@@ -26,6 +29,16 @@ else
 end
 descr = params.descr;
 
+
+% data.x = dataset(:,1:end-1);
+% data.y = dataset(:, end);
+
+[data.x, ia, ~] = unique(dataset(:,1:end-1), 'rows');
+data.y = dataset(ia, end);
+
+if normaliza
+    data.x = normalizaDados(data.x, 1);
+end
 
 %% Evaluate
 %% =============== Bayes ===============
@@ -93,6 +106,7 @@ if(find(ismember(params.mlMethods,'svm')))
     fprintf('%s\n', strModel)
     
 end
+
 
 
 %% =============== MLP ===============
@@ -222,7 +236,7 @@ if(find(ismember(params.mlMethods,'mlmNN')))
     config.k = 1;
     config.NN = 9;
     
-    for dist = {'cityblock', '', } %{'cityblock', '', 'mahalanobis' }
+    for dist = {'cityblock', '', 'mahalanobis' } %{'cityblock', '', 'mahalanobis' }
         
         config.distance = dist{1};
         
