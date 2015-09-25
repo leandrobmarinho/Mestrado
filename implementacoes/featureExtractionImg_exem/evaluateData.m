@@ -8,9 +8,12 @@ function [ ] = evaluateData( dataset, params )
 %           descr - string with model of names to save
 %           mlMethods = methods to evaluate {'bayes', 'svm', 'mlp', 'lssvm', 'mlm', 'mlmNN'}
 
-data.x = dataset(:,1:end-1);
-data.y = dataset(:,end);
-data.x = normalizaDados(data.x, 1);
+
+if (isfield(params, 'normaliza') == 0)
+    normaliza = true;
+else
+    normaliza = params.normaliza;
+end
 
 %% Verification
 if (isfield(params, 'ptrain') == 0)    
@@ -26,6 +29,16 @@ else
 end
 descr = params.descr;
 
+
+% data.x = dataset(:,1:end-1);
+% data.y = dataset(:, end);
+
+[data.x, ia, ~] = unique(dataset(:,1:end-1), 'rows');
+data.y = dataset(ia, end);
+
+if normaliza
+    data.x = normalizaDados(data.x, 1);
+end
 
 %% Evaluate
 %% =============== Bayes ===============
@@ -51,7 +64,8 @@ if(find(ismember(params.mlMethods,'svm')))
     config.fkernel = 'linear';
     config.options.MaxIter = 9000000;
     
-    paraC = 2.^(-5:2:9);
+%     paraC = 2.^(-5:2:9);
+    paraC = 2.^(6:9);
     
     i = 1;
     for c = paraC
@@ -74,7 +88,7 @@ if(find(ismember(params.mlMethods,'svm')))
     clear paramsSVM
     config.fkernel = 'rbf';
     i = 1;
-    for sigma = 2.^(-10:5)
+    for sigma = 2.^(3:5)%2.^(-10:5)
         
         for c = paraC
             config.paraC = c;
@@ -93,6 +107,7 @@ if(find(ismember(params.mlMethods,'svm')))
     fprintf('%s\n', strModel)
     
 end
+
 
 
 %% =============== MLP ===============
@@ -133,7 +148,8 @@ if(find(ismember(params.mlMethods,'lssvm')))
     config.fkernel = 'linear';
     config.options.MaxIter = 9000000;
     
-    paraC = 2.^(-5:2:9);
+%     paraC = 2.^(-5:2:9);
+    paraC = 2.^(6:9);
     
     i = 1;
     for c = paraC
@@ -157,7 +173,7 @@ if(find(ismember(params.mlMethods,'lssvm')))
     clear paramsSVM
     config.fkernel = 'rbf';
     i = 1;
-    for sigma = 2.^(-10:5)
+    for sigma = 2.^(3:5)%2.^(-10:5)
         
         for c = paraC
             config.paraC = c;
@@ -168,12 +184,12 @@ if(find(ismember(params.mlMethods,'lssvm')))
         end
     end
     
-%     optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
-%     result = simMultiSVM( data, ptrn, numRep, optParam );
-%     
-%     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
-%     save(strModel, 'result', 'config', 'optParam')
-%     fprintf('%s\n', strModel)
+    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    result = simMultiSVM( data, ptrn, numRep, optParam );
+    
+    strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
+    save(strModel, 'result', 'config', 'optParam')
+    fprintf('%s\n', strModel)
 end
 
 
@@ -195,7 +211,7 @@ if(find(ismember(params.mlMethods,'mlm')))
     config.method = ''; % lsqnonlin knn ''
     config.k = 1;
     
-    for dist = {'cityblock', ''}%{'cityblock', '', 'mahalanobis' }
+    for dist = {'cityblock', '', 'mahalanobis' }
         
         config.distance = dist{1}; % mahalanobis cityblock ''
         
@@ -222,7 +238,7 @@ if(find(ismember(params.mlMethods,'mlmNN')))
     config.k = 1;
     config.NN = 9;
     
-    for dist = {'cityblock', '', } %{'cityblock', '', 'mahalanobis' }
+    for dist = {'cityblock', '', 'mahalanobis' }
         
         config.distance = dist{1};
         
