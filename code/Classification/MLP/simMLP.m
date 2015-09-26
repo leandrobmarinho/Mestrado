@@ -11,6 +11,8 @@ for i = 1 : num
     %% Treinamento
     fprintf('Treinando a MLP.\n');
     net = patternnet(param);
+    net.trainFcn =  'trainlm';
+%         net.trainFcn =  'traingd';
     net.trainParam.showWindow = 0;
     
     tic

@@ -21,6 +21,7 @@ for c = 1 : size(matriz,2)
     metricas(c,6) = TP/sum(matriz(c,:)); %acc
         
 end
+metricas(isnan(metricas)) = 0;
 
 metricasGeral = sum(metricas.*repmat(sum(matriz,2), 1, size(metricas,2)))...
     ./repmat(sum(sum(matriz,2)), 1, size(metricas,2));

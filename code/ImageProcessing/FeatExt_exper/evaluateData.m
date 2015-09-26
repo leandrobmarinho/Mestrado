@@ -37,7 +37,7 @@ descr = params.descr;
 data.y = dataset(ia, end);
 
 if normaliza
-    data.x = normalizaDados(data.x, 1);
+    data.x = normalizeData(data.x, 1);
 end
 
 %% Evaluate
@@ -48,25 +48,26 @@ if(find(ismember(params.mlMethods,'bayes')))
     config.algoritmo = '';
     
     result = simBayes(data, ptrn, numRep, config);
-    
+
     strModel = sprintf('%s_%s', descr, 'bayes');   
     save(strModel, 'result', 'config')
     fprintf('%s\n', strModel)
 end
 
 
-%% =============== SVM ===============
-clear config
-if(find(ismember(params.mlMethods,'svm')))
+% C from LSSVM and SVM
+% paraC = 2.^(-3:2:15);
+paraC = 2.^(2:11);
+sigmas = 2.^(-3:3);
+%% =============== SVM (Linear) ===============
 
-    % =================== SVM - Linear =================== 
+clear config
+if(find(ismember(params.mlMethods,'svmLinear')))
+
     config.metodo = 'SMO';
     config.fkernel = 'linear';
     config.options.MaxIter = 9000000;
-    
-%     paraC = 2.^(-5:2:9);
-    paraC = 2.^(6:9);
-    
+        
     i = 1;
     for c = paraC
         config.paraC = c;
@@ -75,7 +76,7 @@ if(find(ismember(params.mlMethods,'svm')))
         i = i + 1;
     end
 
-    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'svm', config.fkernel);    
@@ -83,12 +84,19 @@ if(find(ismember(params.mlMethods,'svm')))
     fprintf('%s\n', strModel)
     
     
+end
+   
+%% =============== SVM (RBF) ===============
+clear config
+clear paramsSVM
+if(find(ismember(params.mlMethods,'svmRBF')))
     
-    % =================== SVM - RBF =================== 
-    clear paramsSVM
+    config.metodo = 'SMO';
+    config.options.MaxIter = 9000000;
     config.fkernel = 'rbf';
+    
     i = 1;
-    for sigma = 2.^(3:5)%2.^(-10:5)
+    for sigma = sigmas %2.^(-10:5)
         
         for c = paraC
             config.paraC = c;
@@ -99,7 +107,7 @@ if(find(ismember(params.mlMethods,'svm')))
         end
     end
     
-    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
             
     strModel = sprintf('%s_%s-%s', descr, 'svm', config.fkernel);    
@@ -122,9 +130,11 @@ if(find(ismember(params.mlMethods,'mlp')))
     %paramsMLP = 2.^(1:9);
 %     paramsMLP = [10:10:300];
 %     paramsMLP = [10:10:150 200:20:340];
-    paramsMLP = [10:10:150 200:20:240];
+%     paramsMLP = [10:10:150 200:20:240];
+
+    paramsMLP = 5:5:30;
     
-    optParam = searchTopologyMLP(data, paramsMLP, numRep, ptrn );
+    optParam = searchTopologyMLP(data, paramsMLP, 2, ptrn );
     result = simMLP(data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s', descr, 'mlp');    
@@ -135,22 +145,19 @@ end
 
 
 
-%% =============== LSSVM ===============
+%% =============== LSSVM (Linear) ===============
 clear config
 clear paramsSVM
-if(find(ismember(params.mlMethods,'lssvm')))
+if(find(ismember(params.mlMethods,'lssvmLinear')))
     if ( size(data.y,2) > 1)
        data.y = vec2ind(data.y')';
     end
     
-    % =================== LSSVM - Linear ===================
     config.metodo = 'LS';
-    config.fkernel = 'linear';
     config.options.MaxIter = 9000000;
+    config.fkernel = 'linear';
     
-%     paraC = 2.^(-5:2:9);
-    paraC = 2.^(6:9);
-    
+        
     i = 1;
     for c = paraC
         config.paraC = c;
@@ -159,7 +166,7 @@ if(find(ismember(params.mlMethods,'lssvm')))
         i = i + 1;
     end
     
-    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
@@ -167,13 +174,22 @@ if(find(ismember(params.mlMethods,'lssvm')))
     fprintf('%s\n', strModel)
     
     
+end
     
+%% =============== LSSVM (RBF) ===============
+clear config
+clear paramsSVM
+if(find(ismember(params.mlMethods,'lssvmRBF')))
+    if ( size(data.y,2) > 1)
+       data.y = vec2ind(data.y')';
+    end
     
-    % =============== LSSVM - RBF ===============
-    clear paramsSVM
+    config.metodo = 'LS';
+    config.options.MaxIter = 9000000;
     config.fkernel = 'rbf';
+    
     i = 1;
-    for sigma = 2.^(3:5)%2.^(-10:5)
+    for sigma = sigmas
         
         for c = paraC
             config.paraC = c;
@@ -184,7 +200,7 @@ if(find(ismember(params.mlMethods,'lssvm')))
         end
     end
     
-    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
@@ -236,7 +252,7 @@ if(find(ismember(params.mlMethods,'mlmNN')))
     
     config.method = 'knn'; % lsqnonlin knn ''
     config.k = 1;
-    config.NN = 9;
+    config.NN = 1;
     
     for dist = {'cityblock', '', 'mahalanobis' }
         

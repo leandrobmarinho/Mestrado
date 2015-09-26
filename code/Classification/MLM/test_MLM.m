@@ -41,7 +41,13 @@ try
             
             labels = vec2ind(model.refY')';
             n = size(data.x, 1);
-            Yh = mode(reshape(labels(Ind(:, 1:conf.NN)', :), conf.NN, n))';
+            
+            if (conf.NN > 1)
+                Yh = mode(reshape(labels(Ind(:, 1:conf.NN)', :), conf.NN, n))';
+            else
+                Yh = labels(Ind(:, 1:conf.NN)', :);
+            end
+            
             
             Yh = full(ind2vec(Yh'))';
             

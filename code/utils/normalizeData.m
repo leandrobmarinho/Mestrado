@@ -1,4 +1,4 @@
-function [ dados ] = normalizaDados( dados, opcao )
+function [ dados ] = normalizeData( dados, opcao )
 %NORMALIZADADOS Summary of this function goes here
 % [1] - (dados - media)./(max - min)
 
