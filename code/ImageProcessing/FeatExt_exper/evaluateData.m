@@ -63,6 +63,7 @@ sigmas = 2.^(-3:3);
 
 clear config
 if(find(ismember(params.mlMethods,'svmLinear')))
+    try
 
     config.metodo = 'SMO';
     config.fkernel = 'linear';
@@ -76,13 +77,21 @@ if(find(ismember(params.mlMethods,'svmLinear')))
         i = i + 1;
     end
 
-    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
+    if isfield(params,'extraSVMLinear')
+        optParam = params.extraSVMLinear;
+    else
+        optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    end
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'svm', config.fkernel);    
     save(strModel, 'result', 'config', 'optParam')
     fprintf('%s\n', strModel)
-    
+
+    catch
+         fprintf('========= Erro no SVM =========\n');
+    end
+
     
 end
    
@@ -90,8 +99,9 @@ end
 clear config
 clear paramsSVM
 if(find(ismember(params.mlMethods,'svmRBF')))
+    try
     
-    config.metodo = 'SMO';
+    config.metodo = 'SMO';    
     config.options.MaxIter = 9000000;
     config.fkernel = 'rbf';
     
@@ -107,13 +117,20 @@ if(find(ismember(params.mlMethods,'svmRBF')))
         end
     end
     
-    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
+    if isfield(params,'extraRBF')
+        optParam = params.extraRBF;
+    else
+        optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    end
     result = simMultiSVM( data, ptrn, numRep, optParam );
             
     strModel = sprintf('%s_%s-%s', descr, 'svm', config.fkernel);    
     save(strModel, 'result', 'config', 'optParam')
     fprintf('%s\n', strModel)
     
+    catch
+        fprintf('========= Erro no SVM =========\n');
+    end
 end
 
 
@@ -132,9 +149,9 @@ if(find(ismember(params.mlMethods,'mlp')))
 %     paramsMLP = [10:10:150 200:20:340];
 %     paramsMLP = [10:10:150 200:20:240];
 
-    paramsMLP = 5:5:30;
+    paramsMLP = 5:5:50;
     
-    optParam = searchTopologyMLP(data, paramsMLP, 2, ptrn );
+    optParam = searchTopologyMLP(data, paramsMLP, 3, ptrn );    
     result = simMLP(data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s', descr, 'mlp');    
@@ -166,7 +183,7 @@ if(find(ismember(params.mlMethods,'lssvmLinear')))
         i = i + 1;
     end
     
-    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
@@ -200,7 +217,7 @@ if(find(ismember(params.mlMethods,'lssvmRBF')))
         end
     end
     
-    optParam = searchParamSVM(data, paramsSVM, 5, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);

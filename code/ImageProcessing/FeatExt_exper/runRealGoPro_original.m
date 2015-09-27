@@ -17,11 +17,15 @@ mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
 mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
 
  
-conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes'};
+conf.mlMethods = {'svmLinear'};
+conf.extraSVMLinear.metodo = 'SMO';
+conf.extraSVMLinear.options.MaxIter = 9000000;
+conf.extraSVMLinear.fkernel = 'linear';
+conf.extraSVMLinear.paraC = 64;
 conf.descr = sprintf(strModel, 'mideAverage');
 evaluateData(mideAverage, conf)
 
-conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes'};
+conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear'};
 conf.descr = sprintf(strModel, 'mideSobel');
 evaluateData(mideSobel, conf)
 

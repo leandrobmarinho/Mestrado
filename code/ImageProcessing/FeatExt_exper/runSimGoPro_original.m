@@ -44,24 +44,37 @@ load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
 mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
 mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
  
-conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
-    'lssvmRBF', 'mlm', 'mlmNN'};
-conf.descr = sprintf(strModel, 'mideAverage');
-evaluateData(mideAverage, conf)
+% conf.mlMethods = { 'svmRBF', 'lssvmLinear', 'lssvmRBF', 'mlm', 'mlmNN'};
+% conf.extraSVMLinear.metodo = 'SMO';
+% conf.extraSVMLinear.options.MaxIter = 9000000;
+% conf.extraSVMLinear.fkernel = 'linear';
+% conf.extraSVMLinear.paraC = 32;
+% conf.descr = sprintf(strModel, 'mideAverage');
+% evaluateData(mideAverage, conf)
+% conf = rmfield(conf,'extraSVMLinear');
 
-conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
-    'lssvmRBF', 'mlm', 'mlmNN'};
-conf.descr = sprintf(strModel, 'mideSobel');
-evaluateData(mideSobel, conf)
 
-conf.mlMethods = {'mlp', 'mlm', 'mlmNN'};
+% conf.mlMethods = {'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
+%     'lssvmRBF', 'mlm', 'mlmNN'};
+% conf.descr = sprintf(strModel, 'mideSobel');
+% conf.extraSVMLinear.metodo = 'SMO';
+% conf.extraSVMLinear.options.MaxIter = 9000000;
+% conf.extraSVMLinear.fkernel = 'linear';
+% conf.extraSVMLinear.paraC = 64;
+% evaluateData(mideSobel, conf)
+% conf = rmfield(conf,'extraSVMLinear');
+
+
+conf.mlMethods = {'bayes'};
 conf.descr = sprintf(strModel, 'lbp');
 evaluateData(lbp, conf)
 
-conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes', 'mlmNN', 'mlm'};
-conf.descr = sprintf(strModel, 'hu');
-evaluateData(hu, conf)
 
-conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes', 'mlmNN', 'mlm'};
-conf.descr = sprintf(strModel, 'haralick');
-evaluateData(haralick, conf)
+% conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes', 'mlmNN', 'mlm'};
+% conf.descr = sprintf(strModel, 'hu');
+% evaluateData(hu, conf)
+% 
+% 
+% conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes', 'mlmNN', 'mlm'};
+% conf.descr = sprintf(strModel, 'haralick');
+% evaluateData(haralick, conf)
