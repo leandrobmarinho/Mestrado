@@ -1,0 +1,29 @@
+close all; clear all; clc; addpath('../KMeans');
+
+imgIn = imread('cameraman.tif');
+% dataTest = img2Dados(imgs, true);
+imgs{1} = imgIn;
+
+data = img2Dados(imgs, 'teste');
+
+%% Utilizando o classificador
+conf.epocas = 200;
+conf.k = 2;
+r = trainKMeans(X, conf)
+
+fprintf('Treinando...\n')
+% [modelo] = trainPzWin(dadosTrein);
+fprintf('Testando...\n')
+% [Yh] = testePzWin(modelo, dadosTeste, 10);
+
+
+
+%% Convertendo a resposta em imagem
+[linhas colunas ~] = size(imgIn);
+% 
+% newImg = reshape(Yh,[colunas, linhas])';
+newImg = reshape(Yh,[linhas, colunas]);
+figure
+image(newImg), colormap('lines')
+axis off;
+

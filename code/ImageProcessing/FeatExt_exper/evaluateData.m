@@ -57,8 +57,8 @@ end
 
 % C from LSSVM and SVM
 % paraC = 2.^(-3:2:15);
-paraC = 2.^(2:11);
-sigmas = 2.^(-3:3);
+paraC = 2.^(2:11); %2.^(2:11);
+sigmas = 2.^(0:3); %2.^(-3:3);
 %% =============== SVM (Linear) ===============
 
 clear config
@@ -80,7 +80,7 @@ if(find(ismember(params.mlMethods,'svmLinear')))
     if isfield(params,'extraSVMLinear')
         optParam = params.extraSVMLinear;
     else
-        optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+        optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
@@ -120,7 +120,7 @@ if(find(ismember(params.mlMethods,'svmRBF')))
     if isfield(params,'extraRBF')
         optParam = params.extraRBF;
     else
-        optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+        optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
     result = simMultiSVM( data, ptrn, numRep, optParam );
             
@@ -183,7 +183,7 @@ if(find(ismember(params.mlMethods,'lssvmLinear')))
         i = i + 1;
     end
     
-    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
@@ -217,7 +217,7 @@ if(find(ismember(params.mlMethods,'lssvmRBF')))
         end
     end
     
-    optParam = searchParamSVM(data, paramsSVM, numRep, ptrn );
+    optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);

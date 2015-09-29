@@ -7,7 +7,7 @@ addpath('../../Classification/bayes/'); addpath('../../utils/');
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
-conf.numRep = 4;
+conf.numRep = 10;
 
 
 %% ======= Gray - Real =======
@@ -43,7 +43,14 @@ strModel = 'gray_%s_gopro_sim';
 load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
 mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
 mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
- 
+
+
+% load('../../../data/mideLaplacian_sim');
+% mideLaplacian = dataMideLaplacian(:, [2 3 4 6 8 9 10 12]);
+% conf.mlMethods = {'bayes'};
+% conf.descr = sprintf(strModel, 'mideLaplacian');
+% evaluateData(mideLaplacian, conf)
+
 % conf.mlMethods = { 'svmRBF', 'lssvmLinear', 'lssvmRBF', 'mlm', 'mlmNN'};
 % conf.extraSVMLinear.metodo = 'SMO';
 % conf.extraSVMLinear.options.MaxIter = 9000000;
@@ -65,16 +72,16 @@ mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
 % conf = rmfield(conf,'extraSVMLinear');
 
 
-conf.mlMethods = {'bayes'};
+conf.mlMethods = {'mlmNN'};
 conf.descr = sprintf(strModel, 'lbp');
 evaluateData(lbp, conf)
 
 
-% conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes', 'mlmNN', 'mlm'};
+
+% conf.mlMethods = {'lssvmRBF', 'svmRBF'};
 % conf.descr = sprintf(strModel, 'hu');
 % evaluateData(hu, conf)
-% 
-% 
-% conf.mlMethods = {'lssvmLinear', 'mlp', 'svmLinear', 'bayes', 'mlmNN', 'mlm'};
+
+
 % conf.descr = sprintf(strModel, 'haralick');
 % evaluateData(haralick, conf)
