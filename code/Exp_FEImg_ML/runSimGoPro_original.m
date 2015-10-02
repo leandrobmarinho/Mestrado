@@ -1,13 +1,13 @@
-clear all; close all; clc; p = path;
-addpath('../../Classification/percetron/'); addpath('../../Classification/MLM/');
-addpath('../../Classification/MLP/'); addpath('../../Classification/multisvm/');
-addpath('../../Classification/bayes/'); addpath('../../utils/');
+clear all; close all; clc;
+addpath('../Classification/percetron/'); addpath('../Classification/MLM/');
+addpath('../Classification/MLP/'); addpath('../Classification/multisvm/');
+addpath('../Classification/bayes/'); addpath('../utils/');
 
 %% General configurations
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
-conf.numRep = 10;
+conf.numRep = 5;
 
 
 %% ======= Gray - Real =======
@@ -36,13 +36,23 @@ conf.numRep = 10;
 % conf.descr = sprintf(strModel, 'haralick');
 % evaluateData(haralick, conf)
 
+% % ---------- Central Moments ----------
+% load('../../data/central_real.mat');
+% conf.descr = sprintf(strModel, 'central');
+% evaluateData(centralGoPro, conf)
+% 
+% % ---------- Statistics Moments ----------
+% load('../../data/statistic_real.mat');
+% conf.descr = sprintf(strModel, 'statistic');
+% evaluateData(statisticGoPro, conf)
+
 
 
 %% ======= Gray - Sim =======
 strModel = 'gray_%s_gopro_sim';
-load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
-mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
-mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
+% load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
+% mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
+% mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
 
 
 % load('../../../data/mideLaplacian_sim');
@@ -72,10 +82,9 @@ mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
 % conf = rmfield(conf,'extraSVMLinear');
 
 
-conf.mlMethods = {'mlmNN'};
-conf.descr = sprintf(strModel, 'lbp');
-evaluateData(lbp, conf)
-
+% conf.mlMethods = {'mlmNN'};
+% conf.descr = sprintf(strModel, 'lbp');
+% evaluateData(lbp, conf)
 
 
 % conf.mlMethods = {'lssvmRBF', 'svmRBF'};
@@ -85,3 +94,14 @@ evaluateData(lbp, conf)
 
 % conf.descr = sprintf(strModel, 'haralick');
 % evaluateData(haralick, conf)
+
+
+% ---------- Central Moments ----------
+load('../../data/central_sim.mat');
+conf.descr = sprintf(strModel, 'central');
+evaluateData(centralSim, conf)
+
+% ---------- Statistics Moments ----------
+load('../../data/statistic_sim.mat');
+conf.descr = sprintf(strModel, 'statistic');
+evaluateData(statisticSim, conf)
