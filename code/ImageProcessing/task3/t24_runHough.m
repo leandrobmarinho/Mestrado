@@ -1,4 +1,4 @@
-clear all; close all; clc; addpath('circle_hough');
+clear all; close all; clc;
 
 %% Hough transform for lines
 imgIn  = imread('imgs/street_lines.png');
@@ -10,7 +10,7 @@ figure, imshow(BW);
 [H,T,R] = hough(BW);
 figure, imshow(H,[],'XData',T,'YData',R,...
             'InitialMagnification','fit');
-xlabel('\theta'), ylabel('\rho');
+xlabel('\theta', 'FontSize',16), ylabel('\rho', 'FontSize',16);
 axis on, axis normal, hold on;
 
 P  = houghpeaks(H,2);

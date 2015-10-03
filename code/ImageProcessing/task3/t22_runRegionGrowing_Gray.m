@@ -25,14 +25,14 @@ end
 % Saving...
 imgSeg = regiongrowing(img, x, y, .45);
 figure, imshow(img+imgSeg);
-hold on; plot(y, x, '.b', 'MarkerSize',10)
+hold on; plot(y, x, '.b', 'MarkerSize',30)
 print('imgsOut/regGroMed_45','-depsc');
 
 ts = [.15 .3];
 for t = 1 : length(ts)
     imgSeg = regiongrowing(img, x, y, ts(t));
     figure, imshow(img+imgSeg);
-    hold on; plot(y, x, '.b', 'MarkerSize',10)
+    hold on; plot(y, x, '.b', 'MarkerSize',30)
     print(sprintf('imgsOut/regGroMed_%d', ts(t)*100),'-depsc');
     
     figure, imshow(imgSeg);
@@ -57,7 +57,9 @@ subplot(2,2,2), imshow(img+imgSeg1+imgSeg2);
 hold on; plot(y, x, '.b', 'MarkerSize',20)
 hold on; plot(y2, x2, '.b', 'MarkerSize',20)
 subplot(2,2,3), imshow(imgSeg)
-subplot(2,2,4), imshow(imfill(imgSeg, 'holes'))
+% subplot(2,2,4), imshow(imfill(imgSeg, 'holes'))
+se = strel('disk',5);
+subplot(2,2,4), imshow(imclose(imgSeg, se))
 
 
 figure, imshow(img+imgSeg1+imgSeg2);
@@ -66,4 +68,5 @@ hold on; plot(y2, x2, '.b', 'MarkerSize',20)
 
 print('imgsOut/regGroMandril','-depsc');
 imwrite(imgSeg, 'imgsOut/regGroMandrilRegs.png')
-imwrite(imfill(imgSeg, 'holes'), 'imgsOut/regGroMandrilRegsFillHoles.png')
+se = strel('disk',5);
+imwrite(imclose(imgSeg, se), 'imgsOut/regGroMandrilRegsClosing.png')

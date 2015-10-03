@@ -28,7 +28,7 @@ imwrite(rgb, 'imgsOut/watershedImgSeg_I.png')
 
 
 %% Transformada de Watershed II
-imgIn = imread('imgs/cork.gif');
+imgIn = imread('imgs/cork.png');
 figure, imshow(imgIn)
 title('Imagem original')
 

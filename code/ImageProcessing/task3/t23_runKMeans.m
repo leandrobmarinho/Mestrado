@@ -50,6 +50,7 @@ axis off; axis image; print('imgsOut/kmeansGray','-depsc');  title('Gray');
 
 
 
+
 %% ============== Compare K using RGB (lenna) ==============
 img = imread('imgs/lena_color_512.png');
 imgIn = img;
@@ -57,7 +58,7 @@ data = img2Data(imgIn);
 [row col ~] = size(imgIn);
 
 figure, imshow(img)
-for k = [2 3 10]
+for k = [2 3 10 15]
     
     % K-Means
     resKMeans = trainKMeans(data.x, k);
@@ -66,10 +67,11 @@ for k = [2 3 10]
     
     % Label2Image
     newImg = reshape(Yh, [row, col]);
-    figure, image(newImg), colormap(jet(k))
+    figure, image(newImg), colormap(copper(k))
     axis off; axis image; print(sprintf('imgsOut/kmeansLena%d', k),'-depsc');
     
 end
+
 
 
 

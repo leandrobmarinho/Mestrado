@@ -14,7 +14,8 @@ figure, imshow(mat2gray(img+imgSeg)), colormap('prism')
 hold on
 plot(x, y, '.b', 'MarkerSize',20)
 print('imgsOut/regGro2Objs','-depsc');
-
+img(img == 1) = 255;
+imwrite(img, prism, 'imgsOut/twoObjs.png')
 
 
 %% ------------- One object -------------
@@ -30,7 +31,8 @@ figure, imshow(mat2gray(img+imgSeg)), colormap('lines')
 hold on
 plot(x, y, '.r', 'MarkerSize',20)
 print('imgsOut/regGroFrog','-depsc');
-
+% img(img == 1) = 255;
+imwrite(img, 'imgsOut/frog.png')
 
 img = im2double(imread('imgs/horse.gif'));
 figure, imshow(img)
@@ -40,7 +42,11 @@ figure, imshow(img)
 
 x=133; y=118;
 imgSeg = regiongrowing(img, x, y, 0.2);
-figure, imshow(mat2gray(img+imgSeg)), colormap('lines')
+imgRes = mat2gray(img+imgSeg);
+imgRes(imgRes == 1) = 255;
+figure, imshow(imgRes), colormap('lines')
 hold on
 plot(x, y, '.r', 'MarkerSize',20)
 print('imgsOut/regGroHorse','-depsc');
+img(img == 1) = 255;
+imwrite(img, 'imgsOut/horse.png')
