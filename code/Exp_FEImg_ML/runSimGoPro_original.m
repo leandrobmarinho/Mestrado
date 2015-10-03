@@ -7,7 +7,7 @@ addpath('../Classification/bayes/'); addpath('../utils/');
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
-conf.numRep = 5;
+conf.numRep = 10;
 
 
 %% ======= Gray - Real =======
@@ -97,11 +97,11 @@ strModel = 'gray_%s_gopro_sim';
 
 
 % ---------- Central Moments ----------
-load('../../data/central_sim.mat');
-conf.descr = sprintf(strModel, 'central');
-evaluateData(centralSim, conf)
+% load('../../data/central_sim.mat');
+% conf.descr = sprintf(strModel, 'central');
+% evaluateData(centralSim, conf)
 
 % ---------- Statistics Moments ----------
 load('../../data/statistic_sim.mat');
 conf.descr = sprintf(strModel, 'statistic');
-evaluateData(statisticSim, conf)
+evaluateData(statisticsSim, conf)

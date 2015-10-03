@@ -3,11 +3,12 @@ addpath('../Classification/percetron/'); addpath('../Classification/MLM/');
 addpath('../Classification/MLP/'); addpath('../Classification/multisvm/');
 addpath('../Classification/bayes/'); addpath('../utils/');
 
+
 %% General configurations
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
-conf.numRep = 5;
+conf.numRep = 100;
 
 
 %% ======= Gray - Real =======
@@ -39,14 +40,14 @@ strModel = 'gray_%s_gopro_real';
 % evaluateData(haralick, conf)
 
 % ---------- Central Moments ----------
-load('../../data/central_real.mat');
-conf.descr = sprintf(strModel, 'central');
-evaluateData(centralGoPro, conf)
+% load('../../data/central_real.mat');
+% conf.descr = sprintf(strModel, 'central');
+% evaluateData(centralGoPro, conf)
 
 % ---------- Statistics Moments ----------
-load('../../data/statistic_real.mat');
-conf.descr = sprintf(strModel, 'statistic');
-evaluateData(statisticGoPro, conf)
+% load('../../data/statistic_real.mat');
+% conf.descr = sprintf(strModel, 'statistic');
+% evaluateData(statisticGoPro, conf)
 
 
 

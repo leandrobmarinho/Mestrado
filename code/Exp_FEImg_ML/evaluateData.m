@@ -15,7 +15,7 @@ else
     normaliza = params.normaliza;
 end
 
-%% Verification
+%% Validation
 if (isfield(params, 'ptrain') == 0)    
     ptrn = .8;
 else
@@ -27,6 +27,19 @@ if (isfield(params, 'numRep') == 0)
 else
     numRep = params.numRep;
 end
+
+if (isfield(params, 'distMLM'))
+    distMLM = params.distMLM;
+else
+    distMLM = {'cityblock', '', 'mahalanobis' };
+end
+
+if (isfield(params, 'distMLM_NN'))
+    distMLM_NN = params.distMLM_NN;
+else
+    distMLM_NN = {'cityblock', '', 'mahalanobis' };
+end
+
 descr = params.descr;
 
 
@@ -47,7 +60,7 @@ if(find(ismember(params.mlMethods,'bayes')))
     config.custo = 1 - eye(length(unique(data.y)));
     config.algoritmo = '';
     
-    result = simBayes(data, ptrn, numRep, config);
+    result = simBayes(data, ptrn, 50, config);
 
     strModel = sprintf('%s_%s', descr, 'bayes');   
     save(strModel, 'result', 'config')
@@ -244,7 +257,7 @@ if(find(ismember(params.mlMethods,'mlm')))
     config.method = ''; % lsqnonlin knn ''
     config.k = 1;
     
-    for dist = {'cityblock', '', 'mahalanobis' }
+    for dist = distMLM
         
         config.distance = dist{1}; % mahalanobis cityblock ''
         
@@ -271,7 +284,7 @@ if(find(ismember(params.mlMethods,'mlmNN')))
     config.k = 1;
     config.NN = 1;
     
-    for dist = {'cityblock', '', 'mahalanobis' }
+    for dist = distMLM_NN
         
         config.distance = dist{1};
         
