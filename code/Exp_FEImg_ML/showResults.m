@@ -1,5 +1,4 @@
-clear all; close all; clc; p = path;
-p = path(p, '../');
+clear all; close all; clc;
 
 folder = 'temp/';
 files = dir(sprintf('%s*.mat', folder));
@@ -31,4 +30,3 @@ for i = 1 : numel(files)
     
 
 end
-path(p);

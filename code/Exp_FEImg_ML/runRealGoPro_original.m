@@ -11,7 +11,7 @@ conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
 conf.numRep = 100;
 
 
-%% ======= Gray - Real =======
+%% ======= Real =======
 strModel = 'gray_%s_gopro_real';
 % load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
 % mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);

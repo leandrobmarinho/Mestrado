@@ -130,7 +130,7 @@ if(find(ismember(params.mlMethods,'svmRBF')))
         end
     end
     
-    if isfield(params,'extraRBF')
+    if isfield(params,'extraSVMRBF')
         optParam = params.extraRBF;
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
@@ -164,7 +164,11 @@ if(find(ismember(params.mlMethods,'mlp')))
 
     paramsMLP = 5:5:50;
     
-    optParam = searchTopologyMLP(data, paramsMLP, 3, ptrn );    
+    if isfield(params,'extraMLP')
+        optParam = params.extraMLP;
+    else
+        optParam = searchTopologyMLP(data, paramsMLP, 3, ptrn );
+    end
     result = simMLP(data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s', descr, 'mlp');    
@@ -196,7 +200,11 @@ if(find(ismember(params.mlMethods,'lssvmLinear')))
         i = i + 1;
     end
     
-    optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
+    if isfield(params,'extraLSSVMLinear')
+        optParam = params.extraLSSVMLinear;
+    else
+        optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
+    end
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
@@ -230,7 +238,11 @@ if(find(ismember(params.mlMethods,'lssvmRBF')))
         end
     end
     
-    optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
+    if isfield(params,'extraLSSVMRBF')
+        optParam = params.extraLSSVMLinear;
+    else
+        optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
+    end
     result = simMultiSVM( data, ptrn, numRep, optParam );
     
     strModel = sprintf('%s_%s-%s', descr, 'lssvm', config.fkernel);
