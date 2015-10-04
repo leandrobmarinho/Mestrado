@@ -98,3 +98,25 @@ for k = [2 3 10]
     axis off; axis image; print(sprintf('imgsOut/kmeansBoy%d', k),'-depsc');
     
 end
+
+
+
+%% ============= Dexter =============
+img = imread('imgs/uruguai.png');
+[row col ~] = size(img);
+figure, imshow(img)
+
+data = img2Data(img);
+k = 4;
+% K-Means
+% resKMeans = trainKMeans(data.x, k);
+% Yh = resKMeans.data.y;
+[idx,C] = kmeans(data.x, k);
+Yh = idx;
+Yh = Yh(data.ic);
+
+% Label2Image
+newImg = reshape(Yh, [row, col]);
+figure, image(newImg), colormap(lines)
+axis off; axis image; 
+imwrite(newImg, lines, 'imgsOut/kmeans_uruguai.png')
