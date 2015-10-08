@@ -2,6 +2,14 @@ function [modelo] = treinoPerceptron(dados, conf)
 
 % dados.x
 % dados.y
+if (not(isfield(conf, 'epocas')))
+    conf.epocas = 200;
+end
+
+if (not(isfield(conf, 'alfa')))
+    conf.alfa = 0.01;
+end
+
 d = size(dados.x, 2);
 lin = length(dados.x);
 

@@ -1,4 +1,4 @@
-function [ results ] = perceptron( dados, ptrn, numRepet, config )
+function [ results ] = perceptron2( dados, ptrn, numRepet, config )
 %PERCEPTRON Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -24,7 +24,7 @@ for i = 1 : numRepet,
     tempoTeste(i) = toc;
     
     [~, target] = max(testData.y');
-    %% Matriz de confusao e acurácia
+    %% Matriz de confusao e acur?cia
     confusionMatricesTeste{i} = confusionmat(target, Yh);
     accuracyTeste(i) = trace(confusionMatricesTeste{i}) / length(target);
 end
@@ -33,7 +33,7 @@ meanAccuracy = mean(accuracyTeste);
 meanAccuracyTrain = mean(accuracyTrain);
 
 
-%% Procurando a matriz de confusão mais próxima da acurácia média
+%% Procurando a matriz de confus?o mais pr?xima da acur?cia m?dia
 [~, posicoes] = sort( abs ( meanAccuracy - accuracyTeste ) );
 [~, posicoesTrain] = sort( abs ( meanAccuracyTrain - accuracyTrain ) );
 

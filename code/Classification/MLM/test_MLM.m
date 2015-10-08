@@ -7,7 +7,7 @@ switch (model.distance)
     case ('cityblock')
         DX = pdist2(data.x, model.refX, 'cityblock');
         
-    otherwise
+    case ('euclidean')
         DX = pdist2(data.x, model.refX);
 end
 

@@ -1,10 +1,18 @@
-function [ result ] = simMLP( data, ptrn, num, param )
+function [ result ] = simMLP( data, param )
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-for i = 1 : num
+for i = 1 : length(data)
     %% Embaralhando os dados
-    [treinData, testData] = embaralhaDados(data, ptrn, 2);
+%     [treinData, testData] = embaralhaDados(data, ptrn, 2);
+    treinData = data{i}.train;
+    testData = data{i}.test;
+    
+    if ( size(treinData.y, 2) == 1)
+        treinData.y = full(ind2vec(treinData.y'))';
+        testData.y = full(ind2vec(testData.y'))';
+    end
+    
     Ntest = size(testData.y, 1);
 
         
@@ -38,14 +46,14 @@ end
 % result.matConfTesteMedia = mean(confMatTeste, 3);
 % result.matConfPorcMedia = mean(matConfPorc,3);
 % result.metricasMedia = mean(metricas, 3);
-result.metricasGeralMedia = mean(metricasGeral);
+result.metricasGeralMedia = mean(metricasGeral,1);
 
 result.matConfTeste = confMatTeste;
 result.matConfPorc = matConfPorc;
 result.metricas = metricas;
 result.metricasGeral = metricasGeral;
 
-% Procura a matriz de confusão mais próxima da acc média
+% Procura a matriz de confus?o mais pr?xima da acc m?dia
 acc = metricasGeral(:,end);
 mediaAcc = mean(acc);
 [~, pos] = sort( abs ( mediaAcc - acc) );

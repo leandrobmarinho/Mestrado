@@ -69,18 +69,31 @@ end
 if (isempty(trX) == 0),
     switch (conf.distance)
         case ('mahalanobis')
-            model.covX = cov(trX);
+%             model.covX = nancov(trX);
+%             if (rcond(model.covX) < 1e-12)
+%                 model.covX = model.covX + 0.01*eye(size(model.covX));
+%                 fprintf('------- model.covX -------\n');
+%             end
+%             Dx = pdist2(trX, refX, 'mahalanobis', model.covX);
+%             
+%             model.covY = nancov(trY);
+%             if (rcond(model.covY) < 1e-12)
+%                 model.covY = model.covY + 0.01*eye(size(model.covY));
+%                 fprintf('------- model.covY -------\n');
+%             end
+%             Dy = pdist2(trY, refY, 'mahalanobis', model.covY);            
+            
+            model.covX = nancov(refX);
             if (rcond(model.covX) < 1e-12)
                 model.covX = model.covX + 0.01*eye(size(model.covX));
-            end
-            if (isnan(model.covX))
-                model.covX = model.covX + 0.01*eye(size(model.covX));
+                fprintf('------- model.covX -------\n');
             end
             Dx = pdist2(trX, refX, 'mahalanobis', model.covX);
             
-            model.covY = cov(trY);
+            model.covY = nancov(refY);
             if (rcond(model.covY) < 1e-12)
-                model.covY = model.covY + 0.01*eye(size(model.covY))
+                model.covY = model.covY + 0.01*eye(size(model.covY));
+                fprintf('------- model.covY -------\n');
             end
             Dy = pdist2(trY, refY, 'mahalanobis', model.covY);
 
@@ -88,7 +101,7 @@ if (isempty(trX) == 0),
             Dx = pdist2(trX, refX, 'cityblock');
             Dy = pdist2(trY, refY, 'cityblock');
             
-        otherwise
+        case ('euclidean')
             Dx = pdist2(trX, refX);
             Dy = pdist2(trY, refY);
     end
@@ -106,12 +119,12 @@ else
     model.B =  Dx\Dy;
 end
 
-if (rcond(model.B) < 1e-12)
-    model.B = inv(Dx'*Dx + 0.001.*eye(n))*Dx'*Dy;
-end
-if (isnan(model.B))
-    model.B = inv(Dx'*Dx + 0.001.*eye(n))*Dx'*Dy;
-end
+% if (rcond(model.B) < 1e-12)
+%     model.B = inv(Dx'*Dx + 0.001.*eye(n))*Dx'*Dy;
+% end
+% if (isnan(model.B))
+%     model.B = inv(Dx'*Dx + 0.001.*eye(n))*Dx'*Dy;
+% end
 model.refX = refX;
 model.refY = refY;
 model.bias = conf.bias;

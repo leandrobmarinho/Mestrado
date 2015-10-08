@@ -31,13 +31,13 @@ end
 if (isfield(params, 'distMLM'))
     distMLM = params.distMLM;
 else
-    distMLM = {'cityblock', '', 'mahalanobis' };
+    distMLM = {'cityblock', 'euclidean', 'mahalanobis' };
 end
 
 if (isfield(params, 'distMLM_NN'))
     distMLM_NN = params.distMLM_NN;
 else
-    distMLM_NN = {'cityblock', '', 'mahalanobis' };
+    distMLM_NN = {'cityblock', 'euclidean', 'mahalanobis' };
 end
 
 descr = params.descr;
@@ -131,7 +131,7 @@ if(find(ismember(params.mlMethods,'svmRBF')))
     end
     
     if isfield(params,'extraSVMRBF')
-        optParam = params.extraRBF;
+        optParam = params.extraSVMRBF;
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
@@ -239,7 +239,7 @@ if(find(ismember(params.mlMethods,'lssvmRBF')))
     end
     
     if isfield(params,'extraLSSVMRBF')
-        optParam = params.extraLSSVMLinear;
+        optParam = params.extraLSSVMRBF;
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
@@ -254,8 +254,15 @@ end
 
 
 %% =============== Perceptron ===============
-% TODO
+if(find(ismember(params.mlMethods,'perceptron')))
+    
+    if ( size(data.y,2) > 1)
+       data.y = vec2ind(data.y')';
+    end
 
+    multiperceptron(data.x,data.y, data.x)
+    keyboard
+end
 
 
 %% =============== MLM ===============
@@ -268,6 +275,7 @@ if(find(ismember(params.mlMethods,'mlm')))
     
     config.method = ''; % lsqnonlin knn ''
     config.k = 1;
+    config.bias = 1;
     
     for dist = distMLM
         
@@ -295,7 +303,8 @@ if(find(ismember(params.mlMethods,'mlmNN')))
     config.method = 'knn'; % lsqnonlin knn ''
     config.k = 1;
     config.NN = 1;
-    
+    config.bias = 1;
+
     for dist = distMLM_NN
         
         config.distance = dist{1};

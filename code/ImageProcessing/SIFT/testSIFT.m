@@ -27,7 +27,7 @@ for i = 1 : numTest
         numIndex(j) = sum(ok);                
                 
     end    
-    fprintf('%d\n', i);
+%     fprintf('%d\n', i);
 
     [~, lbs] = sort(numIndex, 'descend');
     Y(i) = lbs(1:k);

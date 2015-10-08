@@ -7,9 +7,9 @@ addpath('../Classification/bayes/'); addpath('../utils/');
 % {gray,h}_{extrMethod_}_{gopro,omni}_{real,sim}_{mlMethod}
 conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
-conf.numRep = 10;
+conf.numRep = 5;
 
-
+conf.mlMethods = {'mlm' 'mlmNN'};
 %% ======= Gray - Real =======
 % strModel = 'gray_%s_gopro_real';
 % load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
@@ -50,7 +50,7 @@ conf.numRep = 10;
 
 %% ======= Gray - Sim =======
 strModel = 'gray_%s_gopro_sim';
-% load(sprintf(sprintf('../../../data/%s', strModel), 'all'));
+load(sprintf(sprintf('../../data/%s', strModel), 'all'));
 % mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
 % mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
 
@@ -82,12 +82,10 @@ strModel = 'gray_%s_gopro_sim';
 % conf = rmfield(conf,'extraSVMLinear');
 
 
-% conf.mlMethods = {'mlmNN'};
 % conf.descr = sprintf(strModel, 'lbp');
 % evaluateData(lbp, conf)
-
-
-% conf.mlMethods = {'lssvmRBF', 'svmRBF'};
+% 
+% 
 % conf.descr = sprintf(strModel, 'hu');
 % evaluateData(hu, conf)
 
@@ -97,9 +95,9 @@ strModel = 'gray_%s_gopro_sim';
 
 
 % ---------- Central Moments ----------
-% load('../../data/central_sim.mat');
-% conf.descr = sprintf(strModel, 'central');
-% evaluateData(centralSim, conf)
+load('../../data/central_sim.mat');
+conf.descr = sprintf(strModel, 'central');
+evaluateData(centralSim, conf)
 
 % ---------- Statistics Moments ----------
 load('../../data/statistic_sim.mat');

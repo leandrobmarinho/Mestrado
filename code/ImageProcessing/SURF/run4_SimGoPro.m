@@ -1,15 +1,15 @@
 clear all; close all; clc;
-p = path; path(p, '../'); path(p, '../utils/');
+p = path; path(p, '../../utils/');
 
 %% General configurations
-numRep = 10;
+numRep = 5;
 nameImgs = 'sim_gopro';
 pathData = sprintf('/Users/leandrobm/Documents/dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
 k = 1;
 
 
 %% Load the images
-load(sprintf('../dados/descInd_%s', nameImgs));
+load(sprintf('../../../data/descInd_%s', nameImgs));
 data.imgs = imgsInd;
 data.labels = labels;
 
@@ -52,7 +52,7 @@ result.matConfPorc = matConfPorc;
 result.metricas = metrics;
 result.metricasGeral = generalMetrics;
 
-% Procura a matriz de confusão mais próxima da acc média
+% Procura a matriz de confus?o mais pr?xima da acc m?dia
 acc = generalMetrics(:,end);
 mediaAcc = mean(acc);
 [~, pos] = sort( abs ( mediaAcc - acc) );

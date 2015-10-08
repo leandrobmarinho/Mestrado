@@ -1,10 +1,10 @@
-addpath('..');clear all;clc; close all;
+addpath('..'); clear all;clc; close all;
 
 % RGB_img = imread('../img/casa2.jpg');
-imgRGB = imread('../../../../../Documents/robohomegopro/P02_03.JPG');
+imgRGB = imread('../../../../../Documents/robohomegopro/P01_01.JPG');
 
-imgHSV = rgb2hsv(imgRGB);
-imgHSV = imgHSV(:,:,1);
+% imgHSV = rgb2hsv(imgRGB);
+% imgHSV = imgHSV(:,:,1);
 
 imgGray = rgb2gray(imgRGB);
 
@@ -13,7 +13,7 @@ img = imgGray;
 tic
 X = invmoments(img)
 toc
-tic
+% tic
 % X2 = feature_vec(img)
-toc
-fprintf('%0.10f',sum((X - X2').^2))
+% toc
+% fprintf('%0.10f',sum((X - X2').^2))
