@@ -37,48 +37,48 @@ for i = 1:600
     
     
     %% Mide Sobel
-    fprintf('Mide Sobel - %s\n', files(i).name);
-    tic
-    I2 = edge(img, 'sobel');
-    
-    [M,~] = mide(img, I2);    
-    stats = mideprops(M, 'all');
-    timeMideSobel(i) = toc + tempoConv;
-    X = struct2array(stats);
-    
-    dataMideSobel = [dataMideSobel; [X numClass] ];
+%     fprintf('Mide Sobel - %s\n', files(i).name);
+%     tic
+%     I2 = edge(img, 'sobel');
+%     
+%     [M,~] = mide(img, I2);    
+%     stats = mideprops(M, 'all');
+%     timeMideSobel(i) = toc + tempoConv;
+%     X = struct2array(stats);
+%     
+%     dataMideSobel = [dataMideSobel; [X numClass] ];
     
     
 
     %% Mide Average
-    fprintf('Mide Average - %s\n', files(i).name);
-
-    tic
-    m = fspecial('average', 15);
-    I2 = imfilter(img, m);
-    
-    [M,~] = mide(img, I2);
-    stats = mideprops(M, 'all');
-    timeMideAver(i) = toc + tempoConv;
-    X = struct2array(stats);
-    
-    dataMideAverage = [dataMideAverage; [X numClass] ];
+%     fprintf('Mide Average - %s\n', files(i).name);
+% 
+%     tic
+%     m = fspecial('average', 15);
+%     I2 = imfilter(img, m);
+%     
+%     [M,~] = mide(img, I2);
+%     stats = mideprops(M, 'all');
+%     timeMideAver(i) = toc + tempoConv;
+%     X = struct2array(stats);
+%     
+%     dataMideAverage = [dataMideAverage; [X numClass] ];
     
     
     
     %% Mide Laplacian
-    fprintf('Mide Laplaciano - %s\n', files(i).name);
-
-    tic
-    m = [-1, -1, -1; -1,  8, -1; -1, -1, -1];
-    I2 = imfilter(img, m, 'replicate');
-    
-    [M,~] = mide(img, I2);
-    stats = mideprops(M, 'all');
-    timeMideLapl(i) = toc + tempoConv;
-    X = struct2array(stats);
-    
-    dataMideLaplacian = [dataMideLaplacian; [X numClass] ];
+%     fprintf('Mide Laplaciano - %s\n', files(i).name);
+% 
+%     tic
+%     m = [-1, -1, -1; -1,  8, -1; -1, -1, -1];
+%     I2 = imfilter(img, m, 'replicate');
+%     
+%     [M,~] = mide(img, I2);
+%     stats = mideprops(M, 'all');
+%     timeMideLapl(i) = toc + tempoConv;
+%     X = struct2array(stats);
+%     
+%     dataMideLaplacian = [dataMideLaplacian; [X numClass] ];
 
     
     
@@ -125,7 +125,10 @@ for i = 1:600
     dataHu = [dataHu; [X numClass] ];
     
     
-    save('gray_all_gopro_real')
+%     save('gray_all_gopro_real')
+    if i > 20
+        break
+    end
 end
 
 % clearvars -except dataMideMedian timeMideMedian

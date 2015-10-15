@@ -1,4 +1,4 @@
-function [result, times] = multisvm(TrainingSet,GroupTrain,TestSet, conf)
+function [labels, times, outputs] = multisvm(TrainingSet,GroupTrain,TestSet, conf)
 %Models a given training set with a corresponding group vector and
 %classifies a given test set using an SVM classifier according to a
 %one vs. all relation.
@@ -10,9 +10,9 @@ function [result, times] = multisvm(TrainingSet,GroupTrain,TestSet, conf)
 
 u=unique(GroupTrain);
 numClasses=length(u);
-result = zeros(length(TestSet(:,1)),1);
+% labels = zeros(length(TestSet(:,1)),1);
 
-kernelcachelimit = size(TrainingSet,1) + 50;
+% kernelcachelimit = size(TrainingSet,1) + 50;
 
 tic
 %build models
@@ -42,14 +42,24 @@ for k=1:numClasses
 end
 times.trein = toc;
 
-tic
+% for j=1:size(TestSet,1)
+%     for k=1:numClasses
+%         if(svmclassify2(models(k),TestSet(j,:)))
+%             break;
+%         end
+%     end
+%     result(j) = k;
+% end
+% result
+
 %classify test cases
-for j=1:size(TestSet,1)
-    for k=1:numClasses
-        if(svmclassify(models(k),TestSet(j,:)))
-            break;
-        end
-    end
-    result(j) = k;
+tic
+labels = []; outputs = [];
+for k=1:numClasses
+    [l, o] = svmclassify2(models(k), TestSet);
+    labels = [labels l];
+    outputs = [outputs o];
 end
 times.test = toc;
+[~, labels] = max(labels');
+outputs = sign(outputs);

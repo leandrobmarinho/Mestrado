@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-folder = 'temp/';
+folder = 'temp/'; type = 10;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
@@ -13,29 +13,116 @@ name = {files.name};
 [~, index] = sort(name);
 namesFile = name(index);
 
-modelStr = '%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.3f\\pm%0.2f\t%0.3f\\pm%0.2f\t%s\n';
-modelStr2 = '%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%0.2f\\pm%0.2f\t%s\n';
+modelStr = '%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.3f$\\pm$%0.2f\t%0.3f$\\pm$%0.2f\t%s\n';
+modelStr2 = '%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%s\n';
 for i = 1 : numel(files)
     name = namesFile{i};
     load(sprintf('%s%s', folder, name));
-    num = size(result.metricasGeralMedia,2);    
+    
+    if (type == 1 || type == 2)
+        num = size(result.metricasGeralMedia,2);
+    end
+    
+    if (type == 3 || type == 4)
+        metricas(1:2:11) = result.metricasGeralMedia;
+        metricas(2:2:12) = std(result.metricasGeral,0,1);
+    end
+    
+    if (type >= 7 && type <= 11 && isfield(result, 'routes'))
+        result = result.routes;
+    end
     
     
-%     fprintf([repmat('%0.4f\t', 1, num) '\n'], result.metricasGeralMedia*100);
+    switch(type)
+        case 1
+            fprintf([repmat('%0.4f\t', 1, num) '\n'], result.metricasGeralMedia*100);
+            
+        case 2
+            fprintf([repmat('%0.4f\t', 1, num) '%0.4f\t%0.4f\t%s\n'], result.metricasGeralMedia*100, mean(result.tempoTrein), 1000000*mean(result.tempoTeste), name);
+            
+        case 3
+            fprintf(modelStr, metricas*100,mean(result.tempoTrein), std(result.tempoTrein), 1000000*mean(result.tempoTeste), 1000000*std(result.tempoTeste), name);
+            
+        case 4
+            fprintf(modelStr2, metricas*100, name);
+            
+        case 5
+            fprintf('%0.4f\t%0.4f\t%s\n', mean(result.tempoTrein), 1000000*mean(result.tempoTeste), name);
+            
+        case 6
+            fprintf('%0.4f\t%0.4f\n', mean(result.tempoTrein), 1000000*mean(result.tempoTeste));
+            
+            
+        case 7
+            %% Only route
+            num = length(result);
+            for j = 1 : num
+                metrcs(j) = mean(result{j}.hit);
+            end
+            
+            %General
+            metrcs(num + 1) = mean(metrcs);
+            fprintf([repmat('%0.2f\t', 1, num+1) '%s\n'], 100*metrcs, name)
+            clear metrcs
+            
+            
+        case 8
+            %% Only route with std
+            num = length(result);
+            for j = 0 : num -1
+                metrcs(j*2 + 1) = mean(result{j+1}.hit);
+                metrcs(j*2 + 2) = std(result{j+1}.hit);
+            end
+            
+            %General
+            metrcs(num*2 + 1) = mean(metrcs(1:2:num*2));
+            metrcs(num*2 + 2) = std(metrcs(1:2:num*2));
+            fprintf([repmat('%0.2f$\\pm$%0.2f\t', 1, num+1) '%s\n'], 100*metrcs, name)
+            clear metrcs
+            
+            
+        case 9
+            %% Only reject option
+            num = length(result);
+            for j = 1 : num
+                metrcs(j) = mean(result{j}.hitRej);
+            end
+            
+            %General
+            metrcs(num + 1) = mean(metrcs);
+            fprintf([repmat('%0.2f\t', 1, num+1) '%s\n'], 100*metrcs, name)
+            clear metrcs
+            
+            
+        case 10
+            %% Only reject option with std
+            num = length(result);
+            for j = 0 : num -1
+                metrcs(j*2 + 1) = mean(result{j+1}.hitRej);
+                metrcs(j*2 + 2) = std(result{j+1}.hitRej);
+            end
+            
+            %General
+            metrcs(num*2 + 1) = mean(metrcs(1:2:num*2));
+            metrcs(num*2 + 2) = std(metrcs(1:2:num*2));
+            fprintf([repmat('%0.2f$\\pm$%0.2f\t', 1, num+1) '%s\n'], 100*metrcs, name)
+            clear metrcs
+            
+            
+        case 11
+            %% Route with rejec option
+            num = length(result);
+            for j = 0 : num -1
+                metrcs(j*2 + 1) = mean(result{j+1}.hit);
+                metrcs(j*2 + 2) = mean(result{j+1}.hitRej);
+            end
+            
+            %General
+            metrcs(num*2 + 1) = mean(metrcs(1:2:num*2));
+            metrcs(num*2 + 2) = mean(metrcs(2:2:num*2));
+            fprintf([repmat('%0.2f/%0.2f\t', 1, num+1) '%s\n'], 100*metrcs, name)
+            clear metrcs
+                        
+    end
     
-%     fprintf([repmat('%0.4f\t', 1, num) '%0.4f\t%0.4f\t%s\n'], result.metricasGeralMedia*100, mean(result.tempoTrein), 1000000*mean(result.tempoTeste), name);
-    
-    metricas(1:2:11) = result.metricasGeralMedia;
-    metricas(2:2:12) = std(result.metricasGeral,0,1);
-    
-    fprintf(modelStr, metricas*100,mean(result.tempoTrein), std(result.tempoTrein), 1000000*mean(result.tempoTeste), 1000000*std(result.tempoTeste), name);
-    
-%     fprintf(modelStr2, metricas*100, name);
-    
-
-%     fprintf('%0.4f\t%0.4f\t%s\n', mean(result.tempoTrein), 1000000*mean(result.tempoTeste), name);
-    
-%     fprintf('%0.4f\t%0.4f\n', mean(result.tempoTrein), 1000000*mean(result.tempoTeste));
-    
-
 end

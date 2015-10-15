@@ -71,64 +71,64 @@ for i = 1 : length(nameFolds)
         
         
         %% Mide Laplacian
-        fprintf('Mide Laplaciano - %s\n', pathFiles(j).name);
+%         fprintf('Mide Laplaciano - %s\n', pathFiles(j).name);
+%         
+%         tic
+%         m = [-1, -1, -1; -1,  8, -1; -1, -1, -1];
+%         I2 = imfilter(img, m, 'replicate');
+%         
+%         [M,~] = mide(img, I2);
+%         stats = mideprops(M, 'all');
+%         timeMideLapl(k) = toc + tempoConv;
+%         X = struct2array(stats);
         
-        tic
-        m = [-1, -1, -1; -1,  8, -1; -1, -1, -1];
-        I2 = imfilter(img, m, 'replicate');
-        
-        [M,~] = mide(img, I2);
-        stats = mideprops(M, 'all');
-        timeMideLapl(k) = toc + tempoConv;
-        X = struct2array(stats);
-        
-        dataMideLaplacian = [dataMideLaplacian; [X numClass] ];
+%         dataMideLaplacian = [dataMideLaplacian; [X numClass] ];
         
         
         
                        
-        % Mide - Sobel
-                fprintf('Mide Sobel - %s\n', pathFiles(j).name);
+%         % Mide - Sobel
+%                 fprintf('Mide Sobel - %s\n', pathFiles(j).name);
+%         
+%                 tic
+%                 I2 = edge(img, 'sobel');
+%         
+%                 [M,~] = mide(img, I2);
+%                 stats = mideprops(M, 'all');
+%                 timeMideSobel(k) = toc + tempoConv;
+%                 X = struct2array(stats);
+%         
+%                 dataMideSobel = [dataMideSobel; [X numClass] ];
         
-                tic
-                I2 = edge(img, 'sobel');
         
-                [M,~] = mide(img, I2);
-                stats = mideprops(M, 'all');
-                timeMideSobel(k) = toc + tempoConv;
-                X = struct2array(stats);
-        
-                dataMideSobel = [dataMideSobel; [X numClass] ];
-        
-        
-        %% Mide - Median
-        fprintf('Mide Median - %s\n', pathFiles(j).name);
-        
-        tic
-        I2 = medfilt2(img);
-        
-        [M,~] = mide(img, I2);
-        stats = mideprops(M, 'all');
-        timeMideMedian(k) = toc + tempoConv;
-        X = struct2array(stats);
-        
-        dataMideMedian = [dataMideMedian; [X numClass] ];
+%         % Mide - Median
+%         fprintf('Mide Median - %s\n', pathFiles(j).name);
+%         
+%         tic
+%         I2 = medfilt2(img);
+%         
+%         [M,~] = mide(img, I2);
+%         stats = mideprops(M, 'all');
+%         timeMideMedian(k) = toc + tempoConv;
+%         X = struct2array(stats);
+%         
+%         dataMideMedian = [dataMideMedian; [X numClass] ];
 
         
         
-        % Mide - Average
-                fprintf('Mide Average - %s\n', pathFiles(j).name);
-        
-                tic
-                m = fspecial('average', 15);
-                I2 = imfilter(img, m);
-        
-                [M,~] = mide(img, I2);
-                stats = mideprops(M, 'all');
-                timeMideAver(k) = toc + tempoConv;
-                X = struct2array(stats);
-        
-                dataMideAver = [dataMideAver; [X numClass] ];
+%         % Mide - Average
+%                 fprintf('Mide Average - %s\n', pathFiles(j).name);
+%         
+%                 tic
+%                 m = fspecial('average', 15);
+%                 I2 = imfilter(img, m);
+%         
+%                 [M,~] = mide(img, I2);
+%                 stats = mideprops(M, 'all');
+%                 timeMideAver(k) = toc + tempoConv;
+%                 X = struct2array(stats);
+%         
+%                 dataMideAver = [dataMideAver; [X numClass] ];
         
         
         
@@ -164,7 +164,7 @@ for i = 1 : length(nameFolds)
         
                 dataHu = [dataHu; [X numClass] ];
         
-        save('gray_all_gopro_sim')
+%         save('gray_all_gopro_sim')
         k = k + 1;
         
     end

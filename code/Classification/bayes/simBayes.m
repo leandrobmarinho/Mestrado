@@ -20,7 +20,8 @@ for i = 1 : length(data)
     %% Teste
     fprintf('Step %d. Testando o Bayes.\n', i);
     tic
-    [Y] = testeBayes(model, testData, conf);
+    Y = testeBayes(model, testData, conf);
+    keyboard
     tempoTeste(i) = toc/Ntest;
     confMatTeste(:,:,i) = confusionmat(testData.y', Y');
     

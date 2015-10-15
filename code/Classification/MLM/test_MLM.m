@@ -1,4 +1,4 @@
-function [Yh, error] =  test_MLM(model, data, conf)
+function [Yh, error, output] =  test_MLM(model, data, conf)
 
 switch (model.distance)
     case ('mahalanobis')
@@ -51,6 +51,9 @@ try
             
             Yh = full(ind2vec(Yh'))';
             
+            output = unique(labels(Ind)', 'rows', 'stable');
+            
+            
             %         labels = unique(y);
             %         code = zeros(length(labels), length(labels));
             %         for j = 1: length(labels),
@@ -64,10 +67,15 @@ try
             %         end
             
         otherwise
+            
             for i = 1: size(data.x, 1),
                 Yh(i, :) = fsolve(@(x)(sum((model.refY - repmat(x, length(model.refY), 1)).^2, 2) - DYh(i,:)'.^2), yh0, options_fsolve);
-            end
+            end           
+            
+            [~, output] = sort(Yh', 'descend');
+
     end
+
 catch
     warning('It was not possible classify!!!');
 end

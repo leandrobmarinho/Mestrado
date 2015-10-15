@@ -1,18 +1,18 @@
-function [classes, valores] = testeBayes(modelo, dados, conf)
+function [classes, valores, acoes] = testeBayes(modelo, dados, conf)
 %TESTEBAYES Summary of this function goes here
 % modelo
 % dados
 % conf.custo - matriz de custo
 % conf.algoritmo
 %   '' - bayes tradicional com risco
-%   sameVar - covariancia igual, diagonal e mesma variancia (variancia média)
+%   sameVar - covariancia igual, diagonal e mesma variancia (variancia m?dia)
 %   euclidean -
-%   mahalanobis1 - covariancia igual e não diagonal
-%   mahalanobis2 - covariancias distintas e não diagonal
-%   mahalanobis3 - covariancia igual, diagonalizada de uma não diagonal
+%   mahalanobis1 - covariancia igual e nao diagonal
+%   mahalanobis2 - covariancias distintas e nao diagonal
+%   mahalanobis3 - covariancia igual, diagonalizada de uma n?o diagonal
 %                 (autovetor e autovalor)
-%   bayesRej - bayesiano com rejeição
-% conf.t - limiar para rejeição binária
+%   bayesRej - bayesiano com rejeicao
+% conf.t - limiar para rejeicao binaria
 
 if (strcmp(conf.algoritmo, 'euclidean') == 1)
     dist = pdist2(modelo.meansX, dados.x);
@@ -102,7 +102,7 @@ elseif (strcmp(conf.algoritmo, '') == 1)
 elseif (strcmp(conf.algoritmo, 'bayesRej') == 1)
     
     if (length(modelo.aprioriClass) ~= 2)
-        error('Bayes com rejeição só é permitido com problemas binários');
+        error('Bayes com rejeicao nao e permitido com problemas binarios');
     end
     
     % Probabilidade a priori de X

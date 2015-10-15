@@ -10,10 +10,11 @@ conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
 conf.numRep = 5;
 
-conf.mlMethods = {'mlp'};
+conf.mlMethods = {'bayes','svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
+    'lssvmRBF', 'mlm', 'mlmNN'};
 %% ------------------ REAL ------------------
-% strModel = 'gray_%s_gopro_real';
-% load(sprintf(sprintf('../../data/%s', strModel), 'all'));
+strModel = 'gray_%s_gopro_real';
+load(sprintf(sprintf('../../data/%s', strModel), 'all'));
 
 % mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
 % mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
@@ -47,8 +48,8 @@ conf.mlMethods = {'mlp'};
 % conf.extraLSSVMRBF.sigma = 4;
 % 
 % conf.extraMLP = 10;
-% conf.descr = sprintf(strModel, 'lbp');
-% evaluate_ml(lbp, conf)
+conf.descr = sprintf(strModel, 'lbp');
+evaluate_ml(lbp, conf)
 
 
 % % ---------- Hu Moments ----------
