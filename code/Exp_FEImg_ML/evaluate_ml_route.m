@@ -61,7 +61,6 @@ for i = 1 : length(params.routes)
             inds = find(testData.y == params.routes{i}(k));
             
             testAux.x = [testAux.x; testData.x(inds(randperm(length(inds), 1)), :)];
-%             testAux.y = [testAux.y; testData.y(inds(randperm(length(inds), 1)), :)];
         end
         testAux.y = params.routes{i}';
         dataset{i,j}.test = testAux;

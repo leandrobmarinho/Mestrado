@@ -1,4 +1,4 @@
-function [Y, timeTest] = testSIFT_ind( model, testData, k, nnThreshold, pathData )
+function [Y, timeTest, output] = testSIFT_ind( model, testData, k, nnThreshold, pathData )
 %TESTSIFT Test of SIFT
 % model - data train
 % testData - test train
@@ -12,6 +12,7 @@ numModels = length(model.imgs);
 Y = zeros(1,numTest);
 numIndex = zeros(1, numModels);
 timeTest = zeros(1, numTest);
+output = [];
 
 inds = 0;
 for i = 1 : numTest
@@ -43,7 +44,7 @@ for i = 1 : numTest
     timeTest(i) = toc;
     
     fprintf('%d \n', i);
-
+    output = [output; lbs];
 end
 
 end
