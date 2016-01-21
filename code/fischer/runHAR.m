@@ -1,13 +1,12 @@
-close all; clear all; clc; addpath('..');
+close all; clear all; clc; addpath('../../../Mestrado/data/');
+addpath('../../code/utils/');
 
-%% Pré-processamento
-conf.pca = 0.98; conf.selecaoAtr = 0.03;
-dados = carregaDados('har', 0, conf);
-
-%dados = carregaDados('iris.data', 0);
+data = load('../../../Mestrado/data/iris.data');
+dados.x = data(:,1:4);
+dados.y = data(:,5);
 
 
-%% Configurações gerais
+%% Configura??es gerais
 ptrn = 0.8;
 numRepet = 10;
 

@@ -1,11 +1,11 @@
-close all; clear all; clc; addpath('..');
+close all; clear all; clc; addpath('../../../code/');
 
-% Pré-processamento
+% Pr?-processamento
 conf.pca = 0.98; conf.selecaoAtr = 0.1;
 dataset = carregaDados('har', 0, conf);
 
 
-%% Configurações gerais
+%% Configura??es gerais
 ptrn = 0.8;
 numRodadas = 10;
 
