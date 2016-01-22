@@ -1,5 +1,6 @@
 clear all; close all; clc;
-addpath('../ImageProcessing/LBP/'); addpath('../ImageProcessing/Haralick/');
+addpath('../ImageProcessing/LBP/');
+addpath('../ImageProcessing/Haralick/');
 addpath('../ImageProcessing/Hu_Moments/');
 addpath('../../../../Dropbox/Mestrado/Feature Extraction Image/mide_v1/')
 

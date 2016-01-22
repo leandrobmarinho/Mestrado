@@ -1,9 +1,12 @@
 clear all; close all; clc;
-addpath('../ImageProcessing/LBP/'); addpath('../ImageProcessing/Haralick/');
+addpath('../ImageProcessing/LBP/');
+addpath('../ImageProcessing/Haralick/');
 addpath('../ImageProcessing/Hu_Moments/');
-addpath('../../../../Dropbox/Mestrado/Feature Extraction Image/mide_v1/')
+% addpath('../../../../Dropbox/Mestrado/Feature Extraction Image/mide_v1/')
 
 folder = '/Users/leandrobm/Documents/robohomegopro/';
+nameFiles = 'gray_all_gopro_real';
+
 files = dir(sprintf('%s*.JPG', folder));
 
 %% General Configurations
@@ -34,6 +37,37 @@ for i = 1:600
     numClass = str2double(files(i).name(2:3));
     img = imageGray;
     
+    
+    
+
+    
+    %% Haralick 
+    fprintf('Haralick Texture - %s\n', files(i).name);
+    
+    tic
+    GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
+    stats = GLCM_Features1(GLCM2,0);
+    timeHaralick(i) = toc + tempoConv;
+    X = struct2array(stats);
+
+    dataHaralick = [dataHaralick; [X numClass] ];
+
+    
+    %% Local Binary Pattern
+    fprintf('Local Binary Pattern - %s\n', files(i).name);
+    tic
+    [X, ~] = lbp(img,[],optionsLBP);
+    timeLBP(i) = toc + tempoConv;
+    dataLBP = [dataLBP; [X numClass] ];
+    
+    %% Hu Moments
+    fprintf('Hu Moments - %s\n\n', files(i).name);
+    tic
+    X = invmoments(img);
+    timeHu(i) = toc + tempoConv;
+%     [X,~] = hugeo(imageRGB);
+    
+    dataHu = [dataHu; [X numClass] ];
     
     
     %% Mide Sobel
@@ -94,42 +128,8 @@ for i = 1:600
 %     X = struct2array(stats);
 %     
 %     dataMideMedian = [dataMideMedian; [X numClass] ];
-
-    
-    %% Haralick 
-    fprintf('Haralick Texture - %s\n', files(i).name);
-    
-    tic
-    GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
-    stats = GLCM_Features1(GLCM2,0);
-    timeHaralick(i) = toc + tempoConv;
-    X = struct2array(stats);
-
-    dataHaralick = [dataHaralick; [X numClass] ];
-
-    
-    %% Local Binary Pattern
-    fprintf('Local Binary Pattern - %s\n', files(i).name);
-    tic
-    [X, ~] = lbp(img,[],optionsLBP);
-    timeLBP(i) = toc + tempoConv;
-    dataLBP = [dataLBP; [X numClass] ];
-    
-    %% Hu Moments
-    fprintf('Hu Moments - %s\n\n', files(i).name);
-    tic
-    X = invmoments(img);
-    timeHu(i) = toc + tempoConv;
-%     [X,~] = hugeo(imageRGB);
-    
-    dataHu = [dataHu; [X numClass] ];
-    
-    
-%     save('gray_all_gopro_real')
-    if i > 20
-        break
-    end
+    save(name_files)
 end
 
 % clearvars -except dataMideMedian timeMideMedian
-% save('mideMedian95_real')
+save(name_files)
