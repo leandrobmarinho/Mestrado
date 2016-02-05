@@ -38,6 +38,7 @@ descr = params.descr;
 % data.x = dataset(:,1:end-1);
 % data.y = dataset(:, end);
 
+% Remove repeated samples
 [data.x, ia, ~] = unique(dataset(:,1:end-1), 'rows');
 data.y = dataset(ia, end);
 
@@ -56,6 +57,7 @@ for i = 1 : numRep
     dataset{i}.test = testData;
 end
 clear trainData testData
+save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
 
 %% Evaluate
 %% =============== Bayes ===============
@@ -73,9 +75,10 @@ end
 
 
 % C from LSSVM and SVM
-% paraC = 2.^(-3:2:15);
-paraC = 2.^(2:11); %2.^(2:11);
-sigmas = 2.^(0:3); %2.^(-3:3);
+paraC = 2.^(-2:2:15);
+% paraC = 2.^(2:11); %2.^(2:11);
+% sigmas = 2.^(0:3);
+sigmas = 2.^(-1:4);
 %% =============== SVM (Linear) ===============
 
 clear config
@@ -154,10 +157,12 @@ if(find(ismember(params.mlMethods,'mlp')))
     %paramsMLP = [50 100:10:200 250 300];
     %paramsMLP = 2.^(1:9);
 %     paramsMLP = [10:10:300];
-%     paramsMLP = [10:10:150 200:20:340];
+    paramsMLP = [10:10:150 200:20:340];
 %     paramsMLP = [10:10:150 200:20:240];
 
-    paramsMLP = 5:5:50;
+paramsMLP = [10:10:150];
+
+%     paramsMLP = 5:5:50;
     
     if isfield(params,'extraMLP')
         optParam = params.extraMLP;

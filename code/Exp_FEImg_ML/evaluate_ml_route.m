@@ -67,7 +67,7 @@ for i = 1 : length(params.routes)
     end
     
 end
-
+save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
 clear trainData testData testAux
 
 %% Evaluate
@@ -87,8 +87,11 @@ end
 
 % C from LSSVM and SVM
 % paraC = 2.^(-3:2:15);
-paraC = 2.^(2:11); %2.^(2:11);
-sigmas = 2.^(0:3); %2.^(-3:3);
+% paraC = 2.^(2:11); %2.^(2:11);
+% sigmas = 2.^(0:3); %2.^(-3:3);
+
+paraC = 2.^(-2:2:15);
+sigmas = 2.^(-1:4);
 %% =============== SVM (Linear) ===============
 
 clear config
@@ -129,7 +132,7 @@ if(find(ismember(params.mlMethods,'svmRBF')))
     config.fkernel = 'rbf';
     
     i = 1;
-    for sigma = sigmas %2.^(-10:5)
+    for sigma = sigmas
         
         for c = paraC
             config.paraC = c;
@@ -170,7 +173,7 @@ if(find(ismember(params.mlMethods,'mlp')))
 %     paramsMLP = [10:10:150 200:20:340];
 %     paramsMLP = [10:10:150 200:20:240];
 
-    paramsMLP = 5:5:50;
+    paramsMLP = 5:5:100;
     
     if isfield(params,'extraMLP')
         optParam = params.extraMLP;

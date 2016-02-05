@@ -5,12 +5,12 @@ function [optParam, Ecv] = searchParamSVM( dados, params, num, ptrn )
 for i = 1 : num,
     %% Embaralhando os dados
     [learnPoints, testData] = embaralhaDados(dados, ptrn, 2);
-
+    
     fprintf('%d - Treinamento e Teste - (LS)SVM.\n', i);
     for j = 1: length(params),
         
         %% Treinamento e Teste - (LS)SVM
-        [Y, ~] = multisvm(learnPoints.x, learnPoints.y, testData.x, params{j});        
+        [Y, ~] = multisvm(learnPoints.x, learnPoints.y, testData.x, params{j});
         confusionMatrices{i, j} = confusionmat(testData.y', Y');
         
         acc(i,j) = trace(confusionMatrices{i, j}) / length(Y);
