@@ -1,14 +1,14 @@
 clear all; close all; clc;
-p = path; path(p, '../'); path(p, '../utils/');
+addpath('../../utils/');
 
 
-nnThreshold = 0.9 ;
-nameImgs = 'real_gopro';
-pathData = '/Users/leandrobm/Documents/dados/SIFT_real_gopro/desc_sift_real_gopro_';
+nnThreshold = 0.7 ;
+nameImgs = 'real_omni';
+pathData = '/Users/leandrobm/Documents/dados/SIFT_real_omni/desc_sift_real_omni_';
 
 
 % Carrega
-load(sprintf('../dados/descInd_%s', nameImgs));
+load(sprintf('../../../data/descInd_%s', nameImgs));
 data.imgs = imgsInd;
 data.labels = labels;
 
@@ -23,8 +23,8 @@ data.labels = labels;
 fprintf('Test\n');
 % Test
 tic
-indImg = testData.imgs(randperm(585,1));
-label = testData.labels(randperm(585,1));
+indImg = testData.imgs(randperm(length(testData.labels),1));
+label = testData.labels(randperm(length(testData.labels),1));
 [batchDesc, inds] = loadDescs(indImg, pathData);
 descrsT = batchDesc{inds == indImg};
 
@@ -41,7 +41,3 @@ end
 lbs(1)
 
 timeTest = toc;
-
-
-
-path(p);

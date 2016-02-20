@@ -37,5 +37,5 @@ load(sprintf(sprintf('../../data/%s', strModel), 'all'));
 
 
 % ---------- Haralick ----------
-conf.descr = sprintf(strModel, 'haralick');
-evaluate_ml(haralick, conf)
+% conf.descr = sprintf(strModel, 'haralick');
+% evaluate_ml(haralick, conf)

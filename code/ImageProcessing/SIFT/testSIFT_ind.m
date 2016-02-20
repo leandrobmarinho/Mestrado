@@ -43,7 +43,7 @@ for i = 1 : numTest
     Y(i) = mode(model.labels(lbs(1:k)));
     timeTest(i) = toc;
     
-    fprintf('%d \n', i);
+    fprintf('Teste SIFT. %d de %d\n', i, numTest);
     output = [output; lbs];
 end
 

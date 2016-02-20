@@ -1,5 +1,5 @@
 clear all; close all; clc;
-type = 1;
+type = 3;
 
 switch(type)
     case 1
@@ -13,7 +13,8 @@ switch(type)
         path = '../../../../Dropbox/2015_InTech_Mapa_Topologico/Simulation V-REP/Imagens/';
         
     case 3
-        name = 'desc_surf_real_omni';
+%         name = 'desc_surf_real_omni';
+        path = '/Users/leandrobm/Documents/robohomeomni/';
         real = true;
         
     case 4
@@ -21,7 +22,7 @@ switch(type)
         real = false;
 end
 
-if real
+if type == 1
     files = dir(sprintf('%s*.JPG', path));
     
     n = size(files,1);
@@ -45,7 +46,7 @@ if real
         fprintf('Real - %d\n', i);
     end
     
-else
+elseif type == 2
     % Sim
     d = dir(path);
     isub = [d(:).isdir];
@@ -67,7 +68,7 @@ else
             
             points = detectSURFFeatures(img);
             [frames, ~] = extractFeatures(img, points);
-                        
+            
             timeExt(k) = toc;
             imgsFrames{k} = frames;
             labels(k) = numClass;
@@ -77,8 +78,47 @@ else
         end
     end
     
+elseif type == 3 % Omni Real
+    k = 1;
+    cont = 1;
+    
+    d = dir(path);
+    isub = [d(:).isdir]; %# returns logical vector
+    nameFolds = {d(isub).name}';
+    nameFolds(ismember(nameFolds,{'.','..'})) = [];
+    
+    for i = 1 : length(nameFolds)
+        pathFiles = dir(sprintf('%s%s/*.jpg', path, char(nameFolds(i))));
+        
+        % Keep the number class
+        numClass = strsplit(nameFolds{i}, ' ');
+        numClass = str2double(numClass{2});
+        
+        for j = 1 : length(pathFiles)
+            
+            tic
+            img = imread(sprintf('%s%s/%s', path, nameFolds{i}, pathFiles(j).name));
+            img = rgb2gray(img);
+            
+            points = detectSURFFeatures(img);
+            [frames, ~] = extractFeatures(img, points);
+            
+            timeExt(k) = toc;
+            imgsFrames{k} = frames;
+            labels(k) = numClass;
+            
+            fprintf('Real Omni - %d %d\n', i, j);
+            if (k == 150)
+                k = 1;
+                save(sprintf('/Users/leandrobm/Documents/dados/SURF_real_omni/desc_surf_real_omni_%.2d', cont), 'imgsFrames', 'labels', 'timeExt')
+                cont = cont + 1;
+            end
+            
+            k = k + 1;
+        end
+    end
 end
 
-save(name, 'imgsFrames', 'labels', 'timeExt')
+% save(name, 'imgsFrames', 'labels', 'timeExt')
 
 

@@ -30,6 +30,7 @@ if exist('pathData')
             [batchDesc, inds] = loadDescs(trainData.imgs(i), pathData);
             model.imgs{i} = batchDesc{inds == indImg};
         end
+        fprintf('Treino SIFT. Arquivo %d de %d\n', i, numTrain);
     end
     model.labels = trainData.labels;
     

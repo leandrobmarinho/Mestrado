@@ -17,11 +17,14 @@ elseif not(isempty(strfind(pathData, 'SIFT_real_gopro/desc_sift_real_gopro_')))
     maxValue = 40;
     numPart = 15;
     n = 600;
+elseif not(isempty(strfind(pathData, 'SIFT_real_omni/desc_sift_real_omni_')))
+    maxValue = 50;
+    numPart = 15;
+    n = 750;    
 end
 
 
 i = 0;
-
 for j = 1 : numPart
     inds = i + 1 : i + maxValue;
     if (max(inds) > n)

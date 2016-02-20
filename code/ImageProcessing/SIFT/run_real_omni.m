@@ -3,10 +3,10 @@ clear all; close all; clc;
 addpath('../'); addpath('../../utils/');
 
 %% General configurations
-numRep = 2;
+numRep = 5;
 nnThreshold = 0.8;
-nameImgs = 'real_gopro';
-pathData = '/Users/leandrobm/Documents/dados/SIFT_real_gopro/desc_sift_real_gopro_';
+nameImgs = 'real_omni';
+pathData = '/Users/leandrobm/Documents/dados/SIFT_real_omni/desc_sift_real_omni_';
 k = 1;
 
 
@@ -43,7 +43,7 @@ for i = 1 : numRep
     matConfPorc(:,:,i) = (confMatTest(:,:,i)./length(testData.labels)).*100;
     [metrics(:,:,i), generalMetrics(i,:)] = metricasMatConf(confMatTest(:,:,i));
     
-    save(sprintf('2_sift_gray_%s', nameImgs));
+    save(sprintf('sift_gray_%s', nameImgs));
 end
 
 % Resultado geral
@@ -54,7 +54,7 @@ result.matConfPorc = matConfPorc;
 result.metricas = metrics;
 result.metricasGeral = generalMetrics;
 
-% Procura a matriz de confus?o mais pr?xima da acc m?dia
+% Procura a matriz de confus?o mais proxima da acc m?dia
 acc = generalMetrics(:,end);
 mediaAcc = mean(acc);
 [~, pos] = sort( abs ( mediaAcc - acc) );
@@ -64,6 +64,6 @@ result.stdAcc = std(acc);
 
 result.timeTest = timeTest;
 
-save(sprintf('2_sift_gray_%s', nameImgs));
+save(sprintf('sift_gray_%s', nameImgs));
 
 % path(p);
