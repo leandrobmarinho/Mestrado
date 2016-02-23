@@ -3,10 +3,9 @@ clear all; close all; clc;
 addpath('../'); addpath('../../utils/');
 
 %% General configurations
-numRep = 5;
-nnThreshold = 0.8;
+numRep = 4;
 nameImgs = 'real_omni';
-pathData = '/Users/leandrobm/Documents/dados/SIFT_real_omni/desc_sift_real_omni_';
+pathData = '/Users/leandrobm/Documents/dados/SURF_real_omni/desc_surf_real_omni_';
 k = 1;
 
 
@@ -29,12 +28,12 @@ for i = 1 : numRep
     [trainData, testData] = shuffleImgs(data, k, false);      
     
     %% Train
-    [model] = trainSIFT(trainData, pathData);
+    [model] = trainSURF(trainData, pathData);
     
     %% Test
-    fprintf('SIFT - step %d.\n', i);
+    fprintf('SURF - step %d.\n', i);
     tic
-    [Y, t] = testSIFT_ind(model, testData, k, nnThreshold, pathData);
+    [Y, t] = testSURF_ind(model, testData, k, pathData);
     timeTest(i) = mean(t);
     confMatTest(:,:,i) = confusionmat(testData.labels', Y');
     
@@ -43,7 +42,7 @@ for i = 1 : numRep
     matConfPorc(:,:,i) = (confMatTest(:,:,i)./length(testData.labels)).*100;
     [metrics(:,:,i), generalMetrics(i,:)] = metricasMatConf(confMatTest(:,:,i));
     
-    save(sprintf('sift_%s', nameImgs));
+    save(sprintf('surf_%s', nameImgs));
 end
 
 % Resultado geral
@@ -54,7 +53,7 @@ result.matConfPorc = matConfPorc;
 result.metricas = metrics;
 result.metricasGeral = generalMetrics;
 
-% Procura a matriz de confus?o mais proxima da acc m?dia
+% Procura a matriz de confus?o mais pr?xima da acc m?dia
 acc = generalMetrics(:,end);
 mediaAcc = mean(acc);
 [~, pos] = sort( abs ( mediaAcc - acc) );
@@ -64,6 +63,6 @@ result.stdAcc = std(acc);
 
 result.timeTest = timeTest;
 
-save(sprintf('sift_%s', nameImgs));
+save(sprintf('surf_%s', nameImgs));
 
 % path(p);

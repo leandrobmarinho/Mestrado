@@ -9,7 +9,7 @@ for z = 1 : 10
     % Train
     tic
     
-    imgsTrain{1} = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P01_%.2d.JPG', randperm(40,1)));
+    imgsTrain{1} = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/P01_%.2d.JPG', randperm(40,1)));
     imgsTrain{2} = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P02_%.2d.JPG', randperm(40,1)));
     imgsTrain{3} = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P03_%.2d.JPG', randperm(40,1)));
     imgsTrain{4} = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P04_%.2d.JPG', randperm(40,1)));
