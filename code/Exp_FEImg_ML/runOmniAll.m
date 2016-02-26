@@ -1,4 +1,4 @@
-clear all; close all; clc;
+clear; close all; clc;
 addpath('../Classification/percetron/'); addpath('../Classification/MLM/');
 addpath('../Classification/MLP/'); addpath('../Classification/multisvm/');
 addpath('../Classification/bayes/'); addpath('../utils/');
