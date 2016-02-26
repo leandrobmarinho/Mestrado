@@ -82,7 +82,7 @@ conf.extraLSSVMRBF.sigma = 1;
 conf.extraMLP = 60;
 
 conf.descr = sprintf(strModel, 'central');
-evaluate_ml_route(centralGoPro, conf)
+evaluate_ml_route(central, conf)
 
 
 
@@ -112,7 +112,7 @@ conf.extraLSSVMRBF.sigma = 1;
 conf.extraMLP = 30;
 
 conf.descr = sprintf(strModel, 'statistic');
-evaluate_ml_route(statisticGoPro, conf)
+evaluate_ml_route(statistic, conf)
 
 
 
