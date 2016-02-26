@@ -1,10 +1,11 @@
+addpath('vlfeat/toolbox');vl_setup;
 clear; close all; clc;
 p = path; path(p, '../'); path(p, '../../utils/');
 
 %% General configurations
 numRep = 10;
-nameImgs = 'real_gopro';
-pathData = sprintf('/Users/leandrobm/Documents/dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
+nnThreshold = 0.8;
+nameImgs = 'real_omni';
 numK = 1;
 routes{1} = [8 7 3 4];
 routes{2} = [1 6 10 9];
@@ -26,13 +27,12 @@ data.labels = labels;
 % Initializes variables
 numClass = length(unique(labels));
 
-
 %% Steps
 for i = 1 : length(routes)
     for j = 1 : numRep
         %% Shuffle the imagens
         [trainData, testData] = shuffleImgs(data, numK, false);
-        
+
         testAux.imgs = [];
         for k = 1 : length(routes{i})
             inds = find(testData.labels == routes{i}(k));
@@ -42,16 +42,17 @@ for i = 1 : length(routes)
         testAux.labels = routes{i}';
         testData = testAux; clear testAux;
         
-        
+
         %% Train
-        fprintf('SURF (Treino): %d - %d\n', i, j);
-        [model] = trainSURF(trainData, pathData);
-        
+        fprintf('SIFT (Treino): %d - %d\n', i, j);
+        tic
+        [model] = trainSIFT(trainData);
+        toc
         
         %% Test
-        fprintf('SURF (Teste): %d - %d\n', i, j);
-        [Y, ~, y_] = testSURF_ind(model, testData, numK, pathData);
-        
+        fprintf('SIFT (Teste): %d - %d\n', i, j);
+        [Y, ~, y_] = testSIFT(model, testData, numK, nnThreshold);
+
         hit(j) = (sum(Y == testData.labels') == length(Y));
         if hit(j)
             hitRej(j) = hit(j);
@@ -63,17 +64,18 @@ for i = 1 : length(routes)
             hitRej(j) = (sum(Y == testData.labels') == length(Y));
         end
         
-        save(sprintf('surf_route_%s', nameImgs));
+        save(sprintf('sift_route_%s', nameImgs));
     end
     
     % Result by route
     route{i}.hit = double(hit);
     route{i}.hitRej = double(hitRej);
     
-    save(sprintf('surf_route_%s', nameImgs));
-end
+    save(sprintf('sift_route_%s', nameImgs));
 
+end
 clear model labels
-save(sprintf('surf_route_%s', nameImgs));
+result.routes = route;
+save(sprintf('sift_route_%s', nameImgs));
 
 path(p);

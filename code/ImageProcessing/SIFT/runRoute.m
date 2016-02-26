@@ -1,4 +1,5 @@
-clear all; close all; clc;
+addpath('vlfeat/toolbox');vl_setup;
+clear; close all; clc;
 p = path; path(p, '../'); path(p, '../../utils/');
 
 %% General configurations
