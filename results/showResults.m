@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'omni/Main/Real/SIFT/'; type = 15;
+folder = 'temp/'; type = 2;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
@@ -15,7 +15,7 @@ namesFile = name(index);
 
 modelStr = '%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.3f$\\pm$%0.2f\t%0.3f$\\pm$%0.2f\t%s\n';
 modelStr2 = '%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%s\n';
-modelStr3 = '& %0.2f$\\pm$%0.2f & %0.2f$\\pm$%0.2f & %0.2f$\\pm$%0.2f & %0.2f$\\pm$%0.2f & %0.2f$\\pm$%0.2f & %0.2f$\\pm$%0.2f \\\\ %s\n';
+modelStr3 = '& %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f \\\\ %s\n';
 
 if (type == 15)
     fprintf('\\begin{tabular}{c|c|c|cccccc}\n');
@@ -259,12 +259,13 @@ for i = 1 : numel(files)
                 nameClassifier = sprintf('\\multicolumn{3}{c|}{SURF}\t\t\t\t\t\t');
                 line = '\hline';
             end
-            
-            %\multirow{12}{*}{Central M.}   & Bayes                   & Normal   ... \\ \cline{2-9}
-            %                               & \multirow{2}{*}{LSSVM}  & Linear   ... \\
 
             fprintf('%s%s', nameClassifier, sprintf(modelStr3, metricas*100, line));
             
+            
+        case 16
+            %% Acc, test and train time            
+            fprintf('& %0.1f\t& %0.1f\t& %0.1f\t %s\n', result.metricasGeralMedia(end)*100, mean(result.tempoTrein), 1000000*mean(result.tempoTeste), name);
     end
     
 end
