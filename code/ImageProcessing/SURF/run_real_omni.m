@@ -1,11 +1,12 @@
-clear all; close all; clc;
+clear; close all; clc;
 % p = path; path(p, '../'); path(p, '../utils/');
 addpath('../'); addpath('../../utils/');
 
 %% General configurations
-numRep = 4;
+numRep = 10;
 nameImgs = 'real_omni';
-pathData = '/Users/leandrobm/Documents/dados/SURF_real_omni/desc_surf_real_omni_';
+pathData = '/Users/WELL/Documents/Leandro/data/SURF_real_omni/desc_surf_real_omni_';
+
 k = 1;
 
 

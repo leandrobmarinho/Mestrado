@@ -5,8 +5,8 @@ addpath('../'); addpath('../../utils/');
 %% General configurations
 numRep = 10;
 nnThreshold = 0.8;
-nameImgs = 'real_omni';
-pathData = '/Users/leandrobm/Documents/dados/SIFT_real_omni/desc_sift_real_omni_';
+nameImgs = 'sim_omni';
+pathData = '/Users/WELL/Documents/Leandro/data/SIFT_sim_omni/desc_sift_sim_omni_';
 k = 1;
 
 
