@@ -4,7 +4,7 @@ addpath('../'); addpath('../../utils/');
 
 %% General configurations
 numRep = 10;
-nameImgs = 'real_omni';
+nameImgs = 'sim_omni';
 pathData = '/Users/WELL/Documents/Leandro/data/SURF_sim_omni/desc_surf_sim_omni_';
 k = 1;
 

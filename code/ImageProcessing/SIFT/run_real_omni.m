@@ -3,10 +3,10 @@ clear; close all; clc;
 addpath('../'); addpath('../../utils/');
 
 %% General configurations
-numRep = 10;
+numRep = 3;
 nnThreshold = 0.8;
 nameImgs = 'real_omni';
-pathData = '/Users/leandrobm/Documents/dados/SIFT_real_omni/desc_sift_real_omni_';
+pathData = '/Users/WELL/Documents/Leandro/data/SIFT_real_omni/desc_sift_real_omni_';
 k = 1;
 
 

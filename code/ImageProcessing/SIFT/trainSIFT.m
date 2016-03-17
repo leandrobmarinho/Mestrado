@@ -44,7 +44,8 @@ else
         if (indImg == 0)
             indImg = 40;
         end
-        img = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P%0.2d_%0.2d.JPG', trainData.labels(i), indImg)) ;
+%         img = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P%0.2d_%0.2d.JPG', trainData.labels(i), indImg)) ;
+        img = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/P%0.2d_%0.2d.jpg', trainData.labels(i), indImg)) ;
         img = single(rgb2gray(img));
         
         [~, descrsTrain] = vl_sift(img);

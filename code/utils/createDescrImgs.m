@@ -112,7 +112,7 @@ elseif type == 3 || type == 4 % Real and Sim Omni
             
             fprintf('%s - %d %d\n', name, i, j);
             if (k == 50)
-                k = 1;
+                k = 0;
                 save(sprintf('%s%s_%.2d', output, name, cont), 'imgsDescr', 'labels', 'timeExt')
                 cont = cont + 1;
             end

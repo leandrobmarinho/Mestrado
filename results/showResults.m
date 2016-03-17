@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'temp/'; type = 2;
+folder = 'omni/Main/Real/Spatial/'; type = 2;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
