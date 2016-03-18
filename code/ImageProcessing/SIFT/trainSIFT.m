@@ -21,6 +21,7 @@ numTrain = length(trainData.labels);
 inds = 0;
 for i = 1 : numTrain
     
+<<<<<<< HEAD
     % Load only if there is not batch in memory
     indImg = trainData.imgs(i);
     if ( sum(inds == indImg) )
@@ -28,6 +29,22 @@ for i = 1 : numTrain
     else
         [batchDesc, inds] = loadDescs(trainData.imgs(i), pathData);
         model.imgs{i} = batchDesc{inds == indImg};
+=======
+    % Only for route
+    for i = 1 : numTrain
+        
+        indImg = trainData.imgs(i);
+        indImg = mod(indImg,40);
+        if (indImg == 0)
+            indImg = 40;
+        end
+%         img = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P%0.2d_%0.2d.JPG', trainData.labels(i), indImg)) ;
+        img = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/P%0.2d_%0.2d.jpg', trainData.labels(i), indImg)) ;
+        img = single(rgb2gray(img));
+        
+        [~, descrsTrain] = vl_sift(img);
+        model.imgs{i} = single(descrsTrain);
+>>>>>>> origin/master
     end
     fprintf('Treino SIFT. Arquivo %d de %d\n', i, numTrain);
 end

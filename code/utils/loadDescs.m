@@ -17,7 +17,8 @@ elseif not(isempty(strfind(pathData, 'SIFT_real_gopro/desc_sift_real_gopro_')))
     maxValue = 40;
     numPart = 15;
     n = 600;
-elseif not(isempty(strfind(pathData, 'SIFT_real_omni/desc_sift_real_omni_')))
+elseif ( not(isempty(strfind(pathData, 'SIFT_real_omni/desc_sift_real_omni_'))) || ... 
+    not(isempty(strfind(pathData, 'SIFT_sim_omni/desc_sift_sim_omni_'))) )
     maxValue = 50;
     numPart = 15;
     n = 750;    

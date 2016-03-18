@@ -31,7 +31,13 @@ for i = 1 : numTest
     if (indImg == 0)
         indImg = limite;
     end
+<<<<<<< HEAD
     eval(comando_leitura);
+=======
+%     img = imread(sprintf('/Users/leandrobm/Documents/robohomegopro/P%0.2d_%0.2d.JPG', testData.labels(i), indImg)) ;
+    img = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/P%0.2d_%0.2d.JPG', testData.labels(i), indImg)) ;
+    
+>>>>>>> origin/master
     img = single(rgb2gray(img));
     
     [~, descrsTest] = vl_sift(img);
