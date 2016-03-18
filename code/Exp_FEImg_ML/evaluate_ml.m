@@ -157,17 +157,17 @@ if(find(ismember(params.mlMethods,'mlp')))
     %paramsMLP = [50 100:10:200 250 300];
     %paramsMLP = 2.^(1:9);
 %     paramsMLP = [10:10:300];
-    paramsMLP = [10:10:150 200:20:340];
+%    paramsMLP = [10:10:150 200:20:340];
 %     paramsMLP = [10:10:150 200:20:240];
 
-paramsMLP = [10:10:150];
+    paramsMLP = 10:10:100;
 
 %     paramsMLP = 5:5:50;
     
     if isfield(params,'extraMLP')
         optParam = params.extraMLP;
     else
-        optParam = searchTopologyMLP(data, paramsMLP, 3, ptrn );
+        optParam = searchTopologyMLP(data, paramsMLP, 2, ptrn );
     end
     result = simMLP(dataset, optParam );
     

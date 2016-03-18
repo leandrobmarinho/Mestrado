@@ -46,12 +46,12 @@ for i = 1 : length(routes)
         %% Train
         fprintf('SIFT (Treino): %d - %d\n', i, j);
         tic
-        [model] = trainSIFT(trainData);
+        [model] = trainSIFT_route(trainData, nameImgs);
         toc
         
         %% Test
         fprintf('SIFT (Teste): %d - %d\n', i, j);
-        [Y, ~, y_] = testSIFT(model, testData, numK, nnThreshold);
+        [Y, ~, y_] = testSIFT(model, testData, numK, nnThreshold, nameImgs);
 
         hit(j) = (sum(Y == testData.labels') == length(Y));
         if hit(j)

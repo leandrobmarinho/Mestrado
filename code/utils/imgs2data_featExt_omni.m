@@ -1,4 +1,4 @@
-clear all; close all; clc;
+clear; close all; clc;
 addpath('../ImageProcessing/LBP/');
 addpath('../ImageProcessing/Haralick/');
 addpath('../ImageProcessing/Hu_Moments/');
