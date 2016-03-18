@@ -31,11 +31,11 @@ load(sprintf(sprintf('../../data/%s', strModel), 'all'));
 % evaluate_ml(statistic, conf)
 
 
-% ---------- Hu Moments ----------
-conf.descr = sprintf(strModel, 'hu');
-evaluate_ml(hu, conf)
-
-
-% ---------- Haralick ----------
-conf.descr = sprintf(strModel, 'haralick');
-evaluate_ml(haralick, conf)
+% % ---------- Hu Moments ----------
+% conf.descr = sprintf(strModel, 'hu');
+% evaluate_ml(hu, conf)
+% 
+% 
+% % ---------- Haralick ----------
+% conf.descr = sprintf(strModel, 'haralick');
+% evaluate_ml(haralick, conf)
