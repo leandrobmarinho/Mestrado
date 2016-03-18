@@ -12,8 +12,8 @@ for z = 1 : 10
     tic
     
     for i = 1 : numClasses
-        imgsTrain{i} = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_virtual/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
-%         imgsTrain{i} = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
+%         imgsTrain{i} = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_virtual/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
+        imgsTrain{i} = imread(sprintf('/Users/leandrobm/Dropbox/Omni_virtual/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
         
         points = detectSURFFeatures(rgb2gray(imgsTrain{i}));
         [framesTrain{i}, ~] = extractFeatures(rgb2gray(imgsTrain{i}), points);
@@ -26,8 +26,8 @@ for z = 1 : 10
     tic
     
     classe = randperm(numClasses, 1);
-    imT = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_virtual/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
-%     imT = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
+%     imT = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_virtual/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
+    imT = imread(sprintf('/Users/leandrobm/Dropbox/Omni_virtual/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
     points = detectSURFFeatures(rgb2gray(imT));
     [frameT, ~] = extractFeatures(rgb2gray(imT), points);
     
@@ -46,6 +46,6 @@ for z = 1 : 10
     hits(z) = lbs(1) == classe;
 end
 
-save('tempo_sim', 'timeTest', 'timeTrain', 'hits');
+save('surf_tempo_sim', 'timeTest', 'timeTrain', 'hits');
 fprintf('Acertos %f\n', mean(hits));
 path(p);

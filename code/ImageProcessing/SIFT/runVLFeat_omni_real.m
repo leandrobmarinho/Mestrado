@@ -11,8 +11,8 @@ for z = 1 : 10
     tic    
     
     for i = 1 : numClasses
-        imgsTrain{i} = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
-%         imgsTrain{i} = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
+%         imgsTrain{i} = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
+        imgsTrain{i} = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/classe %02d/Omn%02d_%02d.jpg', i, i, randperm(50,1)));
 
         [~, descr] = vl_sift(single(rgb2gray(imgsTrain{i})));
         descrs{i} = single(descr);
@@ -25,8 +25,8 @@ for z = 1 : 10
     tic
     
     classe = randperm(numClasses, 1);
-    imT = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
-%     imT = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
+%     imT = imread(sprintf('/Users/WELL/Documents/Leandro/Omni_real/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
+    imT = imread(sprintf('/Users/leandrobm/Documents/robohomeomni/classe %02d/Omn%02d_%02d.jpg', classe, classe, randperm(50, 1))) ;
     [~, descrsT] = vl_sift(single(rgb2gray(imT)));
     descrsT = single(descrsT);
     
@@ -48,6 +48,6 @@ for z = 1 : 10
     hits(z) = lbs(1) == classe;
 end
 
-save('tempo_real', 'timeTest', 'timeTrain', 'hits');
+save('sift_tempo_real', 'timeTest', 'timeTrain', 'hits');
 fprintf('Acertos %f\n', mean(hits));
 path(p);
