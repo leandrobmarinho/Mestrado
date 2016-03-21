@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'omni/Main/Simulation/LBP/'; type = 2;
+folder = 'temp/'; type = 16;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
@@ -19,7 +19,7 @@ modelStr3 = '& %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\
 
 if (type == 15)
     fprintf('\\begin{tabular}{c|c|c|cccccc}\n');
-    fprintf('\\\\hline\n');
+    fprintf('\\hline\n');
     fprintf('Feature\t\t\t\t& Classifier \t\t & Setup \t& Spe (\\%%) \t & Sen (\\%%) \t  & PPV (\\%%)  \t   & F-Score (\\%%)   & HM (\\%%)        & Acc (\\%%) \t \\\\ \\hline\n');
     %
 end
@@ -265,7 +265,8 @@ for i = 1 : numel(files)
             
         case 16
             %% Acc, test and train time            
-            fprintf('& %0.1f\t& %0.1f\t& %0.1f\t %s\n', result.metricasGeralMedia(end)*100, mean(result.tempoTrein), 1000000*mean(result.tempoTeste), name);
+            fprintf('& %0.1f\t& %0.2f$\\pm$%0.1f\t& %0.1f$\\pm$%0.1f\t %s\n', result.metricasGeralMedia(end)*100, ...
+                mean(result.tempoTrein), std(result.tempoTrein), 1000000*mean(result.tempoTeste), 1000000*std(result.tempoTeste), name);
     end
     
 end
