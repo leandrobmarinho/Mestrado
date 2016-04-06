@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'temp/'; type = 16;
+folder = 'goPro/Route/'; type = 8;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date

@@ -25,13 +25,13 @@ Yh = zeros(size(data.x, 1), size(model.refY, 2));
 yh0 = mean(model.refY); % initial estimate for y
 
 try
-    switch (conf.method)
-        
+    switch (conf.method)     
         
         case ('lsqnonlin')
             for i = 1: size(data.x, 1),
                 Yh(i, :) = lsqnonlin(@(x)(fun(x, model.refY, DYh(i, :))), yh0, [], [], options_lsq);
             end
+            
         case ('knn')
             [~, Ind] = sort(DYh, 2);
             %         for i = 1: size(data.x, 1),
