@@ -1,7 +1,7 @@
 clear; clc; close all;
 titulo_extrator = {'Central M.', 'GLCM', 'Hu', 'LBP', 'Statistical M.', 'SIFT-SURF'};
 
-load('route_general.mat');
+load('route_general_gopro.mat');
 for i = 1 : 5
     dataValues{i} = [valuesNormal(:,i) valuesRej(:,i)]*100;
     dataErros{i} = [errosNormal(:,i) errosRej(:,i)]*100;
