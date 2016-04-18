@@ -67,7 +67,7 @@ for i = 1 : length(params.routes)
     end
     
 end
-save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
+% save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
 clear trainData testData testAux
 
 %% Evaluate
