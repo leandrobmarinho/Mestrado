@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'omni/Route/'; type = 18;
+folder = 'omni/Main/Simulation/SIFT/'; type = 2;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
