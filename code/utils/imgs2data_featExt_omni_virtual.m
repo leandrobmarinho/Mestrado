@@ -22,19 +22,22 @@ optionsLBP.mappingtype = 'u2';        % uniform LBP
 %%
 
 pathFolder = '/Users/leandrobm/Dropbox/Omni_virtual/';
+% pathFolder = '/Users/WELL/Documents/Leandro/Omni_virtual';
 
 d = dir(pathFolder);
 isub = [d(:).isdir]; %# returns logical vector
 nameFolds = {d(isub).name}';
 nameFolds(ismember(nameFolds,{'.','..'})) = [];
 
+inds = randperm(40);
+inds = inds(1:10);
 
 %%
 k = 1;
 dataLBP = []; dataHu = []; dataHaralick = []; dataMideSobel = [];
 % dataMideAver = []; dataMideGrandMorf = []; dataMideLaplacian = [];
 % dataMideMedian = [];
-for i = 1 : length(nameFolds)
+for i = inds%1 : length(nameFolds)
     pathFiles = dir(sprintf('%s%s/*.jpg', pathFolder, char(nameFolds(i))));
     
     % Keep the number class

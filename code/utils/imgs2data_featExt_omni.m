@@ -22,12 +22,15 @@ optionsLBP.mappingtype = 'u2';        % uniform LBP
 %%
 
 pathFolder = '/Users/leandrobm/Documents/robohomeomni/';
+% pathFolder = '/Users/WELL/Documents/Leandro/Omni_real/';
 
 d = dir(pathFolder);
 isub = [d(:).isdir]; %# returns logical vector
 nameFolds = {d(isub).name}';
 nameFolds(ismember(nameFolds,{'.','..'})) = [];
 
+inds = randperm(40);
+inds = inds(1:10);
 
 %%
 k = 1;
@@ -41,7 +44,7 @@ for i = 1 : length(nameFolds)
     numClass = strsplit(nameFolds{i}, ' ');
     numClass = str2double(numClass{2});
     
-    for j = 1 : length(pathFiles)
+    for j = inds%1 : length(pathFiles)
         tic
         imageRGB = imread(sprintf('%s%s/%s', pathFolder, nameFolds{i}, pathFiles(j).name));
 %         imageHSV = rgb2hsv(imageRGB);
@@ -85,6 +88,7 @@ for i = 1 : length(nameFolds)
         
         save(nameOut)
         k = k + 1;
+        
     end
 end
 

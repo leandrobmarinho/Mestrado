@@ -306,7 +306,7 @@ table = 0:2^samples-1;
 newMax  = 0; %number of patterns in the resulting LBP code
 index   = 0;
 
-vr2014b = or(strcmp(version('-release'),'2014b'),strcmp(version('-release'),'2014a'));
+vr2014b = or(or(strcmp(version('-release'),'2014b'),strcmp(version('-release'),'2014a')),strcmp(version('-release'),'2015b'));
 if vr2014b
     switch samples
         case 8
