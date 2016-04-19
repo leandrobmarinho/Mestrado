@@ -37,14 +37,14 @@ k = 1;
 dataLBP = []; dataHu = []; dataHaralick = []; dataMideSobel = [];
 % dataMideAver = []; dataMideGrandMorf = []; dataMideLaplacian = [];
 % dataMideMedian = [];
-for i = inds%1 : length(nameFolds)
+for i = 1 : length(nameFolds)
     pathFiles = dir(sprintf('%s%s/*.jpg', pathFolder, char(nameFolds(i))));
     
     % Keep the number class
     numClass = strsplit(nameFolds{i}, ' ');
     numClass = str2double(numClass{2});
     
-    for j = 1 : length(pathFiles)
+    for j = inds%1 : length(pathFiles)
         tic
         imageRGB = imread(sprintf('%s%s/%s', pathFolder, nameFolds{i}, pathFiles(j).name));
 %         imageHSV = rgb2hsv(imageRGB);
