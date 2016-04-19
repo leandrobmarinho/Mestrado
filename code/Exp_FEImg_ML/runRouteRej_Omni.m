@@ -33,7 +33,7 @@ conf.descr = sprintf(strModel, 'lbp');
 
 % ---------- Central Moments ----------
 conf.descr = sprintf(strModel, 'central');
-evaluate_ml_route(central, conf)
+% evaluate_ml_route(central, conf)
 
 
 
