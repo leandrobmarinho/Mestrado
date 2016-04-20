@@ -1,13 +1,13 @@
 clear; clc; close all;
 titulo_extrator = {'Central M.', 'GLCM', 'Hu', 'LBP', 'Statistical M.', 'SIFT-SURF'};
 
-load('route_general_real.mat');
+load('route_general_omni.mat');
 for i = 1 : 5
     dataValues{i} = [valuesNormal(:,i) valuesRej(:,i)]*100;
     dataErros{i} = [errosNormal(:,i) errosRej(:,i)]*100;
 end
-dataValues{6} = [sift; surf];
-dataErros{6} = [sift_erro; surf_erro];
+dataValues{6} = [sift; surf]*100;
+dataErros{6} = [sift_erro; surf_erro]*100;
 
 %% Choose the option
 labelY = 'Accuracy';
@@ -32,7 +32,7 @@ for i = 0:5
     
     % ylabel(sprintf('%s (\\%%)', axisName), 'FontSize', 40, 'interpreter','latex')
     
-    ylim([0 105])
+    ylim([0 max(values(:))+14])
     xlim([0 size(values,1) + 1])
     ax = gca;
     set(gca,'FontSize',20) %tamanho axis

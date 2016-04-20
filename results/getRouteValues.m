@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'omni/Route/'; type = 10;
+folder = 'omni/'; type = 11;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
@@ -31,24 +31,34 @@ for i = 1 : numel(files)
     end
     
     
-    switch(type)            
+    switch(type)
         case 10
             %% Reject option with std
             num = length(result);
-            for j = 0 : num -1
-                metrcs(j*2 + 1) = mean(result{j+1}.hitRej);
-                metrcs(j*2 + 2) = std(result{j+1}.hitRej);
-            end
-            
-            if (strcmp('gray_sift_omni_route.mat', name))
-               keyboard; 
+            for j = 0 : num-1
+                metrcs(j*2 + 1) = mean(result{j+1}.hit);
+                metrcs(j*2 + 2) = std(result{j+1}.hit);
             end
             
             %General
             values(i) = mean(metrcs(1:2:num*2));
             erros(i) = std(metrcs(1:2:num*2));
             fprintf('%s\n', name);
-            clear metrcs          
+            clear metrcs
+            
+        case 11
+            %% Reject option with std
+            num = length(result);
+            for j = 0 : num -1
+                metrcs(j*2 + 1) = mean(result{j+1}.hitRej);
+                metrcs(j*2 + 2) = std(result{j+1}.hitRej);
+            end            
+            
+            %General
+            values(i) = mean(metrcs(1:2:num*2));
+            erros(i) = std(metrcs(1:2:num*2));
+            fprintf('%s\n', name);
+            clear metrcs
     end
     
 end

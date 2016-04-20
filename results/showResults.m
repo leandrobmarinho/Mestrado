@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-folder = 'omni/Main/Simulation/SIFT/'; type = 2;
+folder = 'temp/'; type = 17;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
@@ -347,18 +347,14 @@ for i = 1 : numel(files)
             for j = 0 : num -1
                 metrcs(j*2 + 1) = mean(result{j+1}.hit);
                 metrcs(j*2 + 2) = std(result{j+1}.hit);
-            end
-            
-            %General
-%             metrcs(num*2 + 1) = mean(metrcs(1:2:num*2));
-%             metrcs(num*2 + 2) = std(metrcs(1:2:num*2));
-%             fprintf([repmat('%0.2f$\\pm$%0.2f\t', 1, num+1) '%s\n'], 100*metrcs, name)            
+                
+            end                      
 
             fprintf('%s%s', nameClassifier, sprintf(modelStr4, metrcs*100, line));
             clear metrcs
             
         case 18
-            %% Create the table (Route with std)
+            %% Create the table (Route-Rejec with std)
             if(not(isempty(strfind(name, 'central'))))
                 nameExt = '\rotatebox[origin=c]{90}{Central M.}';
             elseif (not(isempty(strfind(name, 'haralick'))))
@@ -432,7 +428,7 @@ for i = 1 : numel(files)
             num = length(result);
             for j = 0 : num -1
                 metrcs(j*2 + 1) = mean(result{j+1}.hitRej);
-                metrcs(j*2 + 2) = std(result{j+1}.hitRej);
+                metrcs(j*2 + 2) = std(result{j+1}.hitRej);                
             end                        
 
             fprintf('%s%s', nameClassifier, sprintf(modelStr4, metrcs*100, line));
