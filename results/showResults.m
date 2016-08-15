@@ -1,6 +1,8 @@
 clear; close all; clc;
 
-folder = 'temp/'; type = 17;
+folder = 'temp/';
+type = 15;
+precisao = 2;
 files = dir(sprintf('%s*.mat', folder));
 
 % Sort by date
@@ -15,7 +17,9 @@ namesFile = name(index);
 
 modelStr = '%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.3f$\\pm$%0.2f\t%0.3f$\\pm$%0.2f\t%s\n';
 modelStr2 = '%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%0.2f$\\pm$%0.2f\t%s\n';
-modelStr3 = '& %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f \\\\ %s\n';
+% modelStr3 = '& %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f \\\\ %s\n';
+modelStr3 = sprintf('& %%0.%df$\\\\pm$%%0.%df & %%0.%df$\\\\pm$%%0.%df & %%0.%df$\\\\pm$%%0.%df & %%0.%df$\\\\pm$%%0.%df & %%0.%df$\\\\pm$%%0.%df & %%0.%df$\\\\pm$%%0.%df \\\\\\\\ %%s\\n', repmat(precisao, 1, 12));
+
 
 modelStr4 = '& %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f & %0.1f$\\pm$%0.1f\\\\ %s\n';
 
