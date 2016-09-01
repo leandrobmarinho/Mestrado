@@ -1,7 +1,7 @@
 clear; clc; close all;
 titulo_extrator = {'Central M.', 'GLCM', 'Hu', 'LBP', 'Statistical M.', 'SIFT-SURF'};
 
-load('route_general_real.mat');
+load('route_general_gopro.mat');
 for i = 1 : 5
     dataValues{i} = [valuesNormal(:,i) valuesRej(:,i)]*100;
     dataErros{i} = [errosNormal(:,i) errosRej(:,i)]*100;
@@ -10,7 +10,7 @@ dataValues{6} = [sift; surf];
 dataErros{6} = [sift_erro; surf_erro];
 
 %% Choose the option
-labelY = 'Accuracy';
+labelY = 'Acur{\''a}cia';
 
 
 for i = 0:5
@@ -26,7 +26,7 @@ for i = 0:5
     
     
     % Nome das Legenda
-    l = {'Normal', 'With Reject Option'};
+    l = {'Normal', 'Com SDL'};
     l = legend(h,l,'Location','northoutside', 'Orientation', 'horizontal');
     
     
@@ -35,20 +35,20 @@ for i = 0:5
     ylim([0 105])
     xlim([0 size(values,1) + 1])
     ax = gca;
-    set(gca,'FontSize',20) %tamanho axis
-    set(l,'FontSize',25); %tamanho da legenda
+    set(gca,'FontSize',25) %tamanho axis
+    set(l,'FontSize',30); %tamanho da legenda
     
     % ============ XTickLabel ============
     if (size(values,1) == 2)
         namesAxisX = {'SIFT', 'SURF'};
     else
-        namesAxisX = {'Bayes', 'LS-SVM (Lin)', 'LS-SVM (RBF)', 'MLM (CB)', ...
-            'MLM (Euc)', 'MLM (Mah)', 'MLM-NN (CB)', ...
+        namesAxisX = {'Bayes', 'LSSVM (Lin)', 'LSSVM (RBF)', 'MLM (Man)', ...
+            'MLM (Euc)', 'MLM (Mah)', 'MLM-NN (Man)', ...
             'MLM-NN (Euc)', 'MLM-NN (Mah)', 'MLP', 'SVM (Lin)', 'SVM (RBF)'};        
     end
     set(gca,'XTickLabel', namesAxisX)
     if (size(values,1) > 2)
-            ax.XTickLabelRotation = 18;
+            ax.XTickLabelRotation = 22;
     end
 
 %     xlabel('Classifiers', 'FontSize', 40, 'interpreter','latex')
