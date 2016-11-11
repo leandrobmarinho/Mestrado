@@ -17,8 +17,8 @@ load(sprintf(sprintf('../../data/%s', strModel), 'all'));
 
 
 % % ---------- LBP ----------
-% conf.descr = sprintf(strModel, 'lbp');
-% evaluate_ml(lbp, conf)
+conf.descr = sprintf(strModel, 'lbp');
+evaluate_ml(lbp, conf)
 
 
 % ---------- Central Moments ----------

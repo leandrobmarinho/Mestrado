@@ -75,11 +75,11 @@ end
 
 
 % C from LSSVM and SVM
-paraC = 2.^(-2:15);
-%paraC = 2.^(-5:2:15);
-
-sigmas = 2.^(-2:8);
-%sigmas = 2.^(-15:2:3);
+paraC = 2.^(-2:11);
+paraC = 2.^(-5:15);
+% paraC = 2.^(2:11); %2.^(2:11);
+% sigmas = 2.^(0:3);
+sigmas = 2.^(-1:8);
 %% =============== SVM (Linear) ===============
 
 clear config

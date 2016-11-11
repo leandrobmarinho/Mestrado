@@ -15,7 +15,7 @@ for i = 1 : size(data,1)
         
         %% Treinamento e Teste - (LS)SVM
         fprintf('Treinamento e Teste - (LS)SVM.\n');
-        [Y, time, y_] = multisvm(treinData.x, treinData.y, testData.x, conf);
+        [Y, time, y_, acc_train] = multisvm(treinData.x, treinData.y, testData.x, conf);
         tempoTrein(i) = time.trein;
         tempoTeste(i) = time.test/Ntest;
         
@@ -23,6 +23,8 @@ for i = 1 : size(data,1)
         if (not(hit(j)))
             
             indNotHit = find((Y == testData.y') == 0);
+                        
+            y_ = y_./repmat(acc_train, Ntest, 1); %use acc of train as weigth
             
             [~, indC] = sort(y_', 'ascend');
             Y(indNotHit) = indC(2, indNotHit);

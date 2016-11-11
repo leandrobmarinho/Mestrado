@@ -24,7 +24,6 @@ for i = 1 : length(data)
     tempoTeste(i) = toc/Ntest;
     confMatTeste(:,:,i) = confusionmat(testData.y', Y');
     
-    
     %% Metricas
     matConfPorc(:,:,i) = (confMatTeste(:,:,i)./Ntest).*100;
     [metricas(:,:,i), metricasGeral(i,:)] = metricasMatConf(confMatTeste(:,:,i));    

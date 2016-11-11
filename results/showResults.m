@@ -1,7 +1,7 @@
 clear; close all; clc;
 
-folder = 'temp/';
-type = 16;
+folder = 'goPro/Main/Real/Spatial/';
+type = 1;
 precisao = 2;
 files = dir(sprintf('%s*.mat', folder));
 

@@ -48,6 +48,7 @@ for i = 1:600
     GLCM2 = graycomatrix(img); %graycomatrix(I,'Offset',[2 0;0 2]); 
     stats = GLCM_Features1(GLCM2,0);
     timeHaralick(i) = toc + tempoConv;
+    fprintf('%.2f\n', timeHaralick(i) - tempoConv)
     X = struct2array(stats);
 
     dataHaralick = [dataHaralick; [X numClass] ];
@@ -58,76 +59,21 @@ for i = 1:600
     tic
     [X, ~] = lbp(img,[],optionsLBP);
     timeLBP(i) = toc + tempoConv;
+    fprintf('%.2f\n', timeLBP(i) - tempoConv)    
     dataLBP = [dataLBP; [X numClass] ];
     
     %% Hu Moments
-    fprintf('Hu Moments - %s\n\n', files(i).name);
+    fprintf('Hu Moments - %s\n', files(i).name);
     tic
     X = invmoments(img);
     timeHu(i) = toc + tempoConv;
+    fprintf('%.2f\n', timeHu(i) - tempoConv)        
 %     [X,~] = hugeo(imageRGB);
     
     dataHu = [dataHu; [X numClass] ];
     
     
-    %% Mide Sobel
-%     fprintf('Mide Sobel - %s\n', files(i).name);
-%     tic
-%     I2 = edge(img, 'sobel');
-%     
-%     [M,~] = mide(img, I2);    
-%     stats = mideprops(M, 'all');
-%     timeMideSobel(i) = toc + tempoConv;
-%     X = struct2array(stats);
-%     
-%     dataMideSobel = [dataMideSobel; [X numClass] ];
-    
-    
 
-    %% Mide Average
-%     fprintf('Mide Average - %s\n', files(i).name);
-% 
-%     tic
-%     m = fspecial('average', 15);
-%     I2 = imfilter(img, m);
-%     
-%     [M,~] = mide(img, I2);
-%     stats = mideprops(M, 'all');
-%     timeMideAver(i) = toc + tempoConv;
-%     X = struct2array(stats);
-%     
-%     dataMideAverage = [dataMideAverage; [X numClass] ];
-    
-    
-    
-    %% Mide Laplacian
-%     fprintf('Mide Laplaciano - %s\n', files(i).name);
-% 
-%     tic
-%     m = [-1, -1, -1; -1,  8, -1; -1, -1, -1];
-%     I2 = imfilter(img, m, 'replicate');
-%     
-%     [M,~] = mide(img, I2);
-%     stats = mideprops(M, 'all');
-%     timeMideLapl(i) = toc + tempoConv;
-%     X = struct2array(stats);
-%     
-%     dataMideLaplacian = [dataMideLaplacian; [X numClass] ];
-
-    
-    
-%     %% Mide - Median
-%     fprintf('Mide Median - %s\n', files(i).name);
-%     
-%     tic
-%     I2 = medfilt2(img, [45 45]);
-%     
-%     [M,~] = mide(img, I2);
-%     stats = mideprops(M, 'all');
-%     timeMideMedian(i) = toc + tempoConv;
-%     X = struct2array(stats);
-%     
-%     dataMideMedian = [dataMideMedian; [X numClass] ];
     save(name_files)
 end
 

@@ -1,24 +1,43 @@
 clear; clc; close all;
 titulo_extrator = {'Central M.', 'GLCM', 'Hu', 'LBP', 'Statistical M.', 'SIFT-SURF'};
 
-load('route_general_gopro.mat');
-for i = 1 : 5
-    dataValues{i} = [valuesNormal(:,i) valuesRej(:,i)]*100;
-    dataErros{i} = [errosNormal(:,i) errosRej(:,i)]*100;
-end
-dataValues{6} = [sift; surf];
-dataErros{6} = [sift_erro; surf_erro];
+% load('route_general_gopro.mat');
+% for i = 1 : 5
+%     dataValues{i} = [valuesNormal(:,i) valuesRej(:,i)]*100;
+%     dataErros{i} = [errosNormal(:,i) errosRej(:,i)]*100;
+% end
+% dataValues{6} = [sift; surf];
+% dataErros{6} = [sift_erro; surf_erro];
 
 %% Choose the option
 labelY = 'Acur{\''a}cia';
 
 
-for i = 0:1
-    figure('name', titulo_extrator{i+1});
+% for i = 0:1
+%     figure('name', titulo_extrator{i+1});
     
     %%
-    values = dataValues{i+1};
-    errors = dataErros{i+1};
+%     values = dataValues{i+1};
+%     errors = dataErros{i+1};
+    
+
+%% GoPro Virtual
+    values = [99.68	99.15	98.26	95.49	99.27
+56.19	49.31	36.62	73.99	95.95
+99.40	99.66	98.50	99.45	99.63
+97.22	96.13	91.78	98.83	99.95
+99.57	99.81	99.07	99.32	99.88
+99.89	99.69	98.99	99.65	99.86
+97.30	96.15	92.01	98.86	99.95
+99.57	99.81	99.07	99.33	99.88
+99.89	99.67	98.99	99.65	99.86
+99.15	99.16	96.66	98.82	99.53
+60.39	70.50	65.58	89.85	99.08
+98.83	99.55	98.13	99.02	99.49]';
+
+%% GoPro Real
+
+    errors = zeros(size(values));
     
     h = errorb(values,errors, 'Color', [0 0 0]);
     % grid on
@@ -26,36 +45,44 @@ for i = 0:1
     
     
     % Nome das Legenda
-    l = {'Normal', 'Com SDL'};
-    l = legend(h,l,'Location','northoutside', 'Orientation', 'horizontal');
+    l = {'Bayes', 'LSSVM (Lin)', 'LSSVM (RBF)', 'MLM (Man)', ...
+            'MLM (Euc)', 'MLM (Mah)', 'MLM-NN (Man)', ...
+            'MLM-NN (Euc)', 'MLM-NN (Mah)', 'MLP', 'SVM (Lin)', 'SVM (RBF)'};
+    l = legend(h,l,'Orientation', 'vertial');
     
     
     % ylabel(sprintf('%s (\\%%)', axisName), 'FontSize', 40, 'interpreter','latex')
     
-    ylim([0 105])
+    ylim([min(values(:))-1 101])
     xlim([0 size(values,1) + 1])
     ax = gca;
     set(gca,'FontSize',25) %tamanho axis
-    set(l,'FontSize',30); %tamanho da legenda
+    set(l,'FontSize',15); %tamanho da legenda
     
     % ============ XTickLabel ============
-    if (size(values,1) == 2)
-        namesAxisX = {'SIFT', 'SURF'};
-    else
-        namesAxisX = {'Bayes', 'LSSVM (Lin)', 'LSSVM (RBF)', 'MLM (Man)', ...
-            'MLM (Euc)', 'MLM (Mah)', 'MLM-NN (Man)', ...
-            'MLM-NN (Euc)', 'MLM-NN (Mah)', 'MLP', 'SVM (Lin)', 'SVM (RBF)'};        
-    end
+    namesAxisX = {'ME', 'MC', 'MU', 'GLCM', 'LBP'};        
     set(gca,'XTickLabel', namesAxisX)
-    if (size(values,1) > 2)
-            ax.XTickLabelRotation = 22;
-    end
 
 %     xlabel('Classifiers', 'FontSize', 40, 'interpreter','latex')
     
     % mycolor=[255/255 128/255 128/255;166/255 166/255 166/255;0 0 0;1 1 1];
 %     mycolor=[90/255 50/255 0;166/255 166/255 166/255;0.2 0.2 0.2;1 1 1];
     mycolor=[1 1 1; 90/255 50/255 0];
+    
+    mycolor = [
+    247,247,247
+    201,148,199
+    221,28,119
+    222,235,247
+    158,202,225
+    49,130,189
+    229,245,224
+    161,217,155
+    49,163,84
+    153,142,195
+    254,196,79
+    217,95,14]/255;
+    
     colormap(mycolor)
     
     
@@ -90,5 +117,5 @@ for i = 0:1
     % Imprime o menor valor
     v = min(values(:));
     [lin,~] = find(values == v);
-%     fprintf('%s. \tMenor: %.2f. Mascara: %s\n', titulo_extrator{i+1}, v, namesAxisX{lin});
-end
+
+% end

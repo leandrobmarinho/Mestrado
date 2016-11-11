@@ -7,7 +7,7 @@ for i = 1 : num,
     [learnPoints, testData] = embaralhaDados(dados, ptrn, 2);
     
     fprintf('%d - Treinamento e Teste - (LS)SVM.\n', i);
-    for j = 1: length(params),
+    for j = 1: length(params),        
         
         %% Treinamento e Teste - (LS)SVM
         [Y, ~] = multisvm(learnPoints.x, learnPoints.y, testData.x, params{j});

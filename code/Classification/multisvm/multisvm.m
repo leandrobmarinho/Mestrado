@@ -1,4 +1,4 @@
-function [labels, times, outputs] = multisvm(TrainingSet,GroupTrain,TestSet, conf)
+function [labels, times, outputs, accModels] = multisvm(TrainingSet,GroupTrain,TestSet, conf)
 %Models a given training set with a corresponding group vector and
 %classifies a given test set using an SVM classifier according to a
 %one vs. all relation.
@@ -13,6 +13,7 @@ numClasses=length(u);
 % labels = zeros(length(TestSet(:,1)),1);
 
 % kernelcachelimit = size(TrainingSet,1) + 50;
+
 
 try
     tic
@@ -53,24 +54,40 @@ catch ME
     return
 end
 
+
+%% Train ACC to SDL
+accModels = zeros(1,numClasses);
+numTrain = length(GroupTrain);
+for k=1:numClasses    
+    G1vAll = (GroupTrain==u(k));
+
+    [l, ~] = svmclassify2(models(k), TrainingSet);
+    accModels(k) = sum(G1vAll == l)/numTrain;
+end
+
+
+% tic
 % for j=1:size(TestSet,1)
 %     for k=1:numClasses
 %         if(svmclassify2(models(k),TestSet(j,:)))
 %             break;
 %         end
 %     end
-%     result(j) = k;
+%     labels(j) = k;
 % end
-% result
+% times.test = toc;
+
 
 %classify test cases
 tic
 labels = []; outputs = [];
 for k=1:numClasses
-    [l, o] = svmclassify2(models(k), TestSet);
-    labels = [labels l];
+    [~, o] = svmclassify2(models(k), TestSet);
+%     labels = [labels l];
     outputs = [outputs o];
 end
 times.test = toc;
-[~, labels] = max(labels');
-outputs = sign(outputs);
+[~, inds] = sort(outputs', 'ascend');
+labels = inds(1,:);
+%[~, labels] = max(labels');
+%outputs = sign(outputs);

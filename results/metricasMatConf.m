@@ -4,12 +4,11 @@ function [ metricas, metricasGeral ] = metricasMatConf( matriz )
 %   metricas [spe sens ppv fscore hm acc; ...]
 %   metricasGeral [spe sens ppv fscore hm acc; ...] (media ponderadada das metricas)
 
-matriz = matriz';
 for c = 1 : size(matriz,2)
     TP = matriz(c,c);
     TN = trace(matriz())- TP;
     FP = sum(matriz(:,c)) - TP;
-     FN = sum(matriz(c,:)) - TP;
+    FN = sum(matriz(c,:)) - TP;
 %     FN = sum(sum(matriz)) - TN - TP - FP;
     
     metricas(c,1) = ( TN ) / ( TN + FP ); %spe  

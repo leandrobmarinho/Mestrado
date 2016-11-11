@@ -1,4 +1,4 @@
-clear all; close all; clc;
+clear; close all; clc;
 addpath('../Classification/percetron/'); addpath('../Classification/MLM/');
 addpath('../Classification/MLP/'); addpath('../Classification/multisvm/');
 addpath('../Classification/bayes/'); addpath('../utils/');
@@ -50,7 +50,7 @@ conf.mlMethods = {'mlm' 'mlmNN'};
 
 %% ======= Gray - Sim =======
 strModel = 'gray_%s_gopro_sim';
-load(sprintf(sprintf('../../data/%s', strModel), 'all'));
+% load(sprintf(sprintf('../../data/%s', strModel), 'all'));
 % mideAverage = mideAverage(:, [2 3 4 6 8 9 10 12]);
 % mideSobel = mideSobel(:, [2 3 4 6 8 9 10 12]);
 
