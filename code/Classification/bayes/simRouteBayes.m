@@ -1,23 +1,21 @@
-function [ route ] = simRouteBayes( data, conf )
+function [ route, model ] = simRouteBayes( data, conf )
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-for i = 1 : size(data,1)
+
+treinData = data.train;
+%% Treinamento
+fprintf('Treinando o Bayes.\n');
+tic
+[model] = trainBayes(treinData);
+tempoTrein = toc;
+
+for i = 1 : size(data.test,1)
     
-    for j = 1 : size(data,2)
+    for j = 1 : size(data.test,2)
         
-        %% Embaralhando os dados
-        treinData = data{i,j}.train;
-        testData = data{i,j}.test;
-        
-        Ntest = size(testData.y, 1);
-        
-        %% Treinamento
-        fprintf('Treinando o Bayes.\n');
-        tic
-        [model] = trainBayes(treinData);
-        tempoTrein(j) = toc;
-        
+        testData = data.test{i,j};
+        Ntest = length(testData.y);
         
         %% Teste
         fprintf('Step %d. Testando o Bayes.\n', j);
@@ -46,7 +44,6 @@ for i = 1 : size(data,1)
     route{i}.tempoTrein = tempoTrein;
 end
 result.routes = route;
-
 
 end
 

@@ -2,48 +2,42 @@ function [ result ] = simRouteMLP( data, param )
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-for i = 1 : size(data,1)
+
+treinData = data.train;
+%% Treinamento
+fprintf('Treinando MLP.\n');
+
+%% 1-of-k
+if ( size(treinData.y, 2) == 1)
+    numLabels = unique(treinData.y);
+    treinData.y = dataNum2Vec( treinData.y, numLabels );
+end
+
+
+
+%% Treinamento
+fprintf('Treinando a MLP.\n');
+net = patternnet(param);
+net.trainFcn =  'trainlm';
+%         net.trainFcn =  'traingd';
+net.trainParam.showWindow = 0;
+
+tic
+net = train(net, treinData.x', treinData.y');
+tempoTrein = toc;
+
+for i = 1 : size(data.test,1)
     
-    for j = 1 : size(data,2)
+    for j = 1 : size(data.test,2)
         
-        %% Shuffle data
-        treinData = data{i,j}.train;
-        testData = data{i,j}.test;
+        testData = data.test{i,j};
+        Ntest = length(testData.y);
         
-        %% 1-of-k
-        if ( size(treinData.y, 2) == 1)
-            labels = unique(treinData.y);
-            
-            code = zeros(length(labels), length(labels));
-            for c = 1: length(labels),
-                code(c, c) = 1;
-            end
-            for c = length(labels):-1:1,
-                ind = (treinData.y == labels(c));
-                ind2 = (testData.y == labels(c));
-                tam = length(find(ind==1));
-                tam2 = length(find(ind2==1));
-                treinData_y(ind, :) = repmat(code(c, :), tam, 1);
-                testData_y(ind2, :) = repmat(code(c, :), tam2, 1);
-            end
-            treinData.y = treinData_y;
-            testData.y = testData_y;
-            clear treinData_y testData_y
+        
+        if ( size(testData.y, 2) == 1)
+            testData.y = dataNum2Vec( testData.y, numLabels );
         end
-        
-        Ntest = size(testData.y, 1);
-        
-        
-        %% Treinamento
-        fprintf('Treinando a MLP.\n');
-        net = patternnet(param);
-        net.trainFcn =  'trainlm';
-        %         net.trainFcn =  'traingd';
-        net.trainParam.showWindow = 0;
-        
-        tic
-        net = train(net, treinData.x', treinData.y');
-        tempoTrein(i) = toc;
+
         
         
         %% Teste
@@ -52,7 +46,7 @@ for i = 1 : size(data,1)
         y_ = net(testData.x');
         tempoTeste(i) = toc/Ntest;
         
-        Y = vec2ind(y_);        
+        Y = vec2ind(y_);
         hit(j) = (sum(Y == vec2ind(testData.y')) == length(Y));
         
         if (not(hit(j)))

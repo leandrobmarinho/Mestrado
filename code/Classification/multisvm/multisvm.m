@@ -22,20 +22,13 @@ try
         %Vectorized statement that binarizes Group
         %where 1 is the current class and 0 is all other classes
         G1vAll = (GroupTrain==u(k));
-        %     models(k) = svmtrain(TrainingSet,G1vAll);
         
         if (strcmp('rbf', conf.fkernel) == 1)
-            %         models(k) = svmtrain(TrainingSet, G1vAll,'kernel_function',...
-            %             conf.fkernel, 'rbf_sigma', conf.sigma,'boxconstraint', conf.paraC,...
-            %             'method', conf.metodo,'kernelcachelimit',kernelcachelimit,'Options', conf.options);
             
             models(k) = svmtrain(TrainingSet, G1vAll,'kernel_function',...
                 conf.fkernel, 'rbf_sigma', conf.sigma,'boxconstraint', conf.paraC,...
                 'method', conf.metodo,'kernelcachelimit',15000,'Options', conf.options);
         else
-            %         models(k) = svmtrain(TrainingSet, G1vAll,'kernel_function',...
-            %             conf.fkernel,'boxconstraint',conf.paraC,'method',conf.metodo,...
-            %             'kernelcachelimit',kernelcachelimit,'Options', conf.options);
             
             models(k) = svmtrain(TrainingSet, G1vAll,'kernel_function',...
                 conf.fkernel,'boxconstraint',conf.paraC,'method',conf.metodo,...
@@ -49,7 +42,8 @@ catch ME
     times.trein = nan;
     times.test  = nan;
     outputs     = nan(size(TestSet,1),numClasses);
-    
+    accModels = zeros(1,numClasses);
+
     sprintf('Erro no treinamento do (LS)SVM!')
     return
 end

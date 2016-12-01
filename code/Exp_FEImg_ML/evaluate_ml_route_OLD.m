@@ -50,14 +50,11 @@ end
 
 
 %% Shuffle Data
-[trainData, ~] = embaralhaDados(data, ptrn, 2);
-
-dataset.train = trainData;
 for i = 1 : length(params.routes)
     
     for j = 1 : numRep
-        [~, testData] = embaralhaDados(data, ptrn, 2);
-%         dataset{i,j}.train = trainData;
+        [trainData, testData] = embaralhaDados(data, ptrn, 2);
+        dataset{i,j}.train = trainData;
         
         testAux.x = [];
         for k = 1 : length(params.routes{i})
@@ -66,12 +63,11 @@ for i = 1 : length(params.routes)
             testAux.x = [testAux.x; testData.x(inds(randperm(length(inds), 1)), :)];
         end
         testAux.y = params.routes{i}';
-        dataset.test{i,j} = testAux;
+        dataset{i,j}.test = testAux;
     end
     
 end
-
-save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
+% save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
 clear trainData testData testAux
 
 %% Evaluate
@@ -97,6 +93,7 @@ end
 paraC = 2.^(-2:2:15);
 sigmas = 2.^(-1:4);
 %% =============== SVM (Linear) ===============
+
 clear config
 if(find(ismember(params.mlMethods,'svmLinear')))
 
@@ -158,6 +155,7 @@ if(find(ismember(params.mlMethods,'svmRBF')))
     fprintf('%s\n', strModel)
     
 end
+
 
 
 %% =============== MLP ===============
@@ -266,16 +264,17 @@ end
 
 
 
-% %% =============== Perceptron ===============
-% if(find(ismember(params.mlMethods,'perceptron')))
-%     
-%     if ( size(data.y,2) > 1)
-%        data.y = vec2ind(data.y')';
-%     end
-% 
-%     multiperceptron(data.x,data.y, data.x)
-%     keyboard
-% end
+
+%% =============== Perceptron ===============
+if(find(ismember(params.mlMethods,'perceptron')))
+    
+    if ( size(data.y,2) > 1)
+       data.y = vec2ind(data.y')';
+    end
+
+    multiperceptron(data.x,data.y, data.x)
+    keyboard
+end
 
 
 %% =============== MLM ===============
@@ -325,9 +324,6 @@ if(find(ismember(params.mlMethods,'mlmNN')))
         
     end
 end
-
-
-
 
 end
 

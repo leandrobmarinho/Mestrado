@@ -11,17 +11,17 @@ conf.numRep = 10;
 %% ======= Real SCM =======
 % strModel = 'scm_gopro_real';
 strModel = 'scm_%s_gopro_real';
-load(sprintf(sprintf('../../data/%s', strModel), 'others'));
+load('../../data/scm_gopro_real');
 % load(sprintf('../../data/%s', strModel));
-
 
 conf.descr = sprintf(strModel, 'l');
 evaluate_ml(dataSCM_l, conf)
 
-
 conf.descr = sprintf(strModel, 'a');
 evaluate_ml(dataSCM_a, conf)
 
+conf.descr = sprintf(strModel, 'g');
+evaluate_ml(dataSCM_g, conf)
 
 conf.descr = sprintf(strModel, 's');
 evaluate_ml(dataSCM_s, conf)

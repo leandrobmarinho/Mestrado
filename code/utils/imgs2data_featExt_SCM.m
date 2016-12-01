@@ -59,5 +59,5 @@ for i = 1:600
     save(nameOut)
 end
 
-clearvars folder i imageGray imageRGB img imgF numClass p tempoConv X
+clearvars folder i imageGray imageRGB img imgF numClass p tempoConv X files
 save(nameOut)

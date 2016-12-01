@@ -1,4 +1,4 @@
-function [ ] = evaluate_ml_route( dataset, params )
+function [ ] = getModels( dataset, params )
 
 
 if (isfield(params, 'normaliza') == 0)
@@ -50,7 +50,8 @@ end
 
 
 %% Shuffle Data
-[trainData, ~] = embaralhaDados(data, ptrn, 2);
+% [trainData, ~] = embaralhaDados(data, ptrn, 2);
+trainData = data;
 
 dataset.train = trainData;
 for i = 1 : length(params.routes)
@@ -71,7 +72,7 @@ for i = 1 : length(params.routes)
     
 end
 
-save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
+% save(sprintf('/Users/leandrobm/Downloads/DATA_%s', descr), 'data', 'dataset')
 clear trainData testData testAux
 
 %% Evaluate
@@ -81,10 +82,12 @@ if(find(ismember(params.mlMethods,'bayes')))
     config.custo = 1 - eye(length(numClass));
     config.algoritmo = '';
     
-    result = simRouteBayes(dataset, config);
+    [~, model] = simRouteBayes(dataset, config);
+    rmfield(model, 'covAll');
+    model = rmfield(model, 'covAll');
 
-    strModel = sprintf('%s_%s_route', descr, 'bayes');   
-    save(strModel, 'result', 'config')
+    strModel = sprintf('%s_%s_model', descr, 'bayes');   
+    save(strModel, 'model', 'config')
     fprintf('%s\n', strModel)
 end
 
@@ -117,10 +120,10 @@ if(find(ismember(params.mlMethods,'svmLinear')))
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
-    result = simRouteMultiSVM( dataset, optParam);
+    [~, model] = simRouteMultiSVM( dataset, optParam);
     
-    strModel = sprintf('%s_%s-%s_route', descr, 'svm', config.fkernel);    
-    save(strModel, 'result', 'config', 'optParam')
+    strModel = sprintf('%s_%s-%s_model', descr, 'svm', config.fkernel);    
+    save(strModel, 'model', 'config', 'optParam')
     fprintf('%s\n', strModel)
     
 end
@@ -151,10 +154,10 @@ if(find(ismember(params.mlMethods,'svmRBF')))
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
-    result = simRouteMultiSVM( dataset, optParam);
+    [~, model] = simRouteMultiSVM( dataset, optParam);
             
-    strModel = sprintf('%s_%s-%s_route', descr, 'svm', config.fkernel);    
-    save(strModel, 'result', 'config', 'optParam')
+    strModel = sprintf('%s_%s-%s_model', descr, 'svm', config.fkernel);    
+    save(strModel, 'model', 'config', 'optParam')
     fprintf('%s\n', strModel)
     
 end
@@ -184,7 +187,7 @@ if(find(ismember(params.mlMethods,'mlp')))
     end
     result = simRouteMLP(dataset, optParam);
     
-    strModel = sprintf('%s_%s_route', descr, 'mlp');   
+    strModel = sprintf('%s_%s_model', descr, 'mlp');   
     save(strModel, 'result', 'optParam')
     fprintf('%s\n', strModel)
 
@@ -218,10 +221,10 @@ if(find(ismember(params.mlMethods,'lssvmLinear')))
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
-    result = simRouteMultiSVM( dataset, optParam);
+    [~, model] = simRouteMultiSVM( dataset, optParam);    
     
-    strModel = sprintf('%s_%s-%s_route', descr, 'lssvm', config.fkernel);
-    save(strModel, 'result', 'config', 'optParam')
+    strModel = sprintf('%s_%s-%s_model', descr, 'lssvm', config.fkernel);
+    save(strModel, 'model', 'config', 'optParam')
     fprintf('%s\n', strModel)
     
     
@@ -257,10 +260,10 @@ if(find(ismember(params.mlMethods,'lssvmRBF')))
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
-    result = simRouteMultiSVM( dataset, optParam);
+    [~, model] = simRouteMultiSVM( dataset, optParam);
     
-    strModel = sprintf('%s_%s-%s_route', descr, 'lssvm', config.fkernel);
-    save(strModel, 'result', 'config', 'optParam')
+    strModel = sprintf('%s_%s-%s_model', descr, 'lssvm', config.fkernel);
+    save(strModel, 'model', 'config', 'optParam')
     fprintf('%s\n', strModel)
 end
 

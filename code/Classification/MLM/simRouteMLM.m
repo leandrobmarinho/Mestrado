@@ -2,42 +2,33 @@ function [ result ] = simRouteMLM( data, conf)
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-for i = 1 : size(data,1)
-    
-    for j = 1 : size(data,2)
-        
-        %% Shuffle data
-        treinData = data{i,j}.train;
-        testData = data{i,j}.test;
-        
-        %% 1-of-k
-        if ( size(treinData.y, 2) == 1)
-            labels = unique(treinData.y);
+keyboard
+treinData = data.train;
+%% Treinamento
+% 1-of-k
+if ( size(treinData.y, 2) == 1)
+    numLabels = unique(treinData.y);
+    treinData.y = dataNum2Vec( treinData.y, numLabels );
+end
 
-            code = zeros(length(labels), length(labels));
-            for c = 1: length(labels),
-                code(c, c) = 1;
-            end
-            for c = length(labels):-1:1,
-                ind = (treinData.y == labels(c));
-                ind2 = (testData.y == labels(c));
-                tam = length(find(ind==1));
-                tam2 = length(find(ind2==1));
-                treinData_y(ind, :) = repmat(code(c, :), tam, 1);
-                testData_y(ind2, :) = repmat(code(c, :), tam2, 1);
-            end
-            treinData.y = treinData_y;
-            testData.y = testData_y;
-            clear treinData_y testData_y            
-        end
+
+fprintf('Treinando a MLM.\n');
+tic
+[modelo] = train_MLM(treinData, conf);
+tempoTrein = toc;
+
+
+for i = 1 : size(data.test,1)
+    
+    for j = 1 : size(data.test,2)
         
-        Ntest = size(testData.y, 1);
+        testData = data.test{i,j};
+        Ntest = length(testData.y);
         
-        %% Treinamento
-        fprintf('Treinando a MLM.\n');
-        tic
-        [modelo] = train_MLM(treinData, conf);
-        tempoTrein(j) = toc;
+        
+        if ( size(testData.y, 2) == 1)
+            testData.y = dataNum2Vec( testData.y, numLabels );
+        end        
         
 
         %% Teste
