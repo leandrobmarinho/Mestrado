@@ -9,7 +9,7 @@ k = 1;
 
 
 %% Load the images
-load(sprintf('../dados/descInd_%s', nameImgs));
+load(sprintf('../../../data/descInd_%s', nameImgs));
 data.imgs = imgsInd;
 data.labels = labels;
 
@@ -52,7 +52,7 @@ result.matConfPorc = matConfPorc;
 result.metricas = metrics;
 result.metricasGeral = generalMetrics;
 
-% Procura a matriz de confusão mais próxima da acc média
+% Procura a matriz de confus?o mais pr?xima da acc m?dia
 acc = generalMetrics(:,end);
 mediaAcc = mean(acc);
 [~, pos] = sort( abs ( mediaAcc - acc) );

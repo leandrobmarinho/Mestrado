@@ -1,7 +1,7 @@
 clear; close all; clc;
 
-folder = 'SCM/';
-type = 19;
+folder = 'temp/';
+type = 2;
 precisao = 2;
 files = dir(sprintf('%s*.mat', folder));
 

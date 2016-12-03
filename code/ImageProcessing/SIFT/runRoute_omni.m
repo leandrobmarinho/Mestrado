@@ -5,7 +5,7 @@ p = path; path(p, '../'); path(p, '../../utils/');
 %% General configurations
 numRep = 10;
 nnThreshold = 0.8;
-nameImgs = 'real_omni';
+nameImgs = 'real_gopro';
 numK = 1;
 routes{1} = [8 7 3 4];
 routes{2} = [1 6 10 9];

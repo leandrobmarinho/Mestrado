@@ -1,16 +1,19 @@
-addpath('..');clear all;clc; close all;
+addpath('..');clear;clc; close all;
 
 % Example 1: only one distance (3 pixels)
 options.dharalick = 3;                 % 3 pixels distance for coocurrence
-imgRGB = imread('../../../../Documents/robohomegopro/P01_03.JPG');
+imgRGB = imread('/Users/leandrobm/Documents/robohomegopro/P01_03.JPG');
 % R = segbalu(I);                    % segmentation
 % J = I(:,:,2);                          % green channel
-imgHSV = rgb2hsv(imgRGB); imgHSV = imgHSV(:,:,1);
+% imgHSV = rgb2hsv(imgRGB); imgHSV = imgHSV(:,:,1);
 
 imgGray = rgb2gray(imgRGB);
 
 % [X,Xn] = haralick(J,R,options);    % Haralick features
-[X,Xn] = haralick(imgRGB,options);    % Haralick features
+tic
+[X,Xn] = haralick(imgGray,options);    % Haralick features
+toc
+X = X(1:13);
 
 % Bio_printfeatures(X,Xn)
 
@@ -25,7 +28,10 @@ imgGray = rgb2gray(imgRGB);
 
 
 
-
+tic
 GLCM2 = graycomatrix(imgGray); %graycomatrix(I,'Offset',[2 0;0 2]); 
 stats = GLCM_Features1(GLCM2,0); 
-struct2array(stats)
+stats = struct2array(stats);
+toc
+
+feat = stats([8 2 3 13 11 14 16 15 9 17 18 19 20]);

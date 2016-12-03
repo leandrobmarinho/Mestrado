@@ -1,11 +1,9 @@
-function [ result ] = simRouteMLP( data, param )
+function [ result, net ] = simRouteMLP( data, param )
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
 
 treinData = data.train;
-%% Treinamento
-fprintf('Treinando MLP.\n');
 
 %% 1-of-k
 if ( size(treinData.y, 2) == 1)
@@ -21,6 +19,9 @@ net = patternnet(param);
 net.trainFcn =  'trainlm';
 %         net.trainFcn =  'traingd';
 net.trainParam.showWindow = 0;
+% net.performParam.regularization = 0.1;
+% net.performParam.normalization = 'none';
+net.performFcn = 'mse';
 
 tic
 net = train(net, treinData.x', treinData.y');

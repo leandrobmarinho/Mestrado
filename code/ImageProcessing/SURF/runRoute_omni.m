@@ -4,8 +4,8 @@ p = path; path(p, '../'); path(p, '../../utils/');
 %% General configurations
 numRep = 10;
 nameImgs = 'real_omni';
-% pathData = sprintf('/Users/leandrobm/Documents/dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
-pathData = sprintf('/Users/WELL/Documents/Leandro/data/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
+ pathData = sprintf('/Users/leandrobm/Documents/dados/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
+%pathData = sprintf('/Users/WELL/Documents/Leandro/data/SURF_%s/desc_surf_%s_', nameImgs, nameImgs);
 numK = 1;
 routes{1} = [8 7 3 4];
 routes{2} = [1 6 10 9];

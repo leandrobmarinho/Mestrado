@@ -4,7 +4,7 @@
 % Toolbox: Balu
 %    Haralick texture features.
 %
-%    X is a 28 elements vector with mean and range of mean and range of
+%    X is a 28 elements vector with mean and range of
 %
 %     1 Angular Second Moment
 %     2 Contrast

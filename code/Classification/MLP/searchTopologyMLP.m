@@ -12,6 +12,7 @@ for i = 1 : num,
         net.trainFcn =  'trainlm';
 %         net.trainFcn =  'traingd';
         net.trainParam.showWindow = 0;
+        net.performFcn = 'mse';
         net = train(net, learnPoints.x', learnPoints.y');
         
         

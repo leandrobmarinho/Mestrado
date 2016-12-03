@@ -87,7 +87,7 @@ if(find(ismember(params.mlMethods,'bayes')))
     model = rmfield(model, 'covAll');
 
     strModel = sprintf('%s_%s_model', descr, 'bayes');   
-    save(strModel, 'model', 'config')
+    save(strModel, 'model')
     fprintf('%s\n', strModel)
 end
 
@@ -123,7 +123,7 @@ if(find(ismember(params.mlMethods,'svmLinear')))
     [~, model] = simRouteMultiSVM( dataset, optParam);
     
     strModel = sprintf('%s_%s-%s_model', descr, 'svm', config.fkernel);    
-    save(strModel, 'model', 'config', 'optParam')
+    save(strModel, 'model')
     fprintf('%s\n', strModel)
     
 end
@@ -157,11 +157,10 @@ if(find(ismember(params.mlMethods,'svmRBF')))
     [~, model] = simRouteMultiSVM( dataset, optParam);
             
     strModel = sprintf('%s_%s-%s_model', descr, 'svm', config.fkernel);    
-    save(strModel, 'model', 'config', 'optParam')
+    save(strModel, 'model')
     fprintf('%s\n', strModel)
     
 end
-
 
 %% =============== MLP ===============
 clear config
@@ -185,10 +184,16 @@ if(find(ismember(params.mlMethods,'mlp')))
     else
         optParam = searchTopologyMLP(data, paramsMLP, 3, ptrn );
     end
-    result = simRouteMLP(dataset, optParam);
+    [~, model] = simRouteMLP(dataset, optParam);
+    IW = cell2mat(model.IW);
+    LW = cell2mat(model.LW);
+    b = cell2mat(model.b);
+    model.IW;
+    model.LW;
+    model.b;
     
     strModel = sprintf('%s_%s_model', descr, 'mlp');   
-    save(strModel, 'result', 'optParam')
+    save(strModel, 'model')
     fprintf('%s\n', strModel)
 
 end
@@ -221,10 +226,10 @@ if(find(ismember(params.mlMethods,'lssvmLinear')))
     else
         optParam = searchParamSVM(data, paramsSVM, 3, ptrn );
     end
-    [~, model] = simRouteMultiSVM( dataset, optParam);    
+    [~, model] = simRouteMultiSVM(dataset, optParam);    
     
     strModel = sprintf('%s_%s-%s_model', descr, 'lssvm', config.fkernel);
-    save(strModel, 'model', 'config', 'optParam')
+    save(strModel, 'model')
     fprintf('%s\n', strModel)
     
     
@@ -263,7 +268,7 @@ if(find(ismember(params.mlMethods,'lssvmRBF')))
     [~, model] = simRouteMultiSVM( dataset, optParam);
     
     strModel = sprintf('%s_%s-%s_model', descr, 'lssvm', config.fkernel);
-    save(strModel, 'model', 'config', 'optParam')
+    save(strModel, 'model')
     fprintf('%s\n', strModel)
 end
 
@@ -293,12 +298,12 @@ if(find(ismember(params.mlMethods,'mlm')))
     for dist = distMLM
         
         config.distance = dist{1}; % mahalanobis cityblock ''
-        
-        result = simRouteMLM(dataset, config);
+                
+        [~, model] = simRouteMLM(dataset, config);
         
         strModel = sprintf('%s_%s-D-%s-%.0f_route', descr, 'mlm', ...
             config.distance, config.k*100);
-        save(strModel, 'result', 'config')
+        save(strModel, 'model')
         fprintf('%s\n', strModel)        
         
     end
@@ -319,11 +324,11 @@ if(find(ismember(params.mlMethods,'mlmNN')))
         
         config.distance = dist{1};
         
-        result = simRouteMLM(dataset, config);
+        [~, model] = simRouteMLM(dataset, config);
         
         strModel = sprintf('%s_%s-%d-D-%s-%.0f_route', descr, 'mlmNN', config.NN, ...
         config.distance, config.k*100);
-        save(strModel, 'result', 'config')
+        save(strModel, 'model')
         fprintf('%s\n', strModel)        
         
     end

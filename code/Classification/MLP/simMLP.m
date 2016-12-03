@@ -21,6 +21,7 @@ for i = 1 : length(data)
     net = patternnet(param);
     net.trainFcn =  'trainlm';
 %         net.trainFcn =  'traingd';
+    net.performFcn = 'mse';
     net.trainParam.showWindow = 0;
     
     tic

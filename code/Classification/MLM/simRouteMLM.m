@@ -1,8 +1,8 @@
-function [ result ] = simRouteMLM( data, conf)
+function [ result, modelo ] = simRouteMLM(data, conf)
 %SIMMLM Summary of this function goes here
 %   Detailed explanation goes here
 
-keyboard
+
 treinData = data.train;
 %% Treinamento
 % 1-of-k
@@ -16,7 +16,6 @@ fprintf('Treinando a MLM.\n');
 tic
 [modelo] = train_MLM(treinData, conf);
 tempoTrein = toc;
-
 
 for i = 1 : size(data.test,1)
     
