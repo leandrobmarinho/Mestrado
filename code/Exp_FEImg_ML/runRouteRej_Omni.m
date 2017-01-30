@@ -8,7 +8,7 @@ addpath('../Classification/bayes/'); addpath('../utils/');
 %% General configurations
 conf.mlMethods = {'bayes', 'svmLinear', 'svmRBF', 'mlp', 'lssvmLinear', ...
     'lssvmRBF', 'mlm', 'mlmNN'};
-conf.mlMethods = {'svmLinear', 'svmRBF', 'lssvmLinear', 'lssvmRBF'};
+conf.mlMethods = {'svmRBF'};
 conf.numRep = 10;
 conf.routes{1} = [8 7 3 4];
 conf.routes{2} = [1 6 10 9];

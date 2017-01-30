@@ -184,13 +184,13 @@ if(find(ismember(params.mlMethods,'mlp')))
     else
         optParam = searchTopologyMLP(data, paramsMLP, 3, ptrn );
     end
-    [~, model] = simRouteMLP(dataset, optParam);
-    IW = cell2mat(model.IW);
-    LW = cell2mat(model.LW);
-    b = cell2mat(model.b);
-    model.IW;
-    model.LW;
-    model.b;
+    [~, model_] = simRouteMLP(dataset, optParam);
+    IW = cell2mat(model_.IW);
+    LW = cell2mat(model_.LW);
+    b = cell2mat(model_.b);
+    model.IW = IW;
+    model.LW = LW;
+    model.b = b;
     
     strModel = sprintf('%s_%s_model', descr, 'mlp');   
     save(strModel, 'model')
