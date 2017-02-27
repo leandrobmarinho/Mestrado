@@ -76,6 +76,7 @@ end
 
 % C from LSSVM and SVM
 paraC = 2.^(-2:15);
+paraC = 2.^(1:10);
 %paraC = 2.^(-5:2:15);
 
 sigmas = 2.^(-2:8);

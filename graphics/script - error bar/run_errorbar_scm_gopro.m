@@ -14,7 +14,7 @@ dataValues{8} = [sift; surf];
 dataErros{8} = [sift_erro; surf_erro];
 
 %% Choose the option
-labelY = 'Acur{\''a}cia';
+labelY = 'Accuracy';
 sizeLabelY = 100;
 sizeAxis = 45;
 sizeLegend = 60;

@@ -9,9 +9,9 @@ files = dir(sprintf('%s*.JPG', folder));
 nameOut = 'scm_others_gopro_real';
 
 %dataSCM = [];
-dataSCM_l = []; dataSCM_s = []; dataSCM_a = [];
-% timeSCM = zeros(1,600);
+dataSCM_l = []; dataSCM_s = []; dataSCM_a = []; dataSCM_g = [];
 timeSCM_l = zeros(1,600); timeSCM_s = zeros(1,600); timeSCM_a = zeros(1,600);
+timeSCM_g = zeros(1,600);
 for i = 1:600
     %% Load the image
     tic
@@ -23,7 +23,7 @@ for i = 1:600
     img = imageGray;
     
     
-    %% SCM
+    %% SCM - Average
     fprintf('SCM average - %s\n', files(i).name);
     tic
     imgF = imfilter(img,fspecial('average',[3 3]),'replicate');
@@ -33,7 +33,21 @@ for i = 1:600
     X = struct2array(p);
     dataSCM_a = [dataSCM_a; [X numClass] ];
     
-    %% SCM
+    
+    %% SCM - Gaussian
+    fprintf('SCM Gaussian - %s\n\n', files(i).name);
+    
+    tic
+    imgF = imfilter(img, fspecial('gaussian',[3 3]),'replicate');
+    
+    [~,p] = scm(img, imgF);
+    timeSCM_g(i) = toc + tempoConv;
+    X = struct2array(p);
+    dataSCM_g = [dataSCM_g; [X numClass] ];
+    
+    
+    
+    %% SCM - Laplacian
     fprintf('SCM laplacian - %s\n', files(i).name);
     
     tic
@@ -43,6 +57,8 @@ for i = 1:600
     timeSCM_l(i) = toc + tempoConv;
     X = struct2array(p);
     dataSCM_l = [dataSCM_l; [X numClass] ];
+    
+    
     
     %% SCM - Sobel
     fprintf('SCM sobel - %s\n\n', files(i).name);
