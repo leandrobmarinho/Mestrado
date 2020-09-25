@@ -1,3 +1,4 @@
+%% CF MATLAB
 clear all; close all; clc; addpath('../');
 
 
@@ -13,7 +14,7 @@ dadosTeste.y = data(:, 7:end);
 clear data;
 
 
-%% ConfiguraÁıes
+%% Configura√ß√µes
 rodadas = 50;
 rede.maxIterations = 200;
 rede.alfa_i = 0.01;
@@ -52,7 +53,7 @@ for i = 1 : rodadas,
     tempoTeste(i) = toc;
     
     target = vec2ind(dadosTeste.y');
-    %% Matriz de confusao e acur·cia
+    %% Matriz de confusao e acur√°cia
     matConfTeste(:,:,i) = confusionmat(target, Yh);
     accTeste(i) = trace(matConfTeste(:,:,i)) / length(target);
     
@@ -62,7 +63,7 @@ meanAccuracy = mean(accTeste);
 meanAccuracyTrain = mean(accTreino);
 
 
-%% Procurando a matriz de confus„o mais prÛxima da acur·cia mÈdia
+%% Procurando a matriz de confus√£o mais pr√≥xima da acur√°cia m√©dia
 [~, posicoes] = sort( abs ( meanAccuracy - accTeste ) );
 [~, posicoesTrain] = sort( abs ( meanAccuracyTrain - accTreino ) );
 
