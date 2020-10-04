@@ -1,3 +1,11 @@
+% Local binary patterns (LBP) is a type of visual descriptor used for classification in computer vision. 
+% LBP is the particular case of the Texture Spectrum model proposed in 1990. LBP was first described in 1994.
+% It has since been found to be a powerful feature for texture classification; 
+% it has further been determined that when LBP is combined with the Histogram of oriented gradients (HOG) descriptor, 
+% it improves the detection performance considerably on some datasets.
+% A comparison of several improvements of the original LBP in the field of background subtraction was made in 2015 by Silva et al. 
+% A full survey of the different versions of LBP can be found in Bouwmans et al.
+
 % [X,Xn,options] = Bfx_lbp(I,R,options)
 % [X,Xn,options] = Bfx_lbp(I,options)
 % [X,Xn] = Bfx_lbp(I,R,options)
